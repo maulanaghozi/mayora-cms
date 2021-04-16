@@ -1,0 +1,52 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.container {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+
+    &:hover {
+        .tooltip {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    
+    svg {
+        @include center;
+    }
+
+    .tooltip {
+        display: none;
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+        transform: translate(-50%, 0);
+        
+        .dialog_box {
+            background-color: black;
+            color: #50b47e;
+            @include primary-font(semi-bold);
+            font-size: 0.75rem;
+            padding: 9px 14px;
+
+            span {
+                white-space: nowrap;
+            }
+        }
+
+        .triangle {
+            border-color: black transparent;
+            border-style: solid;
+            border-width: 11px 15px 0px 15px;
+            height: 0px;
+            width: 0px;
+            margin-bottom: 2px;
+        }
+    }
+}

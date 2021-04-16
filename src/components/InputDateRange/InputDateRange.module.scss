@@ -1,0 +1,32 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.date_picker_container {
+    display: flex;
+    cursor: pointer;
+
+    .date_picker {
+        @include primary-font(medium);
+        font-size: 0.8rem;
+        padding: 1rem;
+        border: 2px solid #e9eff4;
+        flex-grow: 1;
+
+        .prefix {
+            color: alpha-black(0.5);
+        }
+    }
+
+    .calendar_icon {
+        width: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid #e9eff4;
+        border-right: 1px solid #e9eff4;
+        border-bottom: 1px solid #e9eff4;
+        background-color: rgba($color: #f4f7f9, $alpha: 0.8);
+    }
+
+}

@@ -1,0 +1,56 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.preview_container {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: alpha-black(0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.preview_image {
+    width: 375px;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+}
+
+.preview_footer {
+    @include primary-font (bold);
+    font-size: 1.5rem;
+    display: flex;
+    color: white;
+    align-items: center;
+
+    div {
+        margin: 0 4rem;
+    }
+}
+
+.chevron_icon  {
+    height: 2rem;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-image: url('../../../assets/x.svg');
+    cursor: pointer;
+}

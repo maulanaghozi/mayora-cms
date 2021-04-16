@@ -1,0 +1,22 @@
+/* 
+  Promo List Style 
+*/
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+
+  .filter {
+    display: flex;
+
+    .date_range {
+      margin-left: 1rem;
+    }
+
+    .select {
+      margin-left: 1rem;
+      width: 160px;
+    }
+  }
+}

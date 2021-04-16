@@ -1,0 +1,12 @@
+@import "../../styles/mixin";
+@import "../../styles/function";
+@import "../../styles/variable";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 100%;
+  padding: 30px;
+  height: 100%;
+}

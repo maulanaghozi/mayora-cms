@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#00AEEF" stroke="#00AEEF" stroke-linecap="round" stroke-width="2" d="M14 2.251L25.749 14 14 25.749 2.251 14z"/>
+        <text fill="#FFF" font-family="Montserrat-ExtraBold, Montserrat ExtraBold" font-size="14" font-weight="600" transform="translate(2 2)">
+            <tspan x="9.165" y="17">1</tspan>
+        </text>
+    </g>
+</svg>

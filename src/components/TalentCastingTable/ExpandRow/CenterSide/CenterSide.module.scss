@@ -1,0 +1,21 @@
+@import '../../../../styles/mixin';
+
+.container {
+    @include secondary-font(reguler);
+    padding: 0 15px;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    width: 31%;
+}
+
+.content{
+    margin-bottom: 0.6rem;
+}
+
+.type{
+    text-transform: capitalize;
+}
+
+.title{
+    color: #94979b
+}

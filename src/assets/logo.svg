@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="237" height="63" viewBox="0 0 237 63">
+    <defs>
+        <linearGradient id="a" x1="49.998%" x2="49.998%" y1="-.001%" y2="100.036%">
+            <stop offset="0%" stop-color="#A003D2"/>
+            <stop offset="34.095%" stop-color="#7D33D6"/>
+            <stop offset="100%" stop-color="#29A5DF"/>
+        </linearGradient>
+        <linearGradient id="b" x1="32.238%" x2="122.386%" y1="39.906%" y2="64.005%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#7A7A7A" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero">
+            <path fill="url(#a)" d="M60.972 12.365c0-.033 0-.066.015-.101.015-.036 0-.04 0-.061v-.406a.991.991 0 0 0-.65-.932L31.006.105l-.12-.045a1.02 1.02 0 0 0-.688 0L.745 10.865a.989.989 0 0 0-.643.877.98.98 0 0 0-.102.423v36.183c.005.386.228.735.577.902l29.365 13.606c.102.062.215.106.333.129l.114.015h.222l.114-.015a1.02 1.02 0 0 0 .333-.13l29.365-13.61a.994.994 0 0 0 .195-1.683l-12.35-9.715 12.549-25.092a.954.954 0 0 0 .155-.39zM30.499 24.277L3.23 12.071 30.544 2.052l27.274 10.004-27.32 12.221zM1.997 13.703l27.487 12.305v34.45L1.997 47.714v-34.01zM46.12 37.69a.991.991 0 0 0 .274 1.224l11.716 9.213-26.6 12.33V26.053l26.33-11.794L46.12 37.69z"/>
+            <path fill="url(#b)" d="M26.958 56.515L28 57l-.04-19.333V35L4 45.828l22.958 10.687z" opacity=".3"/>
+        </g>
+        <text fill="#FFF" font-family="Montserrat-Bold, Montserrat" font-size="25" font-weight="bold" letter-spacing=".5">
+            <tspan x="71.365" y="45">kesting•rum</tspan>
+        </text>
+    </g>
+</svg>

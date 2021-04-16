@@ -1,0 +1,67 @@
+/* 
+    Upload Brief Component style
+*/
+
+.container{
+    width: 45%;
+    font-family: Montserrat;
+    font-weight: 500;
+    margin-left: 20px;
+}
+
+.tagline{
+    text-transform: uppercase;
+    font-family: Montserrat;
+    font-weight: 700;
+    color: #00aeef;
+}
+
+.upload{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.upload_file{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.addButton{
+    color: #00aeef;
+    width: 350px;
+    height: 150px;
+    border: 2px dashed #e9eff4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.note{
+    font-size: 0.7rem;
+    color: #878787;
+    font-style: italic;
+    font-family: Montserrat;
+    margin-top: 5px;
+}
+
+.btnPublish{
+    margin-top: 30px;
+    width: 200px;
+    height: 45px;
+    color: white;
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    background-color: #00aeef;
+    box-sizing: border-box;
+    border: none;
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-end;
+}

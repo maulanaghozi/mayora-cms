@@ -1,0 +1,38 @@
+/**
+ * Header Path Component Style
+ */
+ @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+ .text {
+     font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    user-select: none;
+    
+    &.blue {
+        color: #26adee;
+        text-decoration: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    
+    &.grey {
+        color: #687178;
+    }
+}
+
+
+
+.container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding: 21px 30px;
+}
+
+.chevron {
+    margin-left: 15px;
+    margin-right: 15px;
+}

@@ -1,0 +1,17 @@
+@import 'src/styles/mixin';
+@import 'src/styles/variable';
+
+.container {
+    @include primary-font (bold);
+    color: $primary-color;
+    font-size: 0.875rem;
+    text-decoration: none;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 0.5rem;
+}

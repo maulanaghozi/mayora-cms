@@ -1,0 +1,486 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.container {
+    .header {
+        display: flex;
+        margin-top: 15px;
+        align-items: center;
+
+        .count {
+            @include primary-font(reguler);
+            font-size: 0.875rem;
+            color: black;
+        }
+
+        .log {
+
+        }
+
+        .action_container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            margin: 0 -10px;
+
+            .select_container {
+                margin: 10px;
+                display: flex;
+                align-items: center;
+
+                span {
+                    margin-right: 10px;
+                    @include primary-font(reguler);
+                    font-size: 0.875rem;
+                }
+            }
+
+            .action {
+                height: 45px;
+
+                @include respond-to(xl) {
+                    width: 200px;
+                }
+
+                @include respond-to(lg) {
+                    width: 175px;
+                }
+
+                @include respond-to(md) {
+                    width: 150px;
+                }
+
+                @include respond-to(sm) {
+                    width: 125px;
+                }
+
+                @include respond-to(xs) {
+                    width: 100px;
+                }
+
+                &_with_margin {
+                    @extend .action;
+
+                    margin: 10px;
+                }
+            }
+        }
+    }
+    .applicants {
+        .card {
+            width: 100%;
+            display: flex;
+            user-select: none;
+
+            @include respond-to(xl) {
+                margin-top: 60px;
+                padding-bottom: 60px;
+                height: 310px;
+            }
+
+            @include respond-to(lg) {
+                margin-top: 50px;
+                padding-bottom: 50px;
+                height: 270px;
+            }
+
+            @include respond-to(md) {
+                margin-top: 40px;
+                padding-bottom: 40px;
+                height: 210px;
+            }
+
+            @include respond-to(sm) {
+                margin-top: 30px;
+                padding-bottom: 30px;
+                height: 150px;
+            }
+
+            @include respond-to(xs) {
+                margin-top: 20px;
+                padding-bottom: 20px;
+                height: 120px;
+            }
+
+            .picture_container {
+                flex-shrink: 0;
+                
+                @include respond-to(xl) {
+                    width: 250px;
+                    // max-width: 25%;
+                    height: 250px;
+                }
+
+                @include respond-to(lg) {
+                    width: 220px;
+                    height: 220px;
+                }
+
+                @include respond-to(md) {
+                    width: 170px;
+                    height: 170px;
+                }
+
+                @include respond-to(sm) {
+                    width: 120px;
+                    height: 120px;
+                }
+
+                @include respond-to(xs) {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                .profile_picture {
+                    position: relative;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                    background-color: black;
+    
+                    width: 100%;
+                    padding-bottom: 100%;
+    
+                    img {
+                        @include center;
+                    }
+    
+                    .checkbox_container {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 38px;
+                        height: 38px;
+                        cursor: pointer;
+    
+                        .checkbox {
+                            position: absolute;
+                            border: 1px solid #979797;
+                            background-color: white;
+                            top: 5px;
+                            left: 5px;
+
+                            @include respond-to(xl) {
+                                width: 28px;
+                                height: 28px;
+                            }
+            
+                            @include respond-to(lg) {
+                                width: 26px;
+                                height: 26px;
+                            }
+            
+                            @include respond-to(md) {
+                                width: 24px;
+                                height: 24px;
+                            }
+            
+                            @include respond-to(sm) {
+                                width: 22px;
+                                height: 22px;
+                            }
+            
+                            @include respond-to(xs) {
+                                width: 20px;
+                                height: 20px;
+                            }
+
+                            svg {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .data_container {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+
+                @include respond-to(xl) {
+                    padding-left: 30px;
+                }
+
+                @include respond-to(lg) {
+                    padding-left: 25px;
+                }
+
+                @include respond-to(md) {
+                    padding-left: 20px;
+                }
+
+                @include respond-to(sm) {
+                    padding-left: 15px;
+                }
+
+                @include respond-to(xs) {
+                    padding-left: 10px;
+                }
+
+                .properties {
+                    display: flex;
+                    justify-content: space-between;
+                    height: 50%;
+                    
+                    .name_container {
+                        .name {
+                            @include primary-font(bold);
+                            font-size: 1rem;
+                            line-height: 1.25rem;
+                            color: black;
+                        }
+
+                        .username {
+                            @include primary-font(reguler);
+                            color: alpha-black(0.4);
+                            font-size: 0.75rem;
+                            line-height: 1rem;
+                            margin-bottom: 15px;
+                        }
+
+                        .location {
+                            @include primary-font(medium);
+                            color: black;
+                            font-size: 0.75rem;
+                            display: flex;
+                            align-items: center;
+                        }
+                    }
+
+                    .biodata_container {
+                        @include primary-font(medium);
+                        color: black;
+                        line-height: 0.875rem;
+                        font-size: 0.75rem;
+
+                        .list {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .skin_hex_color {
+                            height: 0.875rem;
+                            width: 0.875rem;
+                            border: 1px solid #979797;
+                            border-radius: 50%;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+
+                .audition_video_outer_container {
+                    overflow: hidden;
+                    height: 50%;
+
+                    .audition_video_inner_container {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        height: 100%;
+
+                        .audition_video_container {
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            height: 100%;
+                            margin: 0 12px;
+
+                            .video_container {
+                                height: calc(100% - 22px);
+                                position: relative;
+                                cursor: pointer;
+                                overflow: hidden;
+                                background-color: black;
+
+                                @include respond-to(xl) {
+                                    width: 183px;
+                                }
+
+                                @include respond-to(lg) {
+                                    width: 156px;
+                                }
+
+                                @include respond-to(md) {
+                                    width: 112px;
+                                }
+
+                                @include respond-to(sm) {
+                                    width: 67px;
+                                }
+
+                                @include respond-to(xs) {
+                                    width: 49px;
+                                }
+
+                                .video {
+                                    height: 100%;
+                                    @include center;
+                                }
+                            }
+
+                            .video_title_container {
+                                display: flex;
+                                align-items: flex-end;
+                                justify-content: space-between;
+                                height: 22px;
+
+                                .video_title {
+                                    @include primary-font(reguler);
+                                    font-size: 0.75rem;
+                                }
+
+                                svg {
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .sub_title {
+                    @include primary-font(bold);
+                    font-size: 0.75rem;
+                    color: alpha-black(0.5);
+                    letter-spacing: 1px;
+                    margin-bottom: 15px;
+                    line-height: 1rem;
+                }
+
+                .application_date_container {
+                    .application_date {
+                        @include primary-font(medium);
+                        font-size: 0.75rem;
+                        line-height: 1rem;
+                    }
+                }
+
+                .sub_action {
+                    height: 45px;
+    
+                    @include respond-to(xl) {
+                        width: 135px;
+                    }
+    
+                    @include respond-to(lg) {
+                        width: 120px;
+                    }
+    
+                    @include respond-to(md) {
+                        width: 105px;
+                    }
+    
+                    @include respond-to(sm) {
+                        width: 90px;
+                    }
+    
+                    @include respond-to(xs) {
+                        width: 75px;
+                    }
+    
+                    &_with_margin {
+                        @extend .action;
+    
+                        margin: 10px;
+                    }
+                }
+
+                .application_status_container {
+                    .status {
+                        width: 95px;
+                        height: 35px;
+                        color: white;
+                        position: relative;
+                        @include primary-font(bold);
+                        font-size: 0.75rem;
+                        letter-spacing: 1px;
+
+                        span {
+                            @include center;
+                        }
+                    }
+
+                    .pending {
+                        @extend .status;
+                        background-color: #e54c4c;
+                    }
+
+                    .rejected {
+                        @extend .status;
+                        background-color: #6d7278;
+                    }
+
+                    .shortlist {
+                        @extend .status;
+                        background-color: #7b368f;
+                    }
+
+                    .cast {
+                        @extend .status;
+                        background-color: $primary_color;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        margin-bottom: 36px;
+        margin-top: 39px;
+        justify-content: space-between;
+
+        .page_counter_container {
+            display: flex;
+            align-items: center;
+
+            .page_counter {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .log_message {
+        color: red;
+        margin: 0 15px;
+        @include primary-font(medium);
+        font-size: 0.75rem;
+    }
+}
+
+.play_button {
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 3px solid white;
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    opacity: 0.6;
+    transition: opacity 100ms linear;
+
+    &::before {
+        content: "\25b6";
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(0.75rem, 0.625rem);
+    }
+}
+
+.tooltip {
+    margin-left: 5px;
+}

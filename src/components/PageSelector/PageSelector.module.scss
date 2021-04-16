@@ -1,0 +1,41 @@
+/**
+ * Page Selector Component Style
+ */
+@mixin mr20 {
+    margin-right: 20px;
+}
+
+@mixin ml20 {
+    margin-left: 20px;
+}
+
+@mixin pointer {
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.first_blue, .previous_blue {
+    @include mr20;
+    @include pointer;
+}
+
+.first_grey, .previous_grey {
+    @include mr20
+}
+
+.next_blue, .last_blue {
+    @include ml20;
+    @include pointer;
+}
+
+.next_grey, .last_grey {
+    @include ml20
+}

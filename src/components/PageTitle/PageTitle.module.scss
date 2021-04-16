@@ -1,0 +1,31 @@
+@import "src/styles/variable";
+@import "src/styles/mixin";
+@import "src/styles/function";
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.selected {
+  color: #c60808 !important;
+  font-weight: 800 !important;
+  cursor: default !important;
+  border-bottom: 3px solid #c60808;
+  padding: 10px;
+  background-color: #ffffff !important;
+}
+
+.title {
+  color: #000000;
+  background-color: #e0e0e0;
+  @include primary-font(medium);
+  font-size: 1.125rem;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px;
+  user-select: none;
+  display: inline-block;
+  text-transform: capitalize;
+  padding: 10px;
+}

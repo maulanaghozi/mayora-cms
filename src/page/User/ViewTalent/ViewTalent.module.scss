@@ -1,0 +1,26 @@
+@import "../../../styles/variable";
+@import "../../../styles/mixin";
+@import "../../../styles/function";
+
+.container{
+  @include make-row;
+  margin: 30px;
+
+  header {
+    @include make-col(12);
+  }
+
+  main {
+    @include make-col(12);
+    display: flex;
+    margin-top: 30px;
+
+    .cover_section {
+      width: 300px;
+    }
+
+    .profile_section {
+      flex-grow: 1;
+    }
+  }
+}

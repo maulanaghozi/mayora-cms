@@ -1,0 +1,68 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.navigation {
+    width: 100%;
+    display: flex;
+
+    .btn {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border: none;
+        text-transform: uppercase;
+        @include primary-font(medium);
+        font-size: 0.875rem;
+        color : #00aeef;
+        height: 50px;
+        width: 50%;
+        color: alpha-black(0.5);
+
+        &.pointer {
+            cursor: pointer;
+        }
+
+        span {
+            margin: 0 auto;
+        }
+
+        &.active {
+            @include primary-font(bold);
+            color : $primary_color;
+
+            &.right {
+                -webkit-box-shadow: 18px -18px 18px -18px rgba(0,0,0,0.08);
+                -moz-box-shadow: 18px -18px 18px -18px rgba(0,0,0,0.08);
+                box-shadow: 18px -18px 18px -18px rgba(0,0,0,0.08);
+            }
+
+            &.left {
+                -webkit-box-shadow: -18px -18px 18px -18px rgba(0,0,0,0.08);
+                -moz-box-shadow: -18px -18px 18px -18px rgba(0,0,0,0.08);
+                box-shadow: -18px -18px 18px -18px rgba(0,0,0,0.08);
+            }
+        }
+        
+        &.right {
+            -webkit-box-shadow: inset 18px -18px 18px -18px rgba(0,0,0,0.08);
+            -moz-box-shadow: inset 18px -18px 18px -18px rgba(0,0,0,0.08);
+            box-shadow: inset 18px -18px 18px -18px rgba(0,0,0,0.08);
+        }
+
+        &.left {
+            -webkit-box-shadow: inset -18px -18px 18px -18px rgba(0,0,0,0.08);
+            -moz-box-shadow: inset -18px -18px 18px -18px rgba(0,0,0,0.08);
+            box-shadow: inset -18px -18px 18px -18px rgba(0,0,0,0.08);
+        }
+    }
+}
+
+.description_container{
+    width: 100%;
+    padding: 20px;
+
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.08);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.08);
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.08);
+}

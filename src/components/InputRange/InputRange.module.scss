@@ -1,0 +1,56 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/button';
+
+.range {
+    margin-top: 15px;
+
+    div {
+        &:active {
+            box-shadow: none;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.range_text {
+    color: #acacac;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    user-select: none;
+
+    &.black {
+        color: #000000;
+    }
+}
+
+.text_input_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .text_input {
+        @include primary-font(reguler);
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        outline: none;
+        border: 0;
+        border-bottom: 1px solid #909090;
+        font-size: 0.75rem;
+
+        &.left_margin {
+            margin-left: -12px;
+        }
+
+        &.right_margin {
+            margin-right: -12px;
+        }
+    }
+}

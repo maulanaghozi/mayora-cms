@@ -1,0 +1,28 @@
+/**
+ * Auth Background Component Style
+ */
+.container{
+    background: rgb(34, 15, 70);
+    background: linear-gradient(180deg,rgba(34, 15, 70, 1) 0%,rgba(34, 49, 86, 1) 100%);
+    width: 100vw;
+    height: 100vh;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    background: black;
+    max-width: 400px;
+    min-width: 320px;
+    width: 80%;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    margin: 47px auto 32px auto;
+}

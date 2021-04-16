@@ -1,0 +1,58 @@
+/**
+ * Search Bar Component Style
+ */
+.container {
+    display: flex;
+    width: 250px;
+    height: 3rem;
+    border: 2px solid #e9eff4;
+    padding-left: 16px;
+    align-items: center;
+
+    &:hover {
+        border: 2px solid hsl(0, 0%, 70%)
+    }
+
+    form, input {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    color: #000000;
+    padding-left: 20px;
+    
+    :active {
+        outline: none;
+        border: none;
+        color: white;
+    }
+}
+
+.input::placeholder {
+    color: #acacac;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+input:-webkit-autofill::first-line {
+    font-size: 0.9rem;
+    font-weight: 500;
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-text-fill-color: #000000 !important;
+}

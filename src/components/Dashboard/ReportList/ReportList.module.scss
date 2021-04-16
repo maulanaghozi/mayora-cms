@@ -1,0 +1,14 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.report_container {
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 0 16px 0 alpha-black(0.1);
+    @include make-col(3);
+}
+
+.list_container {
+    margin-top: 2rem;
+}

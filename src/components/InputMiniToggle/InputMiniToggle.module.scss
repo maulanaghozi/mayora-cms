@@ -1,0 +1,52 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.mini_toggle_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+
+    .mini_toggle_slider {
+        width: 20px;
+        height: 10px;
+        background-color: #6A6D70;
+        border-radius: 5px;
+        margin: 0 auto;
+        transition: transform 150ms ease-in, background-color 150ms ease-in;
+
+        &.active {
+            background-color: #26adee;
+        }
+    }
+
+    .mini_toggle_handle {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.3);
+        box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.3);
+        background-color: #b2b2b2;
+        transform: translateX(0);
+        transition: transform 150ms ease-in, background-color 150ms ease-in;
+
+        &.active {
+            transform: translateX(15px);
+            background-color: white;
+        }
+    }
+
+    input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+}

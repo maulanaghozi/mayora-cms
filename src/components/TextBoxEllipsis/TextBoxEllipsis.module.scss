@@ -1,0 +1,18 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.container {
+    overflow: hidden;
+    position: relative;
+    text-align: justify;
+    word-break: break-all;
+
+    .truncation_char {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,20 @@
+/**
+ * Verify Code Page Component Style
+ */
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+.resend {
+    color: #00aeef;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin: 24px auto;
+}

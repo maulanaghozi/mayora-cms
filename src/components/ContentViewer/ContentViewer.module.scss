@@ -1,0 +1,216 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: alpha-black(0.9);
+    z-index: 900;
+
+    .page_counter {
+        position: absolute;
+        color: white;
+        height: 42px;
+        display: flex;
+        align-items: center;
+
+        @include primary-font(medium);
+        
+        @include respond-to(xl) {
+            top: 50px;
+            left: 100px;
+            font-size: 24px;
+        }
+        @include respond-to(lg) {
+            top: 50px;
+            left: 100px;
+            font-size: 24px;
+        }
+        @include respond-to(md) {
+            top: 35px;
+            left: 70px;
+            font-size: 24px;
+        }
+        @include respond-to(sm) {
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+        }
+        @include respond-to(xs) {
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+        }
+    }
+
+    .close {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+        z-index: 900;
+
+        @include respond-to(xl) {
+            top: 50px;
+            right: 100px;
+        }
+        @include respond-to(lg) {
+            top: 50px;
+            right: 100px;
+        }
+        @include respond-to(md) {
+            top: 35px;
+            right: 70px;
+        }
+        @include respond-to(sm) {
+            top: 20px;
+            right: 20px;
+        }
+        @include respond-to(xs) {
+            top: 10px;
+            right: 10px;
+        }
+
+        svg {
+            @include center;
+        }
+    }
+
+    .viewer_container {
+        @include center;
+        display: flex;
+        flex-wrap: wrap;
+        
+        @include respond-to(xl) {
+            height: 80%;
+            width: 80%;
+        }
+        @include respond-to(lg) {
+            height: 80%;
+            width: 80%;
+        }
+
+        @include respond-to(md) {
+            height: 80%;
+            width: 80%;
+        }
+
+        @include respond-to(sm) {
+            height: 80%;
+            width: 90%;
+        }
+
+        @include respond-to(xs) {
+            height: 80%;
+            width: 100%;
+        }
+
+        .button_container {
+            display: flex;
+            align-items: center;
+            
+            @include respond-to(xl) {
+                width: 10%;
+                height: 100%;
+            }
+            @include respond-to(lg) {
+                width: 10%;
+                height: 100%;
+            }
+            
+            @include respond-to(ms) {
+                width: 10%;
+                height: 100%;
+            }
+
+            @include respond-to(sm) {
+                width: 50%;
+                height: 15%;
+
+                &.previous {
+                    order: 100;
+                }
+
+                &.next {
+                    order: 200;
+                }
+            }
+
+            @include respond-to(xs) {
+                width: 50%;
+                height: 15%;
+
+                &.previous {
+                    order: 100;
+                }
+                
+                &.next {
+                    order: 200;
+                }
+            }
+
+            .button {
+                margin: 0 auto;
+                width: 42px;
+                height: 42px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                svg {
+                    margin: 0 auto;
+                }
+            }
+        }
+
+        .content_container {
+            display: flex;
+            align-items: center;
+
+            @include respond-to(xl) {
+                width: 80%;
+                height: 100%;
+            }
+            @include respond-to(lg) {
+                width: 80%;
+                height: 100%;
+            }
+            
+            @include respond-to(md) {
+                width: 80%;
+                height: 100%;
+            }
+
+            @include respond-to(sm) {
+                width: 100%;
+                height: 85%;
+            }
+
+            @include respond-to(xs) {
+                width: 100%;
+                height: 85%;
+            }
+
+            .content_image {
+                max-width: 100%;
+                max-height: 100%;
+                margin: 0 auto;
+                opacity: 0;
+                transition: opacity 100ms linear;
+
+                &.show {
+                    opacity: 1;
+                }
+            }
+
+            .content_video {
+                width: 100%;
+            }
+        }
+    }
+}

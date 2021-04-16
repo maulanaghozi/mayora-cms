@@ -1,0 +1,19 @@
+@import 'src/styles/mixin';
+@import 'src/styles/variable';
+@import 'src/styles/function';
+
+.primary {
+    @include primary-font (bold);
+    font-size: 1.25rem;
+    color: $primary-color;
+
+    margin: 1rem auto;
+}
+
+.secondary {
+    @include primary-font (reguler);
+    font-size: 0.75rem;
+    color: alpha-black(0.6);
+
+    margin: 0.25rem auto 1rem auto;
+}

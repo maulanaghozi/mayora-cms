@@ -1,0 +1,38 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.blue_header {
+    span {
+        color: $primary_color !important;
+        font-weight: 700;
+    }
+}
+
+.table_cell {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-family: 'roboto';
+    color: #000000;
+    font-size: 0.8rem;
+    width: 100px;
+    height: 100%;
+    flex-wrap: wrap;
+
+    svg {
+        flex-shrink: 0;
+    }
+}
+
+.cursor_pointer {
+    span {
+        margin-right: 5px;
+    }
+    cursor: pointer !important;
+}
+
+.header {
+    justify-content: flex-start !important;
+}

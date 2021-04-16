@@ -1,0 +1,179 @@
+@import 'variable';
+
+@mixin respond-to ($size) {
+    @if $size == xs {
+        @media only screen and (max-width: $break-small) { @content; }
+    }
+    @else if $size == sm {
+        @media only screen and (min-width: $break-small + 0.0001) and (max-width: $break-medium) { @content; }
+    }
+    @else if $size == md {
+        @media only screen and (min-width: $break-medium + 0.0001) and (max-width: $break-large) { @content; }
+    }
+    @else if $size == lg {
+        @media only screen and (min-width: $break-large + 0.0001) and (max-width: $break-xlarge) { @content; }
+    }
+    @else if $size == xl {
+        @media only screen and (min-width: $break-xlarge + 0.0001) { @content; }
+    }
+}
+
+@mixin respond-to-upper ($size) {
+    @if $size == sm {
+        @content;
+    }
+    @else if $size == md {
+        @media only screen and (min-width: $break-small + 1) { @content; }
+    }
+    @else if $size == lg {
+        @media only screen and (min-width: $break-medium + 1) { @content; }
+    }
+    @else if $size == xl {
+        @media only screen and (min-width: $break-large + 1) { @content; }
+    }
+}
+
+@mixin respond-to-lower ($size) {
+    @if $size == sm {
+        @media only screen and (max-width: $break-small) { @content; }
+    }
+    @else if $size == md {
+        @media only screen and (max-width: $break-medium) { @content; }
+    }
+    @else if $size == lg {
+        @media only screen and (max-width: $break-large) { @content; }
+    }
+    @else if $size == xl {
+        @content;
+    }
+}
+
+@mixin font-weight ($weight) {
+    @if $weight == reguler {
+        font-weight: 400;
+    }
+    @else if $weight == medium {
+        font-weight: 500;
+    }
+    @else if $weight == semi-bold {
+        font-weight: 600;
+    }
+    @else if $weight == bold {
+        font-weight: 700;
+    }
+    @else if $weight == extra-bold {
+        font-weight: 800;
+    }
+}
+
+@mixin primary-font ($weight) {
+    font-family: $primary-font;
+    
+    @include font-weight($weight);
+}
+
+@mixin secondary-font ($weight) {
+    font-family: $secondary-font;
+
+    @include font-weight($weight);
+}
+
+@mixin padding-for-sidebar {
+    @include respond-to(xs) {
+        padding-left: $closed-sidebar-width-sm;
+
+        // &.open {
+        //     padding-left: $open-sidebar-width-sm;
+        // }
+    }
+    @include respond-to(sm) {
+        padding-left: $closed-sidebar-width-md;
+
+        // &.open {
+        //     padding-left: $open-sidebar-width-md;
+        // }
+    }
+    @include respond-to(md) {
+        padding-left: $closed-sidebar-width-lg;
+
+        // &.open {
+        //     padding-left: $open-sidebar-width-lg;
+        // }
+    }
+    @include respond-to(lg) {
+        padding-left: $closed-sidebar-width-xl;
+
+        &.open {
+            padding-left: $open-sidebar-width-xl;
+        }
+    }
+
+    @include respond-to(xl) {
+        padding-left: $closed-sidebar-width-xl;
+
+        &.open {
+            padding-left: $open-sidebar-width-xl;
+        }
+    }
+}
+
+@mixin make-container {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: stretch;
+}
+
+@mixin make-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    width: 100%;
+}
+
+@mixin make-col($width) {
+    width: #{$width / 12 * 100%};
+}
+
+@mixin make-col-gutter($width, $left-gutter: 0px, $right-gutter: 0px) {
+    $gutter: $left-gutter + $right-gutter;
+    margin: 0 $right-gutter 0 $left-gutter;
+    width: calc(#{$width / 12 * 100%} - #{$gutter});
+}
+
+@mixin make-col-less($width, $spare-space: 0px) {
+    width: calc(#{$width / 12 * 100%} - #{$spare-space});
+}
+
+@mixin hide-scroll {
+    // scrollbar-width: none; /* Firefox */
+    // -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+    // &::-webkit-scrollbar { /* WebKit */
+    //     width: 0;
+    //     height: 0;
+    // }
+}
+
+@mixin center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin vertical-align($align: middle) {
+    &:before {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      vertical-align: $align;
+      // you can add font-size 0 here and restore in the children to prevent
+      // the inline-block white-space to mess the width of your elements
+      font-size: 0;
+    }
+    & > * {
+      vertical-align: $align;
+      // although you need to know the font-size, because "inherit" is 0
+      font-size: 14px;
+    }
+}

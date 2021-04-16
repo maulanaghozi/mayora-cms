@@ -1,0 +1,63 @@
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.filter{
+    margin: 1.5rem 7px 1.5rem -7px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+
+    .searchbar {
+        margin: 7px;
+        max-width: 320px;
+        min-width: 250px;
+        flex-grow: 2;
+    }
+
+    .select {
+        min-width: 180px;
+        max-width: 190px;
+        margin: 7px;
+        flex-grow: 1;
+    }
+
+    .range {
+        width: 223px;
+        margin: 0px 25px 0px 25px;
+
+        div:first-child {
+            margin-left: -10px;
+        }
+    }
+
+    .due_date {
+        // font-size: 12px !important;
+        margin: 7px;
+    }
+}
+
+.selectInput{
+    width: 10rem;
+    margin-left: 2rem;
+}
+
+.toggle_container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 3rem 0 auto 0;
+    user-select: none;
+    cursor: pointer;
+
+    .toggle {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        color: #00aeef;
+        font-size: 0.875rem;
+
+        span {
+            margin-left: 5px;
+        }
+    }
+}

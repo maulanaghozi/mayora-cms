@@ -1,0 +1,120 @@
+@import "src/styles/variable";
+@import "src/styles/mixin";
+@import "src/styles/function";
+@mixin closed-filter {
+  width: 0;
+  flex-grow: 0;
+
+  &.open {
+    flex-grow: 1;
+    width: initial !important;
+  }
+}
+
+@mixin open-text {
+  &.open {
+    width: initial !important;
+    margin-left: 5px;
+  }
+}
+.link {
+  width: 100%;
+  display: flex;
+  height: 8.5%;
+  min-height: 60px;
+  max-height: 100px;
+  cursor: pointer;
+  text-decoration: none;
+
+  ::before {
+    content: "";
+    background-color: transparent;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+  }
+
+  &.selected {
+    background-color: #242944;
+    ::before {
+      content: "";
+      background-color: #c60808;
+      width: 5px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+    }
+
+    .text {
+      color: #e0e0e0 !important;
+      font-weight: 700 !important;
+    }
+  }
+
+  .text_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    &.open {
+      padding: 0 1rem;
+    }
+
+    .filler {
+      @include respond-to(xs) {
+        @include closed-filter();
+      }
+      @include respond-to(sm) {
+        @include closed-filter();
+      }
+      @include respond-to(md) {
+        @include closed-filter();
+      }
+      @include respond-to(lg) {
+        @include closed-filter();
+      }
+      @include respond-to(xl) {
+        @include closed-filter();
+      }
+    }
+  }
+
+  .text {
+    color: #e0e0e0;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+
+    width: 0;
+    overflow: hidden;
+
+    @include respond-to(xs) {
+      @include open-text;
+    }
+    @include respond-to(sm) {
+      @include open-text;
+    }
+    @include respond-to(md) {
+      @include open-text;
+    }
+    @include respond-to(lg) {
+      @include open-text;
+    }
+    @include respond-to(xl) {
+      @include open-text;
+    }
+  }
+
+  .icon {
+    // margin-left: 1.5rem;
+    // margin-right: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

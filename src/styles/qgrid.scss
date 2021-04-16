@@ -1,0 +1,20 @@
+@mixin qgrid {
+    
+}
+
+@mixin qgrid-cell-wrapper($margin, $gutter) {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 ($margin - $gutter / 2);
+}
+
+@mixin qgrid-cell($size, $margin, $gutter) {
+    width: calc(
+        #{$size / 12 * 100%} -
+        #{
+            $gutter +
+            $size * $margin / 6
+        }
+    );
+    margin: 0 ($gutter / 2);
+}

@@ -1,0 +1,10 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.title {
+    @include primary-font(bold);
+    font-size: 1.25rem;
+    color: #4a4a4a;
+    margin-right: 0.5rem;
+}

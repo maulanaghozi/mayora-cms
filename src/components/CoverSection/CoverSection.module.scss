@@ -1,0 +1,65 @@
+@import "../../styles/function";
+@import "../../styles/mixin";
+@import "../../styles/variable";
+
+.cover{
+    width: 300px;
+    height: 211px;
+    object-fit: cover;
+
+    &.is_talent {
+        height: 300px;
+    }
+}
+
+.amount_section{
+    margin-top: 30px;
+    margin-left: 20px;
+    
+    .content_flex{
+        display: flex;
+        margin: 10px;
+        align-items: flex-end;
+        margin-bottom: 15px;
+    }
+
+    .blue_bold{
+        @include primary-font(bold);
+        color: #00aeef;
+        font-size: 1.5rem;
+        width: 70px;
+        cursor: pointer;
+    }
+    
+    .text{
+        @include primary-font(semi-bold);
+        color: #858585;
+        text-transform: uppercase;
+        align-self: flex-end;
+        letter-spacing: 0.3px;
+    }
+}
+
+.social_section {
+    @include make-col(12);
+    margin-top: 45px;
+
+    span {
+        @include primary-font(medium);
+    }
+
+    .social_media {
+        display: flex;
+        align-items: center;
+        margin-top: 22px;
+
+        svg {
+            margin-right: 45px;
+            cursor: pointer;
+        }
+    }
+}
+
+
+
+

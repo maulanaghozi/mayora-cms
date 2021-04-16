@@ -1,0 +1,32 @@
+@import 'src/styles/mixin';
+@import 'src/styles/variable';
+
+.container {
+    @include primary-font(reguler);
+    font-size: 0.75rem !important;
+    font-style: italic;
+    color: white;
+
+    position: absolute;
+    padding: 10px 16px 10px 10px;
+    transform: translate3d(1rem, 2rem, 0);
+    background-color: #bc4d6f;
+}
+
+.triangle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transform: translate3d(2px, -0.9rem, 0) rotate(45deg);
+    background-color: #bc4d6f;
+}
+
+.icon {
+    margin-right: 0.5rem;
+    margin-left: 2px;
+}
+
+.box {
+    display: flex;
+    word-wrap: break-word;
+}

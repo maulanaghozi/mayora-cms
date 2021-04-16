@@ -1,0 +1,11 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.container {
+    // @include qgrid-cell-wrapper(0px, 22px)
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -11px;
+}

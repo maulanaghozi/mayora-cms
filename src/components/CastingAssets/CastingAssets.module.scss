@@ -1,0 +1,90 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.container{
+    width: 100%;
+    font-family: Montserrat;
+}
+
+.topInfo{
+    display: flex;
+
+    .card{
+        display: flex;
+        align-items: center;
+        margin-right: 50px;
+        margin-bottom: 50px;
+        height: 40px;
+
+        .info{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            margin-left: 20px;
+            .title{
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #808080;
+            }
+
+            .value{
+                text-decoration: none !important;
+                font-size: 1.25rem;
+               color: #00aeef;
+               font-weight: 700;
+            }
+        }
+    }
+}
+
+.thumbnail {
+    display: flex;
+    margin-bottom: 20px;
+
+    div {
+        width: 100px;
+    }
+
+    img {
+        max-width: 400px;
+        width: 75%;
+    }
+}
+
+.brief{
+    display: flex;
+    margin-bottom: 30px;
+
+    .text {
+        width: 100px;
+    }
+
+    .brief_container {
+        max-width: 400px;
+        width: 75%;
+    }
+}
+
+.applicant {
+    margin-left: 0;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+
+    .note{
+        font-size: 0.625rem;
+        margin-top: 7px;
+        font-style: italic;
+        color: #878787;
+    }
+
+    .max_video {
+        width: 131px;
+        height: 42px;
+    }
+}

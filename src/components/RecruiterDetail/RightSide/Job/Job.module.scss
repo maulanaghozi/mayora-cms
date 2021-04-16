@@ -1,0 +1,110 @@
+/* 
+    Job component style
+*/
+
+.container{
+    margin-top: 30px;
+    width: 53vw;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #e9eff4;
+
+    .table_header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-bottom: 2px solid #e9eff4;
+
+        div {
+            color: #94979b;
+        }
+    }
+
+    .table_row {
+        display: flex;
+        align-items: center;
+
+        &:nth-child(even) {
+            background-color: #e7f1f5;
+        }
+    }
+
+    .table_cell {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        font-family: 'roboto';
+        color: #000000;
+        font-size: 0.875rem;
+        width: 100px;
+    }
+
+    .column_title {
+        width: 35% !important;
+        padding-left: 20px;
+        padding-right: 10px;
+
+        img {
+            width: 100px;
+            margin-right: 15px;
+        }
+
+        .title {
+            font-weight: 500 !important;
+        }
+    }
+
+    .column_type {
+        width: 10% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .to_member {
+            text-decoration: none;
+            color: #000000 !important;
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+
+            svg {
+                margin-left: 7px;
+            }
+        }
+    }
+
+    .column_due_date {
+        width: 15% !important;
+    }
+
+    .column_posted_date {
+        width: 15% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        
+    }
+
+    .column_status {
+        width: 15% !important;
+        .select{
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+    }
+
+    .column_action {
+        width: 7% !important;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .option{
+        background-color: transparent;
+        border: none;
+    }
+}

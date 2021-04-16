@@ -1,0 +1,49 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.active_jobs_container {
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 0 16px 0 alpha-black(0.1);
+    margin-bottom: 1rem;
+
+    .legend {
+        float: right;
+        
+        .status_container {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 2rem;
+
+            .symbol {
+                width: 0.7rem;
+                height: 0.7rem;
+                border-radius: 50%;
+            }
+            
+            .status_title {
+                padding-left: 0.5rem;
+                @include primary-font(reguler);
+                color: #67758d;
+            }
+        }
+    }
+}
+
+.barchart_container {
+    width: 100%;
+    min-height: 100%;
+
+    .x_axis_text {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        text-overflow: ellipsis;
+        display: block;
+        @include primary-font(reguler);
+        font-size: 0.75rem;
+        line-height: 15px;
+    }
+}

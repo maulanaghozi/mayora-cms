@@ -1,0 +1,12 @@
+@import 'src/styles/mixin';
+@import 'src/styles/variable';
+
+.container{
+    color: white;
+    font-size: 0.75rem;
+}
+
+.timer {
+    @include primary-font (medium);
+    color: $primary-color !important;
+}

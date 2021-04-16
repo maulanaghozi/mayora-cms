@@ -1,0 +1,25 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+
+.button {
+    @include primary-font(bold);
+    font-size: 0.875rem;
+    color: #ffffff;
+    letter-spacing: 1px;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 168px;
+    height: 40px;
+    background-color: $primary-color;
+    
+    cursor: pointer;
+
+    &.disabled {
+        opacity: 0.6 !important;
+        cursor: default;
+    }
+}

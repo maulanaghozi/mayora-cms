@@ -1,0 +1,11 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.sidebar_container {
+    @include make-col(3);
+    // @include hide-scroll();
+    height: 100%;
+    // overflow-y: scroll;
+    padding-right: 2rem;
+}

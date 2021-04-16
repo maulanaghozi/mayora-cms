@@ -1,0 +1,11 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.container {
+    @include primary-font(bold);
+    font-size: 1rem;
+    color: black;
+    padding: 20px;
+}

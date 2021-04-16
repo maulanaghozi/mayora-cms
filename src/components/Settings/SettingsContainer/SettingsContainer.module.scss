@@ -1,0 +1,58 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+// @import 'src/styles/bs/bootstrap-grid';
+
+.settings_container {
+    overflow: hidden;
+    margin: 0 !important;
+    height: 100%;
+    @include make-row();
+
+    @include respond-to-lower(lg) {
+        @include make-container();
+    }
+}
+
+.scroll_wrapper {
+    @include respond-to-lower(lg) {
+        height: calc(100% - 100px);
+    }
+    @include respond-to-upper(lg) {
+        height: 100%;
+    }
+    overflow-y: auto;
+    padding: 2rem;
+    
+    @include hide-scroll();
+
+    @include respond-to(sm) {
+        @include make-col(12);
+    }
+    @include respond-to(md) {
+        @include make-col(12);
+    }
+    @include respond-to(lg) {
+        @include make-col(10);
+    }
+    @include respond-to(xl) {
+        @include make-col(10);
+    }
+}
+
+.wrapper {
+    padding: 2rem;
+    
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.08);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.08);
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.08);
+    box-sizing: border-box !important;
+}
+
+// .wrapper {
+//     position: relative;
+//     // overflow: hidden;
+//     display: flex;
+//     flex-direction: column;
+//     box-sizing: border-box !important;
+// }

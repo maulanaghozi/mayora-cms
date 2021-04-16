@@ -1,0 +1,56 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.container {
+    @include make-col(9);
+    height: 100%;
+    display: flex;
+    box-sizing: border-box !important;
+}
+
+.wrapper {
+    flex-basis: 0;
+    width: 100px;
+    max-width: 100%;
+    box-sizing: border-box !important;
+    flex-grow: 1;
+}
+
+.editor_container {
+    // width: 350px;
+    position: relative;
+    display: flex;
+}
+
+.editor {
+    // width: 350px;
+    padding: 10px;
+    border: 2px solid #e9eff4;
+    color: #000000;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 0.875rem;
+    flex-grow: 1;
+    height: 300px;
+    box-sizing: border-box !important;
+}
+
+.toolbar {
+    border: 2px solid #e9eff4;
+    margin-bottom: 0;
+    border-bottom: 0 !important;
+    box-sizing: border-box !important;
+    // width: 350px;
+}
+
+.footer {
+    height: 40px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+
+    .last_updated {
+        flex-grow: 1;
+    }
+}

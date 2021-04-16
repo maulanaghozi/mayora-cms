@@ -1,0 +1,10 @@
+.vjs-kestingrum .vjs-big-play-button {
+    top: 50% !important; 
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 1.7em !important;
+    height: 1.7em !important;
+    border: 3px solid white;
+    opacity: 0.75;
+    border-radius: 50% !important;
+}

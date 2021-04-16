@@ -1,0 +1,42 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/qgrid';
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: -3px;
+
+    .add_card_container {
+        width: 130px;
+        height: 170px;
+        border: 2px dashed #b1bfcf;
+        position: relative;
+        margin: 3px;
+        cursor: pointer;
+
+        .add_card_label {
+            @include center;
+            @include primary-font(bold);
+            color: $primary_color;
+            font-size: 0.875rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            div {
+                margin: 5px auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                p {
+                    margin: 1px auto;
+                }
+            }
+        }
+    }
+}

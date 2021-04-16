@@ -1,0 +1,48 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.container {
+    margin: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.body {
+    margin: 15px -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.description {
+    padding: 15px;
+
+    @include respond-to-upper(lg) {
+        width: 50%;
+    }
+
+    @include respond-to-lower(lg) {
+        width: 100%;
+    }
+
+    .navigation {
+        width: 100%;
+        display: flex;
+    }
+}
+
+.assets {
+    padding: 15px;
+
+    @include respond-to-upper(lg) {
+        width: 50%;
+    }
+
+    @include respond-to-lower(lg) {
+        width: 100%;
+    }
+}
+

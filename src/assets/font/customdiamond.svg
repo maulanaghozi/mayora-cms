@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
+<defs>
+<font id="customdiamond" horiz-adv-x="1000" >
+<font-face font-family="customdiamond" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="artboard-3" unicode="&#x2022;" d="M358 72l-283 284 283 283 284-283z" horiz-adv-x="703" />
+
+<glyph glyph-name="artboard-1" unicode="&#x25cf;" d="M358 72l-283 284 283 283 284-283z" horiz-adv-x="703" />
+</font>
+</defs>
+</svg>

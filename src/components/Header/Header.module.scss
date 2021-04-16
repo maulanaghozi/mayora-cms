@@ -1,0 +1,26 @@
+@import "src/styles/mixin";
+@import "src/styles/variable";
+@import "src/styles/function";
+// @import 'src/styles/bs/bootstrap-grid';
+
+.header_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+  border-bottom: 1px solid #ebecec;
+  background-color: #ffffff;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+
+  @include padding-for-sidebar;
+}
+
+.border {
+  width: 1px;
+  background-color: #ebecec;
+  height: 50%;
+}

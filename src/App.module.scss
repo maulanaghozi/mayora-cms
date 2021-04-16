@@ -1,0 +1,22 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+// @import 'src/styles/bs/bootstrap-grid';
+
+
+/**
+ * Global Variable
+ */
+
+$sidebar-width-extra-small: 160px;
+$sidebar-width-small: 180px;
+$sidebar-width-medium: 200px;
+$sidebar-width-large: 220px;
+$sidebar-width-extra-large: 240px;
+
+$sidebar-open-width: 15rem;
+$sidebar-closed-width: 4rem;
+
+* {
+    box-sizing: border-box !important;
+}

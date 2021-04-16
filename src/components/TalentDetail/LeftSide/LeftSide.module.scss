@@ -1,0 +1,33 @@
+/* 
+    Talent Detail > Left Side Component style
+*/
+
+.group{
+    margin-left: 20px;
+}
+
+.cover{
+    width: 300px;
+    height: 300px;
+}
+
+.blueBold{
+    color: #00aeef;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 70px;
+    font-family: Montserrat;
+}
+
+.flex{
+    display: flex;
+    margin: 10px;
+}
+
+.text{
+    color: #858585;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: Montserrat;
+    align-self: flex-end;
+}

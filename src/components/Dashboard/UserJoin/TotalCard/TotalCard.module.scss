@@ -1,0 +1,42 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.card_container {
+    background-color: white;
+    box-shadow: 0 0 16px 0 alpha-black(0.08);
+    padding: 1rem;
+    @include make-row();
+    user-select: none;
+
+    .card_icon {
+        width: 2rem;
+        height: 2rem;
+        @include make-col(3);
+    }
+
+    .content_container {
+        @include make-col(9);
+        align-self: center;
+
+        .card_title {
+            @include primary-font(reguler);
+            font-size: 0.875rem;
+            color: #67758d;
+            letter-spacing: 1px;
+        }
+
+        .card_total {
+            @include primary-font(bold);
+            font-size: 1.5rem;
+            color: #67758d;
+            margin: 0.5rem 0;
+        }
+
+        .card_diff {
+            @include primary-font(semi-bold);
+            font-size: 0.875rem;
+            color: $primary-color;
+        }
+    }
+}

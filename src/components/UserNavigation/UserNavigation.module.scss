@@ -1,0 +1,42 @@
+/* 
+    User Navigation Component style
+
+*/
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.selected {
+    color: #00aeef !important;
+    font-weight: 800 !important;
+    font-family: 'Montserrat' !important;
+    font-size: 1.2rem;
+    user-select: none !important;
+    cursor: default !important;
+    letter-spacing: 2px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+
+    &::after {
+        content: ' ';
+        background-color: #00aeef;
+        width: 100%;
+        height: 3px;
+        margin-top: 6px;
+    }
+}
+
+.title {
+    color: rgba($color: #000000, $alpha: 0.15);
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-right: 50px;
+    user-select: none;
+}

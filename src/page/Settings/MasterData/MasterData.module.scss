@@ -1,0 +1,8 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.master_container {
+    @include make-row();
+    height: 100%;
+}

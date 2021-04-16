@@ -1,0 +1,13 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.content_container {
+    @include padding-for-sidebar;
+    padding-top: $header-height;
+    height: 100%;
+    min-height: 100vh;
+
+    // <TODO>
+    // add loading background here
+}

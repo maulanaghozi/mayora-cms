@@ -1,0 +1,19 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.container {
+    padding: 30px;
+    position: relative;
+    min-height: calc(100vh - 60px);
+
+    .page_title {
+        margin-bottom: 30px;
+    }
+
+    .loading_container {
+        width: 100%;
+        height: calc(100vh - 222px);
+        position: relative;
+    }
+}

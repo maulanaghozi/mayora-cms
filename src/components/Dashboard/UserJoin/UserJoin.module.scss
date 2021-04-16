@@ -1,0 +1,26 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.user_join {
+    @include make-row();
+    justify-content: space-between;
+
+    .total_panel {
+        @include make-col(3);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.5rem 0.5rem 0.5rem 0;
+
+        .card_wrapper {
+            padding: 0.5rem 0.5rem 0.5rem 0;
+        }
+    }
+
+    .chart_wrapper {
+        padding: 1rem 0;
+        @include make-col(9);
+    }
+}

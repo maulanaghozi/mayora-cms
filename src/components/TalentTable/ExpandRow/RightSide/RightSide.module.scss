@@ -1,0 +1,36 @@
+@import 'src/styles/mixin';
+@import 'src/styles/variable';
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 25%;
+    height: 100%;
+    padding-left: 15px;
+    font-size: 0.75rem;
+    line-height: 1.3rem;
+    color: $primary-color;
+
+    .content_flex{
+        display: flex;
+        margin: 10px;
+        // align-items: flex-end;
+        margin-bottom: 5px;
+    }
+
+    .blue_bold{
+        @include primary-font(bold);
+        color: #00aeef;
+        width: 70px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    
+    .text{
+        @include primary-font(semi-bold);
+        // text-transform: uppercase;
+        // align-self: flex-end;
+        // letter-spacing: 0.3px;
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="167" height="63" viewBox="0 0 167 63">
+    <defs>
+        <linearGradient id="a" x1="49.998%" x2="49.998%" y1="-.001%" y2="100.036%">
+            <stop offset="0%" stop-color="#A003D2"/>
+            <stop offset="34.095%" stop-color="#7D33D6"/>
+            <stop offset="100%" stop-color="#29A5DF"/>
+        </linearGradient>
+        <linearGradient id="b" x1="32.238%" x2="122.386%" y1="39.906%" y2="64.005%">
+            <stop offset="0%" stop-color="#FFF"/>
+            <stop offset="100%" stop-color="#7A7A7A" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <text fill="#FFF" font-family="Montserrat-Bold, Montserrat" font-size="25" font-weight="bold" letter-spacing=".5">
+            <tspan x="0" y="45">kesting•rum</tspan>
+        </text>
+    </g>
+</svg>

@@ -1,0 +1,48 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+
+.group_container {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.header_container {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        padding: 0 2rem;
+    }
+    
+    .filter {
+        width: 100%;
+        display: flex;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+
+.footer {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 36px;
+    margin-top: 39px;
+    justify-content: space-between;
+
+    .selector_container {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.table_container {
+    // overflow-y: auto;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}

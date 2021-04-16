@@ -1,0 +1,35 @@
+@import "src/styles/variable";
+@import "src/styles/mixin";
+@import "src/styles/function";
+
+.wrapper {
+  position: relative;
+  height: fit-content;
+  .text_box_container {
+    border: 2px solid #e9eff4;
+    padding: 15px 20px;
+    @include primary-font(medium);
+    font-size: 12px;
+    color: black;
+    height: 50px;
+
+    &.not_resizable {
+      resize: none;
+    }
+  }
+
+  textarea::placeholder {
+    font-style: italic;
+    color: #acacac;
+    font-size: 12px;
+  }
+
+  > span {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    color: #979797;
+    @include primary-font(reguler);
+    font-size: 11px;
+  }
+}

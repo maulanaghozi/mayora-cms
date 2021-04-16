@@ -1,0 +1,44 @@
+@import '../../../../styles/mixin';
+
+.container{
+    width: 36%;
+    padding-left: 15px;
+    font-size: 0.75rem;
+    line-height: 1.3rem;
+}
+
+.content{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.field{
+    width: 40% ;
+    color: #00aeef;
+    @include secondary-font(bold);
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+.fill {
+    width: calc(60% - 15px);
+    text-transform: capitalize;
+    display: flex;
+    @include secondary-font(reguler);
+}
+
+.requirement_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    @include secondary-font(reguler);
+}
+
+.requirement{
+    padding: 5px;
+    background-color: #cfcfcf;
+    margin: 2px;
+    text-transform: capitalize;
+}

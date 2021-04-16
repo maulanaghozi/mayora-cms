@@ -1,0 +1,29 @@
+@import "src/styles/mixin";
+@import "src/styles/variable";
+@import "src/styles/function";
+
+.date_picker_container {
+  display: flex;
+  cursor: pointer;
+  background-color: #ffffff;
+
+  .date_picker {
+    font-size: 0.875rem;
+    padding: 1rem;
+    flex-grow: 1;
+    min-width: 200px;
+    font-family: roboto;
+    color: #201d1d;
+  }
+
+  .calendar_icon {
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.disabled {
+    opacity: 0.6;
+  }
+}

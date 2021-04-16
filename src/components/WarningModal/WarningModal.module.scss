@@ -1,0 +1,74 @@
+@import 'src/styles/variable';
+@import 'src/styles/mixin';
+@import 'src/styles/function';
+@import 'src/styles/button';
+
+.modal_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: alpha-black(0.9);
+    z-index: 990;
+
+    .modal_box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 1.5rem;
+
+        .modal_title {
+            @include primary-font(bold);
+            color: #4a4a4a;
+            font-size: 1.2rem;
+        }
+
+        .modal_content {
+            @include primary-font(reguler);
+            color: #4a4a4a;
+            font-size: 1rem;
+
+            margin-top: 2rem;
+        }
+
+        .button_container {
+            @include make-row();
+
+            margin-top: 2rem;
+
+            .yes_button {
+                @extend .button__white;
+
+                @include make-col(6);
+                position: relative;
+            }
+
+            .no_button {
+                @extend .button__blue;
+
+                @include make-col(6);
+
+                border: 0 !important;
+                color: black !important;
+            }
+        }
+
+        .close_button {
+            background-image: url('../../assets/x_black.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            border: 0;
+            outline: none;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            height: 1rem;
+            width: 1rem;
+            cursor: pointer;
+        }
+    }
+}
