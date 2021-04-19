@@ -14,7 +14,8 @@ export default function TroubleList() {
 
   useEffect(() => {
     const getDays = moment().format("YYYY MM DD");
-    console.log(moment(`${getDays} 07:00`).format());
+    const startDay = moment(`${getDays} 02:00`).format();
+    console.log(moment(startDay).startOf("minute").fromNow());
   }, []);
 
   const renderHeader = () => {
@@ -82,49 +83,7 @@ export default function TroubleList() {
           <div
             style={{
               height: "20px",
-              flex: 20,
-              backgroundColor: "#fabb43",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: 70,
-              backgroundColor: "#0ac46b",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: 20,
-              backgroundColor: "#e92548",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: 70,
-              backgroundColor: "#0ac46b",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: 60,
-              backgroundColor: "#e92548",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: 120,
-              backgroundColor: "#0ac46b",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: totalMinutes - 40 - 20 - 70 - 20 - 70 - 60 - 120,
+              flex: totalMinutes - 40,
               backgroundColor: "white",
             }}
           ></div>
@@ -186,34 +145,34 @@ export default function TroubleList() {
 }
 
 const mockData = [
-  {
-    troubleId: "trouble1",
-    startTime: "09:00",
-    endTime: "09:20",
-    duration: "20 Min",
-    category: "Trouble pompa inload glucose",
-    remark: null,
-    name: "system",
-    updatedAt: "11 Mar 2021 09:20",
-  },
-  {
-    troubleId: "trouble2",
-    startTime: "15:15",
-    endTime: "15:25",
-    duration: "10 Min",
-    category: "Double filter bocor",
-    remark: null,
-    name: "system",
-    updatedAt: "11 Mar 2021 15:25",
-  },
-  {
-    troubleId: "triuyble3",
-    startTime: "18:07",
-    endTime: "18:14",
-    duration: "7 Min",
-    category: "Trouble Kompresor/Angin",
-    remark: null,
-    name: "Andi Hidayat",
-    updatedAt: "11 Mar 2021 18:14",
-  },
+  //   {
+  //     troubleId: "trouble1",
+  //     startTime: "09:00",
+  //     endTime: "09:20",
+  //     duration: "20 Min",
+  //     category: "Trouble pompa inload glucose",
+  //     remark: null,
+  //     name: "system",
+  //     updatedAt: "11 Mar 2021 09:20",
+  //   },
+  //   {
+  //     troubleId: "trouble2",
+  //     startTime: "15:15",
+  //     endTime: "15:25",
+  //     duration: "10 Min",
+  //     category: "Double filter bocor",
+  //     remark: null,
+  //     name: "system",
+  //     updatedAt: "11 Mar 2021 15:25",
+  //   },
+  //   {
+  //     troubleId: "triuyble3",
+  //     startTime: "18:07",
+  //     endTime: "18:14",
+  //     duration: "7 Min",
+  //     category: "Trouble Kompresor/Angin",
+  //     remark: null,
+  //     name: "Andi Hidayat",
+  //     updatedAt: "11 Mar 2021 18:14",
+  //   },
 ];
