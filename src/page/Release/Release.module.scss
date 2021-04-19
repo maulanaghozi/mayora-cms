@@ -1,3 +1,7 @@
+.container {
+  flex-direction: column;
+}
+
 .headerContainer {
   background-color: #eeeeee;
   padding: 20px 30px;
@@ -10,6 +14,8 @@
     color: rgba($color: #000000, $alpha: 0.85);
     font-size: 20px;
     font-weight: 500;
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .filter {
@@ -23,96 +29,13 @@
   }
 }
 
-.statusContainer {
-  margin: 10px 30px;
-  border: 1px solid rgba($color: #000000, $alpha: 0.1);
-  border-radius: 10px;
-
-  .headerStatus {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
-
-    > span {
-      font-family: roboto;
-      font-weight: 500;
-      font-size: 16px;
-    }
-
-    .indicatorColor {
-      display: flex;
-      align-items: center;
-
-      .status {
-        display: flex;
-        margin-left: 20px;
-        align-items: center;
-
-        .box {
-          width: 16px;
-          height: 16px;
-
-          &.grey {
-            background-color: #9e9e9e;
-          }
-
-          &.green {
-            background-color: #0ac46b;
-          }
-
-          &.yellow {
-            background-color: #fabb43;
-          }
-
-          &.red {
-            background-color: #e92548;
-          }
-        }
-
-        > span {
-          font-family: roboto;
-          font-size: 12px;
-          font-weight: 400;
-          margin-left: 5px;
-        }
-      }
-    }
-  }
-
-  .progressContainer {
-    padding: 20px 30px;
-
-    .bar {
-      flex: 1;
-      height: 20px;
-      background-color: #0ac46b;
-      display: flex;
-      align-items: center;
-    }
-
-    .hours {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-
-      > span {
-        font-family: roboto;
-        font-size: 12px;
-      }
-    }
-  }
-}
-
 .akumulasiRelease {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 20px 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid salmon;
+  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
 
   > span {
     font-family: roboto;
@@ -120,6 +43,15 @@
 
   .akumulasi {
     font-weight: 500;
-    color: salmon;
+    color: #c60808;
+  }
+}
+
+.tableWraper {
+  width: 100%;
+  display: flex;
+
+  .table {
+    flex: 1;
   }
 }
