@@ -85,9 +85,10 @@
 
   .text {
     color: #e0e0e0;
-    font-weight: 500;
-    font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
+    font-weight: 400;
+    font-family: roboto;
+    font-size: 16px;
+    height: 16px;
     text-decoration: none;
     white-space: nowrap;
 
@@ -112,8 +113,6 @@
   }
 
   .icon {
-    // margin-left: 1.5rem;
-    // margin-right: 0.5rem;
     width: 1.5rem;
     height: 1.5rem;
   }
