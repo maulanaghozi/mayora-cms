@@ -35,5 +35,19 @@ export default function TroubleList() {
     );
   };
 
-  return <div>{renderHeader()}</div>;
+  const renderTotalRelease = () => {
+    return (
+      <div className={Styles.akumulasiRelease}>
+        <span>Data Release By System</span>
+        <span className={Styles.akumulasi}>Total Release</span>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      {renderHeader()}
+      {renderTotalRelease()}
+    </div>
+  );
 }

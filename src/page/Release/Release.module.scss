@@ -105,3 +105,21 @@
     }
   }
 }
+
+.akumulasiRelease {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid salmon;
+
+  > span {
+    font-family: roboto;
+  }
+
+  .akumulasi {
+    font-weight: 500;
+    color: salmon;
+  }
+}
