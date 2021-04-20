@@ -95,12 +95,12 @@
     .hours {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin-top: 10px;
 
       > span {
         font-family: roboto;
         font-size: 12px;
-        margin-right: 10px;
       }
     }
   }
