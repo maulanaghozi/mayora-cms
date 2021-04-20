@@ -21,6 +21,15 @@ export default function TroubleList() {
     setMinutesPass(ms / 60);
   }, []);
 
+  function timeDiffCalc(dateFuture, dateNow) {
+    let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
+
+    // calculate minutes
+    const minutes = diffInMilliSeconds / 60;
+
+    return minutes;
+  }
+
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
