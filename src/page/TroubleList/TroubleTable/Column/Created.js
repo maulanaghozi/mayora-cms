@@ -6,7 +6,6 @@ export default function Created({ row }) {
   return (
     <div className={table_cell + " " + column_updated}>
       <div>{moment(row.updatedAt).format("DD MMM YYYY HH:mm")}</div>
-      {/* <div>{row.updatedAt}</div> */}
     </div>
   );
 }

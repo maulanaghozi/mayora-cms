@@ -7,6 +7,7 @@ import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
 
 let totalMinutes = 1440;
+let totalDuration = 0;
 
 export default function TroubleList() {
   const [selected, setSelected] = useState(null);
@@ -22,10 +23,12 @@ export default function TroubleList() {
   }, []);
 
   function timeDiffCalc(dateFuture, dateNow) {
-    let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
+    let diffInMilliSeconds =
+      Math.abs(new Date(dateFuture) - new Date(dateNow)) / 1000;
 
     // calculate minutes
     const minutes = diffInMilliSeconds / 60;
+    totalDuration = totalDuration + minutes;
 
     return minutes;
   }
@@ -81,21 +84,40 @@ export default function TroubleList() {
     );
   };
 
+  const backgroundProgress = status => {
+    switch (status) {
+      case "off":
+        return "#9e9e9e";
+      case "startup":
+        return "#FABB43";
+      case "running":
+        return "#0AC46B";
+      case "downtime":
+        return "#E92548";
+      case "disconnected":
+        return "#000000";
+      default:
+        return "#ffffff";
+    }
+  };
+
   const renderProgress = () => {
     return (
       <div className={Styles.progressContainer}>
         <div className={classNames(Styles.bar)}>
+          {mockData.map((item, idx) => (
+            <div
+              style={{
+                height: "20px",
+                flex: timeDiffCalc(item.endTime, item.startTime),
+                backgroundColor: backgroundProgress(item.status),
+              }}
+            ></div>
+          ))}
           <div
             style={{
               height: "20px",
-              flex: minutesPass,
-              backgroundColor: "#9e9e9e",
-            }}
-          ></div>
-          <div
-            style={{
-              height: "20px",
-              flex: totalMinutes - minutesPass,
+              flex: totalMinutes - totalDuration - minutesPass,
               backgroundColor: "white",
             }}
           ></div>
@@ -157,34 +179,43 @@ export default function TroubleList() {
 }
 
 const mockData = [
-  //   {
-  //     troubleId: "trouble1",
-  //     startTime: "09:00",
-  //     endTime: "09:20",
-  //     duration: "20 Min",
-  //     category: "Trouble pompa inload glucose",
-  //     remark: null,
-  //     name: "system",
-  //     updatedAt: "11 Mar 2021 09:20",
-  //   },
-  //   {
-  //     troubleId: "trouble2",
-  //     startTime: "15:15",
-  //     endTime: "15:25",
-  //     duration: "10 Min",
-  //     category: "Double filter bocor",
-  //     remark: null,
-  //     name: "system",
-  //     updatedAt: "11 Mar 2021 15:25",
-  //   },
-  //   {
-  //     troubleId: "triuyble3",
-  //     startTime: "18:07",
-  //     endTime: "18:14",
-  //     duration: "7 Min",
-  //     category: "Trouble Kompresor/Angin",
-  //     remark: null,
-  //     name: "Andi Hidayat",
-  //     updatedAt: "11 Mar 2021 18:14",
-  //   },
+  {
+    id: "f92c96f0-7ab8-4e60-80d0-095139de7309",
+    machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+    categoryId: null,
+    startTime: "2021-04-19T00:00:00.000Z",
+    endTime: "2021-04-19T00:30:00.000Z",
+    remark: null,
+    status: "startup",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-20T05:51:47.058Z",
+    updatedAt: "2021-04-20T05:51:57.526Z",
+  },
+  {
+    id: "f8824e89-7018-4e42-b629-6c984bbecbbc",
+    machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+    categoryId: null,
+    startTime: "2021-04-19T00:30:00.000Z",
+    endTime: "2021-04-19T16:30:00.000Z",
+    remark: null,
+    status: "running",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-20T05:51:57.515Z",
+    updatedAt: "2021-04-20T05:52:32.273Z",
+  },
+  {
+    id: "24b174a3-736d-49c3-8841-7de696dcf337",
+    machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+    categoryId: null,
+    startTime: "2021-04-19T16:30:00.000Z",
+    endTime: "2021-04-20T00:00:00.000Z",
+    remark: null,
+    status: "off",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-20T05:52:32.260Z",
+    updatedAt: "2021-04-20T05:53:11.986Z",
+  },
 ];
