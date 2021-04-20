@@ -11,11 +11,14 @@ let totalMinutes = 1440;
 export default function TroubleList() {
   const [selected, setSelected] = useState(null);
   const [date, setDate] = useState(moment().unix());
+  const [minutesPass, setMinutesPass] = useState(0);
 
   useEffect(() => {
     const getDays = moment().format("YYYY MM DD");
-    const startDay = moment(`${getDays} 02:00`).format();
-    console.log(moment(startDay).startOf("minute").fromNow());
+    const curentTime = moment().format("YYYY MM DD HH:mm");
+    const startDay = moment(`${getDays} 07:00`).format();
+    const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
+    setMinutesPass(ms / 60);
   }, []);
 
   const renderHeader = () => {
@@ -76,14 +79,14 @@ export default function TroubleList() {
           <div
             style={{
               height: "20px",
-              flex: 40,
+              flex: minutesPass,
               backgroundColor: "#9e9e9e",
             }}
           ></div>
           <div
             style={{
               height: "20px",
-              flex: totalMinutes - 40,
+              flex: totalMinutes - minutesPass,
               backgroundColor: "white",
             }}
           ></div>
