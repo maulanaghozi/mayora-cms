@@ -7,6 +7,8 @@ import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
 
 let totalMinutes = 1440;
+const getThisDay = moment().format("YYYY MM DD");
+const getThisDay07 = moment(`${getThisDay} 07:00`).format();
 
 export default function TroubleList() {
   const [selected, setSelected] = useState(null);
@@ -112,7 +114,7 @@ export default function TroubleList() {
             <div
               style={{
                 height: "20px",
-                flex: timeDiffCalc(item.endTime, item.startTime),
+                flex: timeDiffCalc(item.endTime, getThisDay07),
                 backgroundColor: backgroundProgress(item.status),
               }}
             ></div>
@@ -187,38 +189,12 @@ const mockData = [
     machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
     categoryId: null,
     startTime: "2021-04-20T00:00:00.000Z",
-    endTime: "2021-04-20T01:00:00.000Z",
+    endTime: null,
     remark: null,
     status: "startup",
     createdBy: null,
     updatedBy: null,
     createdAt: "2021-04-20T05:53:11.965Z",
     updatedAt: "2021-04-20T07:01:44.403Z",
-  },
-  {
-    id: "fb335e54-69a5-4b91-af87-1a16acd36541",
-    machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-    categoryId: null,
-    startTime: "2021-04-20T01:00:00.000Z",
-    endTime: "2021-04-20T04:00:00.000Z",
-    remark: null,
-    status: "running",
-    createdBy: null,
-    updatedBy: null,
-    createdAt: "2021-04-20T07:01:44.372Z",
-    updatedAt: "2021-04-20T07:02:11.900Z",
-  },
-  {
-    id: "2f06bbcb-2fa3-47af-8494-b748d3fd95ca",
-    machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-    categoryId: null,
-    startTime: "2021-04-20T04:00:00.000Z",
-    endTime: null,
-    remark: null,
-    status: "off",
-    createdBy: null,
-    updatedBy: null,
-    createdAt: "2021-04-20T07:02:11.878Z",
-    updatedAt: "2021-04-20T07:02:27.176Z",
   },
 ];
