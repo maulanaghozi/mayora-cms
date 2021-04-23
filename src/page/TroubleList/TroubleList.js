@@ -187,7 +187,7 @@ export default function TroubleList() {
   const renderTable = () => {
     return (
       <TroubleTable
-        data={mockData}
+        data={[]}
         onChange={() => {}}
         sort={"time"}
         setKey={() => {}}
