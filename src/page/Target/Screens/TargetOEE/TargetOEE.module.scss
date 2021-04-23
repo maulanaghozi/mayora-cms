@@ -1,3 +1,47 @@
 .container {
   font-family: roboto;
+  padding: 20px 30px;
+
+  .cardTarget {
+    width: 300px;
+    border-radius: 5px;
+    padding: 12px;
+    border: 1px solid #bdbdbd;
+    margin-right: 20px;
+
+    .titleContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .title {
+        font-weight: 400;
+        color: #201d1d;
+        font-size: 16px;
+      }
+    }
+
+    .targetValueContainer {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 10px;
+
+      .targetValue {
+        font-weight: 500;
+        color: #000000;
+        font-size: 42px;
+        margin-right: 10px;
+      }
+
+      .edit {
+        font-weight: 400;
+        color: #0f74eb;
+        font-size: 20px;
+        cursor: pointer;
+        margin-bottom: 7px;
+        text-decoration: underline;
+      }
+    }
+  }
 }

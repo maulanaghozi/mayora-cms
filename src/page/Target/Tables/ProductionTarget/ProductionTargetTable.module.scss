@@ -61,12 +61,12 @@
   }
 
   .column_time {
-    width: 15% !important;
+    width: 20% !important;
     padding-left: 15px !important;
   }
 
   .column_target {
-    width: 10% !important;
+    width: 20% !important;
   }
 
   .column_activeTarget {
@@ -90,32 +90,9 @@
   }
 
   .column_role {
-    width: 10% !important;
+    width: 20% !important;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .column_updated {
-    width: 15% !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .column_status {
-    width: 10% !important;
-  }
-
-  .column_action {
-    display: flex;
-    justify-content: space-between;
-    width: 10% !important;
-
-    > span {
-      cursor: pointer;
-      color: #0f74eb;
-      font-family: roboto;
-    }
   }
 }
