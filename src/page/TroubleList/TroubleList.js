@@ -64,6 +64,7 @@ export default function TroubleList() {
       <div className={Styles.headerContainer}>
         <span>Trouble List</span>
         <div className={Styles.filter}>
+          <span className={Styles.buttonExport}>Download</span>
           <InputSelect
             value={selected}
             className={Styles.inputSelect}
