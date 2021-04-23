@@ -5,7 +5,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 20px 30px;
+  margin: 20px 0px;
 
   .elipis {
     max-height: 3rem;
@@ -65,11 +65,11 @@
     padding-left: 15px !important;
   }
 
-  .column_duration {
+  .column_target {
     width: 10% !important;
   }
 
-  .column_category {
+  .column_activeTarget {
     width: 20% !important;
     display: flex;
     flex-wrap: wrap;
@@ -82,14 +82,14 @@
     }
   }
 
-  .column_remark {
+  .column_name {
     width: 25% !important;
     img {
       width: 100%;
     }
   }
 
-  .column_name {
+  .column_role {
     width: 10% !important;
     display: flex;
     flex-direction: column;
@@ -112,7 +112,7 @@
     justify-content: space-between;
     width: 10% !important;
 
-    .edit {
+    > span {
       cursor: pointer;
       color: #0f74eb;
       font-family: roboto;

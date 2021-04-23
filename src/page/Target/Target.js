@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import moment from "moment";
 import InputSelect from "../../components/InputSelect/InputSelect";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import InputDate from "../../components/InputDate/InputDate";
+import ProductionTarget from "./Screens/ProductionTarget/ProductionTarget";
+import TargetOEE from "./Screens/TargetOEE/TargetOEE";
 import Styles from "./Target.module.scss";
 
 export default function TroubleList() {
@@ -42,5 +45,26 @@ export default function TroubleList() {
     );
   };
 
-  return <div>{renderHeader()}</div>;
+  const renderMainContent = () => {
+    return (
+      <Switch>
+        <Route
+          path={"/target/production-target"}
+          component={ProductionTarget}
+        />
+        <Route path={"/target/target-oee"} component={TargetOEE} />
+        <Route
+          path={"/target"}
+          render={() => <Redirect to={"/target/production-target"} />}
+        />
+      </Switch>
+    );
+  };
+
+  return (
+    <div>
+      {renderHeader()}
+      {renderMainContent()}
+    </div>
+  );
 }
