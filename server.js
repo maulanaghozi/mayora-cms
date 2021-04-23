@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.get("/*", function(req, res) {
+app.get("/*", function (req, res) {
   console.log("request web static ====> ", req);
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
@@ -12,5 +12,5 @@ app.get("/*", function(req, res) {
 const port = process.env.REACT_APP_PORT || 21001;
 
 app.listen(port, () => {
-  console.log("gerak cms running on port " + port);
+  console.log("mayora cms running on port " + port);
 });
