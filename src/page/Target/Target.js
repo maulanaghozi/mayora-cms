@@ -12,10 +12,7 @@ export default function TroubleList() {
   const [selected, setSelected] = useState(null);
   const [date, setDate] = useState(moment().unix());
 
-  useEffect(() => {
-    const getDays = moment().format("YYYY MM DD");
-    console.log(moment(`${getDays} 07:00`).format());
-  }, []);
+  useEffect(() => {}, []);
 
   const renderHeader = () => {
     return (
