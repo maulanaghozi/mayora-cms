@@ -188,7 +188,7 @@ export default function TroubleList() {
   const renderTable = () => {
     return (
       <TroubleTable
-        data={mockData}
+        data={[]}
         onChange={() => {}}
         sort={"time"}
         setKey={() => {}}
@@ -213,7 +213,7 @@ const mockData = [
     startTime: "2021-04-23T00:00:00.000Z",
     endTime: null,
     remark: null,
-    status: "startup",
+    status: "off",
     createdBy: null,
     updatedBy: null,
     createdAt: "2021-04-20T05:53:11.965Z",
