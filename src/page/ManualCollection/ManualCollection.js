@@ -45,7 +45,7 @@ export default function TroubleList() {
             "Not Operating Day & Planned Down Time",
             "Down Time Losses",
             "Speed Losses",
-            "Defect & Rework Losses (3)",
+            "Defect & Rework Losses",
             "Release",
           ]}
           path={[

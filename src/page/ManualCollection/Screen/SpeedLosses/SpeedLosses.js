@@ -1,53 +1,30 @@
 import React from "react";
-import moment from "moment";
+import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./SpeedLosses.module.scss";
 
 export default function SpeedLosses() {
-  const renderDefaultTarget = () => {
+  const renderDirectoryParent = () => {
     return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Default Target</span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Default target akan berlaku seterusnya sebagai nilai awal apabila
-          tidak ada pergantian nilai target
-        </p>
+      <div>
+        {results.map((item, idx) => (
+          <Directory name={item.name} key={idx.toString()} />
+        ))}
       </div>
     );
   };
 
-  const renderCurrentTarget = () => {
-    return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Current Target</span>
-          <span className={Styles.dateCard}>
-            {moment().format("DD MMM YYYY")}
-          </span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Current target akan berlaku hanya untuk hari ini. Waktu mulai aktif
-          dapat diatur sesuai keinginan.
-        </p>
-      </div>
-    );
-  };
-
-  return (
-    <div className={Styles.container}>
-      <div className={Styles.cardTargetContainer}>
-        {renderDefaultTarget()}
-        {renderCurrentTarget()}
-      </div>
-    </div>
-  );
+  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
 }
+
+const results = [
+  {
+    id: "1ae22a86-2358-4bbc-b381-e2aed91cd2d9",
+    name: "Reduced Speed",
+    categoryParentId: "c0598cf2-abd8-4b51-a8a3-210cca4363bc",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+];

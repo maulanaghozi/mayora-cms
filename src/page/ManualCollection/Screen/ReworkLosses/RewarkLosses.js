@@ -1,53 +1,50 @@
 import React from "react";
-import moment from "moment";
+import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./ReworkLosses.module.scss";
 
 export default function RewarkLosses() {
-  const renderDefaultTarget = () => {
+  const renderDirectoryParent = () => {
     return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Default Target</span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Default target akan berlaku seterusnya sebagai nilai awal apabila
-          tidak ada pergantian nilai target
-        </p>
+      <div>
+        {results.map((item, idx) => (
+          <Directory name={item.name} key={idx.toString()} />
+        ))}
       </div>
     );
   };
 
-  const renderCurrentTarget = () => {
-    return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Current Target</span>
-          <span className={Styles.dateCard}>
-            {moment().format("DD MMM YYYY")}
-          </span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Current target akan berlaku hanya untuk hari ini. Waktu mulai aktif
-          dapat diatur sesuai keinginan.
-        </p>
-      </div>
-    );
-  };
-
-  return (
-    <div className={Styles.container}>
-      <div className={Styles.cardTargetContainer}>
-        {renderDefaultTarget()}
-        {renderCurrentTarget()}
-      </div>
-    </div>
-  );
+  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
 }
+
+const results = [
+  {
+    id: "a6efa0c7-50f7-4816-8f1d-375987f8bd12",
+    name: "Defect",
+    categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+  {
+    id: "24e46e49-0c6a-4d46-83a4-63e035f8d47f",
+    name: "Rework 41",
+    categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+  {
+    id: "64b92ff5-e110-42e3-b7e1-8109cab3317e",
+    name: "Rework 44",
+    categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+];

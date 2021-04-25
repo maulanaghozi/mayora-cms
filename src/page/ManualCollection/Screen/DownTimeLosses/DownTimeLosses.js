@@ -1,53 +1,60 @@
 import React from "react";
-import moment from "moment";
+import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./DownTimeLosses.module.scss";
 
 export default function DownTimeLosses() {
-  const renderDefaultTarget = () => {
+  const renderDirectoryParent = () => {
     return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Default Target</span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Default target akan berlaku seterusnya sebagai nilai awal apabila
-          tidak ada pergantian nilai target
-        </p>
+      <div>
+        {results.map((item, idx) => (
+          <Directory name={item.name} key={idx.toString()} />
+        ))}
       </div>
     );
   };
 
-  const renderCurrentTarget = () => {
-    return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Current Target</span>
-          <span className={Styles.dateCard}>
-            {moment().format("DD MMM YYYY")}
-          </span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Current target akan berlaku hanya untuk hari ini. Waktu mulai aktif
-          dapat diatur sesuai keinginan.
-        </p>
-      </div>
-    );
-  };
-
-  return (
-    <div className={Styles.container}>
-      <div className={Styles.cardTargetContainer}>
-        {renderDefaultTarget()}
-        {renderCurrentTarget()}
-      </div>
-    </div>
-  );
+  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
 }
+
+const results = [
+  {
+    id: "0c962c1d-a830-4786-a3d0-e5a46329406e",
+    name: "Idling & Minor Stoppages",
+    categoryParentId: "630af900-a4a9-4746-a6d9-6462eecf0c63",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+  {
+    id: "7d40ce23-7f11-4682-ba19-663ac1baea75",
+    name: "Late Start/Early Stop",
+    categoryParentId: "630af900-a4a9-4746-a6d9-6462eecf0c63",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+  {
+    id: "8c29a614-cb5d-4d32-8cb3-082cba07e019",
+    name: "Set-Up & Adjustment",
+    categoryParentId: "630af900-a4a9-4746-a6d9-6462eecf0c63",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+  {
+    id: "a2fe9f30-eede-46b9-a7ad-a4cc3a008175",
+    name: "Technical Break Down",
+    categoryParentId: "630af900-a4a9-4746-a6d9-6462eecf0c63",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+];

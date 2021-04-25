@@ -12,6 +12,11 @@ import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as FieldTime } from "./field-time.svg";
 import { ReactComponent as ChevronLeft } from "./chevron-left.svg";
 import { ReactComponent as ChevronRight } from "./chevron-right.svg";
+import { ReactComponent as EditIcon } from "./edit.svg";
+import { ReactComponent as FolderCloseIcon } from "./folder-close.svg";
+import { ReactComponent as FolderOpenIcon } from "./folder-open.svg";
+import { ReactComponent as MinusSquareIcon } from "./minus-square.svg";
+import { ReactComponent as PlusSquareIcon } from "./plus-square.svg";
 
 export {
   MayoraLogo,
@@ -28,4 +33,9 @@ export {
   FieldTime,
   ChevronLeft,
   ChevronRight,
+  EditIcon,
+  FolderCloseIcon,
+  FolderOpenIcon,
+  MinusSquareIcon,
+  PlusSquareIcon,
 };

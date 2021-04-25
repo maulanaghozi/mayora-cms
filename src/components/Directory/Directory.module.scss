@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid #c60808;
+  padding: 16px;
+
+  > svg {
+    margin-right: 16px;
+  }
+
+  > span {
+    font-family: roboto;
+    font-size: 14px;
+  }
+}

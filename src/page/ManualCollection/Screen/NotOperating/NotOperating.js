@@ -1,53 +1,40 @@
 import React from "react";
-import moment from "moment";
+import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./NotOperating.module.scss";
 
 export default function NotOperating() {
-  const renderDefaultTarget = () => {
+  const renderDirectoryParent = () => {
     return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Default Target</span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Default target akan berlaku seterusnya sebagai nilai awal apabila
-          tidak ada pergantian nilai target
-        </p>
+      <div>
+        {results.map((item, idx) => (
+          <Directory name={item.name} key={idx.toString()} />
+        ))}
       </div>
     );
   };
 
-  const renderCurrentTarget = () => {
-    return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Current Target</span>
-          <span className={Styles.dateCard}>
-            {moment().format("DD MMM YYYY")}
-          </span>
-        </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Current target akan berlaku hanya untuk hari ini. Waktu mulai aktif
-          dapat diatur sesuai keinginan.
-        </p>
-      </div>
-    );
-  };
-
-  return (
-    <div className={Styles.container}>
-      <div className={Styles.cardTargetContainer}>
-        {renderDefaultTarget()}
-        {renderCurrentTarget()}
-      </div>
-    </div>
-  );
+  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
 }
+
+const results = [
+  {
+    id: "1bef0792-ae62-4d57-a94b-93b029fa7181",
+    name: "Not Operating Day",
+    categoryParentId: "545fcd41-52e2-4756-9a12-d0ba0a18036a",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.916Z",
+    updatedAt: "2021-04-25T15:56:58.916Z",
+  },
+  {
+    id: "67a1cc81-5e51-45ca-8daa-68a0e85cdbb3",
+    name: "Planned Down Time",
+    categoryParentId: "4e046f3c-6c72-4093-8bff-d780b6b70648",
+    categoryLevel: "level2",
+    createdBy: null,
+    updatedBy: null,
+    createdAt: "2021-04-25T15:56:58.920Z",
+    updatedAt: "2021-04-25T15:56:58.920Z",
+  },
+];
