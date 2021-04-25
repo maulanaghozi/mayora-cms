@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import InputSelect from "../../components/InputSelect/InputSelect";
-import InputDate from "../../components/InputDate/InputDate";
+import InputSelect from "../../components/Form/InputSelect/InputSelect";
+import InputDate from "../../components/Form/InputDate/InputDate";
 import TableShiftRelease from "../../components/TableShiftRelease/TableShiftRelease";
 import Styles from "./Release.module.scss";
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import moment from "moment";
-import InputSelect from "../../components/InputSelect/InputSelect";
-import InputDate from "../../components/InputDate/InputDate";
+import InputSelect from "../../components/Form/InputSelect/InputSelect";
+import InputDate from "../../components/Form/InputDate/InputDate";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import NotOperating from "./Screen/NotOperating/NotOperating";
 import DownTimeLosses from "./Screen/DownTimeLosses/DownTimeLosses";

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import InputSelect from "../../components/InputSelect/InputSelect";
+import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import Styles from "./EditTrouble.module.scss";
-import { ChevronLeft } from "../../assets/icons/index";
+import { ChevronLeft } from "../../assets/icons";
 
 export default function EditTrouble() {
   const [minutesPass, setMinutesPass] = useState(0);

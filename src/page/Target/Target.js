@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import moment from "moment";
-import InputSelect from "../../components/InputSelect/InputSelect";
+import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import InputDate from "../../components/InputDate/InputDate";
+import InputDate from "../../components/Form/InputDate/InputDate";
 import ProductionTarget from "./Screens/ProductionTarget/ProductionTarget";
 import TargetOEE from "./Screens/TargetOEE/TargetOEE";
 import Styles from "./Target.module.scss";

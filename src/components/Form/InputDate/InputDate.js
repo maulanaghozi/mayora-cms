@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import classNames from "classnames";
 import ReactDatePicker from "react-datepicker";
-import { ReactComponent as CalenderIcon } from "../../assets/calendar_icon.svg";
+import { CalendarIcon } from "../../../assets/icons";
 import style from "./InputDate.module.scss";
 
-import "../../../node_modules/react-datepicker/dist/react-datepicker.css";
+import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
 
 export default function InputDate(props) {
   const [selectedDate, setSelectedDate] = useState(
@@ -39,7 +39,7 @@ export default function InputDate(props) {
               : "Select Date"}
           </div>
           <div className={style.calendar_icon}>
-            <CalenderIcon />
+            <CalendarIcon />
           </div>
         </div>
       }

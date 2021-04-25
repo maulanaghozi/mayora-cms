@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import classNames from "classnames";
-import InputSelect from "../../components/InputSelect/InputSelect";
-import InputDate from "../../components/InputDate/InputDate";
+import InputSelect from "../../components/Form/InputSelect/InputSelect";
+import InputDate from "../../components/Form/InputDate/InputDate";
 import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
 
