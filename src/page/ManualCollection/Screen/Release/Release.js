@@ -3,51 +3,47 @@ import moment from "moment";
 import Styles from "./Release.module.scss";
 
 export default function Release() {
-  const renderDefaultTarget = () => {
+  const renderReleaseBySystem = () => {
     return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Default Target</span>
+      <div className={Styles.releaseBySystem}>
+        <div className={Styles.shiftContainer}>
+          <div className={Styles.shiftWrapper}>
+            <span>Shift 1</span>
+            <span>708</span>
+          </div>
+          <div className={Styles.shiftWrapper}>
+            <span>Shift 2</span>
+            <span>590</span>
+          </div>
+          <div className={Styles.shiftWrapper}>
+            <span>Shift 3</span>
+            <span>1002</span>
+          </div>
         </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
+        <div>
+          <span>Total Release by System</span>
+          <span>2300</span>
         </div>
-        <p className={Styles.desc}>
-          Default target akan berlaku seterusnya sebagai nilai awal apabila
-          tidak ada pergantian nilai target
-        </p>
       </div>
     );
   };
 
-  const renderCurrentTarget = () => {
+  const renderActualRelease = () => {
     return (
-      <div className={Styles.cardTarget}>
-        <div className={Styles.titleContainer}>
-          <span className={Styles.title}>Current Target</span>
-          <span className={Styles.dateCard}>
-            {moment().format("DD MMM YYYY")}
-          </span>
+      <div>
+        <span>Total Actual Release</span>
+        <input />
+        <div>
+          <button>Cancel</button>
+          <button>Save</button>
         </div>
-        <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
-          <span className={Styles.edit}>Edit</span>
-        </div>
-        <p className={Styles.desc}>
-          Current target akan berlaku hanya untuk hari ini. Waktu mulai aktif
-          dapat diatur sesuai keinginan.
-        </p>
       </div>
     );
   };
-
   return (
     <div className={Styles.container}>
-      <div className={Styles.cardTargetContainer}>
-        {renderDefaultTarget()}
-        {renderCurrentTarget()}
-      </div>
+      {renderReleaseBySystem()}
+      {renderActualRelease()}
     </div>
   );
 }

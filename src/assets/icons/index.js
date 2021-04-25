@@ -10,6 +10,7 @@ import { ReactComponent as TroubleIcon } from "./trouble.svg";
 import { ReactComponent as UserIcon } from "./user.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as FieldTime } from "./field-time.svg";
+import { ReactComponent as ChevronLeft } from "./chevron-left.svg";
 
 export {
   MayoraLogo,
@@ -24,4 +25,5 @@ export {
   UserIcon,
   CalendarIcon,
   FieldTime,
+  ChevronLeft,
 };
