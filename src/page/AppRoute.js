@@ -5,6 +5,7 @@ import AppLayout from "../layout/AppLayout/AppLayout";
 import Dashboard from "./Dashboard/Dashboard";
 import TroubleList from "./TroubleList/TroubleList";
 import EditTrouble from "./TroubleList/EditTrouble";
+import SelectCategory from "./TroubleList/SelectCategory";
 import ManualCollection from "./ManualCollection/ManualCollection";
 import Target from "./Target/Target";
 import Release from "./Release/Release";
@@ -18,6 +19,10 @@ export default function AppPage() {
       <Switch>
         <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/trouble-list/edit/:id" component={EditTrouble} />
+        <Route
+          path="/trouble-list/select-category"
+          component={SelectCategory}
+        />
         <Route path="/trouble-list" component={TroubleList} />
         <Route path="/manual-collection" component={ManualCollection} />
         <Route path="/target" component={Target} />

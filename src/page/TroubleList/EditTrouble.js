@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import history from "../../utility/history";
 import classNames from "classnames";
-import InputSelect from "../../components/Form/InputSelect/InputSelect";
+import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditTrouble.module.scss";
 import { ChevronLeft } from "../../assets/icons";
 
 export default function EditTrouble() {
   const [minutesPass, setMinutesPass] = useState(0);
+  const [remark, setRemark] = useState("");
 
   useEffect(() => {
     let getDays = moment().format("YYYY MM DD");
@@ -49,7 +51,72 @@ export default function EditTrouble() {
     );
   };
 
-  return <div>{renderHeader()}</div>;
+  const renderInputTime = () => {
+    return (
+      <InputWithLabel label={"Time"} value={"09:00 - 09:20"} disabled={true} />
+    );
+  };
+
+  const renderDuration = () => {
+    return (
+      <InputWithLabel
+        label={"Time"}
+        value={"20"}
+        unit={"Min."}
+        disabled={true}
+      />
+    );
+  };
+
+  const renderCategory = () => {
+    return (
+      <>
+        <InputWithLabel
+          styleContainer={Styles.select}
+          onClick={() => history.push("/trouble-list/select-category")}
+          label={"Category"}
+          value={"Trouble Kompresor/Angin"}
+        />
+        <span className={Styles.note}>
+          Technical Break Down / Mechanical / Reception
+        </span>
+      </>
+    );
+  };
+
+  const renderRemark = () => {
+    return (
+      <InputWithLabel
+        styleContainer={Styles.remark}
+        label={"Remark"}
+        value={remark}
+        isTextarea={true}
+        placeholder={"Write remak here"}
+      />
+    );
+  };
+
+  const renderButton = () => {
+    return (
+      <div className={Styles.buttonContainer}>
+        <button className={Styles.cancel}>Cancel</button>
+        <button className={Styles.save}>Save</button>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      {renderHeader()}
+      <div className={Styles.mainContent}>
+        {renderInputTime()}
+        {renderDuration()}
+        {renderCategory()}
+        {renderRemark()}
+        {renderButton()}
+      </div>
+    </div>
+  );
 }
 
 const mockData = [

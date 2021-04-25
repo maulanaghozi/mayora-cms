@@ -1,12 +1,12 @@
 import React from "react";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import Styles from "./MasterCategory.module.scss";
+import Styles from "./SelectCategory.module.scss";
 
-export default function TroubleList() {
+export default function SelectCategory() {
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
-        <span>Master Category</span>
+        <span>Select Category</span>
         <PageTitle
           title={[
             "Not Operating Day & Planned Down Time",
@@ -15,10 +15,10 @@ export default function TroubleList() {
             "Defect & Rework Losses",
           ]}
           path={[
-            "/master-category/planed-down-time",
-            "/master-category/down-time-losses",
-            "/master-category/speed-losses",
-            "/master-category/rework-losses",
+            "/trouble-list/select-category/planed-down-time",
+            "/trouble-list/select-category/down-time-losses",
+            "/trouble-list/select-category/speed-losses",
+            "/trouble-list/select-category/rework-losses",
           ]}
         />
       </div>
