@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import Styles from "./Release.module.scss";
 
 export default function Release() {
@@ -8,21 +7,21 @@ export default function Release() {
       <div className={Styles.releaseBySystem}>
         <div className={Styles.shiftContainer}>
           <div className={Styles.shiftWrapper}>
-            <span>Shift 1</span>
-            <span>708</span>
+            <span className={Styles.shift}>Shift 1</span>
+            <span className={Styles.amount}>708</span>
           </div>
           <div className={Styles.shiftWrapper}>
-            <span>Shift 2</span>
-            <span>590</span>
+            <span className={Styles.shift}>Shift 2</span>
+            <span className={Styles.amount}>590</span>
           </div>
           <div className={Styles.shiftWrapper}>
-            <span>Shift 3</span>
-            <span>1002</span>
+            <span className={Styles.shift}>Shift 3</span>
+            <span className={Styles.amount}>1002</span>
           </div>
         </div>
-        <div>
-          <span>Total Release by System</span>
-          <span>2300</span>
+        <div className={Styles.totalReleaseBySystem}>
+          <span className={Styles.shift}>Total Release by System</span>
+          <span className={Styles.amount}>2300</span>
         </div>
       </div>
     );
@@ -30,12 +29,12 @@ export default function Release() {
 
   const renderActualRelease = () => {
     return (
-      <div>
+      <div className={Styles.actualRelease}>
         <span>Total Actual Release</span>
-        <input />
-        <div>
-          <button>Cancel</button>
-          <button>Save</button>
+        <input value={2300} className={Styles.input} />
+        <div className={Styles.buttonContainer}>
+          <button className={Styles.cancel}>Cancel</button>
+          <button className={Styles.save}>Save</button>
         </div>
       </div>
     );
