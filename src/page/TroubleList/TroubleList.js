@@ -33,7 +33,9 @@ export default function TroubleList() {
   const [dataTable, setDataTable] = useState([]);
   const [startTime, setStartTime] = useState(getTime().getThisDay07);
   const [endTime, setEndTime] = useState(getTime().endTime);
-  const [selected, setSelected] = useState(null);
+  const [machineId, setMachineId] = useState(
+    "00f5eafd-89c5-4871-a982-26a8180774c7"
+  );
   const [date, setDate] = useState(moment().unix());
   const [minutesPass, setMinutesPass] = useState(0);
 
@@ -49,11 +51,16 @@ export default function TroubleList() {
 
     const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
     setMinutesPass(ms / 60);
-
-    getStatus();
   }, []);
 
-  const getTroublelist = async () => {};
+  useEffect(() => {
+    getTroublelist();
+  }, [machineId, date]);
+
+  const getTroublelist = async () => {
+    getStatus();
+    getDataTable();
+  };
 
   const getStatus = async () => {
     const params = {
@@ -62,15 +69,64 @@ export default function TroubleList() {
       query: {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
+        machineId: machineId,
       },
     };
 
     const result = await http(params);
 
-    console.log(result);
+    if (result && result.code === "success") {
+      setDataStatus(result.payload.results);
+    } else {
+      console.log(result);
+      alert("please contact administrator");
+    }
   };
 
-  const getDataTable = async () => {};
+  const getDataTable = async () => {
+    const params = {
+      method: "GET",
+      path: "trouble",
+      query: {
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
+        status: "downtime",
+        machineId: machineId,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setDataTable(result.payload.results);
+    } else {
+      console.log(result);
+      alert("please contact administrator");
+    }
+  };
+
+  const onDownload = async () => {
+    const params = {
+      method: "GET",
+      path: "trouble/download",
+      query: {
+        date: moment(date * 1000).format("YYYY-MM-DD"),
+        status: "downtime",
+        machineId: machineId,
+      },
+    };
+
+    const result = await http(params);
+
+    console.log(typeof result);
+
+    if (result && result.code === "success") {
+      console.log("SUKSES DOWNLOAD");
+    } else {
+      // console.log(result);
+      alert("please contact administrator");
+    }
+  };
 
   function timeDiffCalc(dateFuture, dateNow) {
     let diffInMilliSeconds =
@@ -83,29 +139,46 @@ export default function TroubleList() {
 
     // calculate minutes
     const minutes = diffInMilliSeconds / 60;
-    console.log(minutes);
-
     return minutes;
   }
+
+  const onChangeDate = time => {
+    let getDays = moment(time * 1000).format("YYYY MM DD");
+    let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
+    let endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
+
+    setStartTime(startDay);
+    setEndTime(endDay);
+    setDate(time);
+    return;
+  };
 
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
         <span>Trouble List</span>
         <div className={Styles.filter}>
-          <span className={Styles.buttonExport}>Download</span>
+          <span className={Styles.buttonExport} onClick={() => onDownload()}>
+            Download
+          </span>
           <InputSelect
-            value={selected}
+            value={machineId}
             className={Styles.inputSelect}
             placeholder={"Line 1"}
             defaultValue={"Line 1"}
             options={[
-              { value: "machine1", label: "Line 1" },
-              { value: "machine2", label: "Line 2" },
+              {
+                value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                label: "Line 1",
+              },
+              {
+                value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                label: "Line 2",
+              },
             ]}
-            onChange={selected => setSelected(selected.value)}
+            onChange={selected => setMachineId(selected.value)}
           />
-          <InputDate value={date} onChange={e => setDate(e)} />
+          <InputDate value={date} onChange={e => onChangeDate(e)} />
         </div>
       </div>
     );
@@ -161,8 +234,9 @@ export default function TroubleList() {
     return (
       <div className={Styles.progressContainer}>
         <div className={classNames(Styles.bar)}>
-          {mockData.map((item, idx) => (
+          {dataStatus.map((item, idx) => (
             <div
+              key={idx.toString()}
               style={{
                 height: "20px",
                 flex: timeDiffCalc(item.endTime, item.startTime),
@@ -217,7 +291,7 @@ export default function TroubleList() {
   const renderTable = () => {
     return (
       <TroubleTable
-        data={[]}
+        data={dataTable}
         onChange={() => {}}
         sort={"time"}
         setKey={() => {}}
@@ -233,20 +307,3 @@ export default function TroubleList() {
     </div>
   );
 }
-
-const mockData = [
-  {
-    id: "033cd982-69ac-4dbb-932c-977fbe570c17",
-    machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-    categoryId: null,
-    startTime: "2021-04-26T00:00:00.000Z",
-    endTime: null,
-    remark: null,
-    status: "off",
-    createdBy: null,
-    updatedBy: null,
-    createdAt: "2021-04-26T02:30:29.088Z",
-    updatedAt: "2021-04-26T02:30:29.088Z",
-    category: null,
-  },
-];
