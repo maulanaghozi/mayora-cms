@@ -141,7 +141,7 @@ export default function TroubleList() {
 
     // calculate minutes
     const minutes = diffInMilliSeconds / 60;
-    return minutes;
+    return Math.round(Number(minutes));
   }
 
   const onChangeDate = time => {
