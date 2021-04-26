@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { table_cell, column_detail, detail } from "../styles.module.scss";
+import { table_cell, column_detail, detail } from "../Styles.module.scss";
 
 export default function Tag({ row }) {
   return (

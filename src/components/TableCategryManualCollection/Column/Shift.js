@@ -1,6 +1,6 @@
 import React from "react";
 import { EditIcon } from "../../../assets/icons";
-import { table_cell, column_shift, notSet } from "../styles.module.scss";
+import { table_cell, column_shift, notSet } from "../Styles.module.scss";
 
 export default function Description({ row }) {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { table_cell, column_category, elipis } from "../styles.module.scss";
+import { table_cell, column_category, elipis } from "../Styles.module.scss";
 
 export default function Title({ row }) {
   return (
