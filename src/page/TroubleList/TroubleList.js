@@ -5,26 +5,34 @@ import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
+import { http } from "../../utility/http";
 
 function getTime() {
   let totalMinutes = 1440;
   let getThisDay = moment().format("YYYY MM DD");
   let curentTime = moment().format("YYYY MM DD HH:mm");
   let getThisDay07 = moment(`${getThisDay} 07:00`).format("YYYY MM DD HH:mm");
+  let endTime = moment(getThisDay07).add(1, "days").format("YYYY MM DD HH:mm");
 
   if (curentTime < getThisDay07) {
     getThisDay = moment(getThisDay).subtract(1, "days").format("YYYY MM DD");
     getThisDay07 = moment(`${getThisDay} 07:00`).format("YYYY MM DD HH:mm");
+    endTime = moment(getThisDay07).add(1, "days").format("YYYY MM DD HH:mm");
   }
 
   return {
     totalMinutes,
     getThisDay,
     getThisDay07,
+    endTime,
   };
 }
 
 export default function TroubleList() {
+  const [dataStatus, setDataStatus] = useState([]);
+  const [dataTable, setDataTable] = useState([]);
+  const [startTime, setStartTime] = useState(getTime().getThisDay07);
+  const [endTime, setEndTime] = useState(getTime().endTime);
   const [selected, setSelected] = useState(null);
   const [date, setDate] = useState(moment().unix());
   const [minutesPass, setMinutesPass] = useState(0);
@@ -41,7 +49,28 @@ export default function TroubleList() {
 
     const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
     setMinutesPass(ms / 60);
+
+    getStatus();
   }, []);
+
+  const getTroublelist = async () => {};
+
+  const getStatus = async () => {
+    const params = {
+      method: "GET",
+      path: "trouble",
+      query: {
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
+      },
+    };
+
+    const result = await http(params);
+
+    console.log(result);
+  };
+
+  const getDataTable = async () => {};
 
   function timeDiffCalc(dateFuture, dateNow) {
     let diffInMilliSeconds =
@@ -136,7 +165,7 @@ export default function TroubleList() {
             <div
               style={{
                 height: "20px",
-                flex: timeDiffCalc(item.endTime, getTime().getThisDay07),
+                flex: timeDiffCalc(item.endTime, item.startTime),
                 backgroundColor: backgroundProgress(item.status),
               }}
             ></div>
@@ -207,16 +236,17 @@ export default function TroubleList() {
 
 const mockData = [
   {
-    id: "e88f0953-1143-4bab-914e-ac0ca8b9c746",
+    id: "033cd982-69ac-4dbb-932c-977fbe570c17",
     machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
     categoryId: null,
-    startTime: "2021-04-23T00:00:00.000Z",
+    startTime: "2021-04-26T00:00:00.000Z",
     endTime: null,
     remark: null,
     status: "off",
     createdBy: null,
     updatedBy: null,
-    createdAt: "2021-04-20T05:53:11.965Z",
-    updatedAt: "2021-04-20T07:01:44.403Z",
+    createdAt: "2021-04-26T02:30:29.088Z",
+    updatedAt: "2021-04-26T02:30:29.088Z",
+    category: null,
   },
 ];
