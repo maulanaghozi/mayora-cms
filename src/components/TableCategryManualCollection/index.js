@@ -14,7 +14,7 @@ import {
   column_category,
   column_shift,
   column_detail,
-} from "./styles.module.scss";
+} from "./Styles.module.scss";
 
 const Header = [
   "Category",
