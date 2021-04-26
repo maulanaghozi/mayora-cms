@@ -4,6 +4,7 @@
   border: 1px solid #e0e0e0;
   border-left: 5px solid #c60808;
   padding: 16px;
+  cursor: pointer;
 
   > svg {
     margin-right: 16px;
@@ -13,4 +14,12 @@
     font-family: roboto;
     font-size: 14px;
   }
+
+  > .children {
+    margin-left: 10px !important;
+  }
+}
+
+.wrapper {
+  border-left: 1px solid #c60808;
 }

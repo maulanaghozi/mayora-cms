@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import Styles from "./Directory.module.scss";
 import {
@@ -13,10 +13,17 @@ export const Directory = props => {
   const { name } = props;
 
   return (
-    <div className={Styles.container} onClick={() => setIsOpened(!isOpened)}>
-      {isOpened ? <MinusSquareIcon /> : <PlusSquareIcon />}
-      {isOpened ? <FolderOpenIcon /> : <FolderCloseIcon />}
-      <span>{name}</span>
+    <div className={Styles.wrapper}>
+      <div className={Styles.container} onClick={() => setIsOpened(!isOpened)}>
+        {isOpened ? <MinusSquareIcon /> : <PlusSquareIcon />}
+        {isOpened ? <FolderOpenIcon /> : <FolderCloseIcon />}
+        <span>{name}</span>
+      </div>
+      {isOpened && (
+        <div className={Styles.children} style={{ marginLeft: 20 }}>
+          {props.children}
+        </div>
+      )}
     </div>
   );
 };

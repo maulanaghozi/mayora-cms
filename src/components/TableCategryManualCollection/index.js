@@ -1,1 +1,65 @@
 import React from "react";
+import classNames from "classnames";
+
+import Category from "./Column/Category";
+import Shift from "./Column/Shift";
+import Detail from "./Column/Detail";
+
+import {
+  container,
+  table_header,
+  table_body,
+  table_row,
+  table_cell,
+  column_category,
+  column_shift,
+  column_detail,
+} from "./styles.module.scss";
+
+const Header = [
+  "Category",
+  "Value (Shift 1)",
+  "Value (Shift 2)",
+  "Value (Shift 3)",
+  "Detail",
+];
+
+const headerClasses = [
+  column_category,
+  column_shift,
+  column_shift,
+  column_shift,
+  column_detail,
+];
+
+export default function PromoTable(props) {
+  return (
+    <div className={container}>
+      <div className={table_header}>
+        {Header.map((head, index) => (
+          <NormalHeader key={index} index={index} columnName={head} />
+        ))}
+      </div>
+      <div className={table_body}>
+        {props.data &&
+          props.data.map((row, index, arr) => (
+            <div className={table_row} key={index}>
+              <Category row={row} />
+              <Shift row={row} />
+              <Shift row={row} />
+              <Shift row={row} />
+              <Detail row={row} />
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+}
+
+const NormalHeader = props => {
+  return (
+    <div className={classNames(table_cell, headerClasses[props.index])}>
+      <span>{props.columnName}</span>
+    </div>
+  );
+};
