@@ -17,6 +17,7 @@ import { ReactComponent as FolderCloseIcon } from "./folder-close.svg";
 import { ReactComponent as FolderOpenIcon } from "./folder-open.svg";
 import { ReactComponent as MinusSquareIcon } from "./minus-square.svg";
 import { ReactComponent as PlusSquareIcon } from "./plus-square.svg";
+import { ReactComponent as DownloadIcon } from "./download.svg";
 
 export {
   MayoraLogo,
@@ -38,4 +39,5 @@ export {
   FolderOpenIcon,
   MinusSquareIcon,
   PlusSquareIcon,
+  DownloadIcon,
 };

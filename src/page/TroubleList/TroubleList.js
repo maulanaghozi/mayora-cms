@@ -116,6 +116,8 @@ export default function TroubleList() {
       },
     };
 
+    console.log(params);
+
     const result = await http(params);
 
     console.log(typeof result);

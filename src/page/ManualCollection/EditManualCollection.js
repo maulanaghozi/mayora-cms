@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import history from "../../utility/history";
 import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditManualCollection.module.scss";
 import { ChevronLeft } from "../../assets/icons";
