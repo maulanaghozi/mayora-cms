@@ -11,7 +11,7 @@ export default function Description({ row }) {
       Math.abs(new Date(dateFuture) - new Date(dateNow)) / 1000;
 
     // calculate minutes
-    const minutes = diffInMilliSeconds / 60;
+    const minutes = Math.round(Number(diffInMilliSeconds / 60));
 
     return `${minutes} Min.`;
   }
