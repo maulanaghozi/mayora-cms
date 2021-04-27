@@ -5,6 +5,7 @@ import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
+import usePolling from "../../hooks/usePolling/usePolling";
 import { http } from "../../utility/http";
 
 function getTime() {
@@ -43,11 +44,16 @@ export default function TroubleList() {
     let getDays = moment().format("YYYY MM DD");
     let curentTime = moment().format("YYYY MM DD HH:mm");
     let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
+    let endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
 
     if (curentTime < startDay) {
       getDays = moment(getDays).subtract(1, "days").format("YYYY MM DD");
       startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
+      endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
     }
+
+    setStartTime(startDay);
+    setEndTime(endDay);
 
     const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
     setMinutesPass(ms / 60);
@@ -61,6 +67,8 @@ export default function TroubleList() {
     getStatus();
     getDataTable();
   };
+
+  usePolling(getTroublelist, 120000);
 
   const getStatus = async () => {
     const params = {

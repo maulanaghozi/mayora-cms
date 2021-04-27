@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import classNames from "classnames";
 import { ReactComponent as Logo } from "../../../assets/mayora-logo.svg";
 import { ReactComponent as LogoText } from "../../../assets/mayora-text.svg";

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import classNames from "classnames";
 import { header_container, border, open } from "./Header.module.scss";
 import HeaderPath from "./HeaderPath/HeaderPath";
