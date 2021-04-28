@@ -36,6 +36,7 @@ export const InputWithLabel = props => {
   const renderClickable = () => {
     return (
       <div
+        onClick={() => onClick()}
         className={classNames(
           Styles.inputContainer,
           Styles.disabled,
@@ -46,7 +47,6 @@ export const InputWithLabel = props => {
           className={classNames(Styles.input, Styles.clickable)}
           value={value}
           placeholder={placeholder}
-          onClick={() => onClick()}
           disabled={true}
         />
         <ChevronRight />

@@ -1,0 +1,39 @@
+.container {
+  .itemContainer {
+    display: flex;
+    align-items: center;
+    padding: 15px 12px;
+    cursor: pointer;
+
+    &.topBorder {
+      border-top: 1px solid #ececec;
+    }
+    .circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 100%;
+      border: 1px solid #d9d9d9;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.selected {
+        border: 1px solid #c60808;
+      }
+
+      .dotRed {
+        background-color: #c60808;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+      }
+    }
+
+    > span {
+      font-family: roboto;
+      color: #212121;
+      font-size: 14px;
+    }
+  }
+}
