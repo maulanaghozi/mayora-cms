@@ -37,6 +37,7 @@ export default function TroubleList() {
   const [machineId, setMachineId] = useState(
     "00f5eafd-89c5-4871-a982-26a8180774c7"
   );
+  const [machineName, setMachineName] = useState("Line 1");
   const [date, setDate] = useState(moment().unix());
   const [minutesPass, setMinutesPass] = useState(0);
 
@@ -186,7 +187,10 @@ export default function TroubleList() {
                 label: "Line 2",
               },
             ]}
-            onChange={selected => setMachineId(selected.value)}
+            onChange={selected => {
+              setMachineId(selected.value);
+              setMachineName(selected.label);
+            }}
           />
           <InputDate value={date} onChange={e => onChangeDate(e)} />
         </div>
@@ -198,7 +202,7 @@ export default function TroubleList() {
     return (
       <div className={Styles.statusContainer}>
         <div className={Styles.headerStatus}>
-          <span>Production Status - LINE 1</span>
+          <span>{`Production Status - ${machineName.toUpperCase()}`}</span>
           <div className={Styles.indicatorColor}>
             <div className={Styles.status}>
               <div className={classNames(Styles.box, Styles.grey)} />
