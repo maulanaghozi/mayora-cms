@@ -22,13 +22,13 @@ export default function Report() {
   const onExport = async () => {
     const params = {
       method: "GET",
-      path: "http://localhost:3000/report-daily",
+      path: "report-daily",
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
         machineId: machineId,
       },
-      content_type: 'application/octet-stream',
-      responseType:'blob'
+      content_type: "application/octet-stream",
+      responseType: "blob",
     };
 
     console.log(params);
@@ -37,10 +37,11 @@ export default function Report() {
     const result = await http(params);
 
     // 2. Create blob link to download
+    console.log("window ", window.URL);
     const url = window.URL.createObjectURL(result);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', `Report Weekly`);
+    link.setAttribute("download", `Report Weekly`);
     // 3. Append to html page
     document.body.appendChild(link);
     // 4. Force download
@@ -119,12 +120,13 @@ export default function Report() {
           </div>
           <div className={Styles.filter}>
             <span>Week</span>
-            <InputDate 
-              value={date} 
+            <InputDate
+              value={date}
               onChange={e => setDate(e)}
-              className={Styles.inputSelect} />
+              className={Styles.inputSelect}
+            />
           </div>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <div className={Styles.download} onClick={() => onExport()}>
             <DownloadIcon />
             <span>Export</span>
           </div>
