@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import classNames from "classnames";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
@@ -7,6 +7,7 @@ import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
 import usePolling from "../../hooks/usePolling/usePolling";
 import { http } from "../../utility/http";
+import { Context } from "../../hooks/context";
 export const baseURL = process.env.REACT_APP_BASE_URL;
 
 function getTime() {
@@ -35,14 +36,9 @@ export default function TroubleList(props) {
   const [dataTable, setDataTable] = useState([]);
   const [startTime, setStartTime] = useState(getTime().getThisDay07);
   const [endTime, setEndTime] = useState(getTime().endTime);
-  const [machineId, setMachineId] = useState(
-    props.location && props.state && props.state.machineId
-      ? props.location.state.machineId
-      : "00f5eafd-89c5-4871-a982-26a8180774c7"
-  );
-  const [machineName, setMachineName] = useState("Line 1");
-  const [date, setDate] = useState(moment().unix());
   const [minutesPass, setMinutesPass] = useState(0);
+  const globalState = useContext(Context);
+  const { machine, dateSelected, setMachine, setDateSelected } = globalState;
 
   useEffect(() => {
     handleMinutesPass();
@@ -69,15 +65,9 @@ export default function TroubleList(props) {
   };
 
   useEffect(() => {
-    if (props.location && props.state && props.state.machineId) {
-      setMachineId(props.location.state.machineId);
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log("masuukkkkkk");
+    console.log("globalContext", { machine, dateSelected });
     getTroublelist();
-  }, [machineId, date]);
+  }, [dateSelected, machine.machineId]);
 
   const getTroublelist = async () => {
     getStatus();
@@ -94,7 +84,7 @@ export default function TroubleList(props) {
       query: {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
-        machineId: machineId,
+        machineId: machine.machineId,
       },
     };
 
@@ -116,7 +106,7 @@ export default function TroubleList(props) {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
         status: "downtime",
-        machineId: machineId,
+        machineId: machine.machineId,
       },
     };
 
@@ -131,27 +121,27 @@ export default function TroubleList(props) {
   };
 
   const onDownload = async () => {
-    // const params = {
-    //   method: "GET",
-    //   path: "trouble/download",
-    //   query: {
-    //     date: moment(date * 1000).format("YYYY-MM-DD"),
-    //     status: "downtime",
-    //     machineId: machineId,
-    //   },
-    // };
+    const params = {
+      method: "GET",
+      path: "trouble/download",
+      query: {
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        status: "downtime",
+        machineId: machine.machineId,
+      },
+    };
 
-    // console.log(params);
+    console.log(params);
 
-    // const result = await http(params);
+    const result = await http(params);
 
     // console.log(typeof result);
     return (
       <a
         target="_blank"
-        href={`${baseURL}trouble/download?date=${moment(date * 1000).format(
-          "YYYY-MM-DD"
-        )}&status=downtime&machineId=${machineId}`}
+        href={`${baseURL}trouble/download?date=${moment(
+          dateSelected * 1000
+        ).format("YYYY-MM-DD")}&status=downtime&machineId=${machine.machineId}`}
       ></a>
     );
 
@@ -184,7 +174,7 @@ export default function TroubleList(props) {
 
     setStartTime(startDay);
     setEndTime(endDay);
-    setDate(time);
+    setDateSelected(time);
 
     if (getDays === moment().format("YYYY MM DD")) {
       handleMinutesPass();
@@ -204,9 +194,9 @@ export default function TroubleList(props) {
             Download
           </span> */}
           <InputSelect
-            value={machineId}
+            value={machine.machineId}
             className={Styles.inputSelect}
-            placeholder={"Line 1"}
+            placeholder={machine.machineName}
             options={[
               {
                 value: "00f5eafd-89c5-4871-a982-26a8180774c7",
@@ -218,11 +208,13 @@ export default function TroubleList(props) {
               },
             ]}
             onChange={selected => {
-              setMachineId(selected.value);
-              setMachineName(selected.label);
+              setMachine({
+                machineId: selected.value,
+                machineName: selected.label,
+              });
             }}
           />
-          <InputDate value={date} onChange={e => onChangeDate(e)} />
+          <InputDate value={dateSelected} onChange={e => onChangeDate(e)} />
         </div>
       </div>
     );
@@ -232,7 +224,7 @@ export default function TroubleList(props) {
     return (
       <div className={Styles.statusContainer}>
         <div className={Styles.headerStatus}>
-          <span>{`Production Status - ${machineName.toUpperCase()}`}</span>
+          <span>{`Production Status - ${machine.machineName.toUpperCase()}`}</span>
           <div className={Styles.indicatorColor}>
             <div className={Styles.status}>
               <div className={classNames(Styles.box, Styles.grey)} />

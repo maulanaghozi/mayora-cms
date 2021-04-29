@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import { Link, useParams, useHistory } from "react-router-dom";
 import classNames from "classnames";
 import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditTrouble.module.scss";
 import { ChevronLeft } from "../../assets/icons";
+import { Context } from "../../hooks/context";
 import { http } from "../../utility/http";
 
 export default function EditTrouble() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const [categoryName, setCategoryName] = useState("");
-  const [categoryId, setCategoryId] = useState("");
   const [remark, setRemark] = useState("");
   const [machineId, setMachineId] = useState("");
   const { id } = useParams();
   const history = useHistory();
 
+  const globalState = useContext(Context);
+  const { setCategory, setTroubleId, category } = globalState;
+
   useEffect(() => {
+    console.log("this is global ", globalState);
     getStatus();
   }, []);
 
@@ -30,12 +33,17 @@ export default function EditTrouble() {
     const result = await http(params);
 
     if (result && result.code === "success") {
-      setCategoryId(result.payload.categoryId);
+      if (category.categoryId === result.payload.category.id) {
+        setCategory({
+          categoryId: result.payload.category.id,
+          categoryName: result.payload.category.name,
+        });
+      }
       setStartTime(result.payload.startTime);
       setEndTime(result.payload.endTime);
-      setCategoryName(result.payload.category.name);
       setRemark(result.payload.remark);
       setMachineId(result.payload.machineId);
+      setTroubleId(result.payload.id);
     } else {
       console.log(result);
       alert("please contact administrator");
@@ -47,7 +55,7 @@ export default function EditTrouble() {
       method: "PUT",
       path: `trouble/${id}`,
       data: {
-        categoryId: categoryId,
+        categoryId: category.categoryId,
         updatedBy: "Budi Putra",
         remark: remark,
       },
@@ -111,7 +119,7 @@ export default function EditTrouble() {
     return (
       <InputWithLabel
         label={"Duration"}
-        value={timeDiffCalc(endTime, startTime)}
+        value={`${timeDiffCalc(endTime, startTime)}`}
         unit={"Min."}
         disabled={true}
         name={"duration"}
@@ -127,15 +135,14 @@ export default function EditTrouble() {
           onClick={() =>
             history.push({
               pathname: "/trouble-list/select-category",
-              state: { categoryId: categoryId, id: id },
             })
           }
           label={"Category"}
-          value={categoryName}
+          value={category.categoryName}
           name={"category"}
         />
         <span className={Styles.note}>
-          {`Technical Break Down / Mechanical / ${categoryName}`}
+          {`Technical Break Down / Mechanical / ${category.categoryName}`}
         </span>
       </>
     );

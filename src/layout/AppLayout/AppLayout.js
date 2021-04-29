@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
@@ -15,6 +16,20 @@ export default function AppLayout(props) {
   const [adminProfile, setAdminProfile] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [dateSelected, setDateSelected] = useState(moment().unix());
+  const [machine, setMachine] = useState({
+    machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+    machineName: "Line 1",
+  });
+  const [category, setCategory] = useState({
+    categoryId: "",
+    categoryName: "",
+  });
+  const [troubleId, setTroubleId] = useState("");
+  const [profile, setProfile] = useState({
+    userId: "",
+    name: "Budi Putra",
+  });
   const [isOpen, setIsOpen] = useState(windowWidth > 1200);
 
   const resizeHandler = () => {
@@ -50,6 +65,16 @@ export default function AppLayout(props) {
         windowHeight,
         adminProfile,
         setAdminProfile,
+        dateSelected,
+        setDateSelected,
+        machine,
+        setMachine,
+        category,
+        setCategory,
+        troubleId,
+        setTroubleId,
+        profile,
+        setProfile,
       }}
     >
       <div className={app_container}>

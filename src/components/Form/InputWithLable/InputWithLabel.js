@@ -111,7 +111,7 @@ InputWithLabel.defaultProps = {
 
 InputWithLabel.propTypes = {
   label: PropTypes.string.isRequired,
-  styleContainer: PropTypes.object,
+  styleContainer: PropTypes.any,
   unit: PropTypes.string,
   disabled: PropTypes.bool,
   value: PropTypes.string,
