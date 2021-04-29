@@ -45,9 +45,9 @@ export default function PromoTable(props) {
           props.data.map((row, index, arr) => (
             <div className={table_row} key={index}>
               <Category row={row} />
-              <Shift row={row} />
-              <Shift row={row} />
-              <Shift row={row} />
+              <Shift row={row} shift={"shift1"} />
+              <Shift row={row} shift={"shift2"} />
+              <Shift row={row} shift={"shift3"} />
               <Detail row={row} />
             </div>
           ))}

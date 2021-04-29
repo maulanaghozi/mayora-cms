@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import { Link, useHistory } from "react-router-dom";
 import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditManualCollection.module.scss";
 import { ChevronLeft } from "../../assets/icons";
+import { Context } from "../../hooks/context";
+import { http } from "../../utility/http";
 
 export default function EditCollection() {
   const [minutesPass, setMinutesPass] = useState(0);
   const [remark, setRemark] = useState("");
   const history = useHistory();
+  const globalState = useContext(Context);
+  const { manualCollection } = globalState;
 
   useEffect(() => {
     let getDays = moment().format("YYYY MM DD");
@@ -24,6 +28,14 @@ export default function EditCollection() {
     setMinutesPass(ms / 60);
   }, []);
 
+  const handleSave = () => {
+    const params = {
+      method: "POST",
+      path: "",
+      data: {},
+    };
+  };
+
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
@@ -36,15 +48,21 @@ export default function EditCollection() {
   };
 
   const renderInputShift = () => {
-    return <InputWithLabel label={"Shift"} value={"shift 1"} disabled={true} />;
+    return (
+      <InputWithLabel
+        label={"Shift"}
+        value={manualCollection.shift}
+        disabled={true}
+      />
+    );
   };
 
   const renderDuration = () => {
     return (
       <InputWithLabel
         label={"Value"}
-        value={"20"}
-        unit={"Min."}
+        value={manualCollection.value}
+        unit={manualCollection.unit}
         name={"value"}
         setValue={() => {}}
       />
@@ -57,11 +75,11 @@ export default function EditCollection() {
         <InputWithLabel
           styleContainer={Styles.select}
           label={"Category"}
-          value={"Trouble Kompresor/Angin"}
+          value={manualCollection.categoryName}
           disabled={true}
         />
         <span className={Styles.note}>
-          {`Defect & Rework Losses / Defect / Burning particle/kotor`}
+          {/* {`Defect & Rework Losses / Defect / Burning particle/kotor`} */}
         </span>
       </>
     );
@@ -72,9 +90,10 @@ export default function EditCollection() {
       <InputWithLabel
         styleContainer={Styles.remark}
         label={"Remark"}
-        value={remark}
+        value={manualCollection.remark}
         isTextarea={true}
         placeholder={"Write remak here"}
+        setValue={() => {}}
       />
     );
   };
