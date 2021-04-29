@@ -40,7 +40,15 @@ export default function EditCollection() {
   };
 
   const renderDuration = () => {
-    return <InputWithLabel label={"Value"} value={"20"} unit={"Min."} />;
+    return (
+      <InputWithLabel
+        label={"Value"}
+        value={"20"}
+        unit={"Min."}
+        name={"value"}
+        setValue={() => {}}
+      />
+    );
   };
 
   const renderCategory = () => {

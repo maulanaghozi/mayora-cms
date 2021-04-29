@@ -1,13 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import ProductionTargetTable from "../../Tables/ProductionTarget/ProductionTargetTable";
 import { CustomModal } from "../../../../components/Modal/CustomModal/CustomModal";
 import { InputWithLabel } from "../../../../components/Form/InputWithLable/InputWithLabel";
+import { http } from "../../../../utility/http";
 import Styles from "./ProductionTarget.module.scss";
+import { Context } from "../../../../hooks/context";
 
 export default function ProductionTarget() {
   const [modalDefaultVisible, setModalDefaultVisible] = useState(false);
   const [modalCurrentVisible, setModalCurrentVisible] = useState(false);
+  const [defaultTarget, setDefaultTarget] = useState(0);
+  const [currentTarget, setCurrentTarget] = useState(0);
+
+  const globalState = useContext(Context);
+  const { machine } = globalState;
+
+  useEffect(() => {
+    getDefaultTarget();
+    getProductionTarget();
+  }, []);
+
+  const getDefaultTarget = async () => {
+    const params = {
+      method: "GET",
+      path: "default-target/target",
+      query: {
+        machineId: machine.machineId,
+      },
+    };
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      setDefaultTarget(result.payload.target);
+    } else {
+      setDefaultTarget(0);
+    }
+  };
+
+  const handleSaveDefault = async () => {
+    const params = {
+      method: "PUT",
+      path: "default-target",
+      data: {
+        machineId: machine.machineId,
+        target: defaultTarget,
+      },
+    };
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      console.log("BERHASIL ", result);
+      setModalDefaultVisible(false);
+    } else {
+      console.log("GAGAL ", result);
+    }
+  };
+
+  const getProductionTarget = async () => {
+    const params = {
+      method: "GET",
+      path: "production-target/target",
+      query: {
+        machineId: machine.machineId,
+      },
+    };
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      console.log("BERHASIL CURRENT ", result);
+      setCurrentTarget(result.payload.target);
+    } else {
+      setCurrentTarget(0);
+    }
+  };
+
   const renderDefaultTarget = () => {
     return (
       <div className={Styles.cardTarget}>
@@ -15,7 +82,7 @@ export default function ProductionTarget() {
           <span className={Styles.title}>Default Target</span>
         </div>
         <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
+          <span className={Styles.targetValue}>{defaultTarget}</span>
           <span
             onClick={() => setModalDefaultVisible(true)}
             className={Styles.edit}
@@ -41,7 +108,7 @@ export default function ProductionTarget() {
           </span>
         </div>
         <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>3000</span>
+          <span className={Styles.targetValue}>{currentTarget}</span>
           <span
             onClick={() => setModalCurrentVisible(true)}
             className={Styles.edit}
@@ -67,7 +134,12 @@ export default function ProductionTarget() {
         onClose={() => setModalDefaultVisible(false)}
         title={"Set New Default Target"}
       >
-        <InputWithLabel label={"Target"} value={3000} setValue={() => {}} />
+        <InputWithLabel
+          label={"Target"}
+          value={defaultTarget}
+          setValue={setDefaultTarget}
+          name={"target"}
+        />
         <div className={Styles.buttonContainer}>
           <button
             onClick={() => setModalDefaultVisible(false)}
@@ -75,7 +147,7 @@ export default function ProductionTarget() {
           >
             Cancel
           </button>
-          <button onClick={() => {}} className={Styles.save}>
+          <button onClick={() => handleSaveDefault()} className={Styles.save}>
             Save
           </button>
         </div>
@@ -89,7 +161,12 @@ export default function ProductionTarget() {
         onClose={() => setModalCurrentVisible(false)}
         title={"Set New Production Target"}
       >
-        <InputWithLabel label={"Target"} value={3000} setValue={() => {}} />
+        <InputWithLabel
+          label={"Target"}
+          value={currentTarget}
+          setValue={setCurrentTarget}
+          name={"current"}
+        />
         <InputWithLabel
           label={"Active Target"}
           value={"18:00"}
