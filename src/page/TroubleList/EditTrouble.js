@@ -165,10 +165,13 @@ export default function EditTrouble() {
   const renderButton = () => {
     return (
       <div className={Styles.buttonContainer}>
-        <button onClick={() => {}} className={Styles.cancel}>
+        <button
+          onClick={() => history.replace("/trouble-list")}
+          className={Styles.cancel}
+        >
           Cancel
         </button>
-        <button onClick={() => {}} className={Styles.save}>
+        <button onClick={() => handleSave()} className={Styles.save}>
           Save
         </button>
       </div>

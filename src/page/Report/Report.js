@@ -123,7 +123,7 @@ export default function Report() {
             <InputDate
               value={date}
               onChange={e => setDate(e)}
-              className={Styles.inputSelect}
+              className={Styles.inputDate}
             />
           </div>
           <div className={Styles.download} onClick={() => onExport()}>
