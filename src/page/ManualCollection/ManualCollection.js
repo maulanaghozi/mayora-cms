@@ -12,7 +12,9 @@ import Release from "./Screen/Release/Release";
 import Styles from "./ManualCollection.module.scss";
 
 export default function TroubleList() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(
+    "00f5eafd-89c5-4871-a982-26a8180774c7"
+  );
   const [date, setDate] = useState(moment().unix());
 
   useEffect(() => {
@@ -30,10 +32,16 @@ export default function TroubleList() {
               value={selected}
               className={Styles.inputSelect}
               placeholder={"Line 1"}
-              defaultValue={"Line 1"}
+              defaultValue={selected}
               options={[
-                { value: "machine1", label: "Line 1" },
-                { value: "machine2", label: "Line 2" },
+                {
+                  value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                  label: "Line 1",
+                },
+                {
+                  value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                  label: "Line 2",
+                },
               ]}
               onChange={selected => setSelected(selected.value)}
             />
@@ -79,7 +87,10 @@ export default function TroubleList() {
           path={"/manual-collection/rework-losses"}
           component={RewarkLosses}
         />
-        <Route path={"/manual-collection/release"} component={Release} />
+        <Route
+          path={"/manual-collection/release"}
+          render={() => <Release machindeId={selected} date={date} />}
+        />
         <Route
           path={"/manual-collection"}
           render={() => <Redirect to={"/manual-collection/planed-down-time"} />}

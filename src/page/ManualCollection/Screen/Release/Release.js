@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Styles from "./Release.module.scss";
+import { http } from "../../../../utility/http";
 
-export default function Release() {
+export default function Release(props) {
   const [actual, setActual] = useState(0);
+  const { date, machineId } = props;
+
+  useEffect(() => {
+    console.log(props);
+  }, []);
 
   const handleChange = e => {
     if (e.target.name === "actual") {
       setActual(e.target.value);
     }
   };
+
+  const getActual = () => {
+    const params = {
+      method: "GET",
+      path: "",
+    };
+  };
+
+  const handleSave = () => {};
 
   const renderReleaseBySystem = () => {
     return (

@@ -11,7 +11,9 @@ export default function EditTrouble() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [categoryName, setCategoryName] = useState("");
+  const [categoryId, setCategoryId] = useState("");
   const [remark, setRemark] = useState("");
+  const [machineId, setMachineId] = useState("");
   const { id } = useParams();
   const history = useHistory();
 
@@ -28,13 +30,41 @@ export default function EditTrouble() {
     const result = await http(params);
 
     if (result && result.code === "success") {
+      setCategoryId(result.payload.categoryId);
       setStartTime(result.payload.startTime);
       setEndTime(result.payload.endTime);
       setCategoryName(result.payload.category.name);
       setRemark(result.payload.remark);
+      setMachineId(result.payload.machineId);
     } else {
       console.log(result);
       alert("please contact administrator");
+    }
+  };
+
+  const handleSave = async () => {
+    const params = {
+      method: "PUT",
+      path: `trouble/${id}`,
+      data: {
+        categoryId: categoryId,
+        updatedBy: "Budi Putra",
+        remark: remark,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload.isSuccess) {
+        history.push({
+          pathname: "/trouble-list",
+          state: { machineId: machineId },
+        });
+      }
+    } else {
+      console.log(result);
+      alert("Error");
     }
   };
 
@@ -72,6 +102,7 @@ export default function EditTrouble() {
           endTime ? moment(endTime).format("HH:mm") : "Now"
         }`}
         disabled={true}
+        name={"time"}
       />
     );
   };
@@ -79,10 +110,11 @@ export default function EditTrouble() {
   const renderDuration = () => {
     return (
       <InputWithLabel
-        label={"Time"}
+        label={"Duration"}
         value={timeDiffCalc(endTime, startTime)}
         unit={"Min."}
         disabled={true}
+        name={"duration"}
       />
     );
   };
@@ -92,9 +124,15 @@ export default function EditTrouble() {
       <>
         <InputWithLabel
           styleContainer={Styles.select}
-          onClick={() => history.push("/trouble-list/select-category")}
+          onClick={() =>
+            history.push({
+              pathname: "/trouble-list/select-category",
+              state: { categoryId: categoryId, id: id },
+            })
+          }
           label={"Category"}
           value={categoryName}
+          name={"category"}
         />
         <span className={Styles.note}>
           {`Technical Break Down / Mechanical / ${categoryName}`}
@@ -111,6 +149,8 @@ export default function EditTrouble() {
         value={remark}
         isTextarea={true}
         placeholder={"Write remak here"}
+        name={"remark"}
+        setValue={setRemark}
       />
     );
   };
@@ -124,10 +164,7 @@ export default function EditTrouble() {
         >
           Cancel
         </button>
-        <button
-          onClick={() => history.push("/trouble-list")}
-          className={Styles.save}
-        >
+        <button onClick={() => handleSave()} className={Styles.save}>
           Save
         </button>
       </div>

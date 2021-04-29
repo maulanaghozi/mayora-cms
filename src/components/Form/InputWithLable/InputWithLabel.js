@@ -11,10 +11,18 @@ export const InputWithLabel = props => {
     unit,
     disabled,
     value,
+    setValue,
     placeholder,
     onClick,
     isTextarea,
+    name,
   } = props;
+
+  const handleChange = e => {
+    if (e.target.name === name) {
+      setValue(e.target.value);
+    }
+  };
   const renderInputText = () => {
     return (
       <div
@@ -27,6 +35,8 @@ export const InputWithLabel = props => {
           disabled={disabled}
           value={value}
           placeholder={placeholder}
+          name={name}
+          onChange={handleChange}
         />
         {unit && <span className={Styles.unit}>{unit}</span>}
       </div>
@@ -48,6 +58,8 @@ export const InputWithLabel = props => {
           value={value}
           placeholder={placeholder}
           disabled={true}
+          name={name}
+          onChange={handleChange}
         />
         <ChevronRight />
       </div>
@@ -67,6 +79,8 @@ export const InputWithLabel = props => {
           className={classNames(Styles.input)}
           value={value}
           placeholder={placeholder}
+          name={name}
+          onChange={handleChange}
         />
       </div>
     );
@@ -92,6 +106,7 @@ InputWithLabel.defaultProps = {
   placeholder: "input here ...",
   onClick: null,
   isTextarea: false,
+  name: "",
 };
 
 InputWithLabel.propTypes = {
@@ -103,4 +118,5 @@ InputWithLabel.propTypes = {
   placeholder: PropTypes.string,
   onClick: PropTypes.func,
   isTextarea: PropTypes.bool,
+  name: PropTypes.string.isRequired,
 };

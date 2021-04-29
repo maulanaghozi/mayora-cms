@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import IdlingMinorStoppages from "./Screen/MinorStoppages/MinorStoppage";
 import EarlyStop from "./Screen/EarlyStop/EarlyStop";
@@ -7,12 +7,18 @@ import TechnicalBreakDown from "./Screen/TechnicalBreakDown/TechnicalBreakDown";
 import Styles from "./SelectCategory.module.scss";
 import { ChevronLeft } from "../../assets/icons";
 
-export default function SelectCategory() {
+export default function SelectCategory(props) {
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(props);
+  }, []);
+
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
         <div className={Styles.titleHeader}>
-          <ChevronLeft />
+          <ChevronLeft onClick={() => history.goBack()} />
           <span>Select Category</span>
         </div>
         <PageTitle
@@ -44,7 +50,7 @@ export default function SelectCategory() {
         />
         <Route
           path={"/trouble-list/select-category/technical-break-down"}
-          component={TechnicalBreakDown}
+          render={props => <TechnicalBreakDown {...props} />}
         />
         <Route
           path={"/trouble-list/select-category"}
