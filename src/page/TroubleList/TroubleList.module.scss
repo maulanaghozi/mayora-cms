@@ -96,7 +96,6 @@
     .bar {
       flex: 1;
       height: 20px;
-      background-color: #0ac46b;
       display: flex;
       align-items: center;
     }
@@ -106,6 +105,7 @@
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
+      margin-left: -8px;
 
       > span {
         flex: 60;

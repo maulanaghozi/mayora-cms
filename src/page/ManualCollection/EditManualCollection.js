@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditManualCollection.module.scss";
 import { ChevronLeft } from "../../assets/icons";
@@ -8,6 +8,7 @@ import { ChevronLeft } from "../../assets/icons";
 export default function EditCollection() {
   const [minutesPass, setMinutesPass] = useState(0);
   const [remark, setRemark] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     let getDays = moment().format("YYYY MM DD");
@@ -26,9 +27,9 @@ export default function EditCollection() {
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
-        <Link to={"/trouble-list"} className={Styles.back}>
+        <div onClick={() => history.goBack()} className={Styles.back}>
           <ChevronLeft />
-        </Link>
+        </div>
         <span>Edit Manual Collection</span>
       </div>
     );

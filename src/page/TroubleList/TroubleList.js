@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import classNames from "classnames";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
@@ -7,6 +7,8 @@ import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
 import usePolling from "../../hooks/usePolling/usePolling";
 import { http } from "../../utility/http";
+import { Context } from "../../hooks/context";
+export const baseURL = process.env.REACT_APP_BASE_URL;
 
 function getTime() {
   let totalMinutes = 1440;
@@ -29,19 +31,20 @@ function getTime() {
   };
 }
 
-export default function TroubleList() {
+export default function TroubleList(props) {
   const [dataStatus, setDataStatus] = useState([]);
   const [dataTable, setDataTable] = useState([]);
   const [startTime, setStartTime] = useState(getTime().getThisDay07);
   const [endTime, setEndTime] = useState(getTime().endTime);
-  const [machineId, setMachineId] = useState(
-    "00f5eafd-89c5-4871-a982-26a8180774c7"
-  );
-  const [machineName, setMachineName] = useState("Line 1");
-  const [date, setDate] = useState(moment().unix());
   const [minutesPass, setMinutesPass] = useState(0);
+  const globalState = useContext(Context);
+  const { machine, dateSelected, setMachine, setDateSelected } = globalState;
 
   useEffect(() => {
+    handleMinutesPass();
+  }, []);
+
+  const handleMinutesPass = () => {
     let getDays = moment().format("YYYY MM DD");
     let curentTime = moment().format("YYYY MM DD HH:mm");
     let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
@@ -58,11 +61,13 @@ export default function TroubleList() {
 
     const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
     setMinutesPass(ms / 60);
-  }, []);
+    return;
+  };
 
   useEffect(() => {
+    console.log("globalContext", { machine, dateSelected });
     getTroublelist();
-  }, [machineId, date]);
+  }, [dateSelected, machine.machineId]);
 
   const getTroublelist = async () => {
     getStatus();
@@ -78,7 +83,7 @@ export default function TroubleList() {
       query: {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
-        machineId: machineId,
+        machineId: machine.machineId,
       },
     };
 
@@ -100,7 +105,7 @@ export default function TroubleList() {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
         status: "downtime",
-        machineId: machineId,
+        machineId: machine.machineId,
       },
     };
 
@@ -119,9 +124,9 @@ export default function TroubleList() {
       method: "GET",
       path: "trouble/download",
       query: {
-        date: moment(date * 1000).format("YYYY-MM-DD"),
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
         status: "downtime",
-        machineId: machineId,
+        machineId: machine.machineId,
       },
     };
 
@@ -129,14 +134,22 @@ export default function TroubleList() {
 
     const result = await http(params);
 
-    console.log(typeof result);
+    // console.log(typeof result);
+    return (
+      <a
+        target="_blank"
+        href={`${baseURL}trouble/download?date=${moment(
+          dateSelected * 1000
+        ).format("YYYY-MM-DD")}&status=downtime&machineId=${machine.machineId}`}
+      ></a>
+    );
 
-    if (result && result.code === "success") {
-      console.log("SUKSES DOWNLOAD");
-    } else {
-      // console.log(result);
-      alert("please contact administrator");
-    }
+    // if (result && result.code === "success") {
+    //   console.log("SUKSES DOWNLOAD");
+    // } else {
+    //   // console.log(result);
+    //   alert("please contact administrator");
+    // }
   };
 
   function timeDiffCalc(dateFuture, dateNow) {
@@ -160,7 +173,14 @@ export default function TroubleList() {
 
     setStartTime(startDay);
     setEndTime(endDay);
-    setDate(time);
+    setDateSelected(time);
+
+    if (getDays === moment().format("YYYY MM DD")) {
+      handleMinutesPass();
+    } else {
+      setMinutesPass(1440);
+    }
+
     return;
   };
 
@@ -169,14 +189,13 @@ export default function TroubleList() {
       <div className={Styles.headerContainer}>
         <span>Trouble List</span>
         <div className={Styles.filter}>
-          <span className={Styles.buttonExport} onClick={() => onDownload()}>
+          {/* <span className={Styles.buttonExport} onClick={() => onDownload()}>
             Download
-          </span>
+          </span> */}
           <InputSelect
-            value={machineId}
+            value={machine.machineId}
             className={Styles.inputSelect}
-            placeholder={"Line 1"}
-            defaultValue={"Line 1"}
+            placeholder={machine.machineName}
             options={[
               {
                 value: "00f5eafd-89c5-4871-a982-26a8180774c7",
@@ -188,11 +207,13 @@ export default function TroubleList() {
               },
             ]}
             onChange={selected => {
-              setMachineId(selected.value);
-              setMachineName(selected.label);
+              setMachine({
+                machineId: selected.value,
+                machineName: selected.label,
+              });
             }}
           />
-          <InputDate value={date} onChange={e => onChangeDate(e)} />
+          <InputDate value={dateSelected} onChange={e => onChangeDate(e)} />
         </div>
       </div>
     );
@@ -202,7 +223,7 @@ export default function TroubleList() {
     return (
       <div className={Styles.statusContainer}>
         <div className={Styles.headerStatus}>
-          <span>{`Production Status - ${machineName.toUpperCase()}`}</span>
+          <span>{`Production Status - ${machine.machineName.toUpperCase()}`}</span>
           <div className={Styles.indicatorColor}>
             <div className={Styles.status}>
               <div className={classNames(Styles.box, Styles.grey)} />
@@ -262,7 +283,7 @@ export default function TroubleList() {
             style={{
               height: "20px",
               flex: getTime().totalMinutes - minutesPass,
-              backgroundColor: "white",
+              backgroundColor: "#ffffff",
             }}
           ></div>
         </div>
@@ -274,30 +295,30 @@ export default function TroubleList() {
   const renderHours = () => {
     return (
       <>
-        <span>07:00</span>
-        <span>08:00</span>
-        <span>09:00</span>
-        <span>10:00</span>
-        <span>11:00</span>
-        <span>12:00</span>
-        <span>13:00</span>
-        <span>14:00</span>
-        <span>15:00</span>
-        <span>16:00</span>
-        <span>17:00</span>
-        <span>18:00</span>
-        <span>19:00</span>
-        <span>20:00</span>
-        <span>21:00</span>
-        <span>22:00</span>
-        <span>23:00</span>
-        <span>24:00</span>
-        <span>01:00</span>
-        <span>02:00</span>
-        <span>03:00</span>
-        <span>04:00</span>
-        <span>05:00</span>
-        <span>06:00</span>
+        <span>07</span>
+        <span>08</span>
+        <span>09</span>
+        <span>10</span>
+        <span>11</span>
+        <span>12</span>
+        <span>13</span>
+        <span>14</span>
+        <span>15</span>
+        <span>16</span>
+        <span>17</span>
+        <span>18</span>
+        <span>19</span>
+        <span>20</span>
+        <span>21</span>
+        <span>22</span>
+        <span>23</span>
+        <span>24</span>
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+        <span>04</span>
+        <span>05</span>
+        <span>06</span>
       </>
     );
   };

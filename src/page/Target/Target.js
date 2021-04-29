@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import ProductionTarget from "./Screens/ProductionTarget/ProductionTarget";
 import TargetOEE from "./Screens/TargetOEE/TargetOEE";
 import Styles from "./Target.module.scss";
+import { Context } from "../../hooks/context";
 
 export default function TroubleList() {
-  const [selected, setSelected] = useState(null);
-  const [date, setDate] = useState(moment().unix());
-
-  useEffect(() => {}, []);
+  const globalState = useContext(Context);
+  const { machine, dateSelected, setMachine, setDateSelected } = globalState;
 
   const renderHeader = () => {
     return (
@@ -21,17 +19,30 @@ export default function TroubleList() {
           <span>Target</span>
           <div className={Styles.filter}>
             <InputSelect
-              value={selected}
+              value={machine.machineId}
               className={Styles.inputSelect}
-              placeholder={"Line 1"}
-              defaultValue={"Line 1"}
+              placeholder={machine.machineName}
               options={[
-                { value: "machine1", label: "Line 1" },
-                { value: "machine2", label: "Line 2" },
+                {
+                  value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                  label: "Line 1",
+                },
+                {
+                  value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                  label: "Line 2",
+                },
               ]}
-              onChange={selected => setSelected(selected.value)}
+              onChange={selected =>
+                setMachine({
+                  machineId: selected.value,
+                  machineName: selected.label,
+                })
+              }
             />
-            <InputDate value={date} onChange={e => setDate(e)} />
+            <InputDate
+              value={dateSelected}
+              onChange={e => setDateSelected(e)}
+            />
           </div>
         </div>
         <PageTitle
