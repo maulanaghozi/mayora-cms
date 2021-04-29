@@ -25,33 +25,13 @@ const Header = ["Updated at", "Target", "Name", "Role"];
 
 const headerClasses = [column_time, column_target, column_name, column_role];
 
-const sortAttributes = ["time", null, null, null, null];
-
 export default function ProductionTargetTable(props) {
-  const [currentSort, setCurrentSort] = useState("Time");
-
   return (
     <div className={container}>
       <div className={table_header}>
-        {Header.map((head, index) => {
-          if (sortAttributes[index]) {
-            const sortBy = sortAttributes[index];
-
-            return (
-              <SortableHeader
-                key={index}
-                index={index}
-                columnName={head}
-                handleSort={props.onChange}
-                sortBy={sortBy}
-                currentSort={currentSort}
-                setCurrentSort={setCurrentSort}
-              />
-            );
-          } else {
-            return <NormalHeader key={index} index={index} columnName={head} />;
-          }
-        })}
+        {Header.map((head, index) => (
+          <NormalHeader key={index} index={index} columnName={head} />
+        ))}
       </div>
       <div className={table_body}>
         {props.data &&
