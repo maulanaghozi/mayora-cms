@@ -77,7 +77,6 @@ export default function TroubleList(props) {
   usePolling(getTroublelist, 120000);
 
   const getStatus = async () => {
-    console.log("mausuuukkkkk get status");
     const params = {
       method: "GET",
       path: "trouble",

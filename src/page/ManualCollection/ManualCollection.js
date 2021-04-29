@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
@@ -10,12 +10,11 @@ import SpeedLosses from "./Screen/SpeedLosses/SpeedLosses";
 import RewarkLosses from "./Screen/ReworkLosses/RewarkLosses";
 import Release from "./Screen/Release/Release";
 import Styles from "./ManualCollection.module.scss";
+import { Context } from "../../hooks/context";
 
 export default function TroubleList() {
-  const [selected, setSelected] = useState(
-    "00f5eafd-89c5-4871-a982-26a8180774c7"
-  );
-  const [date, setDate] = useState(moment().unix());
+  const globalState = useContext(Context);
+  const { machine, dateSelected, setMachine, setDateSelected } = globalState;
 
   useEffect(() => {
     const getDays = moment().format("YYYY MM DD");
@@ -29,10 +28,9 @@ export default function TroubleList() {
           <span>Manual Collection</span>
           <div className={Styles.filter}>
             <InputSelect
-              value={selected}
+              value={machine.machineId}
               className={Styles.inputSelect}
-              placeholder={"Line 1"}
-              defaultValue={selected}
+              placeholder={machine.machineName}
               options={[
                 {
                   value: "00f5eafd-89c5-4871-a982-26a8180774c7",
@@ -43,9 +41,17 @@ export default function TroubleList() {
                   label: "Line 2",
                 },
               ]}
-              onChange={selected => setSelected(selected.value)}
+              onChange={selected =>
+                setMachine({
+                  machineId: selected.value,
+                  machineName: selected.label,
+                })
+              }
             />
-            <InputDate value={date} onChange={e => setDate(e)} />
+            <InputDate
+              value={dateSelected}
+              onChange={e => setDateSelected(e)}
+            />
           </div>
         </div>
         <PageTitle
@@ -87,10 +93,7 @@ export default function TroubleList() {
           path={"/manual-collection/rework-losses"}
           component={RewarkLosses}
         />
-        <Route
-          path={"/manual-collection/release"}
-          render={() => <Release machindeId={selected} date={date} />}
-        />
+        <Route path={"/manual-collection/release"} component={Release} />
         <Route
           path={"/manual-collection"}
           render={() => <Redirect to={"/manual-collection/planed-down-time"} />}
