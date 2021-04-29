@@ -33,6 +33,7 @@ export const http = async (params, progress, setProgress) => {
           setProgress(percentCompleted);
         }
       },
+      responseType:params.responseType || ""
     };
 
     let { data } = await axios(config);

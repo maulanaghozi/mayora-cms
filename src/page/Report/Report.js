@@ -3,6 +3,8 @@ import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import { DownloadIcon } from "../../assets/icons";
 import Styles from "./Report.module.scss";
+import InputDate from "../../components/Form/InputDate/InputDate";
+import { http } from "../../utility/http";
 
 export default function Report() {
   const [machineId, setMachineId] = useState(
@@ -10,11 +12,50 @@ export default function Report() {
   );
   const [duration, setDuration] = useState("weekly");
   const [week, setWeek] = useState("01 (2021)");
+  const [date, setDate] = useState(moment().unix());
 
   useEffect(() => {
     const getDays = moment().format("YYYY MM DD");
     console.log(moment(`${getDays} 07:00`).format());
   }, []);
+
+  const onExport = async () => {
+    const params = {
+      method: "GET",
+      path: "http://localhost:3000/report-daily",
+      query: {
+        date: moment(date * 1000).format("YYYY-MM-DD"),
+        machineId: machineId,
+      },
+      content_type: 'application/octet-stream',
+      responseType:'blob'
+    };
+
+    console.log(params);
+    console.log(moment(date * 1000).format("YYYY-MM-DD"));
+
+    const result = await http(params);
+
+    // 2. Create blob link to download
+    const url = window.URL.createObjectURL(result);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `Report Weekly`);
+    // 3. Append to html page
+    document.body.appendChild(link);
+    // 4. Force download
+    link.click();
+    // 5. Clean up and remove the link
+    link.parentNode.removeChild(link);
+
+    return result;
+    // if (result && result.code === "success") {
+    //   console.log("SUKSES EXPORT");
+    // } else {
+    //   // console.log(result);
+    //   alert("please contact administrator");
+    // }
+  };
 
   const renderHeader = () => {
     return (
@@ -78,29 +119,12 @@ export default function Report() {
           </div>
           <div className={Styles.filter}>
             <span>Week</span>
-            <InputSelect
-              value={week}
-              className={Styles.inputSelect}
-              placeholder={"01 (2021)"}
-              defaultValue={"01 (2021)"}
-              options={[
-                {
-                  value: "01 (2021)",
-                  label: "01 (2021)",
-                },
-                {
-                  value: "02 (2021)",
-                  label: "02 (2021)",
-                },
-                {
-                  value: "03 (2021)",
-                  label: "03 (2021)",
-                },
-              ]}
-              onChange={selected => setWeek(selected.value)}
-            />
+            <InputDate 
+              value={date} 
+              onChange={e => setDate(e)}
+              className={Styles.inputSelect} />
           </div>
-          <div className={Styles.download}>
+          <div className={Styles.download}  onClick={() => onExport()}>
             <DownloadIcon />
             <span>Export</span>
           </div>
