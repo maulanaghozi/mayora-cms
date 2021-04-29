@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -15,11 +14,6 @@ import { Context } from "../../hooks/context";
 export default function TroubleList() {
   const globalState = useContext(Context);
   const { machine, dateSelected, setMachine, setDateSelected } = globalState;
-
-  useEffect(() => {
-    const getDays = moment().format("YYYY MM DD");
-    console.log(moment(`${getDays} 07:00`).format());
-  }, []);
 
   const renderHeader = () => {
     return (
