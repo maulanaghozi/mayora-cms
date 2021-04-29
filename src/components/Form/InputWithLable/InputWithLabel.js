@@ -3,6 +3,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import Styles from "./InputWithLabel.module.scss";
 import { ChevronRight } from "../../../assets/icons";
+import DatePicker from "react-datepicker";
 
 export const InputWithLabel = props => {
   const {
@@ -15,6 +16,7 @@ export const InputWithLabel = props => {
     placeholder,
     onClick,
     isTextarea,
+    isHourSelected,
     name,
   } = props;
 
@@ -85,6 +87,21 @@ export const InputWithLabel = props => {
       </div>
     );
   };
+
+  const renderInputHour = () => {
+    return (
+      <DatePicker
+        selected={value}
+        onChange={date => setValue(date)}
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={15}
+        timeCaption="Time"
+        dateFormat="HH:mm"
+      />
+    );
+  };
+
   return (
     <div className={classNames(Styles.container, styleContainer)}>
       <span className={Styles.label}>{label}</span>
@@ -92,6 +109,8 @@ export const InputWithLabel = props => {
         ? renderClickable()
         : isTextarea
         ? renderTextarea()
+        : isHourSelected
+        ? renderInputHour()
         : renderInputText()}
     </div>
   );
@@ -107,6 +126,7 @@ InputWithLabel.defaultProps = {
   onClick: null,
   isTextarea: false,
   name: "",
+  isHourSelected: false,
 };
 
 InputWithLabel.propTypes = {
@@ -119,4 +139,5 @@ InputWithLabel.propTypes = {
   onClick: PropTypes.func,
   isTextarea: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  isHourSelected: PropTypes.bool,
 };

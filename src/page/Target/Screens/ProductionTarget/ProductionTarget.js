@@ -12,6 +12,8 @@ export default function ProductionTarget() {
   const [modalCurrentVisible, setModalCurrentVisible] = useState(false);
   const [defaultTarget, setDefaultTarget] = useState(0);
   const [currentTarget, setCurrentTarget] = useState(0);
+  const [activeTarget, setActveTarget] = useState(null);
+  const [logData, setLogData] = useState([]);
 
   const globalState = useContext(Context);
   const { machine } = globalState;
@@ -19,7 +21,25 @@ export default function ProductionTarget() {
   useEffect(() => {
     getDefaultTarget();
     getProductionTarget();
-  }, []);
+    getCurrentLog();
+  }, [machine.machineId]);
+
+  const getCurrentLog = async () => {
+    const params = {
+      method: "GET",
+      path: "production-target",
+      query: {
+        machineId: machine.machineId,
+      },
+    };
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      setLogData(result.payload.results);
+    } else {
+      setLogData([]);
+    }
+  };
 
   const getDefaultTarget = async () => {
     const params = {
@@ -52,6 +72,29 @@ export default function ProductionTarget() {
     if (result && result.code === "success") {
       console.log("BERHASIL ", result);
       setModalDefaultVisible(false);
+    } else {
+      console.log("GAGAL ", result);
+    }
+  };
+
+  const handleSaveCurrentTarget = async () => {
+    const params = {
+      method: "PUT",
+      path: "production-target",
+      data: {
+        machineId: machine.machineId,
+        target: currentTarget,
+        activeTarget: activeTarget,
+      },
+    };
+
+    console.log(activeTarget);
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      console.log("BERHASIL ", result);
+      setModalCurrentVisible(false);
+      getCurrentLog();
     } else {
       console.log("GAGAL ", result);
     }
@@ -124,7 +167,7 @@ export default function ProductionTarget() {
     );
   };
   const renderTable = () => {
-    return <ProductionTargetTable />;
+    return <ProductionTargetTable data={logData} />;
   };
 
   const renderModalEditDefaultTarget = () => {
@@ -169,8 +212,10 @@ export default function ProductionTarget() {
         />
         <InputWithLabel
           label={"Active Target"}
-          value={"18:00"}
-          setValue={() => {}}
+          value={activeTarget}
+          setValue={setActveTarget}
+          isHourSelected={true}
+          name={"activetarget"}
         />
         <div className={Styles.buttonContainer}>
           <button
@@ -179,7 +224,10 @@ export default function ProductionTarget() {
           >
             Cancel
           </button>
-          <button onClick={() => {}} className={Styles.save}>
+          <button
+            onClick={() => handleSaveCurrentTarget()}
+            className={Styles.save}
+          >
             Save
           </button>
         </div>
