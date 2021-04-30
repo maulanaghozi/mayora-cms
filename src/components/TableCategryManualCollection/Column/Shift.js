@@ -4,13 +4,17 @@ import { EditIcon } from "../../../assets/icons";
 import { table_cell, column_shift, notSet } from "../Styles.module.scss";
 import { Context } from "../../../hooks/context";
 
-export default function Description({ row, shift }) {
+export default function Description({ manualCollection, row, shift }) {
   const globalState = useContext(Context);
   const { setManualCollection } = globalState;
   const history = useHistory();
   return (
     <div className={table_cell + " " + column_shift}>
-      <span className={notSet}>Not Set</span>
+      <span className={notSet}>
+        {manualCollection && manualCollection.value
+          ? `${manualCollection.value} ${manualCollection.unit}`
+          : `Not Set`}
+      </span>
       <EditIcon
         onClick={() => {
           setManualCollection({

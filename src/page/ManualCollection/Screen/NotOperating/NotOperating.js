@@ -1,13 +1,46 @@
-import React from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { http } from "../../../../utility/http";
 import TableCategory from "../../../../components/TableCategryManualCollection";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./NotOperating.module.scss";
+import { Context } from "../../../../hooks/context";
+import moment from "moment";
 
 export default function NotOperating() {
+  const [data, setData] = useState([]);
+  const globalState = useContext(Context);
+  const { machine, dateSelected } = globalState;
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const params = {
+      method: "GET",
+      path: "category/parent",
+      query: {
+        categoryParentId: "545fcd41-52e2-4756-9a12-d0ba0a18036a",
+        machineId: machine.machineId,
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        categoryType: "manualCollection",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setData(result.payload.results);
+    } else {
+      setData(results);
+      console.log("THIS IS ERROR TechnicalBreakDown");
+    }
+  };
+
   const renderDirectoryParent = () => {
     return (
       <div>
-        {results.map((item, idx) => (
+        {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
             {Array.isArray(item.categories) && item.categories.length > 0 && (
               <TableCategory data={item.categories} />

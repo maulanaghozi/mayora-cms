@@ -1,13 +1,46 @@
-import React from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Directory } from "../../../../components/Directory/Directory";
 import TableCategory from "../../../../components/TableCategryManualCollection";
 import Styles from "./ReworkLosses.module.scss";
+import { Context } from "../../../../hooks/context";
+import moment from "moment";
+import { http } from "../../../../utility/http";
 
 export default function RewarkLosses() {
+  const [data, setData] = useState([]);
+  const globalState = useContext(Context);
+  const { machine, dateSelected } = globalState;
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const params = {
+      method: "GET",
+      path: "category/parent",
+      query: {
+        categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
+        machineId: machine.machineId,
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        categoryType: "manualCollection",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setData(result.payload.results);
+    } else {
+      setData(results);
+      console.log("THIS IS ERROR TechnicalBreakDown");
+    }
+  };
+
   const renderDirectoryParent = () => {
     return (
       <div>
-        {results.map((item, idx) => (
+        {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
             {Array.isArray(item.children) &&
               item.children.length > 0 &&

@@ -38,6 +38,7 @@ export default function AppLayout(props) {
     unit: "",
   });
   const [isOpen, setIsOpen] = useState(windowWidth > 1200);
+  const [fromPage, setFromPage] = useState(null);
 
   const resizeHandler = () => {
     setWindowWidth(window.innerWidth);
@@ -84,6 +85,8 @@ export default function AppLayout(props) {
         setProfile,
         manualCollection,
         setManualCollection,
+        fromPage,
+        setFromPage,
       }}
     >
       <div className={app_container}>
