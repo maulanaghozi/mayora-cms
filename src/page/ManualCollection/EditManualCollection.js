@@ -1,28 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import moment from "moment";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditManualCollection.module.scss";
 import { ChevronLeft } from "../../assets/icons";
+import { Context } from "../../hooks/context";
+import { http } from "../../utility/http";
 
 export default function EditCollection() {
-  const [minutesPass, setMinutesPass] = useState(0);
   const [remark, setRemark] = useState("");
+  const [value, setValue] = useState("");
   const history = useHistory();
+  const globalState = useContext(Context);
+  const { manualCollection, dateSelected, machine } = globalState;
 
-  useEffect(() => {
-    let getDays = moment().format("YYYY MM DD");
-    let curentTime = moment().format("YYYY MM DD HH:mm");
-    let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
+  const handleSave = async () => {
+    const params = {
+      method: "POST",
+      path: "manual-collection",
+      data: {
+        machineId: machine.machineId,
+        categoryId: manualCollection.categoryId,
+        value: value,
+        shift: manualCollection.shift,
+        remark: remark,
+        unit: manualCollection.unit,
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        createdBy: "Budi Putra",
+      },
+    };
 
-    if (curentTime < startDay) {
-      getDays = moment(getDays).subtract(1, "days").format("YYYY MM DD");
-      startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      history.goBack();
     }
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
-    setMinutesPass(ms / 60);
-  }, []);
+    console.log("RESULT ", result);
+  };
 
   const renderHeader = () => {
     return (
@@ -36,11 +51,25 @@ export default function EditCollection() {
   };
 
   const renderInputShift = () => {
-    return <InputWithLabel label={"Shift"} value={"shift 1"} disabled={true} />;
+    return (
+      <InputWithLabel
+        label={"Shift"}
+        value={manualCollection.shift}
+        disabled={true}
+      />
+    );
   };
 
   const renderDuration = () => {
-    return <InputWithLabel label={"Value"} value={"20"} unit={"Min."} />;
+    return (
+      <InputWithLabel
+        label={"Value"}
+        value={value}
+        unit={manualCollection.unit}
+        name={"value"}
+        setValue={setValue}
+      />
+    );
   };
 
   const renderCategory = () => {
@@ -49,11 +78,11 @@ export default function EditCollection() {
         <InputWithLabel
           styleContainer={Styles.select}
           label={"Category"}
-          value={"Trouble Kompresor/Angin"}
+          value={manualCollection.categoryName}
           disabled={true}
         />
         <span className={Styles.note}>
-          {`Defect & Rework Losses / Defect / Burning particle/kotor`}
+          {/* {`Defect & Rework Losses / Defect / Burning particle/kotor`} */}
         </span>
       </>
     );
@@ -67,6 +96,7 @@ export default function EditCollection() {
         value={remark}
         isTextarea={true}
         placeholder={"Write remak here"}
+        setValue={setRemark}
       />
     );
   };
@@ -75,7 +105,9 @@ export default function EditCollection() {
     return (
       <div className={Styles.buttonContainer}>
         <button className={Styles.cancel}>Cancel</button>
-        <button className={Styles.save}>Save</button>
+        <button onClick={() => handleSave()} className={Styles.save}>
+          Save
+        </button>
       </div>
     );
   };

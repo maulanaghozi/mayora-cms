@@ -1,7 +1,7 @@
-import React, { useEffect, useState , useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
-import { DownloadIcon,ExcelFileIcon } from "../../assets/icons";
+import { DownloadIcon, ExcelFileIcon } from "../../assets/icons";
 import Styles from "./Report.module.scss";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import { http } from "../../utility/http";
@@ -17,10 +17,9 @@ export default function Report() {
   const [duration, setDuration] = useState("weekly");
   const [week, setWeek] = useState("01 (2021)");
   const [date, setDate] = useState(moment().unix());
-  const [file1, setFile1] = useState('not set');
-  const [file2, setFile2] = useState('not set');
-  const [file3, setFile3] = useState('not set');
-  
+  const [file1, setFile1] = useState("not set");
+  const [file2, setFile2] = useState("not set");
+  const [file3, setFile3] = useState("not set");
 
   useEffect(() => {
     const getDays = moment().format("YYYY MM DD");
@@ -31,13 +30,13 @@ export default function Report() {
   const onExport = async () => {
     const params = {
       method: "GET",
-      path: "http://localhost:3000/report-weekly",
+      path: "report-daily",
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
         machineId: machineId,
       },
-      content_type: 'application/octet-stream',
-      responseType:'blob'
+      content_type: "application/octet-stream",
+      responseType: "blob",
     };
 
     console.log(params);
@@ -46,10 +45,11 @@ export default function Report() {
     const result = await http(params);
 
     // 2. Create blob link to download
+    console.log("window ", window.URL);
     const url = window.URL.createObjectURL(result);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', `Report Weekly`);
+    link.setAttribute("download", `Report Weekly`);
     // 3. Append to html page
     document.body.appendChild(link);
     // 4. Force download
@@ -66,13 +66,13 @@ export default function Report() {
     // }
   };
 
-  function mapTemplate (data) {
-    if(data){
-      if(data.type == 'weekly'){
+  function mapTemplate(data) {
+    if (data) {
+      if (data.type == "weekly") {
         setFile1(data.fileTemplate);
-      }else if(data.type == 'monthly'){
+      } else if (data.type == "monthly") {
         setFile2(data.fileTemplate);
-      }else if(data.type == 'semester'){
+      } else if (data.type == "semester") {
         setFile3(data.fileTemplate);
       }
 
@@ -81,7 +81,7 @@ export default function Report() {
 
     return null;
   }
-  
+
   const getTemplate = async () => {
     const params = {
       method: "GET",
@@ -89,20 +89,18 @@ export default function Report() {
     };
 
     console.log(params);
-    
+
     const result = await http(params);
-	
-	  console.log(result);
+
+    console.log(result);
     if (result && result.code === "success") {
-      if(result.payload)
-      {
+      if (result.payload) {
         result.payload.map(e => mapTemplate(e));
-      }else{
-        setFile1('not set');
-        setFile2('not set');
-        setFile3('not set');
+      } else {
+        setFile1("not set");
+        setFile2("not set");
+        setFile3("not set");
       }
-      
     } else {
       alert("please contact administrator");
     }
@@ -170,12 +168,13 @@ export default function Report() {
           </div>
           <div className={Styles.filter}>
             <span>Week</span>
-            <InputDate 
-              value={date} 
+            <InputDate
+              value={date}
               onChange={e => setDate(e)}
-              className={Styles.inputDate} />
+              className={Styles.inputDate}
+            />
           </div>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <div className={Styles.download} onClick={() => onExport()}>
             <DownloadIcon />
             <span>Export</span>
           </div>
@@ -184,29 +183,26 @@ export default function Report() {
     );
   };
 
-  const renderHorizontalLine=()=>{
-    return(
-      <hr className={Styles.hr}></hr>
-    )
-  }
+  const renderHorizontalLine = () => {
+    return <hr className={Styles.hr}></hr>;
+  };
 
-  const renderTemplate = () =>{
-    return(
-        <div className={Styles.exportReport}>
-          <span className={Styles.title}>Import Template</span>
-          <span className={Styles.note}>
-            Pilih file excel yang akan di-import dan dijadikan template untuk Report
-          </span>
-          
-          <div className={Styles.filterContainer}>
-          {renderexcelTemplate()}
-          </div>
-        </div>
-    )
-  }
+  const renderTemplate = () => {
+    return (
+      <div className={Styles.exportReport}>
+        <span className={Styles.title}>Import Template</span>
+        <span className={Styles.note}>
+          Pilih file excel yang akan di-import dan dijadikan template untuk
+          Report
+        </span>
 
-  const renderexcelTemplate = () =>{
-    return(
+        <div className={Styles.filterContainer}>{renderexcelTemplate()}</div>
+      </div>
+    );
+  };
+
+  const renderexcelTemplate = () => {
+    return (
       <div className={Styles.box}>
         <span>Current excel template</span>
         <div className={Styles.insideBox}>
@@ -215,11 +211,11 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Weekly)</span>
           <span className={Styles.fileName}>{file1}</span>
-          <div className={Styles.download}  onClick={onButtonClick1}>
-              <span>Replace</span>
+          <div className={Styles.download} onClick={onButtonClick1}>
+            <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onDownload('weekly')}>
-              <span>Download</span>
+          <div className={Styles.download} onClick={() => onDownload("weekly")}>
+            <span>Download</span>
           </div>
         </div>
 
@@ -229,11 +225,14 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Monthly)</span>
           <span className={Styles.fileName}>{file2}</span>
-          <div className={Styles.download}  onClick={onButtonClick2}>
-              <span>Replace</span>
+          <div className={Styles.download} onClick={onButtonClick2}>
+            <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onDownload('monthly')}>
-              <span>Download</span>
+          <div
+            className={Styles.download}
+            onClick={() => onDownload("monthly")}
+          >
+            <span>Download</span>
           </div>
         </div>
 
@@ -243,16 +242,19 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Semester)</span>
           <span className={Styles.fileName}>{file3}</span>
-          <div className={Styles.download}  onClick={onButtonClick3}>
-              <span>Replace</span>
+          <div className={Styles.download} onClick={onButtonClick3}>
+            <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onDownload('semester')}>
-              <span>Download</span>
+          <div
+            className={Styles.download}
+            onClick={() => onDownload("semester")}
+          >
+            <span>Download</span>
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const onButtonClick1 = () => {
     // `current` points to the mounted file input element
@@ -268,39 +270,39 @@ export default function Report() {
     // `current` points to the mounted file input element
     inputFile3.current.click();
   };
-  
+
   const fileChange = (e, periode) => {
-    if(periode=='weekly'){
-      setFile1('Uploading...');
-    }else if(periode=='monthly'){
-      setFile2('Uploading...');
-    }else if(periode=='semester'){
-      setFile3('Uploading...');
+    if (periode == "weekly") {
+      setFile1("Uploading...");
+    } else if (periode == "monthly") {
+      setFile2("Uploading...");
+    } else if (periode == "semester") {
+      setFile3("Uploading...");
     }
 
     onUpload(e.target.files[0]);
   };
 
-  const fileClick=(e)=>{
+  const fileClick = e => {
     e.target.value = null;
-  }
+  };
 
-  const onUpload = async (file) => {
+  const onUpload = async file => {
     var formData = new FormData();
     formData.append("file", file);
 
     const params = {
       method: "POST",
       path: "http://localhost:3000/report-weekly/upload",
-      content_type: 'multipart/form-data',
-      data: formData
+      content_type: "multipart/form-data",
+      data: formData,
     };
 
     console.log(formData);
 
     const result = await http(params);
     if (result && result.code === "success") {
-      if(result.payload){
+      if (result.payload) {
         setFile1(result.payload);
       }
       console.log("SUKSES UPLOAD");
@@ -310,21 +312,21 @@ export default function Report() {
     }
   };
 
-  const onDownload = async (periode) => {
+  const onDownload = async periode => {
     const params = {
       method: "GET",
       path: `http://localhost:3000/report-${periode}`,
-      content_type: 'application/octet-stream',
-      responseType:'blob'
+      content_type: "application/octet-stream",
+      responseType: "blob",
     };
 
     const result = await http(params);
 
     // 2. Create blob link to download
     const url = window.URL.createObjectURL(result);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', `Template report ${periode}`);
+    link.setAttribute("download", `Template report ${periode}`);
     // 3. Append to html page
     document.body.appendChild(link);
     // 4. Force download
@@ -340,9 +342,30 @@ export default function Report() {
 
   return (
     <div>
-      <input type='file' id='weekly' ref={inputFile1} style={{display: 'none'}} onChange={(e) => fileChange(e, 'weekly')} onClick={(e) => fileClick(e)}/>
-      <input type='file' id='monthly' ref={inputFile2} style={{display: 'none'}} onChange={(e) => fileChange(e, 'monthly')} onClick={(e) => fileClick(e)}/>
-      <input type='file' id='semester' ref={inputFile3} style={{display: 'none'}} onChange={(e) => fileChange(e, 'semester')} onClick={(e) => fileClick(e)}/>
+      <input
+        type="file"
+        id="weekly"
+        ref={inputFile1}
+        style={{ display: "none" }}
+        onChange={e => fileChange(e, "weekly")}
+        onClick={e => fileClick(e)}
+      />
+      <input
+        type="file"
+        id="monthly"
+        ref={inputFile2}
+        style={{ display: "none" }}
+        onChange={e => fileChange(e, "monthly")}
+        onClick={e => fileClick(e)}
+      />
+      <input
+        type="file"
+        id="semester"
+        ref={inputFile3}
+        style={{ display: "none" }}
+        onChange={e => fileChange(e, "semester")}
+        onClick={e => fileClick(e)}
+      />
       {renderHeader()}
       {renderExportReport()}
       {renderHorizontalLine()}

@@ -11,7 +11,7 @@ import { Context } from "../../hooks/context";
 export default function SelectCategory(props) {
   const history = useHistory();
   const globalState = useContext(Context);
-  const { troubleId } = globalState;
+  const { troubleId, setFromPage } = globalState;
 
   useEffect(() => {
     console.log("troubleId ", troubleId);
@@ -23,12 +23,22 @@ export default function SelectCategory(props) {
         <div className={Styles.titleHeader}>
           <div>
             <ChevronLeft
-              onClick={() => history.replace(`/trouble-list/edit/${troubleId}`)}
+              onClick={() => {
+                setFromPage("selectCategory");
+                history.replace(`/trouble-list/edit/${troubleId}`);
+              }}
             />
             <span>Select Category</span>
           </div>
 
-          <button onClick={() => history.goBack()}>Save</button>
+          <button
+            onClick={() => {
+              setFromPage("selectCategory");
+              history.replace(`/trouble-list/edit/${troubleId}`);
+            }}
+          >
+            Save
+          </button>
         </div>
         <PageTitle
           title={[

@@ -45,10 +45,12 @@ export default function TroubleList(props) {
   }, []);
 
   const handleMinutesPass = () => {
-    let getDays = moment().format("YYYY MM DD");
+    let getDays = moment(dateSelected * 1000).format("YYYY MM DD");
     let curentTime = moment().format("YYYY MM DD HH:mm");
     let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
     let endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
+
+    console.log({ getDays, curentTime, startDay, endDay });
 
     if (curentTime < startDay) {
       getDays = moment(getDays).subtract(1, "days").format("YYYY MM DD");
@@ -65,9 +67,8 @@ export default function TroubleList(props) {
   };
 
   useEffect(() => {
-    console.log("globalContext", { machine, dateSelected });
     getTroublelist();
-  }, [dateSelected, machine.machineId]);
+  }, [machine.machineId, startTime]);
 
   const getTroublelist = async () => {
     getStatus();
@@ -86,6 +87,8 @@ export default function TroubleList(props) {
         machineId: machine.machineId,
       },
     };
+
+    console.log("THIS IS PARAMS =>> ", params);
 
     const result = await http(params);
 
