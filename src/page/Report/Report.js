@@ -7,7 +7,9 @@ import InputDate from "../../components/Form/InputDate/InputDate";
 import { http } from "../../utility/http";
 
 export default function Report() {
-  const inputFile = useRef(null) 
+  const inputFile1 = useRef(null);
+  const inputFile2 = useRef(null);
+  const inputFile3 = useRef(null);
 
   const [machineId, setMachineId] = useState(
     "00f5eafd-89c5-4871-a982-26a8180774c7"
@@ -22,13 +24,14 @@ export default function Report() {
 
   useEffect(() => {
     const getDays = moment().format("YYYY MM DD");
+    getTemplate();
     console.log(moment(`${getDays} 07:00`).format());
   }, []);
 
   const onExport = async () => {
     const params = {
       method: "GET",
-      path: "http://localhost:3000/report-daily",
+      path: "http://localhost:3000/report-weekly",
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
         machineId: machineId,
@@ -62,20 +65,44 @@ export default function Report() {
     //   alert("please contact administrator");
     // }
   };
+
+  function mapTemplate (data) {
+    if(data){
+      if(data.type == 'weekly'){
+        setFile1(data.fileTemplate);
+      }else if(data.type == 'monthly'){
+        setFile2(data.fileTemplate);
+      }else if(data.type == 'semester'){
+        setFile3(data.fileTemplate);
+      }
+
+      return data.fileTemplate;
+    }
+
+    return null;
+  }
   
   const getTemplate = async () => {
     const params = {
       method: "GET",
-      path: "http://localhost:3000/report",
+      path: "http://localhost:3000/template",
     };
 
     console.log(params);
     
     const result = await http(params);
 	
-	console.log(result);
+	  console.log(result);
     if (result && result.code === "success") {
-      console.log("sukses export");
+      if(result.payload)
+      {
+        result.payload.map(e => mapTemplate(e));
+      }else{
+        setFile1('not set');
+        setFile2('not set');
+        setFile3('not set');
+      }
+      
     } else {
       alert("please contact administrator");
     }
@@ -188,10 +215,10 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Weekly)</span>
           <span className={Styles.fileName}>{file1}</span>
-          <div className={Styles.download}  onClick={onButtonClick}>
+          <div className={Styles.download}  onClick={onButtonClick1}>
               <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <div className={Styles.download}  onClick={() => onDownload('weekly')}>
               <span>Download</span>
           </div>
         </div>
@@ -201,11 +228,11 @@ export default function Report() {
             <ExcelFileIcon />
           </div>
           <span className={Styles.periode}>(Monthly)</span>
-          <span className={Styles.fileName}>{file1}</span>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <span className={Styles.fileName}>{file2}</span>
+          <div className={Styles.download}  onClick={onButtonClick2}>
               <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <div className={Styles.download}  onClick={() => onDownload('monthly')}>
               <span>Download</span>
           </div>
         </div>
@@ -215,11 +242,11 @@ export default function Report() {
             <ExcelFileIcon />
           </div>
           <span className={Styles.periode}>(Semester)</span>
-          <span className={Styles.fileName}>{file1}</span>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <span className={Styles.fileName}>{file3}</span>
+          <div className={Styles.download}  onClick={onButtonClick3}>
               <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onExport()}>
+          <div className={Styles.download}  onClick={() => onDownload('semester')}>
               <span>Download</span>
           </div>
         </div>
@@ -227,21 +254,95 @@ export default function Report() {
     )
   }
 
-  const onButtonClick = () => {
+  const onButtonClick1 = () => {
     // `current` points to the mounted file input element
-	inputFile.current.click();
+    inputFile1.current.click();
+  };
+
+  const onButtonClick2 = () => {
+    // `current` points to the mounted file input element
+    inputFile2.current.click();
+  };
+
+  const onButtonClick3 = () => {
+    // `current` points to the mounted file input element
+    inputFile3.current.click();
   };
   
-  const fileChange = (e) => {
-    let files = e.target.files;
-	console.log(files);
-	
-	setFile1(files[0].name);
+  const fileChange = (e, periode) => {
+    if(periode=='weekly'){
+      setFile1('Uploading...');
+    }else if(periode=='monthly'){
+      setFile2('Uploading...');
+    }else if(periode=='semester'){
+      setFile3('Uploading...');
+    }
+
+    onUpload(e.target.files[0]);
+  };
+
+  const fileClick=(e)=>{
+    e.target.value = null;
+  }
+
+  const onUpload = async (file) => {
+    var formData = new FormData();
+    formData.append("file", file);
+
+    const params = {
+      method: "POST",
+      path: "http://localhost:3000/report-weekly/upload",
+      content_type: 'multipart/form-data',
+      data: formData
+    };
+
+    console.log(formData);
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      if(result.payload){
+        setFile1(result.payload);
+      }
+      console.log("SUKSES UPLOAD");
+    } else {
+      // console.log(result);
+      alert("please contact administrator");
+    }
+  };
+
+  const onDownload = async (periode) => {
+    const params = {
+      method: "GET",
+      path: `http://localhost:3000/report-${periode}`,
+      content_type: 'application/octet-stream',
+      responseType:'blob'
+    };
+
+    const result = await http(params);
+
+    // 2. Create blob link to download
+    const url = window.URL.createObjectURL(result);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `Template report ${periode}`);
+    // 3. Append to html page
+    document.body.appendChild(link);
+    // 4. Force download
+    link.click();
+    // 5. Clean up and remove the link
+    link.parentNode.removeChild(link);
+
+    if (result && result.code === "err_general") {
+      // console.log(result);
+      alert("please contact administrator");
+    }
   };
 
   return (
     <div>
-      <input type='file' id='weekly' ref={inputFile} style={{display: 'none'}} onChange={(e) => fileChange(e)}/>
+      <input type='file' id='weekly' ref={inputFile1} style={{display: 'none'}} onChange={(e) => fileChange(e, 'weekly')} onClick={(e) => fileClick(e)}/>
+      <input type='file' id='monthly' ref={inputFile2} style={{display: 'none'}} onChange={(e) => fileChange(e, 'monthly')} onClick={(e) => fileClick(e)}/>
+      <input type='file' id='semester' ref={inputFile3} style={{display: 'none'}} onChange={(e) => fileChange(e, 'semester')} onClick={(e) => fileClick(e)}/>
       {renderHeader()}
       {renderExportReport()}
       {renderHorizontalLine()}
