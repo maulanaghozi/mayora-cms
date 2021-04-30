@@ -1,12 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import moment from "moment";
 import Styles from "./Release.module.scss";
+import { Context } from "../../../../hooks/context";
+import { http } from "../../../../utility/http";
 
-export default function Release() {
+export default function Release(props) {
   const [actual, setActual] = useState(0);
+  const globalState = useContext(Context);
+
+  const { dateSelected, machine, profile } = globalState;
+
+  useEffect(() => {
+    getActual();
+  }, [dateSelected, machine.machineId]);
 
   const handleChange = e => {
     if (e.target.name === "actual") {
       setActual(e.target.value);
+    }
+  };
+
+  const getActual = async () => {
+    const params = {
+      method: "GET",
+      path: "actual-release",
+      query: {
+        machineId: machine.machineId,
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload) {
+        console.log("success ", result.payload);
+        setActual(result.payload.amount);
+      } else {
+        setActual(0);
+      }
+    } else {
+      console.log("error ", result);
+    }
+  };
+
+  const handleSave = async () => {
+    const params = {
+      method: "POST",
+      path: "actual-release",
+      data: {
+        machineId: machine.machineId,
+        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        amount: actual,
+        updatedBy: profile.name,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload) {
+        console.log("success ", result.payload);
+      }
+    } else {
+      console.log("error ", result);
     }
   };
 
@@ -46,8 +103,17 @@ export default function Release() {
           onChange={handleChange}
         />
         <div className={Styles.buttonContainer}>
-          <button className={Styles.cancel}>Cancel</button>
-          <button className={Styles.save}>Save</button>
+          <button
+            onClick={() => {
+              getActual();
+            }}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button onClick={() => handleSave()} className={Styles.save}>
+            Save
+          </button>
         </div>
       </div>
     );

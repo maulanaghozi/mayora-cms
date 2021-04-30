@@ -5,12 +5,36 @@
   flex-wrap: wrap;
   align-items: center;
 
-  > span {
-    margin-bottom: 20px;
-    font-family: roboto;
-    color: rgba($color: #000000, $alpha: 0.85);
-    font-size: 20px;
-    font-weight: 500;
+  .titleHeader {
     width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > div {
+      > svg {
+        margin-right: 20px;
+        cursor: pointer;
+      }
+      > span {
+        margin-bottom: 20px;
+        font-family: roboto;
+        color: rgba($color: #000000, $alpha: 0.85);
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+
+    > button {
+      outline: none;
+      padding: 5px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: roboto;
+      background-color: #c60808;
+      color: #ffffff;
+      border: none;
+    }
   }
 }

@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { positions, Provider } from "react-alert";
+import { positions, Provider as ProviderReactAlert } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -22,7 +22,7 @@ const options = {
 
 function App() {
   return (
-    <Provider template={AlertTemplate} {...options}>
+    <ProviderReactAlert template={AlertTemplate} {...options}>
       <Router>
         <Switch>
           {/* <Route path={"/auth"} component={AuthRoute} /> */}
@@ -31,7 +31,7 @@ function App() {
           </PrivateRoute>
         </Switch>
       </Router>
-    </Provider>
+    </ProviderReactAlert>
   );
 }
 

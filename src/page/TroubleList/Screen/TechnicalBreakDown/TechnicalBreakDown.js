@@ -4,10 +4,15 @@ import { TroublelistRadio } from "../../../../components/TroublelistRadio/Troubl
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./TechnicalBreakDown.module.scss";
 
-export default function TechnicalBreakDown() {
+export default function TechnicalBreakDown(props) {
   const [data, setData] = useState([]);
+  const [troubleId, setTroubleId] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+
+  const { location } = props;
 
   useEffect(() => {
+    console.log(location);
     getData();
   }, []);
 
