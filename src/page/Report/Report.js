@@ -211,10 +211,13 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Weekly)</span>
           <span className={Styles.fileName}>{file1}</span>
-          <div className={Styles.download} onClick={onButtonClick1}>
+          <div className={Styles.buttonTamplate} onClick={onButtonClick1}>
             <span>Replace</span>
           </div>
-          <div className={Styles.download} onClick={() => onDownload("weekly")}>
+          <div
+            className={Styles.buttonTamplate}
+            onClick={() => onDownload("weekly")}
+          >
             <span>Download</span>
           </div>
         </div>
@@ -225,11 +228,11 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Monthly)</span>
           <span className={Styles.fileName}>{file2}</span>
-          <div className={Styles.download} onClick={onButtonClick2}>
+          <div className={Styles.buttonTamplate} onClick={onButtonClick2}>
             <span>Replace</span>
           </div>
           <div
-            className={Styles.download}
+            className={Styles.buttonTamplate}
             onClick={() => onDownload("monthly")}
           >
             <span>Download</span>
@@ -242,11 +245,11 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Semester)</span>
           <span className={Styles.fileName}>{file3}</span>
-          <div className={Styles.download} onClick={onButtonClick3}>
+          <div className={Styles.buttonTamplate} onClick={onButtonClick3}>
             <span>Replace</span>
           </div>
           <div
-            className={Styles.download}
+            className={Styles.buttonTamplate}
             onClick={() => onDownload("semester")}
           >
             <span>Download</span>
