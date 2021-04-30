@@ -63,7 +63,6 @@ export default function TroubleList(props) {
 
     const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
     setMinutesPass(ms / 60);
-    return;
   };
 
   useEffect(() => {
@@ -182,6 +181,7 @@ export default function TroubleList(props) {
       handleMinutesPass();
     } else {
       setMinutesPass(1440);
+      // handleMinutesPass();
     }
 
     return;
