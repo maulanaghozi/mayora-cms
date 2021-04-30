@@ -13,7 +13,7 @@ export default function NotOperating() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [machine.machineId, dateSelected]);
 
   const getData = async () => {
     const params = {

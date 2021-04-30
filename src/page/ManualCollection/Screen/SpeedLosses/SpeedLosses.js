@@ -13,7 +13,7 @@ export default function SpeedLosses() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [dateSelected, machine.machineId]);
 
   const getData = async () => {
     const params = {

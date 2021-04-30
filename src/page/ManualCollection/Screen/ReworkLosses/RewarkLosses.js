@@ -13,7 +13,7 @@ export default function RewarkLosses() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [machine.machineId, dateSelected]);
 
   const getData = async () => {
     const params = {
