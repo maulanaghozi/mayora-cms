@@ -29,10 +29,18 @@ export default function Release(props) {
   };
 
   const getTotal = async () => {
-    const date = moment(dateSelected * 1000).format("YYYY MM DD");
-    const startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
-    const endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
+    let date = moment(dateSelected * 1000).format("YYYY MM DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
 
+    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+
+    if (ms < 86400) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+      startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+      endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
+    }
     const params = {
       method: "GET",
       path: "release/last",
@@ -56,10 +64,20 @@ export default function Release(props) {
       console.log("error ", result);
     }
   };
+
   const getShift1 = async () => {
-    const date = moment(dateSelected * 1000).format("YYYY MM DD");
-    const startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
-    const endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+    let date = moment(dateSelected * 1000).format("YYYY MM DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+
+    if (ms < 86400) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+      startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+      endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+    }
 
     const params = {
       method: "GET",
@@ -83,10 +101,21 @@ export default function Release(props) {
       console.log("error ", result);
     }
   };
+
   const getShift2 = async () => {
-    const date = moment(dateSelected * 1000).format("YYYY MM DD");
-    const startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
-    const endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
+    let date = moment(dateSelected * 1000).format("YYYY MM DD");
+    let startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+    let endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
+    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(curentTime) - new Date(startDate)) / 1000;
+
+    if (ms < 86400) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+      startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+      endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
+    }
 
     const params = {
       method: "GET",
@@ -110,11 +139,23 @@ export default function Release(props) {
       console.log("error ", result);
     }
   };
+
   const getShift3 = async () => {
-    const date = moment(dateSelected * 1000).format("YYYY MM DD");
-    const nextDate = moment(date).add(1, "days").format("YYYY MM DD");
-    const startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
-    const endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
+    let date = moment(dateSelected * 1000).format("YYYY MM DD");
+    let nextDate = moment(date).add(1, "days").format("YYYY MM DD");
+    let startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
+    let endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
+    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(curentTime) - new Date(startDate)) / 1000;
+
+    if (ms < 86400) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+      nextDate = moment(date).add(1, "days").format("YYYY MM DD");
+      startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
+      endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
+    }
 
     const params = {
       method: "GET",

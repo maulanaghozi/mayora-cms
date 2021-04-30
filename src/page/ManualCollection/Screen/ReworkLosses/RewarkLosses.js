@@ -16,13 +16,23 @@ export default function RewarkLosses() {
   }, [machine.machineId, dateSelected]);
 
   const getData = async () => {
+    let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+
+    if (ms < 86400) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
     const params = {
       method: "GET",
       path: "category/parent",
       query: {
         categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
         machineId: machine.machineId,
-        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        date: date,
         categoryType: "manualCollection",
       },
     };
