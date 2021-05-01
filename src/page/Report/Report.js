@@ -320,12 +320,16 @@ export default function Report() {
   const onDownload = async periode => {
     const params = {
       method: "GET",
-      path: `http://localhost:3000/report-${periode}`,
+      path: `http://localhost:3000/report-${periode}/download`,
       content_type: "application/octet-stream",
       responseType: "blob",
     };
 
     const result = await http(params);
+
+    console.log(params);
+
+    if (!result) return;
 
     // 2. Create blob link to download
     const url = window.URL.createObjectURL(result);
