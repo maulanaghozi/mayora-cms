@@ -1,0 +1,93 @@
+@import "src/styles/variable";
+@import "src/styles/mixin";
+@import "src/styles/function";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 30px;
+
+  .elipis {
+    max-height: 3rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    line-height: 1rem;
+  }
+
+  .table_header {
+    user-select: none;
+    display: flex;
+    height: 4rem;
+    flex-direction: row;
+    align-items: center;
+    background-color: #f5f5f5;
+
+    div {
+      color: #94979b;
+      flex-direction: row !important;
+      align-items: center !important;
+
+      span {
+        margin-right: 7px;
+      }
+    }
+
+    .blue_header {
+      color: $primary_color !important;
+      font-weight: 700;
+    }
+
+    .cursor_pointer {
+      cursor: pointer;
+    }
+  }
+
+  .table_row {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+  }
+
+  .table_cell {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-family: "roboto";
+    color: #000000;
+    font-size: 0.8rem;
+    width: 100px;
+  }
+
+  .column_updatedAt {
+    width: 20% !important;
+    padding-left: 15px !important;
+  }
+
+  .column_shift {
+    width: 15% !important;
+  }
+
+  .column_value {
+    width: 15% !important;
+  }
+
+  .column_remark {
+    width: 20% !important;
+
+    .notSet {
+      color: #9e9e9e;
+      font-style: italic;
+      font-size: 14px;
+    }
+  }
+
+  .column_name {
+    width: 15% !important;
+  }
+
+  .column_role {
+    width: 10% !important;
+  }
+}

@@ -19,9 +19,10 @@ export default function EditCollection() {
     let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
     }
 

@@ -1,0 +1,19 @@
+.headerContainer {
+  background-color: #eeeeee;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  > span {
+    font-family: roboto;
+    color: rgba($color: #000000, $alpha: 0.85);
+    font-size: 20px;
+    font-weight: 500;
+    width: fit-content;
+  }
+
+  .back {
+    margin-right: 16px;
+  }
+}
