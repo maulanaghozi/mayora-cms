@@ -6,7 +6,7 @@ export default function Title({ row }) {
   return (
     <div className={table_cell + " " + column_time}>
       <div className={elipis}>
-        {moment(row.time).format("DD MMM YYYY HH:mm")}
+        {moment(row.updatedAt).format("DD MMM YYYY HH:mm")}
       </div>
     </div>
   );

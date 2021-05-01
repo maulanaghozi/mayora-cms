@@ -3,6 +3,7 @@ import { CustomModal } from "../../../../components/Modal/CustomModal/CustomModa
 import { InputWithLabel } from "../../../../components/Form/InputWithLable/InputWithLabel";
 import TargetOEETable from "../../Tables/TargetOEE/TargetOEETable";
 import Styles from "./TargetOEE.module.scss";
+import moment from "moment";
 import { Context } from "../../../../hooks/context";
 import { http } from "../../../../utility/http";
 
@@ -12,12 +13,12 @@ export default function TargetOEE() {
   const [logData, setLogData] = useState([]);
 
   const globalState = useContext(Context);
-  const { machine } = globalState;
+  const { machine, dateSelected } = globalState;
 
   useEffect(() => {
     getOeeTarget();
     getOeeTargetLog();
-  }, [machine.machineId]);
+  }, [machine.machineId, dateSelected]);
 
   const getOeeTarget = async () => {
     const params = {
@@ -37,11 +38,24 @@ export default function TargetOEE() {
   };
 
   const getOeeTargetLog = async () => {
+    let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
     const params = {
       method: "GET",
       path: "oee-target",
       query: {
         machineId: machine.machineId,
+        date: date,
+        sort: "desc",
       },
     };
 
