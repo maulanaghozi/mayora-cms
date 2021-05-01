@@ -17,7 +17,7 @@ export default function TargetOEE() {
   useEffect(() => {
     getOeeTarget();
     getOeeTargetLog();
-  }, []);
+  }, [machine.machineId]);
 
   const getOeeTarget = async () => {
     const params = {
