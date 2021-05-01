@@ -106,8 +106,6 @@ export default function TroubleList(props) {
       },
     };
 
-    console.log({ startTime: startTime, endTime: endTime });
-
     const result = await http(params);
 
     if (result && result.code === "success") {

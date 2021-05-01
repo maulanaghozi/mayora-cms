@@ -25,6 +25,12 @@ export default function TroubleList() {
     getShift3();
   }, [dateSelected, machine.machineId]);
 
+  const handleAmoutDaily = time => {
+    const result = totalAmount.find(item => item.time === time);
+
+    return result ? result.amount : null;
+  };
+
   const getTotalAmount = async () => {
     let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
     let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
@@ -50,7 +56,6 @@ export default function TroubleList() {
 
     if (result && result.code === "success") {
       if (Array.isArray(result.payload)) {
-        console.log("success ", result.payload);
         setTotalAmount(result.payload);
       } else {
         setTotalAmount([]);
@@ -89,7 +94,6 @@ export default function TroubleList() {
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log("success ", result.payload);
         setTotal(result.payload.amount);
       } else {
         setTotal(0);
@@ -266,14 +270,14 @@ export default function TroubleList() {
           title={"Shift 1"}
           styleContainer={Styles.table}
           data={[
-            { time: "07:00", amount: null },
-            { time: "08:00", amount: null },
-            { time: "09:00", amount: null },
-            { time: "10:00", amount: null },
-            { time: "11:00", amount: null },
-            { time: "12:00", amount: null },
-            { time: "13:00", amount: null },
-            { time: "14:00", amount: null },
+            { time: "07:00", amount: handleAmoutDaily(7) },
+            { time: "08:00", amount: handleAmoutDaily(8) },
+            { time: "09:00", amount: handleAmoutDaily(9) },
+            { time: "10:00", amount: handleAmoutDaily(10) },
+            { time: "11:00", amount: handleAmoutDaily(11) },
+            { time: "12:00", amount: handleAmoutDaily(12) },
+            { time: "13:00", amount: handleAmoutDaily(13) },
+            { time: "14:00", amount: handleAmoutDaily(14) },
           ]}
         />
         <TableShiftRelease
@@ -281,14 +285,14 @@ export default function TroubleList() {
           title={"Shift 2"}
           styleContainer={Styles.table}
           data={[
-            { time: "15:00", amount: null },
-            { time: "16:00", amount: null },
-            { time: "17:00", amount: null },
-            { time: "18:00", amount: null },
-            { time: "19:00", amount: null },
-            { time: "20:00", amount: null },
-            { time: "21:00", amount: null },
-            { time: "22:00", amount: null },
+            { time: "15:00", amount: handleAmoutDaily(15) },
+            { time: "16:00", amount: handleAmoutDaily(16) },
+            { time: "17:00", amount: handleAmoutDaily(17) },
+            { time: "18:00", amount: handleAmoutDaily(18) },
+            { time: "19:00", amount: handleAmoutDaily(19) },
+            { time: "20:00", amount: handleAmoutDaily(20) },
+            { time: "21:00", amount: handleAmoutDaily(21) },
+            { time: "22:00", amount: handleAmoutDaily(22) },
           ]}
         />
         <TableShiftRelease
@@ -296,14 +300,14 @@ export default function TroubleList() {
           title={"Shift 3"}
           styleContainer={Styles.table}
           data={[
-            { time: "23:00", amount: null },
-            { time: "24:00", amount: null },
-            { time: "01:00", amount: null },
-            { time: "02:00", amount: null },
-            { time: "03:00", amount: null },
-            { time: "04:00", amount: null },
-            { time: "05:00", amount: null },
-            { time: "06:00", amount: null },
+            { time: "23:00", amount: handleAmoutDaily(23) },
+            { time: "24:00", amount: handleAmoutDaily(24) },
+            { time: "01:00", amount: handleAmoutDaily(1) },
+            { time: "02:00", amount: handleAmoutDaily(2) },
+            { time: "03:00", amount: handleAmoutDaily(3) },
+            { time: "04:00", amount: handleAmoutDaily(4) },
+            { time: "05:00", amount: handleAmoutDaily(5) },
+            { time: "06:00", amount: handleAmoutDaily(6) },
           ]}
         />
       </div>
