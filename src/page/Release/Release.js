@@ -18,11 +18,6 @@ export default function TroubleList() {
   const { dateSelected, setDateSelected, machine, setMachine } = globalState;
 
   useEffect(() => {
-    const getDays = moment().format("YYYY MM DD");
-    console.log(moment(`${getDays} 07:00`).format());
-  }, []);
-
-  useEffect(() => {
     getTotalAmount();
     getTotal();
     getShift1();
@@ -35,9 +30,10 @@ export default function TroubleList() {
     let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
     }
 
@@ -70,9 +66,10 @@ export default function TroubleList() {
     let endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
       endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
@@ -108,9 +105,10 @@ export default function TroubleList() {
     let endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
       endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
@@ -138,6 +136,7 @@ export default function TroubleList() {
       console.log("error ", result);
     }
   };
+
   const getShift2 = async () => {
     let date = moment(dateSelected * 1000).format("YYYY MM DD");
     let startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
@@ -145,9 +144,10 @@ export default function TroubleList() {
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startDate)) / 1000;
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
       endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
@@ -175,6 +175,7 @@ export default function TroubleList() {
       console.log("error ", result);
     }
   };
+
   const getShift3 = async () => {
     let date = moment(dateSelected * 1000).format("YYYY MM DD");
     let nextDate = moment(date).add(1, "days").format("YYYY MM DD");
@@ -183,9 +184,10 @@ export default function TroubleList() {
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startDate)) / 1000;
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       nextDate = moment(date).add(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");

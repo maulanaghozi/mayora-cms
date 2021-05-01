@@ -34,9 +34,10 @@ export default function Release(props) {
     let endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
       endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
@@ -71,9 +72,10 @@ export default function Release(props) {
     let endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
       endTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
@@ -109,9 +111,10 @@ export default function Release(props) {
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startDate)) / 1000;
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
       endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
@@ -148,9 +151,10 @@ export default function Release(props) {
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(curentTime) - new Date(startDate)) / 1000;
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
 
-    if (ms < 86400) {
+    if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
       nextDate = moment(date).add(1, "days").format("YYYY MM DD");
       startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
@@ -181,12 +185,23 @@ export default function Release(props) {
   };
 
   const getActual = async () => {
+    let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
+    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+    }
+
     const params = {
       method: "GET",
       path: "actual-release",
       query: {
         machineId: machine.machineId,
-        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        date: date,
       },
     };
 
@@ -205,12 +220,23 @@ export default function Release(props) {
   };
 
   const handleSave = async () => {
+    let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
+    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+    }
+
     const params = {
       method: "POST",
       path: "actual-release",
       data: {
         machineId: machine.machineId,
-        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        date: date,
         amount: actual,
         updatedBy: profile.name,
       },
