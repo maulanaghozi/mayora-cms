@@ -30,7 +30,7 @@ export default function Report() {
   const onExport = async () => {
     const params = {
       method: "GET",
-      path: "report-daily",
+      path: "report-weekly",
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
         machineId: machineId,
@@ -45,7 +45,9 @@ export default function Report() {
     const result = await http(params);
 
     // 2. Create blob link to download
+    console.log(result);
     console.log("window ", window.URL);
+    if (!result) return;
     const url = window.URL.createObjectURL(result);
     const link = document.createElement("a");
     link.href = url;
