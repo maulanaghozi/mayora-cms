@@ -23,6 +23,7 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.10.1",
     "rc-slider": "^8.7.1",
+    "rc-time-picker": "^3.7.3",
     "react": "^16.12.0",
     "react-alert": "^6.0.0",
     "react-alert-template-basic": "^1.0.0",
