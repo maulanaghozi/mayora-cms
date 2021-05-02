@@ -32,11 +32,13 @@ export default function EditTrouble() {
     const result = await http(params);
 
     if (result && result.code === "success") {
-      if (fromPage !== "selectCategory") {
-        setCategory({
-          categoryId: result.payload.category.id,
-          categoryName: result.payload.category.name,
-        });
+      if (fromPage !== "selectCategory" && result.payload) {
+        if (result.payload.category) {
+          setCategory({
+            categoryId: result.payload.category.id,
+            categoryName: result.payload.category.name,
+          });
+        }
       }
       setStartTime(result.payload.startTime);
       setEndTime(result.payload.endTime);
@@ -146,7 +148,7 @@ export default function EditTrouble() {
           name={"category"}
         />
         <span className={Styles.note}>
-          {`Technical Break Down / Mechanical / ${category.categoryName}`}
+          {/* {`Technical Break Down / Mechanical / ${category.categoryName}`} */}
         </span>
       </>
     );
