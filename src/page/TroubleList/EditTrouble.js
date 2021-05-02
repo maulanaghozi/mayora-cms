@@ -38,6 +38,11 @@ export default function EditTrouble() {
             categoryId: result.payload.category.id,
             categoryName: result.payload.category.name,
           });
+        } else {
+          setCategory({
+            categoryId: "",
+            categoryName: "",
+          });
         }
       }
       setStartTime(result.payload.startTime);
@@ -52,11 +57,16 @@ export default function EditTrouble() {
   };
 
   const handleSave = async () => {
+    let categoryId = category.categoryId;
+
+    if (!category || category.categoryId === "" || !category.categoryId) {
+      categoryId = null;
+    }
     const params = {
       method: "PUT",
       path: `trouble/${id}`,
       data: {
-        categoryId: category.categoryId,
+        categoryId: categoryId,
         updatedBy: "Budi Putra",
         remark: remark,
       },
