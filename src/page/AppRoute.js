@@ -19,7 +19,7 @@ export default function AppPage() {
   return (
     <AppLayout>
       <Switch>
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/trouble-list/edit/:id" component={EditTrouble} />
         <Route
           path="/trouble-list/select-category"

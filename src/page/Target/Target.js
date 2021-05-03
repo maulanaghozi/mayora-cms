@@ -8,7 +8,7 @@ import TargetOEE from "./Screens/TargetOEE/TargetOEE";
 import Styles from "./Target.module.scss";
 import { Context } from "../../hooks/context";
 
-export default function TroubleList() {
+export default function Target() {
   const globalState = useContext(Context);
   const { machine, dateSelected, setMachine, setDateSelected } = globalState;
 
