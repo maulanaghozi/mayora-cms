@@ -3,9 +3,14 @@ import moment from "moment";
 import Styles from "./Release.module.scss";
 import { Context } from "../../../../hooks/context";
 import { http } from "../../../../utility/http";
+import { EditIcon } from "../../../../assets/icons/index";
+import { LoadingModal } from "../../../../components/Modal";
 
 export default function Release(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [actual, setActual] = useState(0);
+  const [currentActual, setCurrentActual] = useState(0);
   const [shift1, setShift1] = useState(0);
   const [shift2, setShift2] = useState(0);
   const [shift3, setShift3] = useState(0);
@@ -211,8 +216,10 @@ export default function Release(props) {
       if (result.payload) {
         console.log("success ", result.payload);
         setActual(result.payload.amount);
+        setCurrentActual(result.payload.amount);
       } else {
         setActual(0);
+        setCurrentActual(0);
       }
     } else {
       console.log("error ", result);
@@ -220,6 +227,7 @@ export default function Release(props) {
   };
 
   const handleSave = async () => {
+    setIsLoading(true);
     let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
@@ -246,11 +254,14 @@ export default function Release(props) {
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log("success ", result.payload);
+        getActual();
+        setIsEdit(false);
       }
     } else {
       console.log("error ", result);
     }
+
+    setIsLoading(false);
   };
 
   const renderReleaseBySystem = () => {
@@ -282,25 +293,38 @@ export default function Release(props) {
     return (
       <div className={Styles.actualRelease}>
         <span>Total Actual Release</span>
-        <input
-          name={"actual"}
-          value={actual}
-          className={Styles.input}
-          onChange={handleChange}
-        />
-        <div className={Styles.buttonContainer}>
-          <button
+        <div className={Styles.displayActual}>
+          <span>{currentActual}</span>
+          <EditIcon
             onClick={() => {
-              getActual();
+              setIsEdit(true);
             }}
-            className={Styles.cancel}
-          >
-            Cancel
-          </button>
-          <button onClick={() => handleSave()} className={Styles.save}>
-            Save
-          </button>
+          />
         </div>
+        {isEdit && (
+          <>
+            <input
+              name={"actual"}
+              value={actual}
+              className={Styles.input}
+              onChange={handleChange}
+            />
+            <div className={Styles.buttonContainer}>
+              <button
+                onClick={() => {
+                  getActual();
+                  setIsEdit(false);
+                }}
+                className={Styles.cancel}
+              >
+                Cancel
+              </button>
+              <button onClick={() => handleSave()} className={Styles.save}>
+                Save
+              </button>
+            </div>
+          </>
+        )}
       </div>
     );
   };
@@ -308,6 +332,7 @@ export default function Release(props) {
     <div className={Styles.container}>
       {renderReleaseBySystem()}
       {renderActualRelease()}
+      {isLoading && <LoadingModal />}
     </div>
   );
 }
