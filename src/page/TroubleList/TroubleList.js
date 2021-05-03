@@ -183,15 +183,7 @@ export default function TroubleList(props) {
   }
 
   const onChangeDate = time => {
-    let getDays = moment(time * 1000).format("YYYY MM DD");
-    let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
-    let endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
-
     setDateSelected(time);
-    // setStartTime(startDay);
-    // setEndTime(endDay);
-
-    // handleMinutesPass();
   };
 
   const renderHeader = () => {
