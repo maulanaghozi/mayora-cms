@@ -3,6 +3,7 @@ import moment from "moment";
 import classNames from "classnames";
 import { http } from "../../../../utility/http";
 import { ProductionStatusBar } from "../../../../components/ProductionStatus/ProductionStatus";
+import { ProductionPlanning } from "../../../../components/ProductionPlaning/ProductionPlaning";
 
 const GetTime = () => {
   let totalMinutes = 1440;
@@ -31,15 +32,25 @@ export default function ProductionStatus() {
   const [minutesPass, setMinutesPass] = useState(0);
   const [startTime, setStartTime] = useState(GetTime().getThisDay07);
   const [endTime, setEndTime] = useState(GetTime().endTime);
+  const [target1, setTarget1] = useState(0);
+  const [target2, setTarget2] = useState(0);
+  const [actual1, setActual1] = useState(0);
+  const [actual2, setActual2] = useState(0);
+  const [status1, setStatus1] = useState("running");
+  const [status2, setStatus2] = useState("running");
 
   useEffect(() => {
     handleMinutesPass();
     getTroublelist();
   }, []);
 
-  const getTroublelist = async () => {
-    await getStatus1();
-    await getStatus2();
+  const getTroublelist = () => {
+    getStatus1();
+    getStatus2();
+    getProductionTarget1();
+    getProductionTarget2();
+    getActual1();
+    getActual2();
   };
 
   const getStatus1 = async () => {
@@ -86,6 +97,112 @@ export default function ProductionStatus() {
     }
   };
 
+  const getProductionTarget1 = async () => {
+    const params = {
+      method: "GET",
+      path: "production-target/target",
+      query: {
+        machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+      },
+    };
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      console.log("BERHASIL CURRENT ", result);
+      setTarget1(result.payload.target);
+    } else {
+      setTarget1(0);
+    }
+  };
+
+  const getProductionTarget2 = async () => {
+    const params = {
+      method: "GET",
+      path: "production-target/target",
+      query: {
+        machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+      },
+    };
+
+    const result = await http(params);
+    if (result && result.code === "success") {
+      console.log("BERHASIL CURRENT ", result);
+      setTarget2(result.payload.target);
+    } else {
+      setTarget2(0);
+    }
+  };
+
+  const getActual1 = async () => {
+    let date = moment().format("YYYY-MM-DD");
+    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+    }
+
+    const params = {
+      method: "GET",
+      path: "actual-release",
+      query: {
+        machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+        date: date,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload) {
+        console.log("success ", result.payload);
+        setActual1(result.payload.amount);
+      } else {
+        setActual1(0);
+      }
+    } else {
+      console.log("error ", result);
+    }
+  };
+
+  const getActual2 = async () => {
+    let date = moment().format("YYYY-MM-DD");
+    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY MM DD");
+    }
+
+    const params = {
+      method: "GET",
+      path: "actual-release",
+      query: {
+        machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+        date: date,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload) {
+        console.log("success ", result.payload);
+        setActual2(result.payload.amount);
+      } else {
+        setActual2(0);
+      }
+    } else {
+      console.log("error ", result);
+    }
+  };
+
   const handleMinutesPass = () => {
     let getDays = moment().format("YYYY MM DD");
     let curentTime = moment().format("YYYY MM DD HH:mm");
@@ -108,7 +225,16 @@ export default function ProductionStatus() {
     }
   };
 
-  const renderProductionPlaningLine1 = () => {};
+  const renderProductionPlaningLine1 = () => {
+    return (
+      <ProductionPlanning
+        machineName={"line 1"}
+        target={target1}
+        actual={actual1}
+      />
+    );
+  };
+
   const renderProductionStatusLine1 = () => {
     return (
       <ProductionStatusBar
@@ -118,7 +244,17 @@ export default function ProductionStatus() {
       />
     );
   };
-  const renderProductionPlaningLine2 = () => {};
+
+  const renderProductionPlaningLine2 = () => {
+    return (
+      <ProductionPlanning
+        machineName={"line 2"}
+        target={target2}
+        actual={actual2}
+      />
+    );
+  };
+
   const renderProductionStatusLine2 = () => {
     return (
       <ProductionStatusBar
@@ -131,7 +267,9 @@ export default function ProductionStatus() {
 
   return (
     <div>
+      {renderProductionPlaningLine1()}
       {renderProductionStatusLine1()}
+      {renderProductionPlaningLine2()}
       {renderProductionStatusLine2()}
     </div>
   );
