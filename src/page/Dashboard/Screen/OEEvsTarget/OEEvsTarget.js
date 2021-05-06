@@ -22,7 +22,7 @@ export default function OEEvsTarget() {
 
   useEffect(() => {
     init();
-  }, [sassion]);
+  }, []);
 
   useEffect(() => {
     if (targetOEE1 > 0 && oeeData1.length > 0) {
