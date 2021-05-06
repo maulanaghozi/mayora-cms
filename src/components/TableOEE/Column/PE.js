@@ -5,7 +5,7 @@ import { table_cell, column_oee } from "../TableOEE.module.scss";
 export default function AV(props) {
   return (
     <div className={classNames(table_cell, column_oee)}>
-      <span>{props.row.PE ? `${props.row.PE}%` : "-"}</span>
+      <span>{props.row.PE >= 0 ? `${props.row.PE}%` : "-"}</span>
     </div>
   );
 }

@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   margin: 20px 0px;
+  flex: 1;
 
   .elipis {
     max-height: 3rem;
@@ -60,26 +61,7 @@
     width: 100px;
   }
 
-  .column_time {
-    width: 20% !important;
-    padding-left: 15px !important;
-  }
-
-  .column_target {
-    width: 20% !important;
-  }
-
-  .column_name {
-    width: 30% !important;
-    img {
-      width: 100%;
-    }
-  }
-
-  .column_role {
-    width: 20% !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  .column_oee {
+    flex: 1;
   }
 }

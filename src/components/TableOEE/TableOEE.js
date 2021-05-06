@@ -28,7 +28,7 @@ const headerClasses = [
   column_oee,
 ];
 
-export default function ProductionTargetTable(props) {
+export default function TableOEE(props) {
   return (
     <div className={container}>
       <div className={table_header}>
@@ -41,7 +41,7 @@ export default function ProductionTargetTable(props) {
           props.data.map((row, index) => (
             <div className={table_row} key={index}>
               <Date row={row} />
-              <Target row={row} />
+              <Target row={row} target={props.target} />
               <OEE row={row} />
               <AV row={row} />
               <PE row={row} />
