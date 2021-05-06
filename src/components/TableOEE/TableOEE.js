@@ -6,7 +6,7 @@ import Target from "./Column/Target";
 import OEE from "./Column/OEE";
 import AV from "./Column/AV";
 import PE from "./Column/PE";
-import QR from "./Column/AV";
+import QR from "./Column/QR";
 
 import {
   container,
