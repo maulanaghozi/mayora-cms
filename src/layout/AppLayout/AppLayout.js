@@ -30,7 +30,15 @@ export default function AppLayout(props) {
     userId: "",
     name: "Budi Putra",
   });
+  const [manualCollection, setManualCollection] = useState({
+    categoryId: "",
+    value: "",
+    shift: "shift1",
+    remark: "",
+    unit: "",
+  });
   const [isOpen, setIsOpen] = useState(windowWidth > 1200);
+  const [fromPage, setFromPage] = useState(null);
 
   const resizeHandler = () => {
     setWindowWidth(window.innerWidth);
@@ -75,6 +83,10 @@ export default function AppLayout(props) {
         setTroubleId,
         profile,
         setProfile,
+        manualCollection,
+        setManualCollection,
+        fromPage,
+        setFromPage,
       }}
     >
       <div className={app_container}>

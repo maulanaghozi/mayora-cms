@@ -9,10 +9,8 @@ import {
 export default function Title({ row }) {
   return (
     <div className={table_cell + " " + column_time}>
-      <div className={elipis}>{moment(row.startTime).format("HH:mm")}</div>
-      <span>{` - `}</span>
       <div className={elipis}>
-        {row.endTime ? moment(row.endTime).format("HH:mm") : "now"}
+        {moment(row.updatedAt).format("DD MM YYYY HH:mm")}
       </div>
     </div>
   );

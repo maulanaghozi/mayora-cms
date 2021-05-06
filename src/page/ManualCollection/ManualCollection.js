@@ -51,14 +51,14 @@ export default function TroubleList() {
         <PageTitle
           title={[
             "Not Operating Day & Planned Down Time",
-            "Down Time Losses",
+            // "Down Time Losses",
             "Speed Losses",
             "Defect & Rework Losses",
             "Release",
           ]}
           path={[
             "/manual-collection/planed-down-time",
-            "/manual-collection/down-time-losses",
+            // "/manual-collection/down-time-losses",
             "/manual-collection/speed-losses",
             "/manual-collection/rework-losses",
             "/manual-collection/release",
@@ -75,10 +75,10 @@ export default function TroubleList() {
           path={"/manual-collection/planed-down-time"}
           component={NotOperating}
         />
-        <Route
+        {/* <Route
           path={"/manual-collection/down-time-losses"}
           component={DownTimeLosses}
-        />
+        /> */}
         <Route
           path={"/manual-collection/speed-losses"}
           component={SpeedLosses}

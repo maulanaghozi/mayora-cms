@@ -47,34 +47,15 @@ const headerClasses = [
   column_action,
 ];
 
-const sortAttributes = ["time", null, null, null, null, null, null];
-
 export default function PromoTable(props) {
   const [openMore, setOpenMore] = useState(false);
-  const [currentSort, setCurrentSort] = useState("Time");
 
   return (
     <div className={container}>
       <div className={table_header}>
-        {Header.map((head, index) => {
-          if (sortAttributes[index]) {
-            const sortBy = sortAttributes[index];
-
-            return (
-              <SortableHeader
-                key={index}
-                index={index}
-                columnName={head}
-                handleSort={props.onChange}
-                sortBy={sortBy}
-                currentSort={currentSort}
-                setCurrentSort={setCurrentSort}
-              />
-            );
-          } else {
-            return <NormalHeader key={index} index={index} columnName={head} />;
-          }
-        })}
+        {Header.map((head, index) => (
+          <NormalHeader key={index} index={index} columnName={head} />
+        ))}
       </div>
       <div className={table_body}>
         {props.data &&

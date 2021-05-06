@@ -17,7 +17,7 @@ export default function EditTrouble() {
   const history = useHistory();
 
   const globalState = useContext(Context);
-  const { setCategory, setTroubleId, category } = globalState;
+  const { setCategory, setTroubleId, category, fromPage } = globalState;
 
   useEffect(() => {
     console.log("this is global ", globalState);
@@ -33,7 +33,7 @@ export default function EditTrouble() {
     const result = await http(params);
 
     if (result && result.code === "success") {
-      if (category.categoryId === result.payload.category.id) {
+      if (fromPage !== "selectCategory") {
         setCategory({
           categoryId: result.payload.category.id,
           categoryName: result.payload.category.name,
@@ -94,9 +94,14 @@ export default function EditTrouble() {
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
-        <Link to={"/trouble-list"} className={Styles.back}>
+        <div
+          onClick={() => {
+            history.goBack();
+          }}
+          className={Styles.back}
+        >
           <ChevronLeft />
-        </Link>
+        </div>
         <span>Edit Trouble List</span>
       </div>
     );
@@ -166,7 +171,7 @@ export default function EditTrouble() {
     return (
       <div className={Styles.buttonContainer}>
         <button
-          onClick={() => history.push("/trouble-list")}
+          onClick={() => history.replace("/trouble-list")}
           className={Styles.cancel}
         >
           Cancel
