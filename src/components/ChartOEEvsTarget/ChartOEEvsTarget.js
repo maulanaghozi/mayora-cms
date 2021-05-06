@@ -3,10 +3,9 @@ import Chart from "react-apexcharts";
 
 class ChartOEEvsTarget extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
 
-    this.updateCharts = this.updateCharts.bind(this);
+    // this.updateCharts = this.updateCharts.bind(this);
 
     this.state = {
       optionsMixedChart: {
@@ -25,7 +24,7 @@ class ChartOEEvsTarget extends Component {
           width: [4, 0, 0],
         },
         xaxis: {
-          categories: data.categories,
+          categories: props.dates,
         },
         markers: {
           size: 6,
@@ -46,15 +45,12 @@ class ChartOEEvsTarget extends Component {
         {
           name: "Target",
           type: "line",
-          chart: {
-            background: "#fff",
-          },
-          data: data.target,
+          data: props.targets,
         },
         {
-          name: "Actual",
+          name: "OEE",
           type: "column",
-          data: data.actual,
+          data: props.DataOEE,
         },
       ],
     };
@@ -65,6 +61,7 @@ class ChartOEEvsTarget extends Component {
     const min = 30;
     const newMixedSeries = [];
     const newBarSeries = [];
+    const {} = this.state;
 
     this.state.seriesMixedChart.forEach(s => {
       const data = s.data.map(() => {
@@ -110,6 +107,6 @@ export default ChartOEEvsTarget;
 
 const data = {
   target: [],
-  actual: [],
-  categories: [],
+  oee: [],
+  dates: [],
 };

@@ -51,7 +51,7 @@ export default function ProductionOutput() {
       if (typeof getTroublelist === "function") {
         getTroublelist();
       }
-    }, 3000);
+    }, 30000);
 
     return () => {
       clearInterval(interval);

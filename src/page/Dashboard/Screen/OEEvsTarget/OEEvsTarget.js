@@ -10,16 +10,68 @@ export default function OEEvsTarget() {
   const [targetOEE2, setTargetOEE2] = useState(0);
   const [oeeData1, setOeeData1] = useState([]);
   const [oeeData2, setOeeData2] = useState([]);
+  const [dates1, setDates1] = useState([]);
+  const [dates2, setDates2] = useState([]);
+  const [oees1, setOees1] = useState([]);
+  const [oees2, setOees2] = useState([]);
+  const [targetData1, setTargetData1] = useState([]);
+  const [targetData2, setTargetData2] = useState([]);
+  const [chartReady1, setChartReady1] = useState(false);
+  const [chartReady2, setChartReady2] = useState(false);
+  const [sassion, setSassion] = useState(Math.floor(Math.random() * 10000000));
 
   useEffect(() => {
     init();
-  }, []);
+  }, [sassion]);
+
+  useEffect(() => {
+    if (targetOEE1 > 0 && oeeData1.length > 0) {
+      handleOEE(oeeData1, 1);
+    }
+
+    if (targetOEE2 > 0 && oeeData2.length > 0) {
+      handleOEE(oeeData2, 2);
+    }
+  }, [sassion]);
 
   const init = () => {
-    getOEE1();
-    getOEE2();
     getOeeTarget1();
     getOeeTarget2();
+    getOEE1();
+    getOEE2();
+  };
+
+  const handleOEE = (data, machine) => {
+    if (!Array.isArray(data)) return;
+
+    const dates = [];
+    const oeeData = [];
+    const target = [];
+
+    data.forEach(item => {
+      const date = moment(item.Date).format("DD MMM");
+      const oee = item.OEE / 100;
+
+      dates.push(date);
+      oeeData.push(oee);
+      if (machine === 1) {
+        target.push(targetOEE1 / 100);
+      } else {
+        target.push(targetOEE2 / 100);
+      }
+    });
+
+    if (machine === 1) {
+      setDates1(dates);
+      setOees1(oeeData);
+      setTargetData1(target);
+      setChartReady1(true);
+    } else {
+      setDates2(dates);
+      setOees2(oeeData);
+      setTargetData2(target);
+      setChartReady2(true);
+    }
   };
 
   const getOeeTarget1 = async () => {
@@ -34,6 +86,7 @@ export default function OEEvsTarget() {
     const result = await http(params);
     if (result && result.code === "success") {
       setTargetOEE1(result.payload.target);
+      setSassion(Math.floor(Math.random() * 100000000));
     } else {
       setTargetOEE1(0);
     }
@@ -51,6 +104,7 @@ export default function OEEvsTarget() {
     const result = await http(params);
     if (result && result.code === "success") {
       setTargetOEE2(result.payload.target);
+      setSassion(Math.floor(Math.random() * 100000000));
     } else {
       setTargetOEE2(0);
     }
@@ -81,14 +135,13 @@ export default function OEEvsTarget() {
         endDate: endDate,
       },
     };
-    console.log(params);
 
     const result = await http(params);
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log("payload 1111 ==>. ", result.payload);
         setOeeData1(result.payload.results);
+        setSassion(Math.floor(Math.random() * 100000000));
       } else {
         setOeeData1([]);
       }
@@ -123,14 +176,12 @@ export default function OEEvsTarget() {
       },
     };
 
-    console.log(params);
-
     const result = await http(params);
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log("payload 2222 ==>. ", result.payload);
         setOeeData2(result.payload.results);
+        setSassion(Math.floor(Math.random() * 100000000));
       } else {
         setOeeData2([]);
       }
@@ -170,7 +221,14 @@ export default function OEEvsTarget() {
       <div className={Styles.lineContainer}>
         {renderTable1()}
         <div className={Styles.chart}>
-          <ChartOEE />
+          {chartReady1 && (
+            <ChartOEE
+              target={targetOEE1}
+              targets={targetData1}
+              DataOEE={oees1}
+              dates={dates1}
+            />
+          )}
         </div>
       </div>
     );
@@ -179,9 +237,16 @@ export default function OEEvsTarget() {
   const renderLine2 = () => {
     return (
       <div className={Styles.lineContainer}>
-        {renderTable2()}{" "}
+        {renderTable2()}
         <div className={Styles.chart}>
-          <ChartOEE />
+          {chartReady2 && (
+            <ChartOEE
+              target={targetOEE2}
+              targets={targetData2}
+              DataOEE={oees2}
+              dates={dates2}
+            />
+          )}
         </div>
       </div>
     );
