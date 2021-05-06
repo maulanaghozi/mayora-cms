@@ -49,7 +49,7 @@ class ChartOEEvsTarget extends Component {
           chart: {
             background: "#fff",
           },
-          data: props.dataTarget,
+          data: data.target,
         },
         {
           name: "Actual",
@@ -109,7 +109,7 @@ class ChartOEEvsTarget extends Component {
 export default ChartOEEvsTarget;
 
 const data = {
-  target: [0.9, 0.9],
-  actual: [0, 0],
-  categories: ["07", "08"],
+  target: [],
+  actual: [],
+  categories: [],
 };

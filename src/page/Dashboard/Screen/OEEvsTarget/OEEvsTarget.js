@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { http } from "../../../../utility/http";
 import TableOEE from "../../../../components/TableOEE/TableOEE";
+import ChartOEE from "../../../../components/ChartOEEvsTarget/ChartOEEvsTarget";
 import Styles from "./OEEvsTarget.module.scss";
 import moment from "moment";
 
@@ -168,7 +169,9 @@ export default function OEEvsTarget() {
     return (
       <div className={Styles.lineContainer}>
         {renderTable1()}
-        <div className={Styles.chart}></div>
+        <div className={Styles.chart}>
+          <ChartOEE />
+        </div>
       </div>
     );
   };
@@ -176,7 +179,10 @@ export default function OEEvsTarget() {
   const renderLine2 = () => {
     return (
       <div className={Styles.lineContainer}>
-        {renderTable2()} <div className={Styles.chart}></div>
+        {renderTable2()}{" "}
+        <div className={Styles.chart}>
+          <ChartOEE />
+        </div>
       </div>
     );
   };
