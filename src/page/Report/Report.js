@@ -34,10 +34,11 @@ export default function Report() {
   const onExport = async () => {
     const params = {
       method: "GET",
-      path: "report-weekly",
+      path: `report-${report}`,
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
         machineId: machineId,
+		duration: week | 4,
       },
       content_type: 'application/octet-stream',
       responseType:'blob'
@@ -51,14 +52,14 @@ export default function Report() {
 		const url = window.URL.createObjectURL(result);
 		const link = document.createElement('a');
 		link.href = url;
-		link.setAttribute('download', `Report Weekly ${moment(date * 1000).format("YYYY-MM-DD hh-mm-ss")}`);
+		link.setAttribute('download', `Report ${report} ${moment(date * 1000).format("YYYY-MM-DD hh-mm-ss")}`);
 		document.body.appendChild(link);
 		link.click();
 		link.parentNode.removeChild(link);
 
 		return result;
     }
-  };
+  }; 
 
   function mapTemplate (data) {
     if(data){
@@ -128,7 +129,7 @@ export default function Report() {
 		  setIsMonthly(false);
 	  }
 	  
-	  setWeek("4 Week");
+	  setWeek("4");
   }
 
   const renderExportReport = () => {
@@ -197,14 +198,14 @@ export default function Report() {
 			  value={week}
 			  className={Styles.inputSelect}
 			  placeholder={"4 Week"}
-			  defaultValue={"4 Week"}
+			  defaultValue={"4"}
 			  options={[
 				{
-				  value: "4 Week",
+				  value: "4",
 				  label: "4 Week",
 				},
 				{
-				  value: "5 Week",
+				  value: "5",
 				  label: "5 Week",
 				},
 			  ]}
@@ -244,14 +245,14 @@ export default function Report() {
 		  value={week}
 		  className={Styles.inputSelect}
 		  placeholder={"4 Week"}
-		  defaultValue={"4 Week"}
+		  defaultValue={"4"}
 		  options={[
 			{
-			  value: "4 Week",
+			  value: "4",
 			  label: "4 Week",
 			},
 			{
-			  value: "5 Week",
+			  value: "5",
 			  label: "5 Week",
 			},
 		  ]}
@@ -301,7 +302,7 @@ export default function Report() {
           <div className={Styles.download}  onClick={onButtonClick1}>
               <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onDownload('weekly')}>
+          <div className={Styles.download}  onClick={() => onDownload('weekly', file1)}>
               <span>Download</span>
           </div>
         </div>
@@ -315,7 +316,7 @@ export default function Report() {
           <div className={Styles.download}  onClick={onButtonClick2}>
               <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onDownload('monthly')}>
+          <div className={Styles.download}  onClick={() => onDownload('monthly', file2)}>
               <span>Download</span>
           </div>
         </div>
@@ -329,7 +330,7 @@ export default function Report() {
           <div className={Styles.download}  onClick={onButtonClick3}>
               <span>Replace</span>
           </div>
-          <div className={Styles.download}  onClick={() => onDownload('semester')}>
+          <div className={Styles.download}  onClick={() => onDownload('semester', file3)}>
               <span>Download</span>
           </div>
         </div>
@@ -361,20 +362,20 @@ export default function Report() {
       setFile3('Uploading...');
     }
 
-    onUpload(e.target.files[0]);
+    onUpload(e.target.files[0], periode);
   };
 
   const fileClick=(e)=>{
     e.target.value = null;
   }
 
-  const onUpload = async (file) => {
+  const onUpload = async (file, periode) => {
     var formData = new FormData();
     formData.append("file", file);
 
     const params = {
       method: "POST",
-      path: "report-weekly/upload",
+      path: `report-${periode}/upload`,
       content_type: 'multipart/form-data',
       data: formData
     };
@@ -384,8 +385,15 @@ export default function Report() {
     const result = await http(params);
     if (result && result.code === "success") {
       if(result.payload){
-        setFile1(result.payload);
+		if(periode=='weekly'){
+		  setFile1(result.payload);
+		}else if(periode=='monthly'){
+		  setFile2(result.payload);
+		}else if(periode=='semester'){
+		  setFile3(result.payload);
+		}
       }
+	  
       console.log("SUKSES UPLOAD");
     } else {
       // console.log(result);
@@ -393,7 +401,7 @@ export default function Report() {
     }
   };
 
-  const onDownload = async (periode) => {
+  const onDownload = async (periode, fileName) => {
     const params = {
       method: "GET",
       path: `report-${periode}/download`,
@@ -407,7 +415,7 @@ export default function Report() {
     const url = window.URL.createObjectURL(result);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', file1 ?? `Template report ${periode}`);
+    link.setAttribute('download', fileName ?? `Template report ${periode}`);
     // 3. Append to html page
     document.body.appendChild(link);
     // 4. Force download
@@ -420,6 +428,7 @@ export default function Report() {
       alert("please contact administrator");
     }
   };
+  
 
   return (
     <div>
