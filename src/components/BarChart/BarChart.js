@@ -54,7 +54,7 @@ class BarChart extends Component {
         {
           name: "Actual",
           type: "column",
-          data: data.actual,
+          data: props.dataRelease,
         },
       ],
     };

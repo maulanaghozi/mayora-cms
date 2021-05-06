@@ -301,7 +301,7 @@ export default function TroubleList() {
           styleContainer={Styles.table}
           data={[
             { time: "23:00", amount: handleAmoutDaily(23) },
-            { time: "24:00", amount: handleAmoutDaily(24) },
+            { time: "00:00", amount: handleAmoutDaily(0) },
             { time: "01:00", amount: handleAmoutDaily(1) },
             { time: "02:00", amount: handleAmoutDaily(2) },
             { time: "03:00", amount: handleAmoutDaily(3) },

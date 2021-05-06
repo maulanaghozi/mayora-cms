@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import classNames from "classnames";
 import { http } from "../../../../utility/http";
 import { ProductionPlanning } from "../../../../components/ProductionOutputPlanning/ProductionOutputPlanning";
 import BarChart from "../../../../components/BarChart/BarChart";
@@ -28,8 +27,6 @@ const GetTime = () => {
 };
 
 export default function ProductionOutput() {
-  const [startTime, setStartTime] = useState(GetTime().getThisDay07);
-  const [endTime, setEndTime] = useState(GetTime().endTime);
   const [target1, setTarget1] = useState(0);
   const [target2, setTarget2] = useState(0);
   const [dataTarget1, setDataTarget1] = useState([]);
@@ -38,6 +35,12 @@ export default function ProductionOutput() {
   const [actual2, setActual2] = useState(0);
   const [status1, setStatus1] = useState("running");
   const [status2, setStatus2] = useState("running");
+  const [dataRelease1, setDataRelease1] = useState([]);
+  const [dataRelease2, setDataRelease2] = useState([]);
+  const [releaseIsReady1, setReleaseIsReady1] = useState(false);
+  const [releaseIsReady2, setReleaseIsReady2] = useState(false);
+  const [maxValue1, setMaxValue1] = useState(0);
+  const [maxValue2, setMaxValue2] = useState(0);
 
   useEffect(() => {
     getTroublelist();
@@ -62,6 +65,8 @@ export default function ProductionOutput() {
     getActual2();
     getRealtimeStatus1();
     getRealtimeStatus2();
+    getDataRelease1();
+    getDataRelease2();
   };
 
   const hanldeDataTarget = async target => {
@@ -79,6 +84,104 @@ export default function ProductionOutput() {
 
     console.log({ target, data });
     return data;
+  };
+
+  const handleDataRelease = (data, machine) => {
+    if (!Array.isArray(data)) return;
+
+    const releases = [];
+    let maxValue = 0;
+
+    let hour = 7;
+    for (let i = 0; i < 24; i++) {
+      if (hour === 24) hour = 0;
+
+      const result = data.find(item => item.time === hour);
+      const amount = result ? result.amount : 0;
+
+      if (amount > maxValue) maxValue = amount;
+
+      releases.push(amount);
+      hour++;
+    }
+
+    if (machine === 1) {
+      setDataRelease1(releases);
+      setMaxValue1(maxValue);
+      setReleaseIsReady1(true);
+    } else {
+      setDataRelease2(releases);
+      setMaxValue2(maxValue);
+      setReleaseIsReady2(true);
+    }
+  };
+
+  const getDataRelease1 = async () => {
+    let date = moment().format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
+    const params = {
+      method: "GET",
+      path: "release/total",
+      query: {
+        machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+        date: date,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (Array.isArray(result.payload)) {
+        handleDataRelease(result.payload, 1);
+      } else {
+        setDataRelease1([]);
+      }
+    } else {
+      console.log("error ", result);
+    }
+  };
+
+  const getDataRelease2 = async () => {
+    let date = moment().format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
+    const params = {
+      method: "GET",
+      path: "release/total",
+      query: {
+        machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+        date: date,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (Array.isArray(result.payload)) {
+        handleDataRelease(result.payload, 2);
+      } else {
+        setDataRelease2([]);
+      }
+    } else {
+      console.log("error ", result);
+    }
   };
 
   const getRealtimeStatus1 = async () => {
@@ -246,9 +349,15 @@ export default function ProductionOutput() {
           status={status1}
         />
         <div className={Styles.chart}>
-          {Array.isArray(dataTarget1) && dataTarget1.length > 0 && (
-            <BarChart dataTarget={dataTarget1} target={target1} />
-          )}
+          {Array.isArray(dataTarget1) &&
+            dataTarget1.length > 0 &&
+            releaseIsReady1 && (
+              <BarChart
+                dataTarget={dataTarget1}
+                target={target1 > maxValue1 ? target1 : maxValue1}
+                dataRelease={dataRelease1}
+              />
+            )}
         </div>
       </div>
     );
@@ -267,8 +376,13 @@ export default function ProductionOutput() {
         <div className={Styles.chart}>
           {Array.isArray(dataTarget2) &&
             dataTarget2.length > 0 &&
-            target2 > 0 && (
-              <BarChart dataTarget={dataTarget2} target={target2} />
+            target2 > 0 &&
+            releaseIsReady2 && (
+              <BarChart
+                dataTarget={dataTarget2}
+                target={target2 > maxValue2 ? target2 : maxValue2}
+                dataRelease={dataRelease2}
+              />
             )}
         </div>
       </div>
