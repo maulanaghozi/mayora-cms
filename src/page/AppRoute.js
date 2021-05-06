@@ -8,6 +8,7 @@ import EditTrouble from "./TroubleList/EditTrouble";
 import SelectCategory from "./TroubleList/SelectCategory";
 import ManualCollection from "./ManualCollection/ManualCollection";
 import EditManualCollection from "./ManualCollection/EditManualCollection";
+import DetailManualCollection from "./ManualCollection/DetailManualCollection";
 import Target from "./Target/Target";
 import Release from "./Release/Release";
 import MasterCategory from "./MasterCategory/MasterCategory";
@@ -18,13 +19,17 @@ export default function AppPage() {
   return (
     <AppLayout>
       <Switch>
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/trouble-list/edit/:id" component={EditTrouble} />
         <Route
           path="/trouble-list/select-category"
           component={SelectCategory}
         />
         <Route path="/trouble-list" component={TroubleList} />
+        <Route
+          path="/manual-collection/detail/:categoryId/:name"
+          component={DetailManualCollection}
+        />
         <Route
           path="/manual-collection/edit/:id"
           component={EditManualCollection}

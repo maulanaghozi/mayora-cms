@@ -46,6 +46,12 @@
   background-color: #101633;
   z-index: 890;
 
+  .sidebar_line {
+    width: 100%;
+    height: 8px;
+    background-color: #5e637b;
+  }
+
   @include respond-to(xs) {
     width: $closed-sidebar-width-sm;
 

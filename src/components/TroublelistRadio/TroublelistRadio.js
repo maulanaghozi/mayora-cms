@@ -6,10 +6,17 @@ import { Context } from "../../hooks/context";
 
 const ItemRadio = props => {
   const { item, isSelected, setSelected, isFirst } = props;
+  const checkDisabledRadio = name => {
+    var patt = /otomatis/i;
+    var result = name.match(patt);
+
+    return !!result;
+  };
   return (
     <div
       className={classNames(Styles.itemContainer, {
         [Styles.topBorder]: !isFirst,
+        [Styles.disabled]: checkDisabledRadio(item.name),
       })}
       onClick={() =>
         setSelected({
@@ -17,6 +24,7 @@ const ItemRadio = props => {
           categoryName: item.name,
         })
       }
+      disabled={checkDisabledRadio(item.name)}
     >
       <div
         className={classNames(Styles.circle, { [Styles.selected]: isSelected })}
@@ -29,7 +37,6 @@ const ItemRadio = props => {
 };
 
 export const TroublelistRadio = props => {
-  const [selectedId, setSelectedId] = useState(null);
   const { data, styleContainer } = props;
   const globalState = useContext(Context);
   const { setCategory, category } = globalState;

@@ -3,7 +3,9 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import Styles from "./InputWithLabel.module.scss";
 import { ChevronRight } from "../../../assets/icons";
-import DatePicker from "react-datepicker";
+import TimePicker from "rc-time-picker";
+import "rc-time-picker/assets/index.css";
+import moment from "moment";
 
 export const InputWithLabel = props => {
   const {
@@ -88,16 +90,19 @@ export const InputWithLabel = props => {
     );
   };
 
+  const onChangeTime = value => {
+    const date = value.format();
+    setValue(date);
+  };
+
   const renderInputHour = () => {
     return (
-      <DatePicker
-        selected={value}
-        onChange={date => setValue(date)}
-        showTimeSelect
-        showTimeSelectOnly
-        timeIntervals={15}
-        timeCaption="Time"
-        dateFormat="HH:mm"
+      <TimePicker
+        style={{ width: 100 }}
+        showSecond={false}
+        defaultValue={moment()}
+        className="xxx"
+        onChange={onChangeTime}
       />
     );
   };

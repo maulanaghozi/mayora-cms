@@ -41,10 +41,6 @@ import { ReactComponent as ReportFlag } from "./vector/report_flag.svg";
 import { ReactComponent as Broadcast } from "./vector/broadcast.svg";
 import { ReactComponent as BroadcastSelected } from "./vector/broadcast_selected.svg";
 
-// Image
-import LogoKestingrum100 from "./raster/default-pp.png";
-import DefaultCoverPic from "./raster/app_icon-100.png";
-
 export {
   ChevronRight,
   ChevronRightBlue,
@@ -77,11 +73,9 @@ export {
   ThumbUpFill,
   ThumbUpOutline,
   ReportFlag,
-  LogoKestingrum100,
   BlueFacebook,
   BlueInstagram,
   BlueTwitter,
-  DefaultCoverPic,
   Broadcast,
   BroadcastSelected,
 };
