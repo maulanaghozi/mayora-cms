@@ -1,6 +1,7 @@
 import React, { useEffect, useState , useRef} from "react";
 import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
+import InputText from "../../components/Form/InputText/InputText";
 import { DownloadIcon,ExcelFileIcon } from "../../assets/icons";
 import Styles from "./Report.module.scss";
 import InputDate from "../../components/Form/InputDate/InputDate";
@@ -14,12 +15,14 @@ export default function Report() {
   const [machineId, setMachineId] = useState(
     "00f5eafd-89c5-4871-a982-26a8180774c7"
   );
-  const [duration, setDuration] = useState("weekly");
-  const [week, setWeek] = useState("01 (2021)");
+  const [report, setReport] = useState("weekly");
+  const [duration, setDuration] = useState("7 Day");
+  const [week, setWeek] = useState("4 Week");
   const [date, setDate] = useState(moment().unix());
   const [file1, setFile1] = useState('not set');
   const [file2, setFile2] = useState('not set');
   const [file3, setFile3] = useState('not set');
+  const [isMonthly, setIsMonthly] = useState(false);
   
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export default function Report() {
   const onExport = async () => {
     const params = {
       method: "GET",
-      path: "http://localhost:3000/report-weekly",
+      path: "report-weekly",
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
         machineId: machineId,
@@ -40,30 +43,21 @@ export default function Report() {
       responseType:'blob'
     };
 
-    console.log(params);
-    console.log(moment(date * 1000).format("YYYY-MM-DD"));
-
     const result = await http(params);
+	
+	if (!result) {
+	  alert("please contact administrator");
+    } else {
+		const url = window.URL.createObjectURL(result);
+		const link = document.createElement('a');
+		link.href = url;
+		link.setAttribute('download', `Report Weekly ${moment(date * 1000).format("YYYY-MM-DD hh-mm-ss")}`);
+		document.body.appendChild(link);
+		link.click();
+		link.parentNode.removeChild(link);
 
-    // 2. Create blob link to download
-    const url = window.URL.createObjectURL(result);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `Report Weekly`);
-    // 3. Append to html page
-    document.body.appendChild(link);
-    // 4. Force download
-    link.click();
-    // 5. Clean up and remove the link
-    link.parentNode.removeChild(link);
-
-    return result;
-    // if (result && result.code === "success") {
-    //   console.log("SUKSES EXPORT");
-    // } else {
-    //   // console.log(result);
-    //   alert("please contact administrator");
-    // }
+		return result;
+    }
   };
 
   function mapTemplate (data) {
@@ -85,7 +79,7 @@ export default function Report() {
   const getTemplate = async () => {
     const params = {
       method: "GET",
-      path: "http://localhost:3000/template",
+      path: "template",
     };
 
     console.log(params);
@@ -115,6 +109,27 @@ export default function Report() {
       </div>
     );
   };
+  
+  const onWeekChange = (e) => {
+	  setWeek(e);
+  }
+  
+  const onReportChange = (e) =>{
+	  setReport(e);
+	  
+	  if(e == 'weekly'){
+		  setDuration('7 Day');
+		  setIsMonthly(false);
+	  }else if(e == 'monthly'){
+		  setDuration('');
+		  setIsMonthly(true);
+	  }else if(e == 'semester'){
+		  setDuration('6 Month');
+		  setIsMonthly(false);
+	  }
+	  
+	  setWeek("4 Week");
+  }
 
   const renderExportReport = () => {
     return (
@@ -145,9 +160,9 @@ export default function Report() {
             />
           </div>
           <div className={Styles.filter}>
-            <span>Report Duration</span>
+            <span>Report</span>
             <InputSelect
-              value={duration}
+              value={report}
               className={Styles.inputSelect}
               placeholder={"weekly"}
               defaultValue={"weekly"}
@@ -165,16 +180,48 @@ export default function Report() {
                   label: "semester",
                 },
               ]}
-              onChange={selected => setDuration(selected.value)}
+              onChange={selected => onReportChange(selected.value)}
             />
           </div>
           <div className={Styles.filter}>
-            <span>Week</span>
+            <span>Start</span>
             <InputDate 
               value={date} 
               onChange={e => setDate(e)}
               className={Styles.inputDate} />
           </div>
+		  
+		  <div className={Styles.filter} style={{ display: isMonthly ? "block" : "none" }}>
+			<span>Duration</span>
+			<InputSelect
+			  value={week}
+			  className={Styles.inputSelect}
+			  placeholder={"4 Week"}
+			  defaultValue={"4 Week"}
+			  options={[
+				{
+				  value: "4 Week",
+				  label: "4 Week",
+				},
+				{
+				  value: "5 Week",
+				  label: "5 Week",
+				},
+			  ]}
+			  onChange={selected => onWeekChange(selected.value)}
+			/>
+		  </div>
+		  <div className={Styles.filter}  style={{ display: !isMonthly ? "block" : "none" }}>
+			<span>Duration</span>
+			<InputText
+			  value={duration}
+			  className={Styles.inputText}
+			  placeholder={"7 Day"}
+			  defaultValue={"7"}
+			  disabled={true}
+			/>
+		  </div>
+		  
           <div className={Styles.download}  onClick={() => onExport()}>
             <DownloadIcon />
             <span>Export</span>
@@ -189,6 +236,42 @@ export default function Report() {
       <hr className={Styles.hr}></hr>
     )
   }
+  
+  const RenderDurationMonthly = () =>(
+	  <div className={Styles.filter}>
+		<span>Duration</span>
+		<InputSelect
+		  value={week}
+		  className={Styles.inputSelect}
+		  placeholder={"4 Week"}
+		  defaultValue={"4 Week"}
+		  options={[
+			{
+			  value: "4 Week",
+			  label: "4 Week",
+			},
+			{
+			  value: "5 Week",
+			  label: "5 Week",
+			},
+		  ]}
+		  onChange={selected => onWeekChange(selected.value)}
+		/>
+	  </div>
+  )
+  
+  const RenderDuration = () =>(
+	  <div className={Styles.filter}>
+		<span>Duration</span>
+		<InputText
+		  value={duration}
+		  className={Styles.inputText}
+		  placeholder={"7 Day"}
+		  defaultValue={"7"}
+		  disabled={true}
+		/>
+	  </div>
+  )
 
   const renderTemplate = () =>{
     return(
@@ -291,7 +374,7 @@ export default function Report() {
 
     const params = {
       method: "POST",
-      path: "http://localhost:3000/report-weekly/upload",
+      path: "report-weekly/upload",
       content_type: 'multipart/form-data',
       data: formData
     };
@@ -313,7 +396,7 @@ export default function Report() {
   const onDownload = async (periode) => {
     const params = {
       method: "GET",
-      path: `http://localhost:3000/report-${periode}`,
+      path: `report-${periode}/download`,
       content_type: 'application/octet-stream',
       responseType:'blob'
     };
@@ -324,7 +407,7 @@ export default function Report() {
     const url = window.URL.createObjectURL(result);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `Template report ${periode}`);
+    link.setAttribute('download', file1 ?? `Template report ${periode}`);
     // 3. Append to html page
     document.body.appendChild(link);
     // 4. Force download

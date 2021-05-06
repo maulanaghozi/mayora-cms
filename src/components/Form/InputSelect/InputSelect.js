@@ -6,7 +6,7 @@ import style from './InputSelect.module.scss';
 /**
  * InputSelect Component
  */
-export default function InputSelect(props) {
+export default function InputSelect(props) {	  
     let reverseMenuStyle = {}
     let reverseIndicatorStyle = {}
     let indicatorContainerWidth = 32;
@@ -18,6 +18,7 @@ export default function InputSelect(props) {
             props.defaultValue.length > 0
         )
     }
+	
 
     if (props.isLoading) {
         indicatorContainerWidth += 40

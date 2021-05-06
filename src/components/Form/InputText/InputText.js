@@ -24,6 +24,7 @@ export default function InputText(props) {
           typeof props.onKeyPress === "function" ? props.onKeyPress : () => {}
         }
         value={props.value || ""}
+		disabled={props.disabled}
       />
     </div>
   );
