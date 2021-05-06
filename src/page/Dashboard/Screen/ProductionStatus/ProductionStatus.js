@@ -44,6 +44,18 @@ export default function ProductionStatus() {
     getTroublelist();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (typeof getTroublelist === "function") {
+        getTroublelist();
+      }
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   const getTroublelist = () => {
     getStatus1();
     getStatus2();
@@ -51,6 +63,54 @@ export default function ProductionStatus() {
     getProductionTarget2();
     getActual1();
     getActual2();
+    getRealtimeStatus1();
+    getRealtimeStatus2();
+  };
+
+  const getRealtimeStatus1 = async () => {
+    const params = {
+      method: "GET",
+      path: "status-machine",
+      query: {
+        machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload) {
+        setStatus1(result.payload.status);
+      } else {
+        setStatus1("disconnected");
+      }
+    } else {
+      alert("please contact administrator");
+      setStatus1("disconnected");
+    }
+  };
+
+  const getRealtimeStatus2 = async () => {
+    const params = {
+      method: "GET",
+      path: "status-machine",
+      query: {
+        machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload) {
+        setStatus2(result.payload.status);
+      } else {
+        setStatus2("disconnected");
+      }
+    } else {
+      alert("please contact administrator");
+      setStatus2("disconnected");
+    }
   };
 
   const getStatus1 = async () => {
@@ -108,7 +168,6 @@ export default function ProductionStatus() {
 
     const result = await http(params);
     if (result && result.code === "success") {
-      console.log("BERHASIL CURRENT ", result);
       setTarget1(result.payload.target);
     } else {
       setTarget1(0);
@@ -126,7 +185,6 @@ export default function ProductionStatus() {
 
     const result = await http(params);
     if (result && result.code === "success") {
-      console.log("BERHASIL CURRENT ", result);
       setTarget2(result.payload.target);
     } else {
       setTarget2(0);
@@ -231,6 +289,7 @@ export default function ProductionStatus() {
         machineName={"line 1"}
         target={target1}
         actual={actual1}
+        status={status1}
       />
     );
   };
@@ -251,6 +310,7 @@ export default function ProductionStatus() {
         machineName={"line 2"}
         target={target2}
         actual={actual2}
+        status={status2}
       />
     );
   };

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Styles from "./ProductionPlaning.module.scss";
+import Styles from "./ProductionOutputPlanning.module.scss";
 
 export const ProductionPlanning = props => {
-  const { machineName, target, actual, status } = props;
+  const { styleContainer, machineName, target, actual, status } = props;
 
   const renderMain = () => {
     return (
@@ -48,15 +48,15 @@ export const ProductionPlanning = props => {
   const renderDisplay = () => {
     return (
       <div className={Styles.mainContainer}>
-        <div className={Styles.dataWrapper}>
+        <div className={classNames(Styles.dataWrapper, Styles.type)}>
           <span>Type</span>
           <h1 className={Styles.type}>{machineName}</h1>
         </div>
-        <div className={Styles.dataWrapper}>
+        <div className={Styles.dataWrapper} style={{ marginBottom: 16 }}>
           <span>Target</span>
           <h1>{target}</h1>
         </div>
-        <div className={Styles.dataWrapper}>
+        <div className={Styles.dataWrapper} style={{ marginBottom: 16 }}>
           <span>Actual</span>
           <h1>{actual}</h1>
         </div>
@@ -83,14 +83,15 @@ export const ProductionPlanning = props => {
     );
   };
 
-  return <div>{renderMain()}</div>;
+  return <div className={classNames(styleContainer)}>{renderMain()}</div>;
 };
 
 ProductionPlanning.defaultProps = {
   machineName: "",
   target: 3000,
   actual: 2349,
-  status: "disconnected",
+  status: "running",
+  styleContainer: {},
 };
 
 ProductionPlanning.propTypes = {
@@ -98,4 +99,5 @@ ProductionPlanning.propTypes = {
   target: PropTypes.number,
   actual: PropTypes.number,
   status: PropTypes.string,
+  styleContainer: PropTypes.object,
 };
