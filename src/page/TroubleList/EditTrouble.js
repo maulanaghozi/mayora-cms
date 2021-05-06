@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
-import { Link, useParams, useHistory } from "react-router-dom";
-import classNames from "classnames";
+import { useParams, useHistory } from "react-router-dom";
 import { InputWithLabel } from "../../components/Form";
 import Styles from "./EditTrouble.module.scss";
 import { ChevronLeft } from "../../assets/icons";
@@ -33,11 +32,18 @@ export default function EditTrouble() {
     const result = await http(params);
 
     if (result && result.code === "success") {
-      if (fromPage !== "selectCategory") {
-        setCategory({
-          categoryId: result.payload.category.id,
-          categoryName: result.payload.category.name,
-        });
+      if (fromPage !== "selectCategory" && result.payload) {
+        if (result.payload.category) {
+          setCategory({
+            categoryId: result.payload.category.id,
+            categoryName: result.payload.category.name,
+          });
+        } else {
+          setCategory({
+            categoryId: "",
+            categoryName: "",
+          });
+        }
       }
       setStartTime(result.payload.startTime);
       setEndTime(result.payload.endTime);
@@ -51,11 +57,16 @@ export default function EditTrouble() {
   };
 
   const handleSave = async () => {
+    let categoryId = category.categoryId;
+
+    if (!category || category.categoryId === "" || !category.categoryId) {
+      categoryId = null;
+    }
     const params = {
       method: "PUT",
       path: `trouble/${id}`,
       data: {
-        categoryId: category.categoryId,
+        categoryId: categoryId,
         updatedBy: "Budi Putra",
         remark: remark,
       },
@@ -147,7 +158,7 @@ export default function EditTrouble() {
           name={"category"}
         />
         <span className={Styles.note}>
-          {`Technical Break Down / Mechanical / ${category.categoryName}`}
+          {/* {`Technical Break Down / Mechanical / ${category.categoryName}`} */}
         </span>
       </>
     );

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { EditIcon } from "../../../assets/icons";
-import { table_cell, column_shift, notSet } from "../Styles.module.scss";
+import { table_cell, column_shift, notSet, value } from "../Styles.module.scss";
 import { Context } from "../../../hooks/context";
 
 export default function Description({ manualCollection, row, shift }) {
@@ -10,11 +10,14 @@ export default function Description({ manualCollection, row, shift }) {
   const history = useHistory();
   return (
     <div className={table_cell + " " + column_shift}>
-      <span className={notSet}>
-        {manualCollection && manualCollection.value
-          ? `${manualCollection.value} ${manualCollection.unit}`
-          : `Not Set`}
-      </span>
+      {manualCollection && manualCollection.value ? (
+        <span
+          className={value}
+        >{`${manualCollection.value} ${manualCollection.unit}`}</span>
+      ) : (
+        <span className={notSet}>Not Set</span>
+      )}
+
       <EditIcon
         onClick={() => {
           setManualCollection({

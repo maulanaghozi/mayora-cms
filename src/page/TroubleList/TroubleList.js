@@ -5,14 +5,17 @@ import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import TroubleTable from "./TroubleTable/TroubleTable";
 import Styles from "./TroubleList.module.scss";
-import usePolling from "../../hooks/usePolling/usePolling";
 import { http } from "../../utility/http";
 import { Context } from "../../hooks/context";
+import { LoadingModal } from "../../components/Modal";
 export const baseURL = process.env.REACT_APP_BASE_URL;
 
-function getTime() {
+const GetTime = () => {
+  const globalState = useContext(Context);
+  const { dateSelected } = globalState;
+
   let totalMinutes = 1440;
-  let getThisDay = moment().format("YYYY MM DD");
+  let getThisDay = moment(dateSelected * 1000).format("YYYY MM DD");
   let curentTime = moment().format("YYYY MM DD HH:mm");
   let getThisDay07 = moment(`${getThisDay} 07:00`).format("YYYY MM DD HH:mm");
   let endTime = moment(getThisDay07).add(1, "days").format("YYYY MM DD HH:mm");
@@ -29,28 +32,23 @@ function getTime() {
     getThisDay07,
     endTime,
   };
-}
+};
 
 export default function TroubleList(props) {
+  const [isLoading, setIsLoading] = useState(false);
   const [dataStatus, setDataStatus] = useState([]);
   const [dataTable, setDataTable] = useState([]);
-  const [startTime, setStartTime] = useState(getTime().getThisDay07);
-  const [endTime, setEndTime] = useState(getTime().endTime);
+  const [startTime, setStartTime] = useState(GetTime().getThisDay07);
+  const [endTime, setEndTime] = useState(GetTime().endTime);
   const [minutesPass, setMinutesPass] = useState(0);
   const globalState = useContext(Context);
   const { machine, dateSelected, setMachine, setDateSelected } = globalState;
-
-  useEffect(() => {
-    handleMinutesPass();
-  }, []);
 
   const handleMinutesPass = () => {
     let getDays = moment(dateSelected * 1000).format("YYYY MM DD");
     let curentTime = moment().format("YYYY MM DD HH:mm");
     let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
     let endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
-
-    console.log({ getDays, curentTime, startDay, endDay });
 
     if (curentTime < startDay) {
       getDays = moment(getDays).subtract(1, "days").format("YYYY MM DD");
@@ -62,20 +60,40 @@ export default function TroubleList(props) {
     setEndTime(endDay);
 
     const ms = Math.abs(new Date(curentTime) - new Date(startDay)) / 1000;
-    setMinutesPass(ms / 60);
-    return;
+
+    if (ms < 86400) {
+      setMinutesPass(ms / 60);
+    } else {
+      setMinutesPass(1440);
+    }
   };
 
   useEffect(() => {
     getTroublelist();
   }, [machine.machineId, startTime]);
 
-  const getTroublelist = async () => {
-    getStatus();
-    getDataTable();
-  };
+  useEffect(() => {
+    handleMinutesPass();
+  }, [dateSelected]);
 
-  usePolling(getTroublelist, 120000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (typeof callback === "function") {
+        getTroublelist();
+      }
+    }, 12000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const getTroublelist = async () => {
+    setIsLoading(true);
+    await getStatus();
+    await getDataTable();
+    setIsLoading(false);
+  };
 
   const getStatus = async () => {
     const params = {
@@ -87,8 +105,6 @@ export default function TroubleList(props) {
         machineId: machine.machineId,
       },
     };
-
-    console.log("THIS IS PARAMS =>> ", params);
 
     const result = await http(params);
 
@@ -133,11 +149,8 @@ export default function TroubleList(props) {
       },
     };
 
-    console.log(params);
-
     const result = await http(params);
 
-    // console.log(typeof result);
     return (
       <a
         target="_blank"
@@ -148,7 +161,6 @@ export default function TroubleList(props) {
     );
 
     // if (result && result.code === "success") {
-    //   console.log("SUKSES DOWNLOAD");
     // } else {
     //   // console.log(result);
     //   alert("please contact administrator");
@@ -166,25 +178,12 @@ export default function TroubleList(props) {
 
     // calculate minutes
     const minutes = diffInMilliSeconds / 60;
+
     return Math.round(Number(minutes));
   }
 
   const onChangeDate = time => {
-    let getDays = moment(time * 1000).format("YYYY MM DD");
-    let startDay = moment(`${getDays} 07:00`).format("YYYY MM DD HH:mm");
-    let endDay = moment(startDay).add(1, "days").format("YYYY MM DD HH:mm");
-
-    setStartTime(startDay);
-    setEndTime(endDay);
     setDateSelected(time);
-
-    if (getDays === moment().format("YYYY MM DD")) {
-      handleMinutesPass();
-    } else {
-      setMinutesPass(1440);
-    }
-
-    return;
   };
 
   const renderHeader = () => {
@@ -285,7 +284,7 @@ export default function TroubleList(props) {
           <div
             style={{
               height: "20px",
-              flex: getTime().totalMinutes - minutesPass,
+              flex: GetTime().totalMinutes - minutesPass,
               backgroundColor: "#ffffff",
             }}
           ></div>
@@ -342,6 +341,7 @@ export default function TroubleList(props) {
       {renderHeader()}
       {renderStatus()}
       {renderTable()}
+      {isLoading && <LoadingModal />}
     </div>
   );
 }

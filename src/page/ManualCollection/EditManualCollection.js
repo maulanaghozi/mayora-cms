@@ -15,6 +15,17 @@ export default function EditCollection() {
   const { manualCollection, dateSelected, machine } = globalState;
 
   const handleSave = async () => {
+    let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
     const params = {
       method: "POST",
       path: "manual-collection",
@@ -25,7 +36,7 @@ export default function EditCollection() {
         shift: manualCollection.shift,
         remark: remark,
         unit: manualCollection.unit,
-        date: moment(dateSelected * 1000).format("YYYY-MM-DD"),
+        date: date,
         createdBy: "Budi Putra",
       },
     };
@@ -35,8 +46,6 @@ export default function EditCollection() {
     if (result && result.code === "success") {
       history.goBack();
     }
-
-    console.log("RESULT ", result);
   };
 
   const renderHeader = () => {

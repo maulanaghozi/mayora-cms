@@ -7,7 +7,7 @@ const Header = ["Time", "Release Amount"];
 const headerClasses = [Styles.columnTime, Styles.columnAmount];
 
 export default function TableShiftRelease(props) {
-  const { title, styleContainer, data } = props;
+  const { title, styleContainer, data, total } = props;
   return (
     <div className={classNames(Styles.container, styleContainer)}>
       <span className={Styles.title}>{title}</span>
@@ -37,9 +37,7 @@ export default function TableShiftRelease(props) {
               <span>Total</span>
             </div>
             <div className={Styles.columnAmount}>
-              <span className={Styles.total}>
-                {data[data.length - 1].amount}
-              </span>
+              <span className={Styles.total}>{total}</span>
             </div>
           </div>
         </div>

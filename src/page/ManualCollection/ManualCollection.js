@@ -4,7 +4,6 @@ import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import NotOperating from "./Screen/NotOperating/NotOperating";
-import DownTimeLosses from "./Screen/DownTimeLosses/DownTimeLosses";
 import SpeedLosses from "./Screen/SpeedLosses/SpeedLosses";
 import RewarkLosses from "./Screen/ReworkLosses/RewarkLosses";
 import Release from "./Screen/Release/Release";
@@ -51,14 +50,12 @@ export default function TroubleList() {
         <PageTitle
           title={[
             "Not Operating Day & Planned Down Time",
-            // "Down Time Losses",
             "Speed Losses",
             "Defect & Rework Losses",
             "Release",
           ]}
           path={[
             "/manual-collection/planed-down-time",
-            // "/manual-collection/down-time-losses",
             "/manual-collection/speed-losses",
             "/manual-collection/rework-losses",
             "/manual-collection/release",
@@ -75,10 +72,6 @@ export default function TroubleList() {
           path={"/manual-collection/planed-down-time"}
           component={NotOperating}
         />
-        {/* <Route
-          path={"/manual-collection/down-time-losses"}
-          component={DownTimeLosses}
-        /> */}
         <Route
           path={"/manual-collection/speed-losses"}
           component={SpeedLosses}
