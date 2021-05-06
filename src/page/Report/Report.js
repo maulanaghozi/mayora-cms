@@ -18,7 +18,7 @@ export default function Report() {
   const [report, setReport] = useState("weekly");
   const [duration, setDuration] = useState("7 Day");
   const [week, setWeek] = useState("4 Week");
-  const [date, setDate] = useState(moment().unix());
+  const [date, setDate] = useState("");
   const [file1, setFile1] = useState('not set');
   const [file2, setFile2] = useState('not set');
   const [file3, setFile3] = useState('not set');
@@ -32,6 +32,10 @@ export default function Report() {
   }, []);
 
   const onExport = async () => {
+	  if(!date){
+		  alert("please select date");
+		  return false;
+	  }
     const params = {
       method: "GET",
       path: `report-${report}`,
@@ -188,6 +192,7 @@ export default function Report() {
               value={date} 
               onChange={e => setDate(e)}
               className={Styles.inputDate}
+			  filterDate={(date) => date.getDay() === 1}
             />
           </div>
 		  

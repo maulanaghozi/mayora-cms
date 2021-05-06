@@ -27,6 +27,7 @@ export default function InputDate(props) {
       shouldCloseOnSelect={true}
       minDate={props.minDate}
       maxDate={props.maxDate}
+	  filterDate={props.filterDate}
       customInput={
         <div
           className={classNames(style.date_picker_container, props.className, {
