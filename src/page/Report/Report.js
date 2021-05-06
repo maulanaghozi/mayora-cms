@@ -307,7 +307,7 @@ export default function Report() {
             <span>Replace</span>
           </div>
           <div
-            className={Styles.download}
+            className={Styles.buttonTamplate}
             onClick={() => onDownload("weekly", file1)}
           >
             <span>Download</span>
@@ -324,7 +324,7 @@ export default function Report() {
             <span>Replace</span>
           </div>
           <div
-            className={Styles.download}
+            className={Styles.buttonTamplate}
             onClick={() => onDownload("monthly", file2)}
           >
             <span>Download</span>
@@ -341,7 +341,7 @@ export default function Report() {
             <span>Replace</span>
           </div>
           <div
-            className={Styles.download}
+            className={Styles.buttonTamplate}
             onClick={() => onDownload("semester", file3)}
           >
             <span>Download</span>
