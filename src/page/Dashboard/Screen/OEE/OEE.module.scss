@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-bottom: 50px;
+
+  .lineContainer {
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    .header {
+      width: 100%;
+      padding: 20px 20px;
+      display: flex;
+
+      .dataWrapper {
+        margin-right: 50px;
+        > span {
+          color: #757575;
+          font-family: roboto;
+          font-size: 16px;
+          line-height: 24px;
+          margin-bottom: 5px;
+        }
+
+        > h1 {
+          color: #212121;
+          font-size: 40px;
+          font-family: roboto;
+          font-weight: 500;
+
+          &.type {
+            text-transform: uppercase;
+          }
+
+          &.status {
+            color: #ffffff;
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 28px;
+            width: fit-content;
+          }
+        }
+      }
+    }
+
+    .chartContainer {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+
+      .chart {
+        flex: 1;
+      }
+    }
+  }
+}

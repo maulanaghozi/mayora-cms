@@ -1,22 +1,23 @@
 import React from "react";
 import GaugeChart from "react-gauge-chart";
+import classNames from "classnames";
 import Styles from "./GaugeChart.module.scss";
 
 export default function GaugeChartOEE(props) {
-  const { title, target, value } = props;
+  const { title, target, value, classContainer } = props;
   return (
-    <div>
+    <div className={classNames(Styles.container, classContainer)}>
       <GaugeChart
         id="gauge-chart5"
         nrOfLevels={420}
-        arcsLength={[0.3, 0.5, 0.2]}
-        colors={["#5BE12C", "#F5CD19", "#EA4228"]}
-        percent={0.37}
-        arcPadding={0.02}
+        arcsLength={[target, 1 - target]}
+        colors={["#E92548", "#0AC46B"]}
+        percent={value}
+        arcPadding={0.0}
       />
-      <div>
-        <span>{title}</span>
-        <span>{`${value}%`}</span>
+      <div className={Styles.titleContainer}>
+        <span className={Styles.title}>{title}</span>
+        <span className={Styles.value}>{`${value * 100}%`}</span>
       </div>
     </div>
   );

@@ -20,13 +20,13 @@ export default function Dashboard() {
             "Production Status",
             "Production Output",
             "OEE VS Target",
-            // "OEE",
+            "OEE",
           ]}
           path={[
             "/dashboard/production-status",
             "/dashboard/production-output",
             "/dashboard/oee-vs-target",
-            // "/dashboard/oee",
+            "/dashboard/oee",
           ]}
         />
       </div>
@@ -45,7 +45,7 @@ export default function Dashboard() {
           component={ProductionOutput}
         />
         <Route path={"/dashboard/oee-vs-target"} component={OEEvsTarget} />
-        {/* <Route path={"/dashboard/oee"} component={OEE} /> */}
+        <Route path={"/dashboard/oee"} component={OEE} />
         <Route
           path={"/dashboard"}
           render={() => <Redirect to={"/dashboard/production-status"} />}

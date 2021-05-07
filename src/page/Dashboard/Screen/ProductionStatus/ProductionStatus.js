@@ -326,7 +326,7 @@ export default function ProductionStatus() {
   };
 
   return (
-    <div>
+    <div style={{ paddingBottom: 50 }}>
       {renderProductionPlaningLine1()}
       {renderProductionStatusLine1()}
       {renderProductionPlaningLine2()}

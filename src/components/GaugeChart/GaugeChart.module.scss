@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .titleContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    > span {
+      color: #201d1d;
+      font-size: 28px;
+      font-family: roboto;
+      font-weight: 500;
+
+      &.title {
+        margin-right: 30px;
+      }
+    }
+  }
+}
