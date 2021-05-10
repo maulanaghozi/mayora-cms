@@ -20,6 +20,8 @@ import { ReactComponent as PlusSquareIcon } from "./plus-square.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
 import { ReactComponent as ExcelFileIcon } from "./excel-file-logo.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as PlusIcon } from "./plus.svg";
+import { ReactComponent as SearchIcon } from "./search.svg";
 
 export {
   CloseIcon,
@@ -44,4 +46,6 @@ export {
   PlusSquareIcon,
   DownloadIcon,
   ExcelFileIcon,
+  PlusIcon,
+  SearchIcon,
 };
