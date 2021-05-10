@@ -14,6 +14,7 @@ export default function GaugeChartOEE(props) {
         colors={["#E92548", "#0AC46B"]}
         percent={value}
         arcPadding={0.0}
+        style={{ width: "100%" }}
       />
       <div className={Styles.titleContainer}>
         <span className={Styles.title}>{title}</span>
