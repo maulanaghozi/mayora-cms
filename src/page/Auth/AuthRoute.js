@@ -30,7 +30,7 @@ export default function AuthPage() {
         <Route exact path={`${path}/back-to-login`} component={BackToLogin} />
         <Route path={`${path}/`} render={() => <Redirect to={"/"} />} />
       </Switch>
-      {hasToken() && <Redirect to={"/dashboard"} />}
+      {true && <Redirect to={"/dashboard"} />}
     </AuthBackground>
   );
 }
