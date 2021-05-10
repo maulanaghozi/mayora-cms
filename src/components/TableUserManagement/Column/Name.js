@@ -6,10 +6,10 @@ import {
   elipis,
 } from "../TableUserManagement.module.scss";
 
-export default function Title({ row }) {
+export default function Name({ row }) {
   return (
     <div className={table_cell + " " + column_oee}>
-      <div className={elipis}>{moment(row.Date).format("DD MMM")}</div>
+      <div className={elipis}>{row.name}</div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Styles from "./User.module.scss";
 import { PlusIcon, SearchIcon } from "../../assets/icons";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import SearchBar from "../../components/Form/SearchBar/SearchBar";
+import TableUserManagement from "../../components/TableUserManagement/TableUserManagement";
 
 export default function TroubleList() {
   const [role, setRole] = useState(null);
@@ -54,12 +55,19 @@ export default function TroubleList() {
     );
   };
 
-  const renderTable = () => {};
+  const renderTable = () => {
+    return (
+      <div className={Styles.table}>
+        <TableUserManagement />
+      </div>
+    );
+  };
 
   return (
     <div>
       {renderHeader()}
       {renderFillter()}
+      {renderTable()}
     </div>
   );
 }

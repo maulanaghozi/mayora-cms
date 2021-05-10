@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 
-import Date from "./Column/Date";
-import Target from "./Column/Target";
-import OEE from "./Column/OEE";
-import AV from "./Column/AV";
-import PE from "./Column/PE";
+import Name from "./Column/Name";
+import Email from "./Column/Email";
+import Role from "./Column/Role";
+import Status from "./Column/Status";
+import Action from "./Column/Action";
 
 import {
   container,
@@ -38,11 +38,11 @@ export default function TableOEE(props) {
         {props.data &&
           props.data.map((row, index) => (
             <div className={table_row} key={index}>
-              <Date row={row} />
-              <Target row={row} target={props.target} />
-              <OEE row={row} />
-              <AV row={row} />
-              <PE row={row} />
+              <Name row={row} />
+              <Email row={row} target={props.target} />
+              <Role row={row} />
+              <Status row={row} />
+              <Action row={row} />
             </div>
           ))}
       </div>
