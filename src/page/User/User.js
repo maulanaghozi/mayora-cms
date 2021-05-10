@@ -54,6 +54,8 @@ export default function TroubleList() {
     );
   };
 
+  const renderTable = () => {};
+
   return (
     <div>
       {renderHeader()}
