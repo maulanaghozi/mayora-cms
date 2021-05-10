@@ -28,7 +28,9 @@ export default function TableShiftRelease(props) {
                 <span>{row.time}</span>
               </div>
               <div className={Styles.columnAmount}>
-                <span>{row.amount ? row.amount : "-"}</span>
+                <span>
+                  {row.amount ? row.amount : row.amount == 0 ? 0 : "-"}
+                </span>
               </div>
             </div>
           ))}
