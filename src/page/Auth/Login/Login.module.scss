@@ -1,26 +1,26 @@
 /**
  * Login Page Component Style
  */
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-.login{
-    width: 75%;
-    height: 64px;
-    margin: 10px auto;
-    background-color: #00aeef;
-    border: none;
-    color: #ffffff;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
+.login {
+  width: 75%;
+  height: 64px;
+  margin: 10px auto;
+  background-color: #00aeef;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: roboto;
+  font-size: 0.9rem;
 }
 
 .forgot {
-    color: #00aeef;
-    margin: 33px auto;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: none;
-    font-size: 0.9rem;
+  color: #201d1d;
+  margin: 33px auto;
+  cursor: pointer;
+  font-family: roboto;
+  text-decoration: none;
+  font-size: 12px;
 }

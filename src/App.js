@@ -25,8 +25,8 @@ function App() {
     <ProviderReactAlert template={AlertTemplate} {...options}>
       <Router>
         <Switch>
-          {/* <Route path={"/auth"} component={AuthRoute} /> */}
-          <PrivateRoute path="/" auth={true}>
+          <Route path={"/auth"} component={AuthRoute} />
+          <PrivateRoute path="/" auth={hasToken()}>
             <AppRoute />
           </PrivateRoute>
         </Switch>

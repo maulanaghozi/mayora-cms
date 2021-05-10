@@ -15,6 +15,8 @@ import MasterCategory from "./MasterCategory/MasterCategory";
 import User from "./User/User";
 import Report from "./Report/Report";
 
+import { hasToken } from "../utility/utility";
+
 export default function AppPage() {
   return (
     <AppLayout>
@@ -40,7 +42,12 @@ export default function AppPage() {
         <Route path="/master-category" component={MasterCategory} />
         <Route exact path="/user" component={User} />
         <Route exact path="/report" component={Report} />
-        <Route path={"/"} render={() => <Redirect to={"/dashboard"} />} />
+        <Route
+          path={"/"}
+          render={() => (
+            <Redirect to={hasToken() ? "/dashboard" : "/auth/login"} />
+          )}
+        />
       </Switch>
     </AppLayout>
   );

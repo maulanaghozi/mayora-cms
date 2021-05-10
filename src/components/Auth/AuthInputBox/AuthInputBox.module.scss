@@ -1,72 +1,76 @@
-@import 'src/styles/mixin';
-@import 'src/styles/variable';
-@import 'src/styles/function';
+@import "src/styles/mixin";
+@import "src/styles/variable";
+@import "src/styles/function";
 
 @mixin font-mons {
-    @include primary-font(reguler);
-    font-size: 0.875rem;
+  @include primary-font(reguler);
+  font-size: 0.875rem;
 }
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    width: 75%;
-    height: 4rem;
-    margin: 1rem auto;
-    background-color: #1f1f1f;
+  width: 75%;
+  height: 3rem;
+  margin: 1rem auto;
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
 }
 
 @font-face {
-    font-family: 'customdiamond';
-      src: url('../../../assets/font/customdiamond.eot?74085734');
-      src: url('../../../assets/font/customdiamond.eot?74085734#iefix') format('embedded-opentype'),
-           url('../../../assets/font/customdiamond.woff?74085734') format('woff'),
-           url('../../../assets/font/customdiamond.ttf?74085734') format('truetype'),
-           url('../../../assets/font/customdiamond.svg?74085734#customdiamond') format('svg');
-      font-weight: normal;
-      font-style: normal;
+  font-family: "customdiamond";
+  src: url("../../../assets/font/customdiamond.eot?74085734");
+  src: url("../../../assets/font/customdiamond.eot?74085734#iefix")
+      format("embedded-opentype"),
+    url("../../../assets/font/customdiamond.woff?74085734") format("woff"),
+    url("../../../assets/font/customdiamond.ttf?74085734") format("truetype"),
+    url("../../../assets/font/customdiamond.svg?74085734#customdiamond")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .input {
-    @include font-mons;
+  @include font-mons;
 
+  outline: none;
+  color: black;
+  background-color: transparent;
+  border: none;
+  width: 90%;
+  font-weight: 500;
+
+  :active {
     outline: none;
-    color: white;
-    background-color: transparent;
     border: none;
-    width: 90%;
-    font-weight: 500;
-    
-    :active {
-        outline: none;
-        border: none;
-        color: white;
-    }
+    color: black;
+  }
 }
 
-.input[type='password'] {
-	font-family: 'customdiamond' ;
-	font-style: normal;
-	font-weight: normal;
-    speak: none;
+.input[type="password"] {
+  font-family: "customdiamond";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
 
-	/* For safety - reset parent styles, that can break glyph codes*/
-	font-variant: normal;
-	text-transform: none;
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
 
-	/* Font smoothing. That was taken from TWBS */
-	-webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.input[type='password']::placeholder { /* Firefox 18- */
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500 !important;
-    font-size: 0.875rem !important;
-    letter-spacing: 0px !important;
+.input[type="password"]::placeholder {
+  /* Firefox 18- */
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0px !important;
 }
-
 
 .input:-webkit-autofill,
 .input:-webkit-autofill:hover, 
@@ -78,14 +82,14 @@
 // select:-webkit-autofill:hover,
 // select:-webkit-autofill:focus,
 .input:-webkit-autofill::first-line {
-    font-size: 0.875rem;
-    font-weight: 500;
-    -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
-    box-shadow: 0 0 0 30px #1f1f1f inset !important;
-    -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+  box-shadow: 0 0 0 30px #1f1f1f inset !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 .icon {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
