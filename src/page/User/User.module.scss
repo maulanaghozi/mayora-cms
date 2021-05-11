@@ -50,10 +50,26 @@
   padding: 0 30px;
 }
 
+.inputSelect {
+  width: 200px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+.labelCustomContainer {
+  width: 100%;
+  > .label {
+    font-family: roboto;
+    font-size: 14px;
+    line-height: 30px;
+  }
+}
+
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 40px;
 
   > button {
     outline: none;

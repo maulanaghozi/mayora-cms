@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Styles from "./User.module.scss";
 import classNames from "classnames";
+import {
+  RadioGroup,
+  RadioButton,
+  ReversedRadioButton,
+} from "react-radio-buttons";
 import { PlusIcon, SearchIcon } from "../../assets/icons";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import SearchBar from "../../components/Form/SearchBar/SearchBar";
@@ -171,7 +176,7 @@ export default function UserManagement() {
           name={"email"}
           placeholder={"Email"}
         />
-        <div>
+        <div style={{ display: "flex", width: "100%" }}>
           <LabelCustom label={"Role"}>
             <InputSelect
               value={roleIdCreate}
@@ -193,21 +198,31 @@ export default function UserManagement() {
             />
           </LabelCustom>
           <LabelCustom label={"Line Type"}>
-            <div>
-              <InputCheckBox
-                className={classNames(Styles.checkbox)}
-                value={machine1}
-                onChange={value => setMachine1(value)}
-                label={"Line 1"}
-              />
-              <InputCheckBox
-                className={classNames(Styles.checkbox)}
-                value={machine2}
-                onChange={value => setMachine2(value)}
-                label={"Line 2"}
-              />
+            <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <InputCheckBox
+                  className={classNames(Styles.checkbox)}
+                  value={machine1}
+                  onChange={value => setMachine1(value)}
+                  label={"Line 1"}
+                />
+              </div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <InputCheckBox
+                  className={classNames(Styles.checkbox)}
+                  value={machine2}
+                  onChange={value => setMachine2(value)}
+                  label={"Line 2"}
+                />
+              </div>
             </div>
           </LabelCustom>
+          {/* <LabelCustom label={"Status"}>
+            <RadioGroup onChange={val => console.log(val)} horizontal>
+              <RadioButton value="apple">Active</RadioButton>
+              <RadioButton value="orange">Inactive</RadioButton>
+            </RadioGroup>
+          </LabelCustom> */}
         </div>
         <div className={Styles.buttonContainer}>
           <button
@@ -247,8 +262,8 @@ export default function UserManagement() {
 
 const LabelCustom = props => {
   return (
-    <div>
-      <span>{props.label}</span>
+    <div className={Styles.labelCustomContainer}>
+      <span className={Styles.label}>{props.label}</span>
       {props.children}
     </div>
   );
