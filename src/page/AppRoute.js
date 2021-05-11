@@ -45,7 +45,7 @@ export default function AppPage() {
         <Route
           path={"/"}
           render={() => (
-            <Redirect to={hasToken() ? "/dashboard" : "dashboard"} />
+            <Redirect to={hasToken() ? "/dashboard" : "/auth/login"} />
           )}
         />
       </Switch>

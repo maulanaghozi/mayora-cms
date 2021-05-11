@@ -19,6 +19,7 @@ import { Context } from "../../../hooks/context";
 
 export default function AdminProfile() {
   const [adminName, setAdminName] = useState("");
+  const [role, setRole] = useState("");
   const [displayBox, setDisplayBox] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const context = useContext(Context);
@@ -27,10 +28,13 @@ export default function AdminProfile() {
     try {
       http({
         method: "GET",
-        path: "profiles/user/" + jwtDecode(getToken()).user_id,
+        path: "user/" + jwtDecode(getToken()).id,
       }).then(result => {
         if (result && result.code === "success") {
           setAdminName(result.payload.name);
+          if (result.payload.role) {
+            setRole(result.payload.role.name);
+          }
           context.setAdminProfile(result.payload);
         }
       });
@@ -50,17 +54,17 @@ export default function AdminProfile() {
   };
 
   const logoutAdmin = e => {
-    // setAdminName(null);
-    // setRedirect(true);
-    // removeToken();
+    setAdminName(null);
+    removeToken();
+    setRedirect(true);
   };
 
   return (
     <div className={container}>
       <div className={text} onClick={toggleBox}>
         <div className={Styles.profileWrapper}>
-          <span>Budi Putra</span>
-          <span className={Styles.role}>Administrator</span>
+          <span>{adminName}</span>
+          <span className={Styles.role}>{role}</span>
         </div>
         <Chevron className={icon} width={20} />
       </div>

@@ -31,15 +31,15 @@ export const capitalize = word =>
     .join(" ");
 
 export const hasToken = () => {
-  return !!localStorage.getItem("kestingrum-cms");
+  return !!localStorage.getItem("mayora-cms");
 };
 
 export const getToken = () => {
-  return localStorage.getItem("kestingrum-cms");
+  return localStorage.getItem("mayora-cms");
 };
 
 export const removeToken = () => {
-  return localStorage.removeItem("kestingrum-cms");
+  return localStorage.removeItem("mayora-cms");
 };
 
 export const validateEmail = email => {

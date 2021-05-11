@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useHistory, Link, useRouteMatch, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { http } from "../../../utility/http";
 
 import InputBox from "../../../components/Auth/AuthInputBox/AuthInputBox";
 import AuthButton from "../../../components/Auth/AuthButton/AuthButton";
 
 import { ReactComponent as LockIconDark } from "../../../assets/lock_dark.svg";
-import { ReactComponent as LockIconLight } from "../../../assets/lock_light.svg";
 import { ReactComponent as MailIconDark } from "../../../assets/mail_dark.svg";
-import { ReactComponent as MailIconLight } from "../../../assets/mail_light.svg";
 
 import { forgot } from "./Login.module.scss";
 import { validateEmail } from "../../../utility/utility";
@@ -38,7 +36,7 @@ export default function Login(props) {
         try {
           const params = {
             method: "post",
-            path: "user/login",
+            path: "authentication/login",
             data: {
               email: email,
               password: password,
@@ -48,7 +46,7 @@ export default function Login(props) {
           const data = await http(params);
 
           if (data && data.code === "success") {
-            localStorage.setItem("mayora-cms", data.payload.jwt);
+            localStorage.setItem("mayora-cms", data.payload.token);
             setRedirect(true);
           } else {
             if (data) {
@@ -74,7 +72,6 @@ export default function Login(props) {
 
   const emailAttr = {
     Icon: MailIconDark,
-    FocusIcon: MailIconLight,
     inputAttr: {
       name: "email",
       type: "text",
@@ -88,7 +85,6 @@ export default function Login(props) {
 
   const passwordAttr = {
     Icon: LockIconDark,
-    FocusIcon: LockIconLight,
     inputAttr: {
       name: "password",
       type: "password",

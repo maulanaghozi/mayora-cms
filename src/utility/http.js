@@ -8,9 +8,7 @@ export const http = async (params, progress, setProgress) => {
     let percentCompleted;
     params.showMessage =
       params.showMessage !== undefined ? params.showMessage : true;
-    let auth = params.token
-      ? params.token
-      : localStorage.getItem("kestingrum-cms");
+    let auth = params.token ? params.token : localStorage.getItem("mayora-cms");
     let query = params.query
       ? "?" + queryString.stringify(params.query, { arrayFormat: "bracket" })
       : "";
@@ -20,7 +18,7 @@ export const http = async (params, progress, setProgress) => {
       url: params.path + (query || ""),
       data: params.data ? params.data : {},
       headers: {
-        // Authorization: 'Bearer ' + (auth ? auth : ''),
+        Authorization: "Bearer " + (auth ? auth : ""),
         "Content-Type": params.content_type
           ? params.content_type
           : "application/json",
@@ -33,7 +31,7 @@ export const http = async (params, progress, setProgress) => {
           setProgress(percentCompleted);
         }
       },
-      responseType:params.responseType || ""
+      responseType: params.responseType || "",
     };
 
     let { data } = await axios(config);
