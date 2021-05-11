@@ -61,7 +61,7 @@ export const ProductionPlanning = props => {
           <span>Actual</span>
           <div>
             <h1>{actual}</h1>
-            <ChevronDownFill />
+            {target > actual && <ChevronDownFill />}
           </div>
         </div>
         <div className={Styles.dataWrapper}>
