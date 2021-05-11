@@ -4,7 +4,7 @@ import { CheckBoxChecked } from "../../../assets/image";
 import classNames from "classnames";
 
 export default function InputCheckbox(props) {
-  const [checked, setChecked] = useState(props.value || 0);
+  const [checked, setChecked] = useState(props.value || false);
 
   const onChange = checked => {
     props.onChange(checked);
@@ -21,10 +21,10 @@ export default function InputCheckbox(props) {
           value={1}
           checked={!!checked}
           onChange={e => {
-            if (checked === 0) {
-              setChecked(1);
-            } else if (checked === 1) {
-              setChecked(0);
+            if (checked === false) {
+              setChecked(true);
+            } else if (checked === true) {
+              setChecked(false);
             }
           }}
         />

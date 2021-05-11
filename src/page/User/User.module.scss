@@ -49,3 +49,28 @@
 .table {
   padding: 0 30px;
 }
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  > button {
+    outline: none;
+    padding: 5px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    &.cancel {
+      background-color: #ffffff;
+      border: 1px solid #d9d9d9;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    &.save {
+      background-color: #c60808;
+      color: #ffffff;
+      border: none;
+    }
+  }
+}
