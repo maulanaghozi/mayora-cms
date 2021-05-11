@@ -39,7 +39,7 @@ export default function TableOEE(props) {
           props.data.map((row, index) => (
             <div className={table_row} key={index}>
               <Name row={row} />
-              <Email row={row} target={props.target} />
+              <Email row={row} />
               <Role row={row} />
               <Status row={row} />
               <Action row={row} />

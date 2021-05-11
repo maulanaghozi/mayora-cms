@@ -1,13 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Styles from "./User.module.scss";
 import { PlusIcon, SearchIcon } from "../../assets/icons";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import SearchBar from "../../components/Form/SearchBar/SearchBar";
 import TableUserManagement from "../../components/TableUserManagement/TableUserManagement";
+import { http } from "../../utility/http";
 
-export default function TroubleList() {
-  const [role, setRole] = useState(null);
+export default function UserManagement() {
+  const [roleId, setRoleId] = useState(null);
   const [keyword, setKeyword] = useState("");
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getDataUser();
+  }, [roleId, keyword]);
+
+  const getDataUser = async () => {
+    const query = {};
+
+    if (roleId) query["roleId"] = roleId;
+    if (keyword) query["keyword"] = keyword;
+
+    const params = {
+      method: "GET",
+      path: "user",
+      query: query,
+    };
+
+    const result = await http(params);
+
+    if (result.code === "success" && result.payload) {
+      console.log(result.payload.results);
+      setData(result.payload.results);
+    } else {
+      setData([]);
+    }
+  };
 
   const renderHeader = () => {
     return (
@@ -26,21 +54,29 @@ export default function TroubleList() {
         </div>
         <div className={Styles.fillter}>
           <InputSelect
-            value={role}
+            value={roleId}
             className={Styles.inputSelect}
             placeholder={"All Role"}
             options={[
               {
-                value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                value: null,
+                label: "All Role",
+              },
+              {
+                value: "ROLE-USER-MYR001",
+                label: "Administartor",
+              },
+              {
+                value: "ROLE-USER-MYR002",
                 label: "Supervisor",
               },
               {
-                value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                value: "ROLE-USER-MYR003",
                 label: "Operator",
               },
             ]}
             onChange={selected => {
-              setRole(selected.value);
+              setRoleId(selected.value);
             }}
           />
           <SearchBar
@@ -58,7 +94,7 @@ export default function TroubleList() {
   const renderTable = () => {
     return (
       <div className={Styles.table}>
-        <TableUserManagement />
+        <TableUserManagement data={data} />
       </div>
     );
   };
