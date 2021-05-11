@@ -20,6 +20,7 @@ import { ReactComponent as PlusSquareIcon } from "./plus-square.svg";
 import { ReactComponent as DownloadIcon } from "./download.svg";
 import { ReactComponent as ExcelFileIcon } from "./excel-file-logo.svg";
 import { ReactComponent as CloseIcon } from "./close.svg";
+import { ReactComponent as ChevronDownFill } from "./chevron-down-fill.svg";
 
 export {
   CloseIcon,
@@ -44,4 +45,5 @@ export {
   PlusSquareIcon,
   DownloadIcon,
   ExcelFileIcon,
+  ChevronDownFill,
 };
