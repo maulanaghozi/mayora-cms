@@ -10,6 +10,7 @@ class BarChart extends Component {
 
     this.state = {
       optionsMixedChart: {
+        colors: ["#E92548", "#0861CB"],
         chart: {
           id: "basic-bar",
           toolbar: {
