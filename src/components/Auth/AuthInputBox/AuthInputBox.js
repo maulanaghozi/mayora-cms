@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   container,
   input,
@@ -11,18 +11,19 @@ import { ReactComponent as EyeOffIcon } from "../../../assets/eye_off.svg";
 import InputErrorMsg from "./InputErrorMsg/InputErrorMsg";
 
 export default function InputBox(props) {
-  const [focus, setFocus] = useState(false);
   const [placeholder, setPlaceholder] = useState(props.inputAttr.placeholder);
   const [passwordType, setPasswordType] = useState("password");
 
+  useEffect(() => {
+    setPlaceholder(props.inputAttr.placeholder);
+  }, [props.inputAttr.placeholder]);
+
   const handleFocus = () => {
-    setFocus(true);
     props.setErrorMsg(false);
     setPlaceholder("");
   };
 
   const handleBlur = () => {
-    setFocus(false);
     setPlaceholder(props.inputAttr.placeholder);
   };
 
@@ -36,8 +37,7 @@ export default function InputBox(props) {
 
   return (
     <div className={container}>
-      {(focus || props.inputAttr.value) && <props.Icon className={icon} />}
-      {!(focus || props.inputAttr.value) && <props.Icon className={icon} />}
+      <props.Icon className={icon} />
       <input
         className={input}
         onFocus={handleFocus}

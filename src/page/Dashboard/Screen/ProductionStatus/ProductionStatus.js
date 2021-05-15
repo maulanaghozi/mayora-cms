@@ -40,8 +40,16 @@ export default function ProductionStatus() {
   const [status2, setStatus2] = useState("running");
 
   useEffect(() => {
-    handleMinutesPass();
-    getTroublelist();
+    let mounted = true;
+
+    if (mounted) {
+      handleMinutesPass();
+      getTroublelist();
+    }
+
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -293,7 +301,7 @@ export default function ProductionStatus() {
     return (
       <ProductionPlanning
         machineName={"line 1"}
-        target={target1}
+        target={Number(target1)}
         actual={actual1}
         status={status1}
       />
@@ -314,7 +322,7 @@ export default function ProductionStatus() {
     return (
       <ProductionPlanning
         machineName={"line 2"}
-        target={target2}
+        target={Number(target2)}
         actual={actual2}
         status={status2}
       />

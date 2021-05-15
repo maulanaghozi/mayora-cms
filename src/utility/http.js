@@ -3,6 +3,9 @@ import history from "./history";
 import queryString from "query-string";
 export const baseURL = process.env.REACT_APP_BASE_URL;
 
+const CancelToken = axios.CancelToken;
+let cancel;
+
 export const http = async (params, progress, setProgress) => {
   try {
     let percentCompleted;
@@ -34,15 +37,27 @@ export const http = async (params, progress, setProgress) => {
       responseType: params.responseType || "",
     };
 
-    let { data } = await axios(config);
+    let { data } = await axios(config, {
+      cancelToken: new CancelToken(function executor(c) {
+        // An executor function receives a cancel function as a parameter
+        cancel = c;
+      }),
+    });
+
     return data;
   } catch (err) {
+    console.log(err);
     if (err.response) {
       // if (err.response.status === 401) {
-      //     localStorage.removeItem('kestingrum-cms')
-      //     history.push('auth/login')
-      //     alert(err.response.data.message)
+      //   localStorage.removeItem("mayora-cms");
+      //   history.push("/auth/login");
+      //   alert(err.response.data.message);
       // }
+
+      if (typeof cancel === "function") {
+        cancel();
+      }
+      console.log(err.response);
       return err.response.data.message;
     }
   }

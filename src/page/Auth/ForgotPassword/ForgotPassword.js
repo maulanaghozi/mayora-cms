@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { http } from "../../../utility/http";
 
 import AuthHeader from "../../../components/Auth/AuthHeader/AuthHeader";
@@ -19,8 +14,15 @@ import { validateEmail } from "../../../utility/utility";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [sassionId, setSassionId] = useState(null);
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    if (sassionId) {
+      setRedirect(true);
+    }
+  }, [sassionId]);
 
   const handleTextChange = e => {
     if (e.target.name === "email") {
@@ -33,7 +35,7 @@ export default function ForgotPassword() {
       if (validateEmail(email)) {
         const params = {
           method: "POST",
-          path: "profiles/authentication/password/forgot/request-otp/",
+          path: "authentication/forgot-password",
           data: {
             email: email,
           },
@@ -41,7 +43,7 @@ export default function ForgotPassword() {
         http(params)
           .then(data => {
             if (data && data.code === "success") {
-              setRedirect(true);
+              setSassionId(data.payload.sassionId);
             } else {
               setEmailErrorMsg(
                 "Something went wrong please check your internet access"
@@ -94,7 +96,10 @@ export default function ForgotPassword() {
       </Link>
       {redirect && (
         <Redirect
-          to={{ pathname: "/auth/verify-code", state: { email: email } }}
+          to={{
+            pathname: "/auth/verify-code",
+            state: { email: email, sassionId: sassionId },
+          }}
         />
       )}
     </React.Fragment>

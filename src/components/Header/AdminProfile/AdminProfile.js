@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-import { getToken, removeToken } from "../../../utility/utility";
+import { getToken, removeToken, hasToken } from "../../../utility/utility";
 import { http } from "../../../utility/http";
 
 import { ReactComponent as Chevron } from "../../../assets/chevron_bottom.svg";
@@ -23,25 +23,43 @@ export default function AdminProfile() {
   const [displayBox, setDisplayBox] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const context = useContext(Context);
+  const history = useHistory();
 
   useEffect(() => {
+    getAdmin();
+  }, []);
+
+  const getAdmin = async () => {
     try {
-      http({
+      if (!hasToken()) {
+        localStorage.removeItem("mayora-cms");
+        return history.push("/auth/login");
+      }
+
+      const result = await http({
         method: "GET",
         path: "user/" + jwtDecode(getToken()).id,
-      }).then(result => {
-        if (result && result.code === "success") {
-          setAdminName(result.payload.name);
-          if (result.payload.role) {
-            setRole(result.payload.role.name);
-          }
-          context.setAdminProfile(result.payload);
-        }
       });
-    } catch {
-      console.error("token not valid");
+
+      if (result && result.code === "success") {
+        console.log("RESULLSSSSSS", result);
+        setAdminName(result.payload.name);
+        if (result.payload.role) {
+          setRole(result.payload.role.name);
+        }
+        context.setAdminProfile(result.payload);
+      } else {
+        console.log(result);
+        localStorage.removeItem("mayora-cms");
+        history.push("/auth/login");
+        console.error("token not valid");
+      }
+    } catch (error) {
+      console.log(error);
+      localStorage.removeItem("mayora-cms");
+      return history.push("/auth/login");
     }
-  }, []);
+  };
 
   const boxRef = useRef(null);
 
