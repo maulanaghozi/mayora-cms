@@ -9,6 +9,7 @@ class ChartOEEvsTarget extends Component {
 
     this.state = {
       optionsMixedChart: {
+        colors: ["#E92548", "#0861CB"],
         chart: {
           id: "basic-bar",
           toolbar: {
@@ -38,7 +39,7 @@ class ChartOEEvsTarget extends Component {
         yaxis: {
           tickAmount: 5,
           min: 0,
-          max: 1,
+          max: 100,
         },
       },
       seriesMixedChart: [

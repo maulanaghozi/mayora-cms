@@ -15,12 +15,13 @@ import {
   table_row,
   table_cell,
   column_oee,
+  column_date,
 } from "./TableOEE.module.scss";
 
 const Header = ["Date", "Target", "OEE", "AV", "PE", "QR"];
 
 const headerClasses = [
-  column_oee,
+  column_date,
   column_oee,
   column_oee,
   column_oee,
@@ -42,7 +43,7 @@ export default function TableOEE(props) {
             <div className={table_row} key={index}>
               <Date row={row} />
               <Target row={row} target={props.target} />
-              <OEE row={row} />
+              <OEE row={row} target={props.target} />
               <AV row={row} />
               <PE row={row} />
               <QR row={row} />

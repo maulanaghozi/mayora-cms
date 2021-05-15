@@ -10,6 +10,7 @@ class BarChart extends Component {
 
     this.state = {
       optionsMixedChart: {
+        colors: ["#E92548", "#0861CB"],
         chart: {
           id: "basic-bar",
           toolbar: {
@@ -36,19 +37,18 @@ class BarChart extends Component {
             size: 8,
           },
         },
-        yaxis: {
-          tickAmount: 5,
-          min: 0,
-          max: Number(props.target),
-        },
+        yaxis: [
+          {
+            tickAmount: 5,
+            min: 0,
+            max: Number(props.target),
+          },
+        ],
       },
       seriesMixedChart: [
         {
           name: "Target",
           type: "line",
-          chart: {
-            background: "#fff",
-          },
           data: props.dataTarget,
         },
         {
@@ -110,57 +110,11 @@ export default BarChart;
 
 const data = {
   target: [
-    125,
-    250,
-    375,
-    500,
-    625,
-    750,
-    875,
-    1000,
-    1125,
-    1250,
-    1375,
-    1500,
-    1625,
-    1750,
-    1875,
-    2000,
-    2125,
-    2250,
-    2375,
-    2500,
-    2625,
-    2750,
-    2875,
-    3000,
+    125, 250, 375, 500, 625, 750, 875, 1000, 1125, 1250, 1375, 1500, 1625, 1750,
+    1875, 2000, 2125, 2250, 2375, 2500, 2625, 2750, 2875, 3000,
   ],
   actual: [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ],
   categories: [
     "07",

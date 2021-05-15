@@ -50,14 +50,14 @@ export default function OEEvsTarget() {
 
     data.forEach(item => {
       const date = moment(item.Date).format("DD MMM");
-      const oee = item.OEE / 100;
+      const oee = item.OEE;
 
       dates.push(date);
       oeeData.push(oee);
       if (machine === 1) {
-        target.push(targetOEE1 / 100);
+        target.push(targetOEE1);
       } else {
-        target.push(targetOEE2 / 100);
+        target.push(targetOEE2);
       }
     });
 

@@ -193,22 +193,26 @@ export default function ProductionStatus() {
 
   const getActual1 = async () => {
     let date = moment().format("YYYY-MM-DD");
-    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
-    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
     if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
+      startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+      endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
     }
 
     const params = {
       method: "GET",
-      path: "actual-release",
+      path: "release/last",
       query: {
         machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
-        date: date,
+        startTime: startTime,
+        endTime: endTime,
       },
     };
 
@@ -216,7 +220,6 @@ export default function ProductionStatus() {
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log("success ", result.payload);
         setActual1(result.payload.amount);
       } else {
         setActual1(0);
@@ -228,22 +231,26 @@ export default function ProductionStatus() {
 
   const getActual2 = async () => {
     let date = moment().format("YYYY-MM-DD");
-    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
 
-    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
-    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
 
     if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
+      startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+      endTime = moment(startTime).add(1, "days").format("YYYY MM DD HH:mm");
     }
 
     const params = {
       method: "GET",
-      path: "actual-release",
+      path: "release/last",
       query: {
         machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-        date: date,
+        startTime: startTime,
+        endTime: endTime,
       },
     };
 
@@ -251,7 +258,6 @@ export default function ProductionStatus() {
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log("success ", result.payload);
         setActual2(result.payload.amount);
       } else {
         setActual2(0);
