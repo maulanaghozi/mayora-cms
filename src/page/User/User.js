@@ -30,6 +30,20 @@ export default function UserManagement() {
   const [machine1, setMachine1] = useState(true);
   const [machine2, setMachine2] = useState(false);
 
+  //Edit
+  const [userEdit, setUserEdit] = useState({
+    id: "",
+    email: "",
+    name: "",
+    roleId: "",
+    status: "",
+    machine1: false,
+    machine2: false,
+    role: {
+      name: "",
+    },
+  });
+
   useEffect(() => {
     getDataUser();
   }, [roleId, keyword]);
@@ -88,7 +102,52 @@ export default function UserManagement() {
       alert("Add User Failed");
     }
   };
-  const onEditUser = async id => {};
+
+  const handleOnChangeEdit = newValue => {
+    setUserEdit({ ...userEdit, ...newValue });
+  };
+
+  const onEditUser = async id => {
+    const data = {
+      name: userEdit.name,
+      email: userEdit.email,
+      status: userEdit.status,
+      roleId: userEdit.roleId,
+      machine1: userEdit.machine1,
+      machine2: userEdit.machine2,
+    };
+
+    const params = {
+      method: "PUT",
+      path: `user/${id}`,
+      data: data,
+    };
+
+    console.log(data);
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      if (result.payload.isSuccess) {
+        setUserEdit({
+          id: "",
+          email: "",
+          name: "",
+          roleId: "",
+          status: "",
+          machine1: false,
+          machine2: false,
+          role: {
+            name: "",
+          },
+        });
+        setModalEditVisible(false);
+        getDataUser();
+      }
+    } else {
+      alert("Add User Failed");
+    }
+  };
 
   const renderHeader = () => {
     return (
@@ -150,7 +209,11 @@ export default function UserManagement() {
   const renderTable = () => {
     return (
       <div className={Styles.table}>
-        <TableUserManagement data={data} />
+        <TableUserManagement
+          data={data}
+          setModalEditVisible={setModalEditVisible}
+          setUserEdit={setUserEdit}
+        />
       </div>
     );
   };
@@ -245,7 +308,88 @@ export default function UserManagement() {
         visible={modalEditVisible}
         onClose={() => setModalEditVisible(false)}
         title={"Edit User"}
-      ></CustomModal>
+      >
+        <InputWithLabel
+          label={"Name"}
+          value={userEdit.name}
+          setValue={name => handleOnChangeEdit({ name })}
+          name={"name"}
+          placeholder={"Name"}
+        />
+        <InputWithLabel
+          label={"Email"}
+          value={userEdit.email}
+          setValue={email => handleOnChangeEdit({ email })}
+          name={"email"}
+          placeholder={"Email"}
+        />
+        <div style={{ display: "flex", width: "100%" }}>
+          <LabelCustom label={"Role"}>
+            <InputSelect
+              value={userEdit.roleId}
+              defaultValue={{
+                value: userEdit.roleId,
+                label: userEdit.role.name,
+              }}
+              className={Styles.inputSelect}
+              placeholder={"Select Role"}
+              options={[
+                {
+                  value: "ROLE-USER-MYR002",
+                  label: "Supervisor",
+                },
+                {
+                  value: "ROLE-USER-MYR003",
+                  label: "Operator",
+                },
+              ]}
+              onChange={selected => {
+                handleOnChangeEdit({ roleId: selected.value });
+              }}
+            />
+          </LabelCustom>
+          <LabelCustom label={"Line Type"}>
+            <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <InputCheckBox
+                  className={classNames(Styles.checkbox)}
+                  value={userEdit.machine1}
+                  onChange={value => handleOnChangeEdit({ machine1: value })}
+                  label={"Line 1"}
+                />
+              </div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <InputCheckBox
+                  className={classNames(Styles.checkbox)}
+                  value={userEdit.machine2}
+                  onChange={value => handleOnChangeEdit({ machine2: value })}
+                  label={"Line 2"}
+                />
+              </div>
+            </div>
+          </LabelCustom>
+          {/* <LabelCustom label={"Status"}>
+            <RadioGroup onChange={val => console.log(val)} horizontal>
+              <RadioButton value="apple">Active</RadioButton>
+              <RadioButton value="orange">Inactive</RadioButton>
+            </RadioGroup>
+          </LabelCustom> */}
+        </div>
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => setModalEditVisible(false)}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => onEditUser(userEdit.id)}
+            className={Styles.save}
+          >
+            Save
+          </button>
+        </div>
+      </CustomModal>
     );
   };
 

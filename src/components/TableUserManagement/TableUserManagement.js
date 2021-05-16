@@ -27,6 +27,7 @@ const headerClasses = [
 ];
 
 export default function TableOEE(props) {
+  const { setModalEditVisible, setUserEdit } = props;
   return (
     <div className={container}>
       <div className={table_header}>
@@ -42,7 +43,11 @@ export default function TableOEE(props) {
               <Email row={row} />
               <Role row={row} />
               <Status row={row} />
-              <Action row={row} />
+              <Action
+                row={row}
+                setModalEditVisible={setModalEditVisible}
+                setUserEdit={setUserEdit}
+              />
             </div>
           ))}
       </div>
