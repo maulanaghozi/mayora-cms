@@ -2,6 +2,7 @@ import React from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./SpeedLosses.module.scss";
+import { PlusIcon } from "../../../../assets/icons";
 
 export default function SpeedLosses() {
   const renderDirectoryParent = () => {
@@ -15,7 +16,13 @@ export default function SpeedLosses() {
                 <Directory name={params.name} key={idx.toString()}>
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
-                      <CategoryList data={params.categories} />
+                      <>
+                        <div className={Styles.buttonAdd} onClick={() => {}}>
+                          <PlusIcon />
+                          <span>Add New Category</span>
+                        </div>
+                        <CategoryList data={params.categories} />
+                      </>
                     )}
                 </Directory>
               ))}

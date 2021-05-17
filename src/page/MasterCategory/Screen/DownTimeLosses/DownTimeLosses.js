@@ -2,6 +2,7 @@ import React from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./DownTimeLosses.module.scss";
+import { PlusIcon } from "../../../../assets/icons";
 
 export default function DownTimeLosses() {
   const renderDirectoryParent = () => {
@@ -15,7 +16,13 @@ export default function DownTimeLosses() {
                 <Directory name={params.name} key={idx.toString()}>
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
-                      <CategoryList data={params.categories} />
+                      <>
+                        <div className={Styles.buttonAdd} onClick={() => {}}>
+                          <PlusIcon />
+                          <span>Add New Category</span>
+                        </div>
+                        <CategoryList data={params.categories} />
+                      </>
                     )}
                   {Array.isArray(params.children) &&
                     params.children.length > 0 &&
@@ -23,14 +30,30 @@ export default function DownTimeLosses() {
                       <Directory name={el.name} key={idx.toString()}>
                         {Array.isArray(el.categories) &&
                           el.categories.length > 0 && (
-                            <CategoryList data={el.categories} />
+                            <>
+                              <div
+                                className={Styles.buttonAdd}
+                                onClick={() => {}}
+                              >
+                                <PlusIcon />
+                                <span>Add New Category</span>
+                              </div>
+                              <CategoryList data={el.categories} />
+                            </>
                           )}
                       </Directory>
                     ))}
                 </Directory>
               ))}
+
             {Array.isArray(item.categories) && item.categories.length > 0 && (
-              <CategoryList data={item.categories} />
+              <>
+                <div className={Styles.buttonAdd} onClick={() => {}}>
+                  <PlusIcon />
+                  <span>Add New Category</span>
+                </div>
+                <CategoryList data={item.categories} />
+              </>
             )}
           </Directory>
         ))}

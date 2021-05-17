@@ -2,6 +2,7 @@ import React from "react";
 import { Directory } from "../../../../components/Directory/Directory";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import Styles from "./ReworkLosses.module.scss";
+import { PlusIcon } from "../../../../assets/icons";
 
 export default function RewarkLosses() {
   const renderDirectoryParent = () => {

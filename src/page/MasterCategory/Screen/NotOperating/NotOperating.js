@@ -1,6 +1,7 @@
 import React from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
+import { PlusIcon } from "../../../../assets/icons";
 import Styles from "./NotOperating.module.scss";
 
 export default function NotOperating() {
@@ -9,6 +10,10 @@ export default function NotOperating() {
       <div>
         {results.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
+            <div className={Styles.buttonAdd} onClick={() => {}}>
+              <PlusIcon />
+              <span>Add New Category</span>
+            </div>
             {Array.isArray(item.categories) && item.categories.length > 0 && (
               <CategoryList data={item.categories} />
             )}

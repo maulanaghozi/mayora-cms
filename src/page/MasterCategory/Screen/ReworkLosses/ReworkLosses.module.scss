@@ -2,6 +2,24 @@
   font-family: roboto;
   padding: 20px 30px;
 
+  .buttonAdd {
+    display: flex;
+    align-items: center;
+    background-color: #c60808;
+    border-radius: 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    width: 180px;
+    margin-top: 15px;
+
+    > span {
+      font-family: roboto;
+      color: #ffffff;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+  }
+
   .cardTargetContainer {
     display: flex;
     flex-direction: row;
