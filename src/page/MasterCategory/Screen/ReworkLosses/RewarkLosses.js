@@ -16,7 +16,13 @@ export default function RewarkLosses() {
                 <Directory name={params.name} key={idx.toString()}>
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
-                      <CategoryList data={params.categories} />
+                      <>
+                        <div className={Styles.buttonAdd} onClick={() => {}}>
+                          <PlusIcon />
+                          <span>Add New Category</span>
+                        </div>
+                        <CategoryList data={params.categories} />
+                      </>
                     )}
                 </Directory>
               ))}
