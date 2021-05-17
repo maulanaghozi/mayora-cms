@@ -75,6 +75,11 @@ export default function UserManagement() {
       machine2: machine2,
     };
 
+    if (data.roleId === "ROLE-USER-MYR002") {
+      data.machine2 = true;
+      data.machine1 = true;
+    }
+
     const params = {
       method: "POST",
       path: "user",
@@ -112,13 +117,16 @@ export default function UserManagement() {
       machine2: userEdit.machine2,
     };
 
+    if (data.roleId === "ROLE-USER-MYR002") {
+      data.machine2 = true;
+      data.machine1 = true;
+    }
+
     const params = {
       method: "PUT",
       path: `user/${id}`,
       data: data,
     };
-
-    console.log(data);
 
     const result = await http(params);
 
