@@ -1,5 +1,5 @@
 import React from "react";
-import TableCategory from "../../../../components/TableCategryManualCollection";
+import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./NotOperating.module.scss";
 
@@ -10,8 +10,7 @@ export default function NotOperating() {
         {results.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
             {Array.isArray(item.categories) && item.categories.length > 0 && (
-              // <TableCategory data={item.categories} />
-              <div></div>
+              <CategoryList data={item.categories} />
             )}
           </Directory>
         ))}

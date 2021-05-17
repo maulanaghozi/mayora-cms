@@ -1,5 +1,5 @@
 import React from "react";
-import TableCategory from "../../../../components/TableCategryManualCollection";
+import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./SpeedLosses.module.scss";
 
@@ -15,8 +15,7 @@ export default function SpeedLosses() {
                 <Directory name={params.name} key={idx.toString()}>
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
-                      // <TableCategory data={params.categories} />
-                      <div></div>
+                      <CategoryList data={params.categories} />
                     )}
                 </Directory>
               ))}

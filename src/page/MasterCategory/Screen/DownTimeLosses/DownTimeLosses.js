@@ -1,5 +1,5 @@
 import React from "react";
-import TableCategory from "../../../../components/TableCategryManualCollection";
+import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./DownTimeLosses.module.scss";
 
@@ -15,19 +15,22 @@ export default function DownTimeLosses() {
                 <Directory name={params.name} key={idx.toString()}>
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
-                      // <TableCategory data={params.categories} />
-                      <div></div>
+                      <CategoryList data={params.categories} />
                     )}
                   {Array.isArray(params.children) &&
                     params.children.length > 0 &&
                     params.children.map((el, idx) => (
-                      <Directory name={el.name} key={idx.toString()} />
+                      <Directory name={el.name} key={idx.toString()}>
+                        {Array.isArray(el.categories) &&
+                          el.categories.length > 0 && (
+                            <CategoryList data={el.categories} />
+                          )}
+                      </Directory>
                     ))}
                 </Directory>
               ))}
             {Array.isArray(item.categories) && item.categories.length > 0 && (
-              // <TableCategory data={item.categories} />
-              <div></div>
+              <CategoryList data={item.categories} />
             )}
           </Directory>
         ))}

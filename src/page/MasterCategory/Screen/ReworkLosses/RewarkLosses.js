@@ -1,6 +1,6 @@
 import React from "react";
 import { Directory } from "../../../../components/Directory/Directory";
-import TableCategory from "../../../../components/TableCategryManualCollection";
+import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import Styles from "./ReworkLosses.module.scss";
 
 export default function RewarkLosses() {
@@ -15,8 +15,7 @@ export default function RewarkLosses() {
                 <Directory name={params.name} key={idx.toString()}>
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
-                      // <TableCategory data={params.categories} />
-                      <div></div>
+                      <CategoryList data={params.categories} />
                     )}
                 </Directory>
               ))}

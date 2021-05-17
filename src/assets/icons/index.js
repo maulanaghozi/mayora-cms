@@ -24,6 +24,7 @@ import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as ChevronDownFill } from "./chevron-down-fill.svg";
 import { ReactComponent as CheckboxInputIcon } from "./checkbox-input.svg";
+import { ReactComponent as PinnedIcon } from "./pinned.svg";
 
 export {
   CloseIcon,
@@ -52,4 +53,5 @@ export {
   SearchIcon,
   ChevronDownFill,
   CheckboxInputIcon,
+  PinnedIcon,
 };
