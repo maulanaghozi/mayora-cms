@@ -63,7 +63,6 @@ export default function UserManagement() {
     const result = await http(params);
 
     if (result.code === "success" && result.payload) {
-      console.log(result.payload.results);
       setData(result.payload.results);
     } else {
       setData([]);
@@ -88,7 +87,7 @@ export default function UserManagement() {
 
     const result = await http(params);
 
-    if (result && result.code === "success") {
+    if (result && result.code === "success" && result.payload) {
       if (result.payload.isSuccess) {
         setName("");
         setEmail("");
@@ -280,13 +279,21 @@ export default function UserManagement() {
               </div>
             </div>
           </LabelCustom>
-          {/* <LabelCustom label={"Status"}>
-            <RadioGroup onChange={val => console.log(val)} horizontal>
-              <RadioButton value="apple">Active</RadioButton>
-              <RadioButton value="orange">Inactive</RadioButton>
-            </RadioGroup>
-          </LabelCustom> */}
         </div>
+        <LabelCustom label={"Status"}>
+          <RadioGroup
+            onChange={val => setStatus(val)}
+            value={status}
+            horizontal
+          >
+            <RadioButton pointColor={"#C60808"} value="active">
+              Active
+            </RadioButton>
+            <RadioButton pointColor={"#C60808"} value="inactive">
+              Inactive
+            </RadioButton>
+          </RadioGroup>
+        </LabelCustom>
         <div className={Styles.buttonContainer}>
           <button
             onClick={() => setModalAddVisible(false)}
@@ -368,13 +375,21 @@ export default function UserManagement() {
               </div>
             </div>
           </LabelCustom>
-          {/* <LabelCustom label={"Status"}>
-            <RadioGroup onChange={val => console.log(val)} horizontal>
-              <RadioButton value="apple">Active</RadioButton>
-              <RadioButton value="orange">Inactive</RadioButton>
-            </RadioGroup>
-          </LabelCustom> */}
         </div>
+        <LabelCustom label={"Status"}>
+          <RadioGroup
+            onChange={value => handleOnChangeEdit({ status: value })}
+            value={userEdit.status}
+            horizontal
+          >
+            <RadioButton pointColor={"#C60808"} value="active">
+              Active
+            </RadioButton>
+            <RadioButton pointColor={"#C60808"} value="inactive">
+              Inactive
+            </RadioButton>
+          </RadioGroup>
+        </LabelCustom>
         <div className={Styles.buttonContainer}>
           <button
             onClick={() => setModalEditVisible(false)}

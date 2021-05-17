@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./InputCheckBox.module.scss";
 import { CheckBoxChecked } from "../../../assets/image";
+import { CheckboxInputIcon } from "../../../assets/icons";
 import classNames from "classnames";
 
 export default function InputCheckbox(props) {
@@ -32,7 +33,7 @@ export default function InputCheckbox(props) {
           <div
             className={classNames(style.checkbox, { [style.checked]: checked })}
           >
-            {!!checked && <CheckBoxChecked width={20} height={20} />}
+            {!!checked && <CheckboxInputIcon width={20} height={20} />}
           </div>
         </div>
       </label>
