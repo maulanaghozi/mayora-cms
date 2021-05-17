@@ -47,6 +47,17 @@ export default function AdminProfile() {
           setRole(result.payload.role.name);
         }
         context.setAdminProfile(result.payload);
+        if (result.payload.machine1) {
+          context.setMachine({
+            machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+            machineName: "Line 1",
+          });
+        } else {
+          context.setMachine({
+            machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+            machineName: "Line 2",
+          });
+        }
       } else {
         console.log(result);
         localStorage.removeItem("mayora-cms");

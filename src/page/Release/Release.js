@@ -7,7 +7,7 @@ import { Context } from "../../hooks/context";
 import Styles from "./Release.module.scss";
 import { http } from "../../utility/http";
 
-export default function TroubleList() {
+export default function Release() {
   const [shift1, setShift1] = useState(0);
   const [shift2, setShift2] = useState(0);
   const [shift3, setShift3] = useState(0);
@@ -15,7 +15,8 @@ export default function TroubleList() {
   const [totalAmount, setTotalAmount] = useState([]);
   const globalState = useContext(Context);
 
-  const { dateSelected, setDateSelected, machine, setMachine } = globalState;
+  const { dateSelected, setDateSelected, machine, setMachine, adminProfile } =
+    globalState;
 
   useEffect(() => {
     getTotalAmount();
@@ -230,16 +231,32 @@ export default function TroubleList() {
             value={machine.machineId}
             className={Styles.inputSelect}
             placeholder={machine.machineName}
-            options={[
-              {
-                value: "00f5eafd-89c5-4871-a982-26a8180774c7",
-                label: "Line 1",
-              },
-              {
-                value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-                label: "Line 2",
-              },
-            ]}
+            options={
+              adminProfile && adminProfile.machine1 && adminProfile.machine2
+                ? [
+                    {
+                      value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                      label: "Line 1",
+                    },
+                    {
+                      value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                      label: "Line 2",
+                    },
+                  ]
+                : adminProfile && adminProfile.machine1
+                ? [
+                    {
+                      value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                      label: "Line 1",
+                    },
+                  ]
+                : [
+                    {
+                      value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                      label: "Line 2",
+                    },
+                  ]
+            }
             onChange={selected => {
               setMachine({
                 machineId: selected.value,

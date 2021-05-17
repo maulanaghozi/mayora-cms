@@ -42,7 +42,8 @@ export default function TroubleList(props) {
   const [endTime, setEndTime] = useState(GetTime().endTime);
   const [minutesPass, setMinutesPass] = useState(0);
   const globalState = useContext(Context);
-  const { machine, dateSelected, setMachine, setDateSelected } = globalState;
+  const { machine, dateSelected, setMachine, setDateSelected, adminProfile } =
+    globalState;
 
   const handleMinutesPass = () => {
     let getDays = moment(dateSelected * 1000).format("YYYY MM DD");
@@ -151,15 +152,6 @@ export default function TroubleList(props) {
 
     const result = await http(params);
 
-    return (
-      <a
-        target="_blank"
-        href={`${baseURL}trouble/download?date=${moment(
-          dateSelected * 1000
-        ).format("YYYY-MM-DD")}&status=downtime&machineId=${machine.machineId}`}
-      ></a>
-    );
-
     // if (result && result.code === "success") {
     // } else {
     //   // console.log(result);
@@ -198,16 +190,32 @@ export default function TroubleList(props) {
             value={machine.machineId}
             className={Styles.inputSelect}
             placeholder={machine.machineName}
-            options={[
-              {
-                value: "00f5eafd-89c5-4871-a982-26a8180774c7",
-                label: "Line 1",
-              },
-              {
-                value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-                label: "Line 2",
-              },
-            ]}
+            options={
+              adminProfile && adminProfile.machine1 && adminProfile.machine2
+                ? [
+                    {
+                      value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                      label: "Line 1",
+                    },
+                    {
+                      value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                      label: "Line 2",
+                    },
+                  ]
+                : adminProfile && adminProfile.machine1
+                ? [
+                    {
+                      value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                      label: "Line 1",
+                    },
+                  ]
+                : [
+                    {
+                      value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                      label: "Line 2",
+                    },
+                  ]
+            }
             onChange={selected => {
               setMachine({
                 machineId: selected.value,

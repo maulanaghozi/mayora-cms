@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import moment from "moment";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import InputText from "../../components/Form/InputText/InputText";
@@ -6,22 +6,23 @@ import { DownloadIcon, ExcelFileIcon } from "../../assets/icons";
 import Styles from "./Report.module.scss";
 import InputDate from "../../components/Form/InputDate/InputDate";
 import { http } from "../../utility/http";
+import { Context } from "../../hooks/context";
 
 export default function Report() {
   const inputFile1 = useRef(null);
   const inputFile2 = useRef(null);
   const inputFile3 = useRef(null);
 
-  const [machineId, setMachineId] = useState(
-    "00f5eafd-89c5-4871-a982-26a8180774c7"
-  );
+  const globalState = useContext(Context);
+  const { adminProfile, setMachine, machine } = globalState;
+
   const [report, setReport] = useState("weekly");
   const [duration, setDuration] = useState("7 Day");
   const [week, setWeek] = useState("4 Week");
   const [date, setDate] = useState("");
-  const [file1, setFile1] = useState('not set');
-  const [file2, setFile2] = useState('not set');
-  const [file3, setFile3] = useState('not set');
+  const [file1, setFile1] = useState("not set");
+  const [file2, setFile2] = useState("not set");
+  const [file3, setFile3] = useState("not set");
   const [isMonthly, setIsMonthly] = useState(false);
 
   useEffect(() => {
@@ -31,16 +32,16 @@ export default function Report() {
   }, []);
 
   const onExport = async () => {
-	  if(!date){
-		  alert("please select date");
-		  return false;
-	  }
+    if (!date) {
+      alert("please select date");
+      return false;
+    }
     const params = {
       method: "GET",
       path: `report-${report}`,
       query: {
         date: moment(date * 1000).format("YYYY-MM-DD"),
-        machineId: machineId,
+        machineId: machine.machineId,
         duration: week | 4,
       },
       content_type: "application/octet-stream",
@@ -147,21 +148,41 @@ export default function Report() {
           <div className={Styles.filter}>
             <span>Line Type</span>
             <InputSelect
-              value={machineId}
+              value={machine.machineId}
               className={Styles.inputSelect}
-              placeholder={"Line 1"}
-              defaultValue={"Line 1"}
-              options={[
-                {
-                  value: "00f5eafd-89c5-4871-a982-26a8180774c7",
-                  label: "Line 1",
-                },
-                {
-                  value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
-                  label: "Line 2",
-                },
-              ]}
-              onChange={selected => setMachineId(selected.value)}
+              placeholder={machine.machineName}
+              options={
+                adminProfile && adminProfile.machine1 && adminProfile.machine2
+                  ? [
+                      {
+                        value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                        label: "Line 1",
+                      },
+                      {
+                        value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                        label: "Line 2",
+                      },
+                    ]
+                  : adminProfile && adminProfile.machine1
+                  ? [
+                      {
+                        value: "00f5eafd-89c5-4871-a982-26a8180774c7",
+                        label: "Line 1",
+                      },
+                    ]
+                  : [
+                      {
+                        value: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+                        label: "Line 2",
+                      },
+                    ]
+              }
+              onChange={selected =>
+                setMachine({
+                  machineId: selected.value,
+                  machineName: selected.label,
+                })
+              }
             />
           </div>
           <div className={Styles.filter}>
@@ -194,7 +215,7 @@ export default function Report() {
               value={date}
               onChange={e => setDate(e)}
               className={Styles.inputDate}
-			  filterDate={(date) => date.getDay() === 1}
+              filterDate={date => date.getDay() === 1}
             />
           </div>
 
