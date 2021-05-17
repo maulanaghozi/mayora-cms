@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Styles from "./User.module.scss";
 import classNames from "classnames";
-import {
-  RadioGroup,
-  RadioButton,
-  ReversedRadioButton,
-} from "react-radio-buttons";
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 import { PlusIcon, SearchIcon } from "../../assets/icons";
 import InputSelect from "../../components/Form/InputSelect/InputSelect";
 import SearchBar from "../../components/Form/SearchBar/SearchBar";
@@ -259,26 +255,28 @@ export default function UserManagement() {
               }}
             />
           </LabelCustom>
-          <LabelCustom label={"Line Type"}>
-            <div style={{ display: "flex" }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <InputCheckBox
-                  className={classNames(Styles.checkbox)}
-                  value={machine1}
-                  onChange={value => setMachine1(value)}
-                  label={"Line 1"}
-                />
+          {roleIdCreate !== "ROLE-USER-MYR002" && (
+            <LabelCustom label={"Line Type"}>
+              <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <InputCheckBox
+                    className={classNames(Styles.checkbox)}
+                    value={machine1}
+                    onChange={value => setMachine1(value)}
+                    label={"Line 1"}
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <InputCheckBox
+                    className={classNames(Styles.checkbox)}
+                    value={machine2}
+                    onChange={value => setMachine2(value)}
+                    label={"Line 2"}
+                  />
+                </div>
               </div>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <InputCheckBox
-                  className={classNames(Styles.checkbox)}
-                  value={machine2}
-                  onChange={value => setMachine2(value)}
-                  label={"Line 2"}
-                />
-              </div>
-            </div>
-          </LabelCustom>
+            </LabelCustom>
+          )}
         </div>
         <LabelCustom label={"Status"}>
           <RadioGroup
@@ -355,26 +353,28 @@ export default function UserManagement() {
               }}
             />
           </LabelCustom>
-          <LabelCustom label={"Line Type"}>
-            <div style={{ display: "flex" }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <InputCheckBox
-                  className={classNames(Styles.checkbox)}
-                  value={userEdit.machine1}
-                  onChange={value => handleOnChangeEdit({ machine1: value })}
-                  label={"Line 1"}
-                />
+          {userEdit.roleId !== "ROLE-USER-MYR002" && (
+            <LabelCustom label={"Line Type"}>
+              <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <InputCheckBox
+                    className={classNames(Styles.checkbox)}
+                    value={userEdit.machine1}
+                    onChange={value => handleOnChangeEdit({ machine1: value })}
+                    label={"Line 1"}
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <InputCheckBox
+                    className={classNames(Styles.checkbox)}
+                    value={userEdit.machine2}
+                    onChange={value => handleOnChangeEdit({ machine2: value })}
+                    label={"Line 2"}
+                  />
+                </div>
               </div>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <InputCheckBox
-                  className={classNames(Styles.checkbox)}
-                  value={userEdit.machine2}
-                  onChange={value => handleOnChangeEdit({ machine2: value })}
-                  label={"Line 2"}
-                />
-              </div>
-            </div>
-          </LabelCustom>
+            </LabelCustom>
+          )}
         </div>
         <LabelCustom label={"Status"}>
           <RadioGroup

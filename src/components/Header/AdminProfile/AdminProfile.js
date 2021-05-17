@@ -42,7 +42,6 @@ export default function AdminProfile() {
       });
 
       if (result && result.code === "success") {
-        console.log("RESULLSSSSSS", result);
         setAdminName(result.payload.name);
         if (result.payload.role) {
           setRole(result.payload.role.name);

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
+import { Context } from "../../hooks/context";
 
 import SidebarHeader from "./SidebarHeader/SidebarHeader";
 import SidebarToggler from "./SidebarToggler/SidebarToggler";
@@ -31,17 +32,6 @@ const navigation = (text, path, icon) => {
   };
 };
 
-const nav = [
-  navigation("Dashboard", "/dashboard", DashboardIcon),
-  navigation("Trouble List", "/trouble-list", TroubleIcon),
-  navigation("Manual Collection", "/manual-collection", CollectionIcon),
-  navigation("Target", "/target", TargetIcon),
-  navigation("Release", "/release", ReleaseIcon),
-  navigation("Report", "/report", ReportIcon),
-  navigation("Master Category", "/master-category", MasterCategoryIcon),
-  navigation("User", "/user", UserIcon),
-];
-
 const topNav = [navigation("Dashboard", "/dashboard", DashboardIcon)];
 const middleNav = [
   navigation("Trouble List", "/trouble-list", TroubleIcon),
@@ -49,13 +39,21 @@ const middleNav = [
   navigation("Target", "/target", TargetIcon),
   navigation("Release", "/release", ReleaseIcon),
 ];
-const bottomNav = [
+const bottomNavAdmin = [
   navigation("Report", "/report", ReportIcon),
   navigation("Master Category", "/master-category", MasterCategoryIcon),
   navigation("User", "/user", UserIcon),
 ];
 
+const bottomNav = [
+  navigation("Report", "/report", ReportIcon),
+  navigation("Master Category", "/master-category", MasterCategoryIcon),
+];
+
 export default function Sidebar(props) {
+  const globalState = useContext(Context);
+  const { adminProfile } = globalState;
+
   return (
     <React.Fragment>
       <div className={classNames(sidebar_container, props.isOpen ? open : "")}>
@@ -84,17 +82,29 @@ export default function Sidebar(props) {
           />
         ))}
         <div className={classNames(sidebar_line, props.isOpen ? open : "")} />
-        {bottomNav.map((param, i) => (
-          <SidebarNav
-            key={i}
-            to={param.path}
-            Icon={param.Icon}
-            SelectedIcon={param.SelectedIcon}
-            text={param.text}
-            isOpen={props.isOpen}
-            setIsOpen={props.setIsOpen}
-          />
-        ))}
+        {adminProfile && adminProfile.roleId === "ROLE-USER-MYR001"
+          ? bottomNavAdmin.map((param, i) => (
+              <SidebarNav
+                key={i}
+                to={param.path}
+                Icon={param.Icon}
+                SelectedIcon={param.SelectedIcon}
+                text={param.text}
+                isOpen={props.isOpen}
+                setIsOpen={props.setIsOpen}
+              />
+            ))
+          : bottomNav.map((param, i) => (
+              <SidebarNav
+                key={i}
+                to={param.path}
+                Icon={param.Icon}
+                SelectedIcon={param.SelectedIcon}
+                text={param.text}
+                isOpen={props.isOpen}
+                setIsOpen={props.setIsOpen}
+              />
+            ))}
         <SidebarToggler isOpen={props.isOpen} setIsOpen={props.setIsOpen} />
       </div>
       <div className={classNames(cover, props.isOpen ? open : "")}></div>
