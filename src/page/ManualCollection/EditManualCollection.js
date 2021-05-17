@@ -12,7 +12,7 @@ export default function EditCollection() {
   const [value, setValue] = useState("");
   const history = useHistory();
   const globalState = useContext(Context);
-  const { manualCollection, dateSelected, machine } = globalState;
+  const { manualCollection, dateSelected, machine, adminProfile } = globalState;
 
   const handleSave = async () => {
     let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
@@ -37,7 +37,7 @@ export default function EditCollection() {
         remark: remark,
         unit: manualCollection.unit,
         date: date,
-        createdBy: "Budi Putra",
+        createdBy: adminProfile.id || null,
       },
     };
 

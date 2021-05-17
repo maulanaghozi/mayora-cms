@@ -16,10 +16,10 @@ export default function EditTrouble() {
   const history = useHistory();
 
   const globalState = useContext(Context);
-  const { setCategory, setTroubleId, category, fromPage } = globalState;
+  const { setCategory, setTroubleId, category, fromPage, adminProfile } =
+    globalState;
 
   useEffect(() => {
-    console.log("this is global ", globalState);
     getStatus();
   }, []);
 
@@ -67,7 +67,7 @@ export default function EditTrouble() {
       path: `trouble/${id}`,
       data: {
         categoryId: categoryId,
-        updatedBy: "Budi Putra",
+        updatedBy: adminProfile.id || null,
         remark: remark,
       },
     };

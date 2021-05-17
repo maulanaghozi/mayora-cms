@@ -13,7 +13,7 @@ export default function TargetOEE() {
   const [logData, setLogData] = useState([]);
 
   const globalState = useContext(Context);
-  const { machine, dateSelected } = globalState;
+  const { machine, dateSelected, adminProfile } = globalState;
 
   useEffect(() => {
     getOeeTarget();
@@ -74,6 +74,7 @@ export default function TargetOEE() {
       data: {
         machineId: machine.machineId,
         target: oeeTarget,
+        updatedBy: adminProfile.id || null,
       },
     };
 

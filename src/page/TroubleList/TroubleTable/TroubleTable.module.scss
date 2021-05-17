@@ -125,6 +125,11 @@
       cursor: pointer;
       color: #0f74eb;
       font-family: roboto;
+
+      &.disabled {
+        color: gray;
+        pointer-events: none;
+      }
     }
   }
 }

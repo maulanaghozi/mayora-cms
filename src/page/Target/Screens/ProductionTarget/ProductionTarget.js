@@ -16,7 +16,7 @@ export default function ProductionTarget() {
   const [logData, setLogData] = useState([]);
 
   const globalState = useContext(Context);
-  const { machine, dateSelected } = globalState;
+  const { machine, dateSelected, adminProfile } = globalState;
 
   useEffect(() => {
     getDefaultTarget();
@@ -78,12 +78,12 @@ export default function ProductionTarget() {
       data: {
         machineId: machine.machineId,
         target: defaultTarget,
+        updatedBy: adminProfile.id || null,
       },
     };
 
     const result = await http(params);
     if (result && result.code === "success") {
-      console.log("BERHASIL ", result);
       setModalDefaultVisible(false);
     } else {
       console.log("GAGAL ", result);
@@ -98,10 +98,9 @@ export default function ProductionTarget() {
         machineId: machine.machineId,
         target: currentTarget,
         activeTarget: activeTarget,
+        updatedBy: adminProfile.id || null,
       },
     };
-
-    console.log(activeTarget);
 
     const result = await http(params);
     if (result && result.code === "success") {
