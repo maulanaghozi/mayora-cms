@@ -7,7 +7,7 @@ import {
 export default function Created({ row }) {
   return (
     <div className={table_cell + " " + column_role}>
-      <span>{row.updatedBy ? "Supervisor" : "-"}</span>
+      <span>{row.user && row.user.role ? row.user.role.name : "-"}</span>
     </div>
   );
 }
