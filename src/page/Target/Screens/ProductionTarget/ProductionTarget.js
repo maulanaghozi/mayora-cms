@@ -12,7 +12,9 @@ export default function ProductionTarget() {
   const [modalCurrentVisible, setModalCurrentVisible] = useState(false);
   const [defaultTarget, setDefaultTarget] = useState(0);
   const [currentTarget, setCurrentTarget] = useState(0);
-  const [activeTarget, setActveTarget] = useState(moment().format("HH:mm"));
+  const [activeTarget, setActveTarget] = useState(
+    moment().format("YYYY-MM-DD HH:mm")
+  );
   const [logData, setLogData] = useState([]);
 
   const globalState = useContext(Context);
