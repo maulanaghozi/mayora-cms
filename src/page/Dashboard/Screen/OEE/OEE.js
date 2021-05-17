@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import GaugeChart from "../../../../components/GaugeChart/GaugeChart";
 import Styles from "./OEE.module.scss";
 import { http } from "../../../../utility/http";
+import { Context } from "../../../../hooks/context";
 
 export default function OEE() {
   const [oee1, setOee1] = useState({ OEE: 0, AV: 0, PE: 0, QR: 0 });
@@ -12,6 +13,9 @@ export default function OEE() {
   const [date, setDate] = useState(
     moment().subtract(1, "days").format("DD MMM YYYY")
   );
+
+  const globalState = useContext(Context);
+  const { adminProfile } = globalState;
 
   useEffect(() => {
     init();
@@ -232,8 +236,8 @@ export default function OEE() {
   };
   return (
     <div className={Styles.container}>
-      {renderLine1()}
-      {renderLine2()}
+      {adminProfile && adminProfile.machine1 && renderLine1()}
+      {adminProfile && adminProfile.machine2 && renderLine2()}
     </div>
   );
 }

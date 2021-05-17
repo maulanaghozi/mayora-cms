@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import { http } from "../../../../utility/http";
 import { ProductionPlanning } from "../../../../components/ProductionOutputPlanning/ProductionOutputPlanning";
 import BarChart from "../../../../components/BarChart/BarChart";
 import Styles from "./ProductionOutput.module.scss";
+import { Context } from "../../../../hooks/context";
 
 export default function ProductionOutput() {
   const [target1, setTarget1] = useState(0);
@@ -20,6 +21,9 @@ export default function ProductionOutput() {
   const [releaseIsReady2, setReleaseIsReady2] = useState(false);
   const [maxValue1, setMaxValue1] = useState(0);
   const [maxValue2, setMaxValue2] = useState(0);
+
+  const globalState = useContext(Context);
+  const { adminProfile } = globalState;
 
   useEffect(() => {
     getTroublelist();
@@ -377,8 +381,8 @@ export default function ProductionOutput() {
 
   return (
     <div className={Styles.container}>
-      {renderLine1()}
-      {renderLine2()}
+      {adminProfile && adminProfile.machine1 && renderLine1()}
+      {adminProfile && adminProfile.machine2 && renderLine2()}
     </div>
   );
 }

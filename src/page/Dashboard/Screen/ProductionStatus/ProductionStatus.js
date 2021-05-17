@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
-import classNames from "classnames";
 import { http } from "../../../../utility/http";
 import { ProductionStatusBar } from "../../../../components/ProductionStatus/ProductionStatus";
 import { ProductionPlanning } from "../../../../components/ProductionPlaning/ProductionPlaning";
+import { Context } from "../../../../hooks/context";
 
 const GetTime = () => {
   let totalMinutes = 1440;
@@ -38,6 +38,9 @@ export default function ProductionStatus() {
   const [actual2, setActual2] = useState(0);
   const [status1, setStatus1] = useState("running");
   const [status2, setStatus2] = useState("running");
+
+  const globalState = useContext(Context);
+  const { adminProfile } = globalState;
 
   useEffect(() => {
     let mounted = true;
@@ -341,10 +344,10 @@ export default function ProductionStatus() {
 
   return (
     <div style={{ paddingBottom: 50 }}>
-      {renderProductionPlaningLine1()}
-      {renderProductionStatusLine1()}
-      {renderProductionPlaningLine2()}
-      {renderProductionStatusLine2()}
+      {adminProfile && adminProfile.machine1 && renderProductionPlaningLine1()}
+      {adminProfile && adminProfile.machine1 && renderProductionStatusLine1()}
+      {adminProfile && adminProfile.machine2 && renderProductionPlaningLine2()}
+      {adminProfile && adminProfile.machine2 && renderProductionStatusLine2()}
     </div>
   );
 }

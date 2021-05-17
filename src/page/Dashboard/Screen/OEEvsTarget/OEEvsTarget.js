@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { http } from "../../../../utility/http";
 import TableOEE from "../../../../components/TableOEE/TableOEE";
 import ChartOEE from "../../../../components/ChartOEEvsTarget/ChartOEEvsTarget";
 import Styles from "./OEEvsTarget.module.scss";
 import moment from "moment";
+import { Context } from "../../../../hooks/context";
 
 export default function OEEvsTarget() {
   const [targetOEE1, setTargetOEE1] = useState(0);
@@ -19,6 +20,9 @@ export default function OEEvsTarget() {
   const [chartReady1, setChartReady1] = useState(false);
   const [chartReady2, setChartReady2] = useState(false);
   const [sassion, setSassion] = useState(Math.floor(Math.random() * 10000000));
+
+  const globalState = useContext(Context);
+  const { adminProfile } = globalState;
 
   useEffect(() => {
     init();
@@ -254,8 +258,8 @@ export default function OEEvsTarget() {
 
   return (
     <div className={Styles.container}>
-      {renderLine1()}
-      {renderLine2()}
+      {adminProfile && adminProfile.machine1 && renderLine1()}
+      {adminProfile && adminProfile.machine2 && renderLine2()}
     </div>
   );
 }
