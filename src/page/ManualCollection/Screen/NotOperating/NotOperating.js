@@ -31,7 +31,7 @@ export default function NotOperating() {
       method: "GET",
       path: "category/parent",
       query: {
-        categoryParentId: "545fcd41-52e2-4756-9a12-d0ba0a18036a",
+        categoryParentId: "4e046f3c-6c72-4093-8bff-d780b6b70648",
         machineId: machine.machineId,
         date: date,
         categoryType: "manualCollection",
@@ -69,7 +69,7 @@ const results = [
   {
     id: "1bef0792-ae62-4d57-a94b-93b029fa7181",
     name: "Not Operating Day",
-    categoryParentId: "545fcd41-52e2-4756-9a12-d0ba0a18036a",
+    categoryParentId: "4e046f3c-6c72-4093-8bff-d780b6b70648",
     categoryLevel: "level2",
     createdBy: null,
     updatedBy: null,
