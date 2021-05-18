@@ -20,6 +20,13 @@ import { Context } from "../../../hooks/context";
 export default function AdminProfile() {
   const [adminName, setAdminName] = useState("");
   const [role, setRole] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    roleId: "",
+    machine1: true,
+    machine2: true,
+    user: {},
+  });
   const [displayBox, setDisplayBox] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const context = useContext(Context);
@@ -42,6 +49,7 @@ export default function AdminProfile() {
       });
 
       if (result && result.code === "success") {
+        setUser(result.payload);
         setAdminName(result.payload.name);
         if (result.payload.role) {
           setRole(result.payload.role.name);
@@ -87,12 +95,27 @@ export default function AdminProfile() {
     setRedirect(true);
   };
 
+  const hanldeDisplayRole = () => {
+    let result = role;
+    if (user.roleId === "ROLE-USER-MYR003") {
+      const machineNames = [];
+
+      if (user.machine1) machineNames.push("Line 1");
+      if (user.machine2) machineNames.push("Line 2");
+
+      const machineAccess = machineNames.join(",");
+      result = result + ` (${machineAccess})`;
+    }
+
+    return result;
+  };
+
   return (
     <div className={container}>
       <div className={text} onClick={toggleBox}>
         <div className={Styles.profileWrapper}>
           <span>{adminName}</span>
-          <span className={Styles.role}>{role}</span>
+          <span className={Styles.role}>{hanldeDisplayRole()}</span>
         </div>
         <Chevron className={icon} width={20} />
       </div>

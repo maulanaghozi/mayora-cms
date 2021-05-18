@@ -329,9 +329,11 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Weekly)</span>
           <span className={Styles.fileName}>{file1}</span>
-          <div className={Styles.buttonTamplate} onClick={onButtonClick1}>
-            <span>Replace</span>
-          </div>
+          {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
+            <div className={Styles.buttonTamplate} onClick={onButtonClick1}>
+              <span>Replace</span>
+            </div>
+          )}
           <div
             className={Styles.buttonTamplate}
             onClick={() => onDownload("weekly", file1)}
@@ -346,9 +348,11 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Monthly)</span>
           <span className={Styles.fileName}>{file2}</span>
-          <div className={Styles.buttonTamplate} onClick={onButtonClick2}>
-            <span>Replace</span>
-          </div>
+          {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
+            <div className={Styles.buttonTamplate} onClick={onButtonClick2}>
+              <span>Replace</span>
+            </div>
+          )}
           <div
             className={Styles.buttonTamplate}
             onClick={() => onDownload("monthly", file2)}
@@ -363,9 +367,11 @@ export default function Report() {
           </div>
           <span className={Styles.periode}>(Semester)</span>
           <span className={Styles.fileName}>{file3}</span>
-          <div className={Styles.buttonTamplate} onClick={onButtonClick3}>
-            <span>Replace</span>
-          </div>
+          {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
+            <div className={Styles.buttonTamplate} onClick={onButtonClick3}>
+              <span>Replace</span>
+            </div>
+          )}
           <div
             className={Styles.buttonTamplate}
             onClick={() => onDownload("semester", file3)}

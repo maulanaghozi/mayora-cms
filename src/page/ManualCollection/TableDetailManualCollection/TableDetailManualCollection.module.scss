@@ -89,5 +89,9 @@
 
   .column_role {
     width: 10% !important;
+
+    > span {
+      text-transform: capitalize;
+    }
   }
 }

@@ -6,7 +6,7 @@ import { Context } from "../../../hooks/context";
 
 export default function Description({ manualCollection, row, shift }) {
   const globalState = useContext(Context);
-  const { setManualCollection } = globalState;
+  const { setManualCollection, adminProfile } = globalState;
   const history = useHistory();
   return (
     <div className={table_cell + " " + column_shift}>
@@ -18,19 +18,26 @@ export default function Description({ manualCollection, row, shift }) {
         <span className={notSet}>Not Set</span>
       )}
 
-      <EditIcon
-        onClick={() => {
-          setManualCollection({
-            categoryId: row.id,
-            categoryName: row.name,
-            value: "",
-            shift: shift,
-            remark: "",
-            unit: row.unit,
-          });
-          history.push(`/manual-collection/edit/${row.id}`);
-        }}
-      />
+      {adminProfile &&
+      adminProfile.roleId === "ROLE-USER-MYR003" &&
+      manualCollection &&
+      manualCollection.value ? (
+        <div />
+      ) : (
+        <EditIcon
+          onClick={() => {
+            setManualCollection({
+              categoryId: row.id,
+              categoryName: row.name,
+              value: "",
+              shift: shift,
+              remark: "",
+              unit: row.unit,
+            });
+            history.push(`/manual-collection/edit/${row.id}`);
+          }}
+        />
+      )}
     </div>
   );
 }

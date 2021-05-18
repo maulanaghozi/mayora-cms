@@ -11,6 +11,7 @@ import { InputWithLabel } from "../../../../components/Form/InputWithLable/Input
 export default function NotOperating() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
+  const [categoryParentId, setCategoryParentId] = useState(null);
   const [categoryType, setCategoryType] = useState(null);
   const [unit, setUnit] = useState(null);
   const [modalIsOpened, setModalIsOpened] = useState(false);
@@ -38,7 +39,19 @@ export default function NotOperating() {
     }
   };
 
-  const onCreateCategory = () => {};
+  const onCreateCategory = () => {
+    const data = {
+      name: name,
+      categoryParentId: categoryParentId,
+      categoryType: categoryType,
+      unit: unit,
+    };
+
+    console.log(data);
+    const params = {};
+
+    setModalIsOpened(false);
+  };
 
   const renderDirectoryParent = () => {
     return (
@@ -47,7 +60,10 @@ export default function NotOperating() {
           <Directory name={item.name} key={idx.toString()}>
             <div
               className={Styles.buttonAdd}
-              onClick={() => setModalIsOpened(true)}
+              onClick={() => {
+                setCategoryParentId(item.id);
+                setModalIsOpened(true);
+              }}
             >
               <PlusIcon />
               <span>Add New Category</span>
@@ -76,47 +92,53 @@ export default function NotOperating() {
           placeholder={"Category"}
         />
 
-        <LabelCustom label={"Category Type"}>
-          <InputSelect
-            value={categoryType}
-            className={Styles.inputSelect}
-            placeholder={"Select Type"}
-            options={[
-              {
-                value: "ROLE-USER-MYR002",
-                label: "Supervisor",
-              },
-              {
-                value: "ROLE-USER-MYR003",
-                label: "Operator",
-              },
-            ]}
-            onChange={selected => {
-              setCategoryType(selected.value);
-            }}
-          />
-        </LabelCustom>
+        <div style={{ display: "flex", width: "100%" }}>
+          <LabelCustom label={"Unit / Satuan"}>
+            <InputSelect
+              value={unit}
+              className={Styles.inputSelect}
+              placeholder={"Select Unit / Satuan"}
+              options={[
+                {
+                  value: "Kg",
+                  label: "Kg",
+                },
+                {
+                  value: "Menit",
+                  label: "Menit",
+                },
+                {
+                  value: "Kg/h",
+                  label: "Kg/h",
+                },
+              ]}
+              onChange={selected => {
+                setUnit(selected.value);
+              }}
+            />
+          </LabelCustom>
 
-        <LabelCustom label={"Category Type"}>
-          <InputSelect
-            value={unit}
-            className={Styles.inputSelect}
-            placeholder={"Select Type"}
-            options={[
-              {
-                value: "ROLE-USER-MYR002",
-                label: "Supervisor",
-              },
-              {
-                value: "ROLE-USER-MYR003",
-                label: "Operator",
-              },
-            ]}
-            onChange={selected => {
-              setUnit(selected.value);
-            }}
-          />
-        </LabelCustom>
+          <LabelCustom label={"Category Type"}>
+            <InputSelect
+              value={categoryType}
+              className={Styles.inputSelect}
+              placeholder={"Select Type"}
+              options={[
+                {
+                  value: "manualcollection",
+                  label: "Manual Collection",
+                },
+                {
+                  value: "trouble",
+                  label: "Trouble",
+                },
+              ]}
+              onChange={selected => {
+                setCategoryType(selected.value);
+              }}
+            />
+          </LabelCustom>
+        </div>
 
         <div className={Styles.buttonContainer}>
           <button

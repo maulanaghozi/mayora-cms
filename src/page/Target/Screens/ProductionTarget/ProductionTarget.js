@@ -139,12 +139,14 @@ export default function ProductionTarget() {
         </div>
         <div className={Styles.targetValueContainer}>
           <span className={Styles.targetValue}>{defaultTarget}</span>
-          <span
-            onClick={() => setModalDefaultVisible(true)}
-            className={Styles.edit}
-          >
-            Edit
-          </span>
+          {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
+            <span
+              onClick={() => setModalDefaultVisible(true)}
+              className={Styles.edit}
+            >
+              Edit
+            </span>
+          )}
         </div>
         <p className={Styles.desc}>
           Default target akan berlaku seterusnya sebagai nilai awal apabila
@@ -165,12 +167,14 @@ export default function ProductionTarget() {
         </div>
         <div className={Styles.targetValueContainer}>
           <span className={Styles.targetValue}>{currentTarget}</span>
-          <span
-            onClick={() => setModalCurrentVisible(true)}
-            className={Styles.edit}
-          >
-            Edit
-          </span>
+          {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
+            <span
+              onClick={() => setModalCurrentVisible(true)}
+              className={Styles.edit}
+            >
+              Edit
+            </span>
+          )}
         </div>
         <p className={Styles.desc}>
           Current target akan berlaku hanya untuk hari ini. Waktu mulai aktif

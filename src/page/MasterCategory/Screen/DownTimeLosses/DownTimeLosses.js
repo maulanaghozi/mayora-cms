@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./DownTimeLosses.module.scss";
 import { PlusIcon } from "../../../../assets/icons";
+import { http } from "../../../../utility/http";
+import { CustomModal } from "../../../../components/Modal/CustomModal/CustomModal";
+import InputSelect from "../../../../components/Form/InputSelect/InputSelect";
+import { InputWithLabel } from "../../../../components/Form/InputWithLable/InputWithLabel";
 
 export default function DownTimeLosses() {
+  const [name, setName] = useState("");
+  const [categoryParentId, setCategoryParentId] = useState(null);
+  const [categoryType, setCategoryType] = useState(null);
+  const [unit, setUnit] = useState(null);
+  const [modalIsOpened, setModalIsOpened] = useState(false);
+
+  const onCreateCategory = () => {
+    const data = {
+      name: name,
+      categoryParentId: categoryParentId,
+      categoryType: categoryType,
+      unit: unit,
+    };
+
+    console.log(data);
+    const params = {};
+
+    setModalIsOpened(false);
+  };
+
   const renderDirectoryParent = () => {
     return (
       <div>
@@ -17,7 +41,13 @@ export default function DownTimeLosses() {
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
                       <>
-                        <div className={Styles.buttonAdd} onClick={() => {}}>
+                        <div
+                          className={Styles.buttonAdd}
+                          onClick={() => {
+                            setCategoryParentId(item.id);
+                            setModalIsOpened(true);
+                          }}
+                        >
                           <PlusIcon />
                           <span>Add New Category</span>
                         </div>
@@ -33,7 +63,10 @@ export default function DownTimeLosses() {
                             <>
                               <div
                                 className={Styles.buttonAdd}
-                                onClick={() => {}}
+                                onClick={() => {
+                                  setCategoryParentId(item.id);
+                                  setModalIsOpened(true);
+                                }}
                               >
                                 <PlusIcon />
                                 <span>Add New Category</span>
@@ -48,7 +81,13 @@ export default function DownTimeLosses() {
 
             {Array.isArray(item.categories) && item.categories.length > 0 && (
               <>
-                <div className={Styles.buttonAdd} onClick={() => {}}>
+                <div
+                  className={Styles.buttonAdd}
+                  onClick={() => {
+                    setCategoryParentId(item.id);
+                    setModalIsOpened(true);
+                  }}
+                >
                   <PlusIcon />
                   <span>Add New Category</span>
                 </div>
@@ -61,8 +100,100 @@ export default function DownTimeLosses() {
     );
   };
 
-  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
+  const renderAddNewModal = () => {
+    return (
+      <CustomModal
+        visible={modalIsOpened}
+        onClose={() => setModalIsOpened(false)}
+        title={"Add New Catgegory"}
+      >
+        <InputWithLabel
+          label={"Category"}
+          value={name}
+          setValue={setName}
+          name={"name"}
+          placeholder={"Category"}
+        />
+
+        <div style={{ display: "flex", width: "100%" }}>
+          <LabelCustom label={"Unit / Satuan"}>
+            <InputSelect
+              value={unit}
+              className={Styles.inputSelect}
+              placeholder={"Select Unit / Satuan"}
+              options={[
+                {
+                  value: "Kg",
+                  label: "Kg",
+                },
+                {
+                  value: "Menit",
+                  label: "Menit",
+                },
+                {
+                  value: "Kg/h",
+                  label: "Kg/h",
+                },
+              ]}
+              onChange={selected => {
+                setUnit(selected.value);
+              }}
+            />
+          </LabelCustom>
+
+          <LabelCustom label={"Category Type"}>
+            <InputSelect
+              value={categoryType}
+              className={Styles.inputSelect}
+              placeholder={"Select Type"}
+              options={[
+                {
+                  value: "manualcollection",
+                  label: "Manual Collection",
+                },
+                {
+                  value: "trouble",
+                  label: "Trouble",
+                },
+              ]}
+              onChange={selected => {
+                setCategoryType(selected.value);
+              }}
+            />
+          </LabelCustom>
+        </div>
+
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => setModalIsOpened(false)}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button onClick={() => onCreateCategory()} className={Styles.save}>
+            Save
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
+  return (
+    <div className={Styles.container}>
+      {renderDirectoryParent()}
+      {renderAddNewModal()}
+    </div>
+  );
 }
+
+const LabelCustom = props => {
+  return (
+    <div className={Styles.labelCustomContainer}>
+      <span className={Styles.label}>{props.label}</span>
+      {props.children}
+    </div>
+  );
+};
 
 const results = [
   {

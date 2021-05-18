@@ -96,9 +96,11 @@ export default function TargetOEE() {
         </div>
         <div className={Styles.targetValueContainer}>
           <span className={Styles.targetValue}>{`${oeeTarget} %`}</span>
-          <span onClick={() => setModalVisible(true)} className={Styles.edit}>
-            Edit
-          </span>
+          {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
+            <span onClick={() => setModalVisible(true)} className={Styles.edit}>
+              Edit
+            </span>
+          )}
         </div>
       </div>
     );
