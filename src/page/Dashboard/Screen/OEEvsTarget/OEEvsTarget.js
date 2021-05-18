@@ -19,6 +19,8 @@ export default function OEEvsTarget() {
   const [targetData2, setTargetData2] = useState([]);
   const [chartReady1, setChartReady1] = useState(false);
   const [chartReady2, setChartReady2] = useState(false);
+  const [maxValue1, setMaxValue1] = useState(100);
+  const [maxValue2, setMaxValue2] = useState(100);
   const [sassion, setSassion] = useState(Math.floor(Math.random() * 10000000));
 
   const globalState = useContext(Context);
@@ -51,10 +53,12 @@ export default function OEEvsTarget() {
     const dates = [];
     const oeeData = [];
     const target = [];
+    let maxValue = 100;
 
     data.forEach(item => {
       const date = moment(item.Date).format("DD MMM");
       const oee = item.OEE;
+      if (oee > maxValue) maxValue = oee;
 
       dates.push(date);
       oeeData.push(oee);
@@ -70,11 +74,13 @@ export default function OEEvsTarget() {
       setOees1(oeeData);
       setTargetData1(target);
       setChartReady1(true);
+      setMaxValue1(maxValue);
     } else {
       setDates2(dates);
       setOees2(oeeData);
       setTargetData2(target);
       setChartReady2(true);
+      setMaxValue2(maxValue);
     }
   };
 
@@ -231,6 +237,7 @@ export default function OEEvsTarget() {
               targets={targetData1}
               DataOEE={oees1}
               dates={dates1}
+              maxValue={maxValue1}
             />
           )}
         </div>
@@ -249,6 +256,7 @@ export default function OEEvsTarget() {
               targets={targetData2}
               DataOEE={oees2}
               dates={dates2}
+              maxValue={maxValue2}
             />
           )}
         </div>

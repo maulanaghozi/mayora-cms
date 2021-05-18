@@ -45,7 +45,10 @@ export default function NotOperating() {
       <div>
         {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
-            <div className={Styles.buttonAdd} onClick={() => {}}>
+            <div
+              className={Styles.buttonAdd}
+              onClick={() => setModalIsOpened(true)}
+            >
               <PlusIcon />
               <span>Add New Category</span>
             </div>

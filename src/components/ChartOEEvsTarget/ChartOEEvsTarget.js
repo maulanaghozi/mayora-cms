@@ -39,7 +39,7 @@ class ChartOEEvsTarget extends Component {
         yaxis: {
           tickAmount: 5,
           min: 0,
-          max: 100,
+          max: props.maxValue || 100,
         },
       },
       seriesMixedChart: [

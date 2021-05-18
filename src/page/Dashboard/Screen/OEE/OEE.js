@@ -155,33 +155,60 @@ export default function OEE() {
           <GaugeChart
             title={"OEE"}
             target={target1 / 100}
-            value={oee1.OEE / 100}
+            value={
+              oee1.OEE > 100
+                ? 105 / 100
+                : oee1.OEE < 0
+                ? -10 / 100
+                : oee1.OEE / 100
+            }
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
             target={target1 / 100}
-            value={oee1.AV / 100}
+            value={
+              oee1.AV > 100
+                ? 105 / 100
+                : oee1.AV < 0
+                ? -10 / 100
+                : oee1.AV / 100
+            }
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
             target={target1 / 100}
-            value={oee1.PE / 100}
+            value={
+              oee1.PE > 100
+                ? 105 / 100
+                : oee1.PE < 0
+                ? -10 / 100
+                : oee1.PE / 100
+            }
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
             target={target1 / 100}
-            value={oee1.QR / 100}
+            value={
+              oee1.QR > 100
+                ? 105 / 100
+                : oee1.QR < 0
+                ? -10 / 100
+                : oee1.QR / 100
+            }
           />
         </div>
       </div>
     );
   };
+
+  //if value grater than 100, set value to 105
+  //if value lt 0, set value to -10
 
   const renderChart2 = () => {
     return (
@@ -190,28 +217,52 @@ export default function OEE() {
           <GaugeChart
             title={"OEE"}
             target={target2 / 100}
-            value={oee2.OEE / 100}
+            value={
+              oee2.OEE > 100
+                ? 105 / 100
+                : oee2.OEE < 0
+                ? -10 / 100
+                : oee2.OEE / 100
+            }
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
             target={target2 / 100}
-            value={oee2.AV / 100}
+            value={
+              oee2.AV > 100
+                ? 105 / 100
+                : oee2.AV < 0
+                ? -10 / 100
+                : oee2.AV / 100
+            }
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
             target={target2 / 100}
-            value={oee2.PE / 100}
+            value={
+              oee2.PE > 100
+                ? 105 / 100
+                : oee2.PE < 0
+                ? -10 / 100
+                : oee2.PE / 100
+            }
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
             target={target2 / 100}
-            value={oee2.QR / 100}
+            value={
+              oee2.QR > 100
+                ? 105 / 100
+                : oee2.QR < 0
+                ? -10 / 100
+                : oee2.QR / 100
+            }
           />
         </div>
       </div>
