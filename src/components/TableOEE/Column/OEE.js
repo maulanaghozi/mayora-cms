@@ -21,7 +21,9 @@ export default function OEE(props) {
           color: colorOEE(Number(props.target) <= Number(props.row.OEE)),
         }}
       >
-        {props.row.OEE >= 0 ? `${props.row.OEE}%` : "-"}
+        {props.row.OEE !== null && props.row.OEE !== undefined
+          ? `${props.row.OEE}%`
+          : "-"}
       </span>
     </div>
   );

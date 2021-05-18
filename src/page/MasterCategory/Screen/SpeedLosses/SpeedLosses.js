@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./SpeedLosses.module.scss";
 import { PlusIcon } from "../../../../assets/icons";
+import { http } from "../../../../utility/http";
 
 export default function SpeedLosses() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const params = {
+      method: "GET",
+      path: "category/parent",
+      query: {
+        categoryParentId: "c0598cf2-abd8-4b51-a8a3-210cca4363bc",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success" && result.payload) {
+      setData(result.payload.results);
+    } else {
+      setData(results);
+      console.log("THIS IS ERROR TechnicalBreakDown");
+    }
+  };
+
   const renderDirectoryParent = () => {
     return (
       <div>
-        {results.map((item, idx) => (
+        {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
             {Array.isArray(item.children) &&
               item.children.length > 0 &&

@@ -1,14 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import { PlusIcon } from "../../../../assets/icons";
 import Styles from "./NotOperating.module.scss";
+import { http } from "../../../../utility/http";
+import { CustomModal } from "../../../../components/Modal/CustomModal/CustomModal";
+import InputSelect from "../../../../components/Form/InputSelect/InputSelect";
+import { InputWithLabel } from "../../../../components/Form/InputWithLable/InputWithLabel";
 
 export default function NotOperating() {
+  const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [categoryType, setCategoryType] = useState(null);
+  const [unit, setUnit] = useState(null);
+  const [modalIsOpened, setModalIsOpened] = useState(false);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const params = {
+      method: "GET",
+      path: "category/parent",
+      query: {
+        categoryParentId: "4e046f3c-6c72-4093-8bff-d780b6b70648",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success" && result.payload) {
+      setData(result.payload.results);
+    } else {
+      setData(results);
+      console.log("THIS IS ERROR TechnicalBreakDown");
+    }
+  };
+
+  const onCreateCategory = () => {};
+
   const renderDirectoryParent = () => {
     return (
       <div>
-        {results.map((item, idx) => (
+        {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
             <div className={Styles.buttonAdd} onClick={() => {}}>
               <PlusIcon />
@@ -23,8 +58,94 @@ export default function NotOperating() {
     );
   };
 
-  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
+  const renderAddNewModal = () => {
+    return (
+      <CustomModal
+        visible={modalIsOpened}
+        onClose={() => setModalIsOpened(false)}
+        title={"Add New Catgegory"}
+      >
+        <InputWithLabel
+          label={"Category"}
+          value={name}
+          setValue={setName}
+          name={"name"}
+          placeholder={"Category"}
+        />
+
+        <LabelCustom label={"Category Type"}>
+          <InputSelect
+            value={categoryType}
+            className={Styles.inputSelect}
+            placeholder={"Select Type"}
+            options={[
+              {
+                value: "ROLE-USER-MYR002",
+                label: "Supervisor",
+              },
+              {
+                value: "ROLE-USER-MYR003",
+                label: "Operator",
+              },
+            ]}
+            onChange={selected => {
+              setCategoryType(selected.value);
+            }}
+          />
+        </LabelCustom>
+
+        <LabelCustom label={"Category Type"}>
+          <InputSelect
+            value={unit}
+            className={Styles.inputSelect}
+            placeholder={"Select Type"}
+            options={[
+              {
+                value: "ROLE-USER-MYR002",
+                label: "Supervisor",
+              },
+              {
+                value: "ROLE-USER-MYR003",
+                label: "Operator",
+              },
+            ]}
+            onChange={selected => {
+              setUnit(selected.value);
+            }}
+          />
+        </LabelCustom>
+
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => setModalIsOpened(false)}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button onClick={() => onCreateCategory()} className={Styles.save}>
+            Save
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
+  return (
+    <div className={Styles.container}>
+      {renderDirectoryParent()}
+      {renderAddNewModal()}
+    </div>
+  );
 }
+
+const LabelCustom = props => {
+  return (
+    <div className={Styles.labelCustomContainer}>
+      <span className={Styles.label}>{props.label}</span>
+      {props.children}
+    </div>
+  );
+};
 
 const results = [
   {
