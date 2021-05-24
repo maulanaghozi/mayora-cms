@@ -3,8 +3,10 @@ import { http } from "../../../../utility/http";
 import { TroublelistRadio } from "../../../../components/TroublelistRadio/TroublelistRadio";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./MinorStoppage.module.scss";
+import { LoadingModal } from "../../../../components/Modal";
 
 export default function IdlingMinorStoppages() {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -12,6 +14,7 @@ export default function IdlingMinorStoppages() {
   }, []);
 
   const getData = async () => {
+    setIsLoading(true);
     const params = {
       method: "GET",
       path: "category/parent",
@@ -24,8 +27,10 @@ export default function IdlingMinorStoppages() {
 
     if (result && result.code === "success") {
       setData(result.payload.results);
+      setIsLoading(false);
     } else {
       setData(results);
+      setIsLoading(false);
       console.log("THIS IS ERROR TechnicalBreakDown");
     }
   };
@@ -44,7 +49,12 @@ export default function IdlingMinorStoppages() {
     );
   };
 
-  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
+  return (
+    <div className={Styles.container}>
+      {renderDirectoryParent()}
+      {isLoading && <LoadingModal />}
+    </div>
+  );
 }
 
 const results = [

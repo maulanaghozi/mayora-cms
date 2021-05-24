@@ -12,6 +12,7 @@
     "dotenv": "^8.2.0",
     "draft-js": "^0.11.4",
     "env-cmd": "^10.0.1",
+    "express": "^4.17.1",
     "file-saver": "^2.0.5",
     "history": "^4.10.1",
     "immutability-helper": "^3.0.1",
@@ -21,6 +22,7 @@
     "moment-timezone": "^0.5.33",
     "node-sass": "^4.14.1",
     "numeral": "^2.0.6",
+    "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "query-string": "^6.10.1",
     "rc-slider": "^8.7.1",
@@ -60,7 +62,8 @@
     "video.js": "^7.3.0"
   },
   "scripts": {
-    "start": "PORT=3006 react-scripts start",
+    "start": "react-scripts start",
+    "start:mac": "PORT=3006 react-scripts start",
     "start:windows": "set PORT=3006 && react-scripts start",
     "build": "react-scripts build",
     "build:development": "PUBLIC_URL=https://dev-cms.kestingrum.com env-cmd -f .env.development npm run build",

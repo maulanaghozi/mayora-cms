@@ -9,7 +9,7 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-const port = process.env.REACT_APP_PORT || 21001;
+const port = process.env.REACT_APP_BASE_URL_WEB || 3006;
 
 app.listen(port, () => {
   console.log("mayora cms running on port " + port);

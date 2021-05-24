@@ -3,11 +3,11 @@ import { http } from "../../../../utility/http";
 import { TroublelistRadio } from "../../../../components/TroublelistRadio/TroublelistRadio";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./TechnicalBreakDown.module.scss";
+import { LoadingModal } from "../../../../components/Modal";
 
 export default function TechnicalBreakDown(props) {
   const [data, setData] = useState([]);
-  const [troubleId, setTroubleId] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { location } = props;
 
@@ -17,6 +17,7 @@ export default function TechnicalBreakDown(props) {
   }, []);
 
   const getData = async () => {
+    setIsLoading(true);
     const params = {
       method: "GET",
       path: "category/parent",
@@ -29,11 +30,14 @@ export default function TechnicalBreakDown(props) {
 
     if (result && result.code === "success") {
       setData(result.payload.results);
+      setIsLoading(false);
     } else {
       setData(results);
       console.log("THIS IS ERROR TechnicalBreakDown");
+      setIsLoading(false);
     }
   };
+
   const renderDirectoryParent = () => {
     return (
       <div>
@@ -55,7 +59,12 @@ export default function TechnicalBreakDown(props) {
     );
   };
 
-  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
+  return (
+    <div className={Styles.container}>
+      {renderDirectoryParent()}
+      {isLoading && <LoadingModal />}
+    </div>
+  );
 }
 
 const results = [
