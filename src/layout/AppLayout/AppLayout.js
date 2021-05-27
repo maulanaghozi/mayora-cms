@@ -5,7 +5,6 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Content from "../../components/Content/Content";
 
-// import { grid, container, sidebar, content } from './AppLayout.module.scss';
 import { app_container } from "./AppLayout.module.scss";
 import { Context } from "../../hooks/context";
 import { throttle } from "throttle-debounce";

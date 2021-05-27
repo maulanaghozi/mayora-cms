@@ -1,0 +1,23 @@
+@import "src/styles/variable";
+@import "src/styles/mixin";
+@import "src/styles/function";
+
+.dashboard_container {
+  padding: 2rem 2rem 0 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: #eeeeee;
+
+  .headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .time_container {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

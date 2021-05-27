@@ -11,6 +11,7 @@ import AlertTemplate from "react-alert-template-basic";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import AuthRoute from "./page/Auth/AuthRoute";
 import AppRoute from "./page/AppRoute";
+import MonitoringDashboard from "./page/Monitoring/Monitoring";
 
 import { hasToken } from "./utility/utility";
 import "./App.module.scss";
@@ -26,6 +27,9 @@ function App() {
       <Router>
         <Switch>
           <Route path={"/auth"} component={AuthRoute} />
+          <PrivateRoute path="/monitoring-dashboard" auth={hasToken()}>
+            <MonitoringDashboard />
+          </PrivateRoute>
           <PrivateRoute path="/" auth={hasToken()}>
             <AppRoute />
           </PrivateRoute>

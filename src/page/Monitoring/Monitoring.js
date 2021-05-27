@@ -5,7 +5,9 @@ import ProductionStatus from "./Screen/ProductionStatus/ProductionStatus";
 import ProductionOutput from "./Screen/ProductionOutput/ProductionOutput";
 import OEEvsTarget from "./Screen/OEEvsTarget/OEEvsTarget";
 import OEE from "./Screen/OEE/OEE";
-import Styles from "./Dashboard.module.scss";
+import Styles from "./Monitoring.module.scss";
+import Date from "../../components/Header/Date/Date";
+import Clock from "../../components/Header/Clock/Clock";
 
 export default function Dashboard() {
   const renderHeader = () => {
@@ -19,12 +21,16 @@ export default function Dashboard() {
             "OEE",
           ]}
           path={[
-            "/dashboard/production-status",
-            "/dashboard/production-output",
-            "/dashboard/oee-vs-target",
-            "/dashboard/oee",
+            "/monitoring-dashboard/production-status",
+            "/monitoring-dashboard/production-output",
+            "/monitoring-dashboard/oee-vs-target",
+            "/monitoring-dashboard/oee",
           ]}
         />
+        <div className={Styles.time_container}>
+          <Date />
+          <Clock />
+        </div>
       </div>
     );
   };
@@ -33,18 +39,23 @@ export default function Dashboard() {
     return (
       <Switch>
         <Route
-          path={"/dashboard/production-status"}
+          path={"/monitoring-dashboard/production-status"}
           component={ProductionStatus}
         />
         <Route
-          path={"/dashboard/production-output"}
+          path={"/monitoring-dashboard/production-output"}
           component={ProductionOutput}
         />
-        <Route path={"/dashboard/oee-vs-target"} component={OEEvsTarget} />
-        <Route path={"/dashboard/oee"} component={OEE} />
         <Route
-          path={"/dashboard"}
-          render={() => <Redirect to={"/dashboard/production-status"} />}
+          path={"/monitoring-dashboard/oee-vs-target"}
+          component={OEEvsTarget}
+        />
+        <Route path={"/monitoring-dashboard/oee"} component={OEE} />
+        <Route
+          path={"/monitoring-dashboard"}
+          render={() => (
+            <Redirect to={"/monitoring-dashboard/production-status"} />
+          )}
         />
       </Switch>
     );
