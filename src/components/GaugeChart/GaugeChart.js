@@ -18,7 +18,9 @@ export default function GaugeChartOEE(props) {
       />
       <div className={Styles.titleContainer}>
         <span className={Styles.title}>{title}</span>
-        <span className={Styles.value}>{`${value * 100}%`}</span>
+        <span
+          className={classNames(Styles.value, { [Styles.red]: value < target })}
+        >{`${value * 100}%`}</span>
       </div>
     </div>
   );
