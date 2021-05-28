@@ -35,11 +35,11 @@ export default function NotOperating() {
       setData(result.payload.results);
     } else {
       setData(results);
-      console.log("THIS IS ERROR TechnicalBreakDown");
+      console.log("THIS IS ERROR Not Operating");
     }
   };
 
-  const onCreateCategory = () => {
+  const onCreateCategory = async () => {
     const data = {
       name: name,
       categoryParentId: categoryParentId,
@@ -47,8 +47,21 @@ export default function NotOperating() {
       unit: unit,
     };
 
-    console.log(data);
-    const params = {};
+    const params = {
+      method: "POST",
+      path: "category",
+      data,
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success" && result.payload) {
+      if (result.payload.isSuccess) {
+        getData();
+      }
+    } else {
+      console.log("THIS IS ERROR Create Not Operating");
+    }
 
     setModalIsOpened(false);
   };

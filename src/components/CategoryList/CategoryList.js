@@ -15,6 +15,10 @@ const ItemRadio = props => {
     >
       <PinnedIcon style={{ marginRight: 10 }} />
       <span>{item.name}</span>
+
+      {/* <div>
+        <span>Delete</span>
+      </div> */}
     </div>
   );
 };
