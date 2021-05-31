@@ -1,6 +1,5 @@
 import React from "react";
 import Styles from "./AuthLayout.module.scss";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { MayoraLogo, MayoraText } from "../../assets/icons";
 
 export default function AuthLayout(props) {
@@ -17,7 +16,7 @@ export default function AuthLayout(props) {
         </div>
         {props.children}
         <span className={Styles.footer}>
-          Copyright © 2020 PT Torabika Eka Semesta Cikupa
+          Copyright © 2021 PT Torabika Eka Semesta Cikupa
         </span>
       </div>
     </div>

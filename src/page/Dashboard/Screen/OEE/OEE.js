@@ -167,7 +167,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={target1 / 100}
+            target={10 / 100}
             value={
               oee1.AV > 100
                 ? 105 / 100

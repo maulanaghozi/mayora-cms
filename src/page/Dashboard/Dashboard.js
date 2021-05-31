@@ -15,14 +15,14 @@ export default function Dashboard() {
           title={[
             "Production Status",
             "Production Output",
-            "OEE VS Target",
             "OEE",
+            "OEE VS Target",
           ]}
           path={[
             "/dashboard/production-status",
             "/dashboard/production-output",
-            "/dashboard/oee-vs-target",
             "/dashboard/oee",
+            "/dashboard/oee-vs-target",
           ]}
         />
       </div>

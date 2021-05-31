@@ -28,8 +28,8 @@ export default function Dashboard() {
           ]}
         />
         <div className={Styles.time_container}>
-          <Date />
-          <Clock />
+          <Date className={Styles.time} />
+          <Clock className={Styles.time} />
         </div>
       </div>
     );
