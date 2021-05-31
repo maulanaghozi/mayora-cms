@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 import HeaderDashboard from "./HeaderDashboard/HeaderDashboard";
 import ProductionStatus from "./Screen/ProductionStatus/ProductionStatus";
 import ProductionOutput from "./Screen/ProductionOutput/ProductionOutput";
@@ -8,6 +8,7 @@ import OEE from "./Screen/OEE/OEE";
 import Styles from "./Monitoring.module.scss";
 import Date from "../../components/Header/Date/Date";
 import Clock from "../../components/Header/Clock/Clock";
+import { MinimizeIcon } from "../../assets/icons";
 
 export default function Dashboard() {
   const renderHeader = () => {
@@ -17,19 +18,22 @@ export default function Dashboard() {
           title={[
             "Production Status",
             "Production Output",
-            "OEE VS Target",
             "OEE",
+            "OEE VS Target",
           ]}
           path={[
             "/monitoring-dashboard/production-status",
             "/monitoring-dashboard/production-output",
-            "/monitoring-dashboard/oee-vs-target",
             "/monitoring-dashboard/oee",
+            "/monitoring-dashboard/oee-vs-target",
           ]}
         />
         <div className={Styles.time_container}>
           <Date className={Styles.time} />
           <Clock className={Styles.time} />
+          <Link to={"/dashboard"} style={{ marginLeft: 15 }}>
+            <MinimizeIcon />
+          </Link>
         </div>
       </div>
     );

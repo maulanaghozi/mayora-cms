@@ -9,4 +9,14 @@
   flex-direction: column;
   overflow-y: auto;
   background-color: #eeeeee;
+
+  .headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > svg {
+      cursor: pointer;
+    }
+  }
 }

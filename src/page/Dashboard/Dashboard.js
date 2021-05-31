@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
 import HeaderDashboard from "./HeaderDashboard/HeaderDashboard";
 import ProductionStatus from "./Screen/ProductionStatus/ProductionStatus";
 import ProductionOutput from "./Screen/ProductionOutput/ProductionOutput";
 import OEEvsTarget from "./Screen/OEEvsTarget/OEEvsTarget";
 import OEE from "./Screen/OEE/OEE";
 import Styles from "./Dashboard.module.scss";
+import { FullscreenIcon } from "../../assets/icons";
 
 export default function Dashboard() {
   const renderHeader = () => {
@@ -25,6 +26,10 @@ export default function Dashboard() {
             "/dashboard/oee-vs-target",
           ]}
         />
+
+        <Link to={"/monitoring-dashboard"}>
+          <FullscreenIcon />
+        </Link>
       </div>
     );
   };

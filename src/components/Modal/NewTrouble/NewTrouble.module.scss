@@ -1,0 +1,21 @@
+.container {
+  width: 500px;
+
+  > span {
+    font-family: roboto;
+  }
+}
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: roboto;
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  > svg {
+    cursor: pointer;
+  }
+}
