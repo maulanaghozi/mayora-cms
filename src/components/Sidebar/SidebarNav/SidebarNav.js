@@ -10,8 +10,10 @@ import {
   open,
   filler,
 } from "./SidebarNav.module.scss";
+import { RedDoteIcon } from "../../../assets/icons";
 
 export default function SidebarNav(props) {
+  console.log(props.redDote);
   return (
     <NavLink
       className={link}
@@ -30,6 +32,9 @@ export default function SidebarNav(props) {
           <span>{props.text}</span>
         </div>
         <div className={classNames(filler, props.isOpen ? open : "")}></div>
+        {props.text === "Trouble List" && props.redDote && (
+          <RedDoteIcon fill={"#E92548"} className={icon} />
+        )}
       </div>
     </NavLink>
   );

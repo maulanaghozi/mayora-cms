@@ -103,22 +103,22 @@ export default function AppLayout(props) {
       if (typeof getLastTrouble === "function") {
         getLastTrouble();
       }
-    }, 15000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
 
-  const renderNewTroubleModal = () => {
-    return (
-      <NewTroubleModal
-        visible={modalNewTroubleVisible}
-        onClose={() => setModalNewTroubleVisible(false)}
-        machineId={lastTroubleId}
-      />
-    );
-  };
+  // const renderNewTroubleModal = () => {
+  //   return (
+  //     <NewTroubleModal
+  //       visible={modalNewTroubleVisible}
+  //       onClose={() => setModalNewTroubleVisible(false)}
+  //       machineId={lastTroubleId}
+  //     />
+  //   );
+  // };
 
   return (
     <Context.Provider
@@ -143,6 +143,8 @@ export default function AppLayout(props) {
         setManualCollection,
         fromPage,
         setFromPage,
+        modalNewTroubleVisible,
+        setModalNewTroubleVisible,
       }}
     >
       <div className={app_container}>
@@ -151,7 +153,7 @@ export default function AppLayout(props) {
         <Content isOpen={isOpen} setPath={setPath} setTitle={setTitle}>
           {props.children}
         </Content>
-        {renderNewTroubleModal()}
+        {/* {renderNewTroubleModal()} */}
       </div>
     </Context.Provider>
   );

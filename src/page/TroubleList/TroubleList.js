@@ -42,8 +42,14 @@ export default function TroubleList(props) {
   const [endTime, setEndTime] = useState(GetTime().endTime);
   const [minutesPass, setMinutesPass] = useState(0);
   const globalState = useContext(Context);
-  const { machine, dateSelected, setMachine, setDateSelected, adminProfile } =
-    globalState;
+  const {
+    machine,
+    dateSelected,
+    setMachine,
+    setDateSelected,
+    adminProfile,
+    setModalNewTroubleVisible,
+  } = globalState;
 
   const handleMinutesPass = () => {
     let getDays = moment(dateSelected * 1000).format("YYYY MM DD");
@@ -93,6 +99,7 @@ export default function TroubleList(props) {
     setIsLoading(true);
     await getStatus();
     await getDataTable();
+    setModalNewTroubleVisible(false);
     setIsLoading(false);
   };
 

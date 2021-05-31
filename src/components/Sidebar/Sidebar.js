@@ -52,7 +52,7 @@ const bottomNav = [
 
 export default function Sidebar(props) {
   const globalState = useContext(Context);
-  const { adminProfile } = globalState;
+  const { adminProfile, modalNewTroubleVisible } = globalState;
 
   return (
     <React.Fragment>
@@ -79,6 +79,7 @@ export default function Sidebar(props) {
             text={param.text}
             isOpen={props.isOpen}
             setIsOpen={props.setIsOpen}
+            redDote={modalNewTroubleVisible}
           />
         ))}
         <div className={classNames(sidebar_line, props.isOpen ? open : "")} />
