@@ -17,7 +17,7 @@ export default function IdlingMinorStoppages() {
     setIsLoading(true);
     const params = {
       method: "GET",
-      path: "category/parent",
+      path: "category/parent/trouble",
       query: {
         categoryParentId: "0c962c1d-a830-4786-a3d0-e5a46329406e",
       },
@@ -31,7 +31,7 @@ export default function IdlingMinorStoppages() {
     } else {
       setData(results);
       setIsLoading(false);
-      console.log("THIS IS ERROR TechnicalBreakDown");
+      console.log("THIS IS ERROR TechnicalBreakDown"); 
     }
   };
 
@@ -40,9 +40,11 @@ export default function IdlingMinorStoppages() {
       <div>
         {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
-            {Array.isArray(item.categories) && item.categories.length > 0 && (
-              <TroublelistRadio data={item.categories} />
-            )}
+            {Array.isArray(item.children) &&
+              item.children.length > 0 &&
+              item.children.map((params, idx) => (
+                <TroublelistRadio data={params.children} />
+              ))}
           </Directory>
         ))}
       </div>

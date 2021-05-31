@@ -20,7 +20,7 @@ export default function TechnicalBreakDown(props) {
     setIsLoading(true);
     const params = {
       method: "GET",
-      path: "category/parent",
+      path: "category/parent/trouble",
       query: {
         categoryParentId: "a2fe9f30-eede-46b9-a7ad-a4cc3a008175",
       },
@@ -47,9 +47,9 @@ export default function TechnicalBreakDown(props) {
               item.children.length > 0 &&
               item.children.map((params, idx) => (
                 <Directory name={params.name} key={idx.toString()}>
-                  {Array.isArray(params.categories) &&
-                    params.categories.length > 0 && (
-                      <TroublelistRadio data={params.categories} />
+                  {Array.isArray(params.children) &&
+                    params.children.length > 0 && (
+                      <TroublelistRadio data={params.children} />
                     )}
                 </Directory>
               ))}
