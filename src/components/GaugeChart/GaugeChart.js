@@ -9,12 +9,15 @@ export default function GaugeChartOEE(props) {
     <div className={classNames(Styles.container, classContainer)}>
       <GaugeChart
         id="gauge-chart5"
-        nrOfLevels={420}
+        nrOfLevels={100}
         arcsLength={[target, 1 - target]}
         colors={["#E92548", "#0AC46B"]}
         percent={value}
-        arcPadding={0.0}
+        arcPadding={0.01}
         style={{ width: "100%" }}
+        cornerRadius={0}
+        hideText={true}
+        formatTextValue={val => val}
       />
       <div className={Styles.titleContainer}>
         <span className={Styles.title}>{title}</span>

@@ -85,7 +85,7 @@ export default function TroubleList(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (typeof callback === "function") {
+      if (typeof getTroublelist === "function") {
         getTroublelist();
       }
     }, 12000);

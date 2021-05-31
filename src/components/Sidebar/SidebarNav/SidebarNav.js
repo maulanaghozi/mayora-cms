@@ -13,7 +13,6 @@ import {
 import { RedDoteIcon } from "../../../assets/icons";
 
 export default function SidebarNav(props) {
-  console.log(props.redDote);
   return (
     <NavLink
       className={link}

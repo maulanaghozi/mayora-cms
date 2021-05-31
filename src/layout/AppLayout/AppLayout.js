@@ -4,7 +4,6 @@ import moment from "moment";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Content from "../../components/Content/Content";
-import { NewTroubleModal } from "../../components/Modal/NewTrouble/NewTrouble";
 import { hasToken } from "../../utility/utility";
 import { http } from "../../utility/http";
 
@@ -80,9 +79,11 @@ export default function AppLayout(props) {
       const result = await http(params);
 
       if (result && result.code === "success" && result.payload) {
+        console.log("[RESULT]", result.payload);
         if (
           result.payload.id !== lastTroubleId &&
-          result.payload.status === "downtime"
+          result.payload.status === "downtime" &&
+          !result.payload.updatedBy
         ) {
           console.log({ id: result.payload.id, lastId: lastTroubleId });
           setLastTroubleId(result.payload.id);
@@ -92,7 +93,6 @@ export default function AppLayout(props) {
   };
 
   useEffect(() => {
-    console.log("[Last trouble] ", lastTroubleId);
     if (lastTroubleId) {
       setModalNewTroubleVisible(true);
     }
@@ -109,16 +109,6 @@ export default function AppLayout(props) {
       clearInterval(interval);
     };
   }, []);
-
-  // const renderNewTroubleModal = () => {
-  //   return (
-  //     <NewTroubleModal
-  //       visible={modalNewTroubleVisible}
-  //       onClose={() => setModalNewTroubleVisible(false)}
-  //       machineId={lastTroubleId}
-  //     />
-  //   );
-  // };
 
   return (
     <Context.Provider
@@ -153,7 +143,6 @@ export default function AppLayout(props) {
         <Content isOpen={isOpen} setPath={setPath} setTitle={setTitle}>
           {props.children}
         </Content>
-        {/* {renderNewTroubleModal()} */}
       </div>
     </Context.Provider>
   );
