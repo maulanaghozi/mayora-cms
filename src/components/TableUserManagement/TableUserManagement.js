@@ -16,7 +16,7 @@ import {
   column_oee,
 } from "./TableUserManagement.module.scss";
 
-const Header = ["Name", "Email", "Role", "Status", "Action"];
+const Header = ["Name", "Username", "Role", "Status", "Action"];
 
 const headerClasses = [
   column_oee,

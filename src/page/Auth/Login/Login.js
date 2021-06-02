@@ -32,36 +32,32 @@ export default function Login(props) {
 
   const handleSubmit = async () => {
     if (email && password) {
-      if (validateEmail(email)) {
-        try {
-          const params = {
-            method: "post",
-            path: "authentication/login",
-            data: {
-              email: email,
-              password: password,
-            },
-          };
+      try {
+        const params = {
+          method: "post",
+          path: "authentication/login",
+          data: {
+            email: email,
+            password: password,
+          },
+        };
 
-          const data = await http(params);
+        const data = await http(params);
 
-          if (data && data.code === "success") {
-            localStorage.setItem("mayora-cms", data.payload.token);
-            setRedirect(true);
+        if (data && data.code === "success") {
+          localStorage.setItem("mayora-cms", data.payload.token);
+          setRedirect(true);
+        } else {
+          if (data) {
+            setEmailErrorMsg(data);
           } else {
-            if (data) {
-              setEmailErrorMsg(data);
-            } else {
-              setEmailErrorMsg(
-                "Something's wrong, please contact our administrator"
-              );
-            }
+            setEmailErrorMsg(
+              "Something's wrong, please contact our administrator"
+            );
           }
-        } catch (err) {
-          alert.error(err);
         }
-      } else {
-        setEmailErrorMsg("Your email address is invalid");
+      } catch (err) {
+        alert.error(err);
       }
     } else if (email) {
       setPasswordErrorMsg("Masukkan password");
@@ -77,7 +73,7 @@ export default function Login(props) {
       type: "text",
       value: email,
       onChange: handleTextChange,
-      placeholder: "Email",
+      placeholder: "Username",
     },
     errorMsg: emailErrorMsg,
     setErrorMsg: setEmailErrorMsg,

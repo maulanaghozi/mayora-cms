@@ -16,6 +16,9 @@ class BarChart extends Component {
           toolbar: {
             show: false,
           },
+          zoom: {
+            enabled: false,
+          },
         },
         plotOptions: {
           bar: {

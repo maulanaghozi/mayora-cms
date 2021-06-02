@@ -41,6 +41,7 @@ export const InputWithLabel = props => {
           placeholder={placeholder}
           name={name}
           onChange={handleChange}
+          type={"text"}
         />
         {unit && <span className={Styles.unit}>{unit}</span>}
       </div>

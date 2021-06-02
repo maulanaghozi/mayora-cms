@@ -21,6 +21,7 @@ export default function UserManagement() {
   //Create
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState("active");
   const [roleIdCreate, setRoleIdCreate] = useState(null);
   const [machine1, setMachine1] = useState(true);
@@ -31,6 +32,7 @@ export default function UserManagement() {
     id: "",
     email: "",
     name: "",
+    password: "",
     roleId: "",
     status: "",
     machine1: false,
@@ -116,6 +118,10 @@ export default function UserManagement() {
       machine1: userEdit.machine1,
       machine2: userEdit.machine2,
     };
+
+    if (userEdit.password) {
+      data.password = userEdit.password;
+    }
 
     if (data.roleId === "ROLE-USER-MYR002") {
       data.machine2 = true;
@@ -236,11 +242,18 @@ export default function UserManagement() {
           placeholder={"Name"}
         />
         <InputWithLabel
-          label={"Email"}
+          label={"Username"}
           value={email}
           setValue={setEmail}
           name={"email"}
-          placeholder={"Email"}
+          placeholder={"Username"}
+        />
+        <InputWithLabel
+          label={"Password"}
+          value={password}
+          setValue={setPassword}
+          name={"password"}
+          placeholder={"Password"}
         />
         <div style={{ display: "flex", width: "100%" }}>
           <LabelCustom label={"Role"}>
@@ -330,11 +343,18 @@ export default function UserManagement() {
           placeholder={"Name"}
         />
         <InputWithLabel
-          label={"Email"}
+          label={"Username"}
           value={userEdit.email}
           setValue={email => handleOnChangeEdit({ email })}
           name={"email"}
-          placeholder={"Email"}
+          placeholder={"Username"}
+        />
+        <InputWithLabel
+          label={"Password"}
+          value={userEdit.password}
+          setValue={password => handleOnChangeEdit({ password })}
+          name={"password"}
+          placeholder={"Password"}
         />
         <div style={{ display: "flex", width: "100%" }}>
           <LabelCustom label={"Role"}>
