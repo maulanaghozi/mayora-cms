@@ -32,7 +32,12 @@ export default function SidebarNav(props) {
         </div>
         <div className={classNames(filler, props.isOpen ? open : "")}></div>
         {props.text === "Trouble List" && props.redDote && (
-          <RedDoteIcon fill={"#E92548"} className={icon} />
+          <RedDoteIcon
+            fill={"#E92548"}
+            className={icon}
+            width={12}
+            height={12}
+          />
         )}
       </div>
     </NavLink>

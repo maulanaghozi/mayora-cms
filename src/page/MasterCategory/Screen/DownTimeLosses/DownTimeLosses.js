@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CategoryList } from "../../../../components/CategoryList/CategoryList";
 import { Directory } from "../../../../components/Directory/Directory";
 import Styles from "./DownTimeLosses.module.scss";
@@ -15,6 +15,44 @@ export default function DownTimeLosses() {
   const [unit, setUnit] = useState(null);
   const [modalIsOpened, setModalIsOpened] = useState(false);
 
+  //Edit
+  const [editModalIsOpened, setEditModalIsOpened] = useState(false);
+  const [categoryEdit, setCategoryEdit] = useState({
+    id: "",
+    name: "",
+    categoryParentId: "",
+    categoryType: "",
+    unit: "",
+  });
+
+  //Delete
+  const [idDelete, setIdDelete] = useState(null);
+  const [nameDelete, setNameDelete] = useState(null);
+  const [deleteModalIsOpened, setDeleteModalIsOpened] = useState(false);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const params = {
+      method: "GET",
+      path: "category/parent",
+      query: {
+        categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success" && result.payload) {
+      // setData(result.payload.results);
+    } else {
+      // setData(results);
+      console.log("THIS IS ERROR TechnicalBreakDown");
+    }
+  };
+
   const onCreateCategory = () => {
     const data = {
       name: name,
@@ -27,6 +65,59 @@ export default function DownTimeLosses() {
     const params = {};
 
     setModalIsOpened(false);
+  };
+
+  const handleOnChangeEdit = newValue => {
+    setCategoryEdit({ ...categoryEdit, ...newValue });
+  };
+
+  const onEditCategory = async id => {
+    const data = {
+      name: categoryEdit.name,
+      categoryParentId: categoryEdit.categoryParentId,
+      categoryType: categoryEdit.categoryType,
+      unit: categoryEdit.unit,
+    };
+
+    const params = {
+      method: "PUT",
+      path: `category/${id}`,
+      data: data,
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setCategoryEdit({
+        id: "",
+        name: "",
+        categoryParentId: "",
+        categoryType: "",
+        unit: "",
+      });
+      setEditModalIsOpened(false);
+      getData();
+    } else {
+      alert("Edit Category Failed");
+    }
+  };
+
+  const onDelete = async id => {
+    const params = {
+      method: "PUT",
+      path: `category/disabled/${id}`,
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setIdDelete(null);
+      setDeleteModalIsOpened(false);
+      setNameDelete(null);
+      getData();
+    } else {
+      alert("Edit Category Failed");
+    }
   };
 
   const renderDirectoryParent = () => {
@@ -51,7 +142,13 @@ export default function DownTimeLosses() {
                           <PlusIcon />
                           <span>Add New Category</span>
                         </div>
-                        <CategoryList data={params.categories} />
+                        <CategoryList
+                          data={params.categories}
+                          setEditModalIsOpened={setEditModalIsOpened}
+                          setCategoryEdit={setCategoryEdit}
+                          setIdDelete={setIdDelete}
+                          setNameDelete={setNameDelete}
+                        />
                       </>
                     )}
                   {Array.isArray(params.children) &&
@@ -71,7 +168,13 @@ export default function DownTimeLosses() {
                                 <PlusIcon />
                                 <span>Add New Category</span>
                               </div>
-                              <CategoryList data={el.categories} />
+                              <CategoryList
+                                data={el.categories}
+                                setEditModalIsOpened={setEditModalIsOpened}
+                                setCategoryEdit={setCategoryEdit}
+                                setIdDelete={setIdDelete}
+                                setNameDelete={setNameDelete}
+                              />
                             </>
                           )}
                       </Directory>
@@ -91,7 +194,13 @@ export default function DownTimeLosses() {
                   <PlusIcon />
                   <span>Add New Category</span>
                 </div>
-                <CategoryList data={item.categories} />
+                <CategoryList
+                  data={item.categories}
+                  setEditModalIsOpened={setEditModalIsOpened}
+                  setCategoryEdit={setCategoryEdit}
+                  setIdDelete={setIdDelete}
+                  setNameDelete={setNameDelete}
+                />
               </>
             )}
           </Directory>
@@ -178,10 +287,149 @@ export default function DownTimeLosses() {
     );
   };
 
+  const handleLabelCategoryType = label => {
+    if (label === "manualcollection") {
+      return "Manual Collection";
+    } else {
+      return "Trouble";
+    }
+  };
+
+  const renderEditModal = () => {
+    return (
+      <CustomModal
+        visible={editModalIsOpened}
+        onClose={() => setEditModalIsOpened(false)}
+        title={"Edit Catgegory"}
+      >
+        <InputWithLabel
+          label={"Category"}
+          value={categoryEdit.name}
+          setValue={name => handleOnChangeEdit({ name })}
+          name={"name"}
+          placeholder={"Category"}
+        />
+
+        <div style={{ display: "flex", width: "100%" }}>
+          <LabelCustom label={"Unit / Satuan"}>
+            <InputSelect
+              value={categoryEdit.unit}
+              className={Styles.inputSelect}
+              placeholder={"Select Unit / Satuan"}
+              defaultValue={{
+                value: categoryEdit.unit,
+                label: categoryEdit.unit,
+              }}
+              options={[
+                {
+                  value: "Kg",
+                  label: "Kg",
+                },
+                {
+                  value: "Menit",
+                  label: "Menit",
+                },
+                {
+                  value: "Kg/h",
+                  label: "Kg/h",
+                },
+              ]}
+              onChange={selected => {
+                handleOnChangeEdit({ unit: selected.value });
+              }}
+            />
+          </LabelCustom>
+
+          <LabelCustom label={"Category Type"}>
+            <InputSelect
+              value={categoryEdit.categoryType}
+              className={Styles.inputSelect}
+              placeholder={"Select Type"}
+              defaultValue={{
+                value: categoryEdit.categoryType,
+                label: handleLabelCategoryType(categoryEdit.categoryType),
+              }}
+              options={[
+                {
+                  value: "manualcollection",
+                  label: "Manual Collection",
+                },
+                {
+                  value: "trouble",
+                  label: "Trouble",
+                },
+              ]}
+              onChange={selected => {
+                handleOnChangeEdit({ categoryType: selected.value });
+              }}
+            />
+          </LabelCustom>
+        </div>
+
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => setEditModalIsOpened(false)}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => onEditCategory(categoryEdit.id)}
+            className={Styles.save}
+          >
+            Save
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
+  const confirmationDeleteModal = () => {
+    return (
+      <CustomModal
+        visible={deleteModalIsOpened}
+        onClose={() => {
+          setIdDelete(null);
+          setDeleteModalIsOpened(false);
+          setNameDelete(null);
+        }}
+        title={"Confirmation Alert"}
+      >
+        <span style={{ fontFamily: "roboto" }}>
+          Anda yakin untuk hapus category <strong>{nameDelete}</strong> dari
+          daftar?
+        </span>
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => {
+              setIdDelete(null);
+              setDeleteModalIsOpened(false);
+              setNameDelete(null);
+            }}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button onClick={() => onDelete(idDelete)} className={Styles.save}>
+            Delete
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
+  useEffect(() => {
+    if (idDelete) {
+      setDeleteModalIsOpened(true);
+    }
+  }, [idDelete]);
+
   return (
     <div className={Styles.container}>
       {renderDirectoryParent()}
       {renderAddNewModal()}
+      {renderEditModal()}
+      {confirmationDeleteModal()}
     </div>
   );
 }

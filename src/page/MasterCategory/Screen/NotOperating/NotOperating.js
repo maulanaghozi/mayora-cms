@@ -15,12 +15,9 @@ export default function NotOperating() {
   const [categoryType, setCategoryType] = useState(null);
   const [unit, setUnit] = useState(null);
   const [modalIsOpened, setModalIsOpened] = useState(false);
-  const [editModalIsOpened, setEditModalIsOpened] = useState(false);
-  const [idDelete, setIdDelete] = useState(null);
-  const [nameDelete, setNameDelete] = useState(null);
-  const [deleteModalIsOpened, setDeleteModalIsOpened] = useState(false);
 
   //Edit
+  const [editModalIsOpened, setEditModalIsOpened] = useState(false);
   const [categoryEdit, setCategoryEdit] = useState({
     id: "",
     name: "",
@@ -28,6 +25,11 @@ export default function NotOperating() {
     categoryType: "",
     unit: "",
   });
+
+  //Delete
+  const [idDelete, setIdDelete] = useState(null);
+  const [nameDelete, setNameDelete] = useState(null);
+  const [deleteModalIsOpened, setDeleteModalIsOpened] = useState(false);
 
   useEffect(() => {
     getData();
@@ -96,14 +98,40 @@ export default function NotOperating() {
       path: `category/${id}`,
       data: data,
     };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setCategoryEdit({
+        id: "",
+        name: "",
+        categoryParentId: "",
+        categoryType: "",
+        unit: "",
+      });
+      setEditModalIsOpened(false);
+      getData();
+    } else {
+      alert("Edit Category Failed");
+    }
   };
 
-  const onDelete = id => {
-    console.log("[id]", id);
+  const onDelete = async id => {
+    const params = {
+      method: "PUT",
+      path: `category/disabled/${id}`,
+    };
 
-    setIdDelete(null);
-    setDeleteModalIsOpened(false);
-    setNameDelete(null);
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setIdDelete(null);
+      setDeleteModalIsOpened(false);
+      setNameDelete(null);
+      getData();
+    } else {
+      alert("Edit Category Failed");
+    }
   };
 
   const renderDirectoryParent = () => {

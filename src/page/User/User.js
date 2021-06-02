@@ -148,7 +148,7 @@ export default function UserManagement() {
         getDataUser();
       }
     } else {
-      alert("Add User Failed");
+      alert("Edit User Failed");
     }
   };
 
