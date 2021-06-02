@@ -6,25 +6,37 @@ import { PinnedIcon } from "../../assets/icons/index";
 import { Context } from "../../hooks/context";
 
 const ItemRadio = props => {
-  const { item, isFirst } = props;
+  const { item, isFirst, setEditModalIsOpened, setCategoryEdit } = props;
+
+  const handleOnCLick = () => {
+    console.log(item);
+    setCategoryEdit(item);
+    setEditModalIsOpened(true);
+  };
+
   return (
     <div
       className={classNames(Styles.itemContainer, {
         [Styles.topBorder]: !isFirst,
       })}
     >
-      <PinnedIcon style={{ marginRight: 10 }} />
-      <span>{item.name}</span>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <PinnedIcon style={{ marginRight: 10 }} />
+        <span>{item.name}</span>
+      </div>
 
-      {/* <div>
-        <span>Delete</span>
-      </div> */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <span onClick={() => handleOnCLick()} className={Styles.action}>
+          Edit
+        </span>
+        <span className={Styles.action}>Delete</span>
+      </div>
     </div>
   );
 };
 
 export const CategoryList = props => {
-  const { data, styleContainer } = props;
+  const { data, styleContainer, setEditModalIsOpened, setCategoryEdit } = props;
   const globalState = useContext(Context);
   const { setCategory, category } = globalState;
   return (
@@ -36,6 +48,8 @@ export const CategoryList = props => {
           isSelected={category.categoryId === item.id}
           setSelected={setCategory}
           isFirst={idx === 0}
+          setEditModalIsOpened={setEditModalIsOpened}
+          setCategoryEdit={setCategoryEdit}
         />
       ))}
     </div>

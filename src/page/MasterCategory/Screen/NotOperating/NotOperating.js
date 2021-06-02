@@ -15,6 +15,16 @@ export default function NotOperating() {
   const [categoryType, setCategoryType] = useState(null);
   const [unit, setUnit] = useState(null);
   const [modalIsOpened, setModalIsOpened] = useState(false);
+  const [editModalIsOpened, setEditModalIsOpened] = useState(false);
+
+  //Edit
+  const [categoryEdit, setCategoryEdit] = useState({
+    id: "",
+    name: "",
+    categoryParentId: "",
+    categoryType: "",
+    unit: "",
+  });
 
   useEffect(() => {
     getData();
@@ -66,6 +76,25 @@ export default function NotOperating() {
     setModalIsOpened(false);
   };
 
+  const handleOnChangeEdit = newValue => {
+    setCategoryEdit({ ...categoryEdit, ...newValue });
+  };
+
+  const onEditCategory = async id => {
+    const data = {
+      name: categoryEdit.name,
+      categoryParentId: categoryEdit.categoryParentId,
+      categoryType: categoryEdit.categoryType,
+      unit: categoryEdit.unit,
+    };
+
+    const params = {
+      method: "PUT",
+      path: `category/${id}`,
+      data: data,
+    };
+  };
+
   const renderDirectoryParent = () => {
     return (
       <div>
@@ -82,7 +111,11 @@ export default function NotOperating() {
               <span>Add New Category</span>
             </div>
             {Array.isArray(item.categories) && item.categories.length > 0 && (
-              <CategoryList data={item.categories} />
+              <CategoryList
+                data={item.categories}
+                setEditModalIsOpened={setEditModalIsOpened}
+                setCategoryEdit={setCategoryEdit}
+              />
             )}
           </Directory>
         ))}
@@ -168,10 +201,108 @@ export default function NotOperating() {
     );
   };
 
+  const handleLabelCategoryType = label => {
+    if (label === "manualcollection") {
+      return "Manual Collection";
+    } else {
+      return "Trouble";
+    }
+  };
+
+  const renderEditModal = () => {
+    return (
+      <CustomModal
+        visible={editModalIsOpened}
+        onClose={() => setEditModalIsOpened(false)}
+        title={"Edit Catgegory"}
+      >
+        <InputWithLabel
+          label={"Category"}
+          value={categoryEdit.name}
+          setValue={name => handleOnChangeEdit({ name })}
+          name={"name"}
+          placeholder={"Category"}
+        />
+
+        <div style={{ display: "flex", width: "100%" }}>
+          <LabelCustom label={"Unit / Satuan"}>
+            <InputSelect
+              value={categoryEdit.unit}
+              className={Styles.inputSelect}
+              placeholder={"Select Unit / Satuan"}
+              defaultValue={{
+                value: categoryEdit.unit,
+                label: categoryEdit.unit,
+              }}
+              options={[
+                {
+                  value: "Kg",
+                  label: "Kg",
+                },
+                {
+                  value: "Menit",
+                  label: "Menit",
+                },
+                {
+                  value: "Kg/h",
+                  label: "Kg/h",
+                },
+              ]}
+              onChange={selected => {
+                handleOnChangeEdit({ unit: selected.value });
+              }}
+            />
+          </LabelCustom>
+
+          <LabelCustom label={"Category Type"}>
+            <InputSelect
+              value={categoryEdit.categoryType}
+              className={Styles.inputSelect}
+              placeholder={"Select Type"}
+              defaultValue={{
+                value: categoryEdit.categoryType,
+                label: handleLabelCategoryType(categoryEdit.categoryType),
+              }}
+              options={[
+                {
+                  value: "manualcollection",
+                  label: "Manual Collection",
+                },
+                {
+                  value: "trouble",
+                  label: "Trouble",
+                },
+              ]}
+              onChange={selected => {
+                handleOnChangeEdit({ categoryType: selected.value });
+              }}
+            />
+          </LabelCustom>
+        </div>
+
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => setEditModalIsOpened(false)}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => onEditCategory(categoryEdit.id)}
+            className={Styles.save}
+          >
+            Save
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
   return (
     <div className={Styles.container}>
       {renderDirectoryParent()}
       {renderAddNewModal()}
+      {renderEditModal()}
     </div>
   );
 }
