@@ -6,7 +6,14 @@ import { PinnedIcon } from "../../assets/icons/index";
 import { Context } from "../../hooks/context";
 
 const ItemRadio = props => {
-  const { item, isFirst, setEditModalIsOpened, setCategoryEdit } = props;
+  const {
+    item,
+    isFirst,
+    setEditModalIsOpened,
+    setCategoryEdit,
+    setIdDelete,
+    setNameDelete,
+  } = props;
 
   const handleOnCLick = () => {
     console.log(item);
@@ -29,14 +36,29 @@ const ItemRadio = props => {
         <span onClick={() => handleOnCLick()} className={Styles.action}>
           Edit
         </span>
-        <span className={Styles.action}>Delete</span>
+        <span
+          onClick={() => {
+            setNameDelete(item.name);
+            setIdDelete(item.id);
+          }}
+          className={Styles.action}
+        >
+          Delete
+        </span>
       </div>
     </div>
   );
 };
 
 export const CategoryList = props => {
-  const { data, styleContainer, setEditModalIsOpened, setCategoryEdit } = props;
+  const {
+    data,
+    styleContainer,
+    setEditModalIsOpened,
+    setCategoryEdit,
+    setIdDelete,
+    setNameDelete,
+  } = props;
   const globalState = useContext(Context);
   const { setCategory, category } = globalState;
   return (
@@ -50,6 +72,8 @@ export const CategoryList = props => {
           isFirst={idx === 0}
           setEditModalIsOpened={setEditModalIsOpened}
           setCategoryEdit={setCategoryEdit}
+          setIdDelete={setIdDelete}
+          setNameDelete={setNameDelete}
         />
       ))}
     </div>

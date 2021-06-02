@@ -16,6 +16,9 @@ export default function NotOperating() {
   const [unit, setUnit] = useState(null);
   const [modalIsOpened, setModalIsOpened] = useState(false);
   const [editModalIsOpened, setEditModalIsOpened] = useState(false);
+  const [idDelete, setIdDelete] = useState(null);
+  const [nameDelete, setNameDelete] = useState(null);
+  const [deleteModalIsOpened, setDeleteModalIsOpened] = useState(false);
 
   //Edit
   const [categoryEdit, setCategoryEdit] = useState({
@@ -95,6 +98,14 @@ export default function NotOperating() {
     };
   };
 
+  const onDelete = id => {
+    console.log("[id]", id);
+
+    setIdDelete(null);
+    setDeleteModalIsOpened(false);
+    setNameDelete(null);
+  };
+
   const renderDirectoryParent = () => {
     return (
       <div>
@@ -115,6 +126,8 @@ export default function NotOperating() {
                 data={item.categories}
                 setEditModalIsOpened={setEditModalIsOpened}
                 setCategoryEdit={setCategoryEdit}
+                setIdDelete={setIdDelete}
+                setNameDelete={setNameDelete}
               />
             )}
           </Directory>
@@ -298,11 +311,52 @@ export default function NotOperating() {
     );
   };
 
+  const confirmationDeleteModal = () => {
+    return (
+      <CustomModal
+        visible={deleteModalIsOpened}
+        onClose={() => {
+          setIdDelete(null);
+          setDeleteModalIsOpened(false);
+          setNameDelete(null);
+        }}
+        title={"Confirmation Alert"}
+      >
+        <span style={{ fontFamily: "roboto" }}>
+          Anda yakin untuk hapus category <strong>{nameDelete}</strong> dari
+          daftar?
+        </span>
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => {
+              setIdDelete(null);
+              setDeleteModalIsOpened(false);
+              setNameDelete(null);
+            }}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button onClick={() => onDelete(idDelete)} className={Styles.save}>
+            Delete
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
+  useEffect(() => {
+    if (idDelete) {
+      setDeleteModalIsOpened(true);
+    }
+  }, [idDelete]);
+
   return (
     <div className={Styles.container}>
       {renderDirectoryParent()}
       {renderAddNewModal()}
       {renderEditModal()}
+      {confirmationDeleteModal()}
     </div>
   );
 }

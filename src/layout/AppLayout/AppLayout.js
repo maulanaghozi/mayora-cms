@@ -79,7 +79,6 @@ export default function AppLayout(props) {
       const result = await http(params);
 
       if (result && result.code === "success" && result.payload) {
-        console.log("[RESULT]", result.payload);
         if (
           result.payload.id !== lastTroubleId &&
           result.payload.status === "downtime" &&

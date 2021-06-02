@@ -16,7 +16,7 @@ const customStyles = {
 };
 
 export const CustomModal = props => {
-  const { visible, onSubmit, onCancel, onClose, title } = props;
+  const { visible, onClose, title } = props;
 
   return (
     <Modal
@@ -41,8 +41,6 @@ CustomModal.defaultProps = {
   styleContainer: {},
   onClose: () => {},
   title: "Title",
-  onSubmit: () => {},
-  onCancel: () => {},
 };
 
 CustomModal.propTypes = {
@@ -50,6 +48,4 @@ CustomModal.propTypes = {
   styleContainer: PropTypes.any,
   onClose: PropTypes.func,
   title: PropTypes.string,
-  onSubmit: PropTypes.func,
-  onCancel: PropTypes.func,
 };
