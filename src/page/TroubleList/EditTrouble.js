@@ -107,7 +107,10 @@ export default function EditTrouble() {
       <div className={Styles.headerContainer}>
         <div
           onClick={() => {
-            history.goBack();
+            history.push({
+              pathname: "/trouble-list",
+              state: { machineId: machineId },
+            });
           }}
           className={Styles.back}
         >
