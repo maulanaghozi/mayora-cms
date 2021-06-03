@@ -1,12 +1,12 @@
 import axios from "axios";
-import history from "./history";
 import queryString from "query-string";
-export const baseURL = process.env.REACT_APP_BASE_URL;
+// export const baseURL = process.env.REACT_APP_BASE_URL;
 
 const CancelToken = axios.CancelToken;
 let cancel;
 
 export const http = async (params, progress, setProgress) => {
+  const baseURL = `http://${window.location.hostname}:3000/`;
   try {
     let percentCompleted;
     params.showMessage =
@@ -48,12 +48,6 @@ export const http = async (params, progress, setProgress) => {
   } catch (err) {
     console.log(err);
     if (err.response) {
-      // if (err.response.status === 401) {
-      //   localStorage.removeItem("mayora-cms");
-      //   history.push("/auth/login");
-      //   alert(err.response.data.message);
-      // }
-
       if (typeof cancel === "function") {
         cancel();
       }

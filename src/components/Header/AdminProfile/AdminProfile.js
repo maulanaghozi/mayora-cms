@@ -13,6 +13,7 @@ import Styles, {
   box,
   text,
   logout,
+  change,
 } from "./AdminProfile.module.scss";
 import { useClickOutside } from "../../../hooks/useClickOutside/useClickOutside";
 import { Context } from "../../../hooks/context";
@@ -121,6 +122,12 @@ export default function AdminProfile() {
       </div>
       {displayBox && (
         <div ref={boxRef} className={box}>
+          <span
+            className={change}
+            onClick={() => context.setModalChangePassVisible(true)}
+          >
+            {"Change Password"}
+          </span>
           <span className={logout} onClick={logoutAdmin}>
             {"Logout"}
           </span>

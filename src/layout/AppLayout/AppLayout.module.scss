@@ -1,6 +1,6 @@
-@import 'src/styles/variable';
-@import 'src/styles/mixin';
-@import 'src/styles/function';
+@import "src/styles/variable";
+@import "src/styles/mixin";
+@import "src/styles/function";
 // @import 'src/styles/bs/bootstrap-grid';
 
 // .grid {
@@ -20,12 +20,43 @@
 //     padding: 0;
 // }
 .app_container {
-    width: 100vw;
-    // height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  width: 100vw;
+  // height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 40px;
+
+  > button {
+    outline: none;
+    padding: 5px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    &.cancel {
+      background-color: #ffffff;
+      border: 1px solid #d9d9d9;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    &.save {
+      background-color: #c60808;
+      color: #ffffff;
+      border: none;
+    }
+
+    &.disabled {
+      background-color: gray;
+      pointer-events: none;
+    }
+  }
 }

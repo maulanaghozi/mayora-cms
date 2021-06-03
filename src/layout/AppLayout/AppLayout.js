@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import classNames from "classnames";
 import { notification } from "antd";
 import { throttle } from "throttle-debounce";
 
@@ -9,9 +10,12 @@ import Content from "../../components/Content/Content";
 import { hasToken } from "../../utility/utility";
 import { http } from "../../utility/http";
 import { WarningIcon } from "../../assets/icons";
+import { CustomModal } from "../../components/Modal/CustomModal/CustomModal";
+import { InputWithLabel } from "../../components/Form/InputWithLable/InputWithLabel";
 
-import { app_container } from "./AppLayout.module.scss";
+import Styles, { app_container } from "./AppLayout.module.scss";
 import { Context } from "../../hooks/context";
+import { configConsumerProps } from "antd/lib/config-provider";
 
 export default function AppLayout(props) {
   const [path, setPath] = useState([]);
@@ -48,6 +52,13 @@ export default function AppLayout(props) {
   const [troubleMachine, setTrroubleMachine] = useState(1);
   const [troubleTime, setTroubleTime] = useState(moment().format("HH:mm"));
   const [modalNewTroubleVisible, setModalNewTroubleVisible] = useState(false);
+
+  //change password
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmationPassword, setConfirmationPassword] = useState("");
+  const [disabledChange, setDisabledChange] = useState(true);
+  const [modalChangePassVisible, setModalChangePassVisible] = useState(false);
 
   const resizeHandler = () => {
     setWindowWidth(window.innerWidth);
@@ -134,6 +145,90 @@ export default function AppLayout(props) {
     });
   };
 
+  useEffect(() => {
+    if (oldPassword && newPassword && confirmationPassword) {
+      if (newPassword === confirmationPassword) {
+        setDisabledChange(false);
+      }
+    }
+  }, [oldPassword, newPassword, confirmationPassword]);
+
+  const onChangePassword = async () => {
+    const params = {
+      method: "PUT",
+      path: "authentication/change-password",
+      data: {
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      },
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success") {
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmationPassword("");
+      setModalChangePassVisible(false);
+      notification.open({
+        message: `Change Password Success`,
+      });
+    } else {
+      notification.open({
+        message: `Change Password Failed`,
+        icon: <WarningIcon />,
+      });
+    }
+  };
+
+  const renderAddNewModal = () => {
+    return (
+      <CustomModal
+        visible={modalChangePassVisible}
+        onClose={() => setModalChangePassVisible(false)}
+        title={"Change Password"}
+      >
+        <InputWithLabel
+          label={"Current Password"}
+          value={oldPassword}
+          setValue={setOldPassword}
+          name={"current password"}
+          placeholder={"Current Password"}
+        />
+        <InputWithLabel
+          label={"New Password"}
+          value={newPassword}
+          setValue={setNewPassword}
+          name={"new password"}
+          placeholder={"New Password"}
+        />
+        <InputWithLabel
+          label={"Retype New Password"}
+          value={confirmationPassword}
+          setValue={setConfirmationPassword}
+          name={"confirmation password"}
+          placeholder={"Retype New Password"}
+        />
+        <div className={Styles.buttonContainer}>
+          <button
+            onClick={() => setModalChangePassVisible(false)}
+            className={Styles.cancel}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => onChangePassword()}
+            className={classNames(Styles.save, {
+              [Styles.disabled]: disabledChange,
+            })}
+          >
+            Save
+          </button>
+        </div>
+      </CustomModal>
+    );
+  };
+
   return (
     <Context.Provider
       value={{
@@ -159,6 +254,7 @@ export default function AppLayout(props) {
         setFromPage,
         modalNewTroubleVisible,
         setModalNewTroubleVisible,
+        setModalChangePassVisible,
       }}
     >
       <div className={app_container}>
@@ -167,6 +263,7 @@ export default function AppLayout(props) {
         <Content isOpen={isOpen} setPath={setPath} setTitle={setTitle}>
           {props.children}
         </Content>
+        {renderAddNewModal()}
       </div>
     </Context.Provider>
   );
