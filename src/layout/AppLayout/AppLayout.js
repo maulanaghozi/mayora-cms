@@ -46,6 +46,7 @@ export default function AppLayout(props) {
   //Trouble Notification
   const [lastTroubleId, setLastTroubleId] = useState("");
   const [troubleMachine, setTrroubleMachine] = useState(1);
+  const [troubleTime, setTroubleTime] = useState(moment().format("HH:mm"));
   const [modalNewTroubleVisible, setModalNewTroubleVisible] = useState(false);
 
   const resizeHandler = () => {
@@ -89,6 +90,8 @@ export default function AppLayout(props) {
           result.payload.status === "downtime" &&
           !result.payload.updatedBy
         ) {
+          setTroubleTime(moment(result.payload.startTime).format("HH:mm"));
+
           if (
             result.payload.machineId === "00f5eafd-89c5-4871-a982-26a8180774c7"
           ) {
@@ -125,7 +128,7 @@ export default function AppLayout(props) {
   const openNotification = () => {
     notification.open({
       message: `Line ${troubleMachine}`,
-      description: `09:00 | New Trouble`,
+      description: `${troubleTime} | New Trouble`,
       duration: 0,
       icon: <WarningIcon />,
     });

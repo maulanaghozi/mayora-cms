@@ -100,7 +100,7 @@ class BarChart extends Component {
               series={this.state.seriesMixedChart}
               type="line"
               width="100%"
-              height="450"
+              height="442"
             />
           </div>
         </div>

@@ -13,13 +13,14 @@
     .planning {
       flex: 1;
       margin: 0;
+      height: 100%;
     }
 
     .chart {
       flex: 2;
       background-color: #ffffff;
       margin-left: 10px;
-      border-radius: 5px;
+      border-radius: 10px;
     }
   }
 }
