@@ -31,7 +31,7 @@ export default function SidebarNav(props) {
           <span>{props.text}</span>
         </div>
         <div className={classNames(filler, props.isOpen ? open : "")}></div>
-        {props.text === "Trouble List" && props.redDote && (
+        {props.text === "Trouble List" && props.redDote && props.isOpen && (
           <RedDoteIcon className={icon} />
         )}
       </div>

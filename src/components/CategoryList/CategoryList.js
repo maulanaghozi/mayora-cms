@@ -63,19 +63,23 @@ export const CategoryList = props => {
   const { setCategory, category } = globalState;
   return (
     <div className={classNames(Styles.container, styleContainer)}>
-      {data.map((item, idx) => (
-        <ItemRadio
-          key={idx.toString()}
-          item={item}
-          isSelected={category.categoryId === item.id}
-          setSelected={setCategory}
-          isFirst={idx === 0}
-          setEditModalIsOpened={setEditModalIsOpened}
-          setCategoryEdit={setCategoryEdit}
-          setIdDelete={setIdDelete}
-          setNameDelete={setNameDelete}
-        />
-      ))}
+      {data.map((item, idx) => {
+        if (item.status === "active") {
+          return (
+            <ItemRadio
+              key={idx.toString()}
+              item={item}
+              isSelected={category.categoryId === item.id}
+              setSelected={setCategory}
+              isFirst={idx === 0}
+              setEditModalIsOpened={setEditModalIsOpened}
+              setCategoryEdit={setCategoryEdit}
+              setIdDelete={setIdDelete}
+              setNameDelete={setNameDelete}
+            />
+          );
+        }
+      })}
     </div>
   );
 };

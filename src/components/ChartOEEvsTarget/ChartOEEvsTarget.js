@@ -90,8 +90,8 @@ class ChartOEEvsTarget extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%" }}>
-        <div className="row" style={{ width: "100%" }}>
+      <div style={{ width: "100%", height: "80%" }}>
+        <div className="row" style={{ width: "100%", height: "100%" }}>
           <div className="col mixed-chart">
             <Chart
               options={this.state.optionsMixedChart}

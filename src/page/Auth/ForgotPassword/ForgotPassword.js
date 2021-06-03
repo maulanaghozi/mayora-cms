@@ -17,8 +17,8 @@ export default function ForgotPassword() {
           marginBottom: 10,
         }}
       >
-        Silakan Hubungi Administrator <br />
-        untuk reset password
+        Please contact Administrator <br />
+        to reset your password.
       </span>
       <Link className={cancel} to={"/auth/login"}>
         CANCEL

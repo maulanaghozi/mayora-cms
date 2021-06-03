@@ -6,11 +6,13 @@
 
   .lineContainer {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
+    margin-bottom: 20px;
 
     .planning {
       flex: 1;
+      margin: 0;
     }
 
     .chart {

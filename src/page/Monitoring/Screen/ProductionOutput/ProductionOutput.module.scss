@@ -6,8 +6,9 @@
 
   .lineContainer {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
+    margin-bottom: 20px;
 
     .planning {
       flex: 1;
@@ -17,7 +18,7 @@
       flex: 2;
       background-color: #ffffff;
       margin-left: 10px;
-      border-radius: 5px;
+      border-radius: 10px;
     }
   }
 }

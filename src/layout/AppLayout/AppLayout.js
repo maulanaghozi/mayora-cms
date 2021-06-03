@@ -124,8 +124,8 @@ export default function AppLayout(props) {
 
   const openNotification = () => {
     notification.open({
-      message: "Trouble Baru!",
-      description: `Ada trouble baru di Machine Creamer Line ${troubleMachine}`,
+      message: `Line ${troubleMachine}`,
+      description: `09:00 | New Trouble`,
       duration: 0,
       icon: <WarningIcon />,
     });
