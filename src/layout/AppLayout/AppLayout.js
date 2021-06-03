@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import { notification } from "antd";
+import { throttle } from "throttle-debounce";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Content from "../../components/Content/Content";
 import { hasToken } from "../../utility/utility";
 import { http } from "../../utility/http";
+import { WarningIcon } from "../../assets/icons";
 
 import { app_container } from "./AppLayout.module.scss";
 import { Context } from "../../hooks/context";
-import { throttle } from "throttle-debounce";
 
 export default function AppLayout(props) {
   const [path, setPath] = useState([]);
@@ -40,7 +42,10 @@ export default function AppLayout(props) {
   });
   const [isOpen, setIsOpen] = useState(windowWidth > 1200);
   const [fromPage, setFromPage] = useState(null);
+
+  //Trouble Notification
   const [lastTroubleId, setLastTroubleId] = useState("");
+  const [troubleMachine, setTrroubleMachine] = useState(1);
   const [modalNewTroubleVisible, setModalNewTroubleVisible] = useState(false);
 
   const resizeHandler = () => {
@@ -84,7 +89,14 @@ export default function AppLayout(props) {
           result.payload.status === "downtime" &&
           !result.payload.updatedBy
         ) {
-          console.log({ id: result.payload.id, lastId: lastTroubleId });
+          if (
+            result.payload.machineId === "00f5eafd-89c5-4871-a982-26a8180774c7"
+          ) {
+            setTrroubleMachine(1);
+          } else {
+            setTrroubleMachine(2);
+          }
+
           setLastTroubleId(result.payload.id);
         }
       }
@@ -93,6 +105,7 @@ export default function AppLayout(props) {
 
   useEffect(() => {
     if (lastTroubleId) {
+      openNotification();
       setModalNewTroubleVisible(true);
     }
   }, [lastTroubleId]);
@@ -102,12 +115,21 @@ export default function AppLayout(props) {
       if (typeof getLastTrouble === "function") {
         getLastTrouble();
       }
-    }, 10000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
+
+  const openNotification = () => {
+    notification.open({
+      message: "Trouble Baru!",
+      description: `Ada trouble baru di Machine Creamer Line ${troubleMachine}`,
+      duration: 0,
+      icon: <WarningIcon />,
+    });
+  };
 
   return (
     <Context.Provider

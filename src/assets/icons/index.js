@@ -28,6 +28,7 @@ import { ReactComponent as PinnedIcon } from "./pinned.svg";
 import { ReactComponent as FullscreenIcon } from "./fullscreen.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize.svg";
 import { ReactComponent as RedDoteIcon } from "./red-dot.svg";
+import { ReactComponent as WarningIcon } from "./warning.svg";
 
 export {
   CloseIcon,
@@ -60,4 +61,5 @@ export {
   FullscreenIcon,
   MinimizeIcon,
   RedDoteIcon,
+  WarningIcon,
 };
