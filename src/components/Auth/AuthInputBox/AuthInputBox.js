@@ -37,7 +37,7 @@ export default function InputBox(props) {
 
   return (
     <div className={container}>
-      <props.Icon className={icon} />
+      <props.Icon className={icon} width={20} height={20} />
       <input
         className={input}
         onFocus={handleFocus}

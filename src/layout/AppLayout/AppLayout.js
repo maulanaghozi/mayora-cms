@@ -194,6 +194,7 @@ export default function AppLayout(props) {
           setValue={setOldPassword}
           name={"current password"}
           placeholder={"Current Password"}
+          isPassword={true}
         />
         <InputWithLabel
           label={"New Password"}
@@ -201,6 +202,7 @@ export default function AppLayout(props) {
           setValue={setNewPassword}
           name={"new password"}
           placeholder={"New Password"}
+          isPassword={true}
         />
         <InputWithLabel
           label={"Retype New Password"}
@@ -208,6 +210,7 @@ export default function AppLayout(props) {
           setValue={setConfirmationPassword}
           name={"confirmation password"}
           placeholder={"Retype New Password"}
+          isPassword={true}
         />
         <div className={Styles.buttonContainer}>
           <button

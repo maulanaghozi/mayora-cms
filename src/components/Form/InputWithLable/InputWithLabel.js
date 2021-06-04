@@ -19,6 +19,7 @@ export const InputWithLabel = props => {
     onClick,
     isTextarea,
     isHourSelected,
+    isPassword,
     name,
   } = props;
 
@@ -41,7 +42,7 @@ export const InputWithLabel = props => {
           placeholder={placeholder}
           name={name}
           onChange={handleChange}
-          type={"text"}
+          type={isPassword ? "password" : "text"}
         />
         {unit && <span className={Styles.unit}>{unit}</span>}
       </div>

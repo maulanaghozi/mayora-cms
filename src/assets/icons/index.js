@@ -29,6 +29,8 @@ import { ReactComponent as FullscreenIcon } from "./fullscreen.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize.svg";
 import { ReactComponent as RedDoteIcon } from "./red-dot.svg";
 import { ReactComponent as WarningIcon } from "./warning.svg";
+import { ReactComponent as UsernameIcon } from "./username.svg";
+import { ReactComponent as LockIcon } from "./lock.svg";
 
 export {
   CloseIcon,
@@ -62,4 +64,6 @@ export {
   MinimizeIcon,
   RedDoteIcon,
   WarningIcon,
+  UsernameIcon,
+  LockIcon,
 };

@@ -5,11 +5,9 @@ import { http } from "../../../utility/http";
 import InputBox from "../../../components/Auth/AuthInputBox/AuthInputBox";
 import AuthButton from "../../../components/Auth/AuthButton/AuthButton";
 
-import { ReactComponent as LockIconDark } from "../../../assets/lock_dark.svg";
-import { ReactComponent as MailIconDark } from "../../../assets/mail_dark.svg";
+import { UsernameIcon, LockIcon } from "../../../assets/icons";
 
 import { forgot } from "./Login.module.scss";
-import { validateEmail } from "../../../utility/utility";
 
 import { useAlert } from "react-alert";
 
@@ -62,12 +60,12 @@ export default function Login(props) {
     } else if (email) {
       setPasswordErrorMsg("Masukkan password");
     } else {
-      setEmailErrorMsg("Masukkan alamat email");
+      setEmailErrorMsg("Masukkan username");
     }
   };
 
   const emailAttr = {
-    Icon: MailIconDark,
+    Icon: UsernameIcon,
     inputAttr: {
       name: "email",
       type: "text",
@@ -80,7 +78,7 @@ export default function Login(props) {
   };
 
   const passwordAttr = {
-    Icon: LockIconDark,
+    Icon: LockIcon,
     inputAttr: {
       name: "password",
       type: "password",
