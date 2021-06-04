@@ -3,6 +3,7 @@ import GaugeChart from "react-gauge-chart";
 import ReactSpeedometer from "react-d3-speedometer";
 import classNames from "classnames";
 import Styles from "./GaugeChart.module.scss";
+import "./styles.css";
 
 export default function GaugeChartOEE(props) {
   const { title, target, value, classContainer } = props;
@@ -30,19 +31,19 @@ export default function GaugeChartOEE(props) {
         forceRender={true}
         segments={2}
         customSegmentStops={[0, target, 100]}
-        customSegmentLabels={[
-          {
-            position: "OUTSIDE",
-            fontSize: "12px",
-            color: "black",
-          },
-          {
-            text: `${target}%`,
-            position: "OUTSIDE",
-            fontSize: "12px",
-            color: "black",
-          },
-        ]}
+        // customSegmentLabels={[
+        //   {
+        //     position: "OUTSIDE",
+        //     fontSize: "12px",
+        //     color: "black",
+        //   },
+        //   {
+        //     text: `${target}%`,
+        //     position: "OUTSIDE",
+        //     fontSize: "12px",
+        //     color: "black",
+        //   },
+        // ]}
         segmentColors={["#E92548", "#0AC46B"]}
         value={value}
         minValue={0}

@@ -1,0 +1,11 @@
+.segment-value:after {
+  content: "%";
+}
+
+.segment-value:first-child {
+  display: none;
+}
+
+.segment-value:last-child {
+  display: none;
+}
