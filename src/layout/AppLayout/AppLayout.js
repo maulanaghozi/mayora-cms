@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import classNames from "classnames";
-import { notification } from "antd";
+import { notification, message } from "antd";
 import { throttle } from "throttle-debounce";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -9,13 +9,12 @@ import Header from "../../components/Header/Header";
 import Content from "../../components/Content/Content";
 import { hasToken } from "../../utility/utility";
 import { http } from "../../utility/http";
-import { WarningIcon } from "../../assets/icons";
+import { WarningIcon, SuccessIcon } from "../../assets/icons";
 import { CustomModal } from "../../components/Modal/CustomModal/CustomModal";
 import { InputWithLabel } from "../../components/Form/InputWithLable/InputWithLabel";
 
 import Styles, { app_container } from "./AppLayout.module.scss";
 import { Context } from "../../hooks/context";
-import { configConsumerProps } from "antd/lib/config-provider";
 
 export default function AppLayout(props) {
   const [path, setPath] = useState([]);
@@ -170,14 +169,9 @@ export default function AppLayout(props) {
       setNewPassword("");
       setConfirmationPassword("");
       setModalChangePassVisible(false);
-      notification.open({
-        message: `Change Password Success`,
-      });
+      message.success(`Change Password Success`, 5);
     } else {
-      notification.open({
-        message: `Change Password Failed`,
-        icon: <WarningIcon />,
-      });
+      message.error(`Change Password Failed`, 5);
     }
   };
 

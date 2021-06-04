@@ -31,6 +31,7 @@ import { ReactComponent as RedDoteIcon } from "./red-dot.svg";
 import { ReactComponent as WarningIcon } from "./warning.svg";
 import { ReactComponent as UsernameIcon } from "./username.svg";
 import { ReactComponent as LockIcon } from "./lock.svg";
+import { ReactComponent as SuccessIcon } from "./green_circle_white_check.svg";
 
 export {
   CloseIcon,
@@ -66,4 +67,5 @@ export {
   WarningIcon,
   UsernameIcon,
   LockIcon,
+  SuccessIcon,
 };

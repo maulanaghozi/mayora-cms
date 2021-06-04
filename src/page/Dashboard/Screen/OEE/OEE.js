@@ -137,10 +137,10 @@ export default function OEE() {
           <span>Type</span>
           <h1 className={Styles.type}>{machineName}</h1>
         </div>
-        <div className={Styles.dataWrapper}>
+        {/* <div className={Styles.dataWrapper}>
           <span>Target</span>
           <h1>{`${target}%`}</h1>
-        </div>
+        </div> */}
         <div className={Styles.dataWrapper}>
           <span>Date</span>
           <h1>{date}</h1>
@@ -152,55 +152,33 @@ export default function OEE() {
     return (
       <div className={Styles.chartContainer}>
         <div className={Styles.chart}>
-          <GaugeChart
-            title={"OEE"}
-            target={target1 / 100}
-            value={
-              oee1.OEE > 100
-                ? 105 / 100
-                : oee1.OEE < 0
-                ? -10 / 100
-                : oee1.OEE / 100
-            }
-          />
+          {target1 && (
+            <GaugeChart
+              title={"OEE"}
+              target={target1}
+              value={oee1.OEE > 100 ? 105 : oee1.OEE < 0 ? -10 : oee1.OEE}
+            />
+          )}
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={90 / 100}
-            value={
-              oee1.AV > 100
-                ? 105 / 100
-                : oee1.AV < 0
-                ? -10 / 100
-                : oee1.AV / 100
-            }
+            target={90}
+            value={oee1.AV > 100 ? 105 : oee1.AV < 0 ? -10 : oee1.AV}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
-            target={95 / 100}
-            value={
-              oee1.PE > 100
-                ? 105 / 100
-                : oee1.PE < 0
-                ? -10 / 100
-                : oee1.PE / 100
-            }
+            target={95}
+            value={oee1.PE > 100 ? 105 : oee1.PE < 0 ? -10 : oee1.PE}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
-            target={99 / 100}
-            value={
-              oee1.QR > 100
-                ? 105 / 100
-                : oee1.QR < 0
-                ? -10 / 100
-                : oee1.QR / 100
-            }
+            target={99}
+            value={oee1.QR > 100 ? 105 : oee1.QR < 0 ? -10 : oee1.QR}
           />
         </div>
       </div>
@@ -214,55 +192,33 @@ export default function OEE() {
     return (
       <div className={Styles.chartContainer}>
         <div className={Styles.chart}>
-          <GaugeChart
-            title={"OEE"}
-            target={target2 / 100}
-            value={
-              oee2.OEE > 100
-                ? 105 / 100
-                : oee2.OEE < 0
-                ? -10 / 100
-                : oee2.OEE / 100
-            }
-          />
+          {target2 && (
+            <GaugeChart
+              title={"OEE"}
+              target={target2}
+              value={oee2.OEE > 100 ? 105 : oee2.OEE < 0 ? -10 : oee2.OEE}
+            />
+          )}
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={90 / 100}
-            value={
-              oee2.AV > 100
-                ? 105 / 100
-                : oee2.AV < 0
-                ? -10 / 100
-                : oee2.AV / 100
-            }
+            target={90}
+            value={oee2.AV > 100 ? 105 : oee2.AV < 0 ? -10 : oee2.AV}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
-            target={95 / 100}
-            value={
-              oee2.PE > 100
-                ? 105 / 100
-                : oee2.PE < 0
-                ? -10 / 100
-                : oee2.PE / 100
-            }
+            target={95}
+            value={oee2.PE > 100 ? 105 : oee2.PE < 0 ? -10 : oee2.PE}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
-            target={99 / 100}
-            value={
-              oee2.QR > 100
-                ? 105 / 100
-                : oee2.QR < 0
-                ? -10 / 100
-                : oee2.QR / 100
-            }
+            target={99}
+            value={oee2.QR > 100 ? 105 : oee2.QR < 0 ? -10 : oee2.QR}
           />
         </div>
       </div>
