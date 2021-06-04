@@ -9,6 +9,8 @@ import { Context } from "../../../../hooks/context";
 export default function ProductionOutput() {
   const [target1, setTarget1] = useState(0);
   const [target2, setTarget2] = useState(0);
+  const [targetProrata1, setTargetProrata1] = useState(0);
+  const [targetProrata2, setTargetProrata2] = useState(0);
   const [dataTarget1, setDataTarget1] = useState([]);
   const [dataTarget2, setDataTarget2] = useState([]);
   const [actual1, setActual1] = useState(0);
@@ -214,39 +216,67 @@ export default function ProductionOutput() {
   };
 
   const getProductionTarget1 = async () => {
+    let date = moment().format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
     const params = {
       method: "GET",
       path: "production-target/target",
       query: {
         machineId: "00f5eafd-89c5-4871-a982-26a8180774c7",
+        date: date,
       },
     };
 
     const result = await http(params);
-    if (result && result.code === "success") {
+    if (result && result.code === "success" && result.payload) {
       setTarget1(result.payload.target);
-      const targetData = await hanldeDataTarget(result.payload.target);
+      setTargetProrata1(result.payload.targetProrata);
+      const targetData = await hanldeDataTarget(result.payload.targetProrata);
       setDataTarget1(targetData);
     } else {
+      setTargetProrata1(0);
       setTarget1(0);
     }
   };
 
   const getProductionTarget2 = async () => {
+    let date = moment().format("YYYY-MM-DD");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
+    let curentTime = moment().format("YYYY MM DD HH:mm");
+
+    const ms = Math.abs(new Date(startTime) - new Date(curentTime)) / 1000;
+    const msa = (new Date(startTime) - new Date(curentTime)) / 1000;
+
+    if (ms < 86400 && msa > 0) {
+      date = moment(date).subtract(1, "days").format("YYYY-MM-DD");
+    }
+
     const params = {
       method: "GET",
       path: "production-target/target",
       query: {
         machineId: "f59e7c5f-4774-48e9-a19e-00d578a21ee4",
+        date: date,
       },
     };
 
     const result = await http(params);
-    if (result && result.code === "success") {
+    if (result && result.code === "success" && result.payload) {
       setTarget2(result.payload.target);
-      const targetData = await hanldeDataTarget(result.payload.target);
+      setTargetProrata2(result.payload.targetProrata);
+      const targetData = await hanldeDataTarget(result.payload.targetProrata);
       setDataTarget2(targetData);
     } else {
+      setTargetProrata2(0);
       setTarget2(0);
     }
   };
@@ -344,7 +374,7 @@ export default function ProductionOutput() {
             releaseIsReady1 && (
               <BarChart
                 dataTarget={dataTarget1}
-                target={target1 > maxValue1 ? target1 : maxValue1}
+                target={targetProrata1 > maxValue1 ? targetProrata1 : maxValue1}
                 dataRelease={dataRelease1}
               />
             )}
@@ -370,7 +400,7 @@ export default function ProductionOutput() {
             releaseIsReady2 && (
               <BarChart
                 dataTarget={dataTarget2}
-                target={target2 > maxValue2 ? target2 : maxValue2}
+                target={targetProrata2 > maxValue2 ? targetProrata2 : maxValue2}
                 dataRelease={dataRelease2}
               />
             )}

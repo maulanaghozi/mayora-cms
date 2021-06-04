@@ -167,7 +167,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={target1 / 100}
+            target={90 / 100}
             value={
               oee1.AV > 100
                 ? 105 / 100
@@ -180,7 +180,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
-            target={target1 / 100}
+            target={95 / 100}
             value={
               oee1.PE > 100
                 ? 105 / 100
@@ -193,7 +193,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
-            target={target1 / 100}
+            target={99 / 100}
             value={
               oee1.QR > 100
                 ? 105 / 100
@@ -229,7 +229,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={target2 / 100}
+            target={90 / 100}
             value={
               oee2.AV > 100
                 ? 105 / 100
@@ -242,7 +242,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
-            target={target2 / 100}
+            target={95 / 100}
             value={
               oee2.PE > 100
                 ? 105 / 100
@@ -255,7 +255,7 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
-            target={target2 / 100}
+            target={99 / 100}
             value={
               oee2.QR > 100
                 ? 105 / 100
