@@ -59,20 +59,22 @@ export const ProductionPlanning = props => {
         </div>
         <div className={Styles.dataWrapper} style={{ marginBottom: 16 }}>
           <span>Actual</span>
-          <div>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <h1>{actual}</h1>
             {target > actual && <ChevronDownFill />}
           </div>
         </div>
         <div className={Styles.dataWrapper}>
           <span>Differential</span>
-          <h1
-            style={{
-              color: colorDifferential(Number(target) <= Number(actual)),
-            }}
-          >
-            {Math.abs(target - actual)}
-          </h1>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <h1
+              style={{
+                color: colorDifferential(Number(target) <= Number(actual)),
+              }}
+            >
+              {Math.abs(target - actual)}
+            </h1>
+          </div>
         </div>
         <div className={Styles.dataWrapper}>
           <span>Status</span>
