@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Styles from "./ProductionPlaning.module.scss";
-import { ChevronDownFill } from "../../assets/icons";
+import { ChevronDownFill, ChevronUpFill } from "../../assets/icons";
 
 export const ProductionPlanning = props => {
   const { machineName, target, actual, status } = props;
@@ -61,7 +60,7 @@ export const ProductionPlanning = props => {
           <span>Actual</span>
           <div>
             <h1>{actual}</h1>
-            {target > actual && <ChevronDownFill />}
+            {target > actual ? <ChevronDownFill /> : <ChevronUpFill />}
           </div>
         </div>
         <div className={Styles.dataWrapper}>
