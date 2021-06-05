@@ -8,7 +8,7 @@ import {
 export default function Target({ row }) {
   return (
     <div className={table_cell + " " + column_target}>
-      <p className={elipis}>{row.target}</p>
+      <span className={elipis}>{row.target}</span>
     </div>
   );
 }

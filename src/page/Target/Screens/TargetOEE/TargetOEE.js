@@ -114,7 +114,10 @@ export default function TargetOEE() {
     return (
       <CustomModal
         visible={modalVisible}
-        onClose={() => setModalVisible(false)}
+        onClose={() => {
+          getOeeTarget();
+          setModalVisible(false);
+        }}
         title={"Set New OEE Target"}
       >
         <InputWithLabel
@@ -125,7 +128,10 @@ export default function TargetOEE() {
         />
         <div className={Styles.buttonContainer}>
           <button
-            onClick={() => setModalVisible(false)}
+            onClick={() => {
+              getOeeTarget();
+              setModalVisible(false);
+            }}
             className={Styles.cancel}
           >
             Cancel

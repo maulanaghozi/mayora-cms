@@ -58,16 +58,15 @@ export default function ProductionOutput() {
     target = Number(target);
     const pembagi = 24; //24 jam
 
-    let targetHour = target / 25;
+    let targetHour = target / 24;
     targetHour = Math.round(targetHour);
 
     const data = [];
 
-    for (let i = 1; i <= 25; i++) {
+    for (let i = 1; i <= 24; i++) {
       data.push(targetHour * i);
     }
 
-    console.log({ target, data });
     return data;
   };
 
@@ -78,7 +77,7 @@ export default function ProductionOutput() {
     let maxValue = 0;
 
     let hour = 7;
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 24; i++) {
       if (hour === 24) hour = 0;
 
       const result = data.find(item => item.time === hour);

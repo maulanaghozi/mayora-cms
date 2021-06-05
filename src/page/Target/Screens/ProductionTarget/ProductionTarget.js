@@ -124,7 +124,6 @@ export default function ProductionTarget() {
 
     const result = await http(params);
     if (result && result.code === "success") {
-      console.log("BERHASIL CURRENT ", result);
       setCurrentTarget(result.payload.target);
     } else {
       setCurrentTarget(0);
@@ -191,7 +190,10 @@ export default function ProductionTarget() {
     return (
       <CustomModal
         visible={modalDefaultVisible}
-        onClose={() => setModalDefaultVisible(false)}
+        onClose={() => {
+          getDefaultTarget();
+          setModalDefaultVisible(false);
+        }}
         title={"Set New Default Target"}
       >
         <InputWithLabel
@@ -202,7 +204,10 @@ export default function ProductionTarget() {
         />
         <div className={Styles.buttonContainer}>
           <button
-            onClick={() => setModalDefaultVisible(false)}
+            onClick={() => {
+              getDefaultTarget();
+              setModalDefaultVisible(false);
+            }}
             className={Styles.cancel}
           >
             Cancel
@@ -218,7 +223,10 @@ export default function ProductionTarget() {
     return (
       <CustomModal
         visible={modalCurrentVisible}
-        onClose={() => setModalCurrentVisible(false)}
+        onClose={() => {
+          getProductionTarget();
+          setModalCurrentVisible(false);
+        }}
         title={"Set New Production Target"}
       >
         <InputWithLabel
@@ -236,7 +244,10 @@ export default function ProductionTarget() {
         />
         <div className={Styles.buttonContainer}>
           <button
-            onClick={() => setModalCurrentVisible(false)}
+            onClick={() => {
+              getProductionTarget();
+              setModalCurrentVisible(false);
+            }}
             className={Styles.cancel}
           >
             Cancel

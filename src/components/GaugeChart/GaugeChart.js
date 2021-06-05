@@ -31,25 +31,12 @@ export default function GaugeChartOEE(props) {
         forceRender={true}
         segments={2}
         customSegmentStops={[0, target, 100]}
-        // customSegmentLabels={[
-        //   {
-        //     position: "OUTSIDE",
-        //     fontSize: "12px",
-        //     color: "black",
-        //   },
-        //   {
-        //     text: `${target}%`,
-        //     position: "OUTSIDE",
-        //     fontSize: "12px",
-        //     color: "black",
-        //   },
-        // ]}
         segmentColors={["#E92548", "#0AC46B"]}
         value={value}
         minValue={0}
         maxValue={100}
         currentValueText={`${title} ${value}%`}
-        textColor={value < target ? "#e92548" : "#0AC46B"}
+        textColor={"#000000"}
         width={250}
         height={200}
         ringWidth={40}

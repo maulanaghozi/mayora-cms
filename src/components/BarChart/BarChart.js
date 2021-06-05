@@ -3,7 +3,6 @@ import Chart from "react-apexcharts";
 
 class BarChart extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
 
     this.updateCharts = this.updateCharts.bind(this);
@@ -121,7 +120,6 @@ const data = {
   ],
   categories: [
     "07",
-    "08",
     "08",
     "09",
     "10",
