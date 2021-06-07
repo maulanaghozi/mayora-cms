@@ -146,6 +146,14 @@ export default function TroubleList(props) {
     }
   };
 
+  const handleMachineId = machineId => {
+    if (machineId === "00f5eafd-89c5-4871-a982-26a8180774c7") {
+      return "Line 1";
+    } else {
+      return "Line 2";
+    }
+  };
+
   const onDownload = async () => {
     const params = {
       method: "GET",
@@ -155,15 +163,35 @@ export default function TroubleList(props) {
         status: "downtime",
         machineId: machine.machineId,
       },
+      content_type: "application/octet-stream",
+      responseType: "blob",
     };
 
     const result = await http(params);
 
-    // if (result && result.code === "success") {
-    // } else {
-    //   // console.log(result);
-    //   alert("please contact administrator");
-    // }
+    if (!result) return alert("please contact administrator");
+
+    // 2. Create blob link to download
+    const url = window.URL.createObjectURL(result);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute(
+      "download",
+      `Trouble ${handleMachineId(params.query.machineId)} - ${
+        params.query.date
+      }`
+    );
+    // 3. Append to html page
+    document.body.appendChild(link);
+    // 4. Force download
+    link.click();
+    // 5. Clean up and remove the link
+    link.parentNode.removeChild(link);
+
+    if (result && result.code === "err_general") {
+      // console.log(result);
+      alert("please contact administrator");
+    }
   };
 
   function timeDiffCalc(dateFuture, dateNow) {
@@ -190,9 +218,9 @@ export default function TroubleList(props) {
       <div className={Styles.headerContainer}>
         <span>Trouble List</span>
         <div className={Styles.filter}>
-          {/* <span className={Styles.buttonExport} onClick={() => onDownload()}>
+          <span className={Styles.buttonExport} onClick={() => onDownload()}>
             Download
-          </span> */}
+          </span>
           <InputSelect
             value={machine.machineId}
             className={Styles.inputSelect}
