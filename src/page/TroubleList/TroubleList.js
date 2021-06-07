@@ -36,6 +36,7 @@ const GetTime = () => {
 
 export default function TroubleList(props) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const [dataStatus, setDataStatus] = useState([]);
   const [dataTable, setDataTable] = useState([]);
   const [startTime, setStartTime] = useState(GetTime().getThisDay07);
@@ -155,6 +156,7 @@ export default function TroubleList(props) {
   };
 
   const onDownload = async () => {
+    setIsDownloading(true);
     const params = {
       method: "GET",
       path: "trouble/download",
@@ -192,6 +194,10 @@ export default function TroubleList(props) {
       // console.log(result);
       alert("please contact administrator");
     }
+
+    setInterval(() => {
+      setIsDownloading(false);
+    }, 2000);
   };
 
   function timeDiffCalc(dateFuture, dateNow) {
@@ -218,8 +224,13 @@ export default function TroubleList(props) {
       <div className={Styles.headerContainer}>
         <span>Trouble List</span>
         <div className={Styles.filter}>
-          <span className={Styles.buttonExport} onClick={() => onDownload()}>
-            Download
+          <span
+            className={classNames(Styles.buttonExport, {
+              [Styles.disabledDownload]: isDownloading,
+            })}
+            onClick={() => onDownload()}
+          >
+            {isDownloading ? "Downloading..." : "Download"}
           </span>
           <InputSelect
             value={machine.machineId}
