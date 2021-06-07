@@ -38,7 +38,7 @@ export default function RewarkLosses() {
   const getData = async () => {
     const params = {
       method: "GET",
-      path: "category/parent",
+      path: "category/parent/master",
       query: {
         categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
       },
@@ -149,7 +149,7 @@ export default function RewarkLosses() {
                         <div
                           className={Styles.buttonAdd}
                           onClick={() => {
-                            setCategoryParentId(item.id);
+                            setCategoryParentId(params.id);
                             setModalIsOpened(true);
                           }}
                         >
@@ -157,7 +157,7 @@ export default function RewarkLosses() {
                           <span>Add New Category</span>
                         </div>
                         <CategoryList
-                          data={item.categories}
+                          data={params.categories}
                           setEditModalIsOpened={setEditModalIsOpened}
                           setCategoryEdit={setCategoryEdit}
                           setIdDelete={setIdDelete}

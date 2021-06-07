@@ -38,7 +38,7 @@ export default function SpeedLosses() {
   const getData = async () => {
     const params = {
       method: "GET",
-      path: "category/parent",
+      path: "category/parent/master",
       query: {
         categoryParentId: "c0598cf2-abd8-4b51-a8a3-210cca4363bc",
       },
@@ -149,7 +149,7 @@ export default function SpeedLosses() {
                         <div
                           className={Styles.buttonAdd}
                           onClick={() => {
-                            setCategoryParentId(item.id);
+                            setCategoryParentId(params.id);
                             setModalIsOpened(true);
                           }}
                         >
@@ -157,7 +157,7 @@ export default function SpeedLosses() {
                           <span>Add New Category</span>
                         </div>
                         <CategoryList
-                          data={item.categories}
+                          data={params.categories}
                           setEditModalIsOpened={setEditModalIsOpened}
                           setCategoryEdit={setCategoryEdit}
                           setIdDelete={setIdDelete}

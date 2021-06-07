@@ -7,13 +7,16 @@ import { http } from "../../../../utility/http";
 import { CustomModal } from "../../../../components/Modal/CustomModal/CustomModal";
 import InputSelect from "../../../../components/Form/InputSelect/InputSelect";
 import { InputWithLabel } from "../../../../components/Form/InputWithLable/InputWithLabel";
+import { LoadingModal } from "../../../../components/Modal";
 
 export default function DownTimeLosses() {
+  const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [categoryParentId, setCategoryParentId] = useState(null);
   const [categoryType, setCategoryType] = useState(null);
   const [unit, setUnit] = useState(null);
   const [modalIsOpened, setModalIsOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Edit
   const [editModalIsOpened, setEditModalIsOpened] = useState(false);
@@ -31,29 +34,35 @@ export default function DownTimeLosses() {
   const [deleteModalIsOpened, setDeleteModalIsOpened] = useState(false);
 
   useEffect(() => {
-    getData();
+    initial();
   }, []);
+
+  const initial = async () => {
+    setIsLoading(true);
+    await getData();
+    setIsLoading(false);
+  };
 
   const getData = async () => {
     const params = {
       method: "GET",
-      path: "category/parent",
+      path: "category/parent/master",
       query: {
-        categoryParentId: "e679843a-bfce-47ce-8f5c-62526cfd7c22",
+        categoryParentId: "630af900-a4a9-4746-a6d9-6462eecf0c63",
       },
     };
 
     const result = await http(params);
 
     if (result && result.code === "success" && result.payload) {
-      // setData(result.payload.results);
+      setData(result.payload.results);
     } else {
-      // setData(results);
+      setData(results);
       console.log("THIS IS ERROR TechnicalBreakDown");
     }
   };
 
-  const onCreateCategory = () => {
+  const onCreateCategory = async () => {
     const data = {
       name: name,
       categoryParentId: categoryParentId,
@@ -61,8 +70,21 @@ export default function DownTimeLosses() {
       unit: unit,
     };
 
-    console.log(data);
-    const params = {};
+    const params = {
+      method: "POST",
+      path: "category",
+      data,
+    };
+
+    const result = await http(params);
+
+    if (result && result.code === "success" && result.payload) {
+      if (result.payload.isSuccess) {
+        getData();
+      }
+    } else {
+      console.log("THIS IS ERROR Create Not Operating");
+    }
 
     setModalIsOpened(false);
   };
@@ -123,7 +145,7 @@ export default function DownTimeLosses() {
   const renderDirectoryParent = () => {
     return (
       <div>
-        {results.map((item, idx) => (
+        {data.map((item, idx) => (
           <Directory name={item.name} key={idx.toString()}>
             {Array.isArray(item.children) &&
               item.children.length > 0 &&
@@ -430,6 +452,7 @@ export default function DownTimeLosses() {
       {renderAddNewModal()}
       {renderEditModal()}
       {confirmationDeleteModal()}
+      {isLoading && <LoadingModal />}
     </div>
   );
 }

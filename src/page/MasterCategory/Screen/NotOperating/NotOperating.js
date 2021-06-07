@@ -38,7 +38,7 @@ export default function NotOperating() {
   const getData = async () => {
     const params = {
       method: "GET",
-      path: "category/parent",
+      path: "category/parent/master",
       query: {
         categoryParentId: "4e046f3c-6c72-4093-8bff-d780b6b70648",
       },
