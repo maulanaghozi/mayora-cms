@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { message } from "antd";
 import Styles from "./User.module.scss";
 import classNames from "classnames";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
@@ -68,9 +69,19 @@ export default function UserManagement() {
   };
 
   const onCreateUser = async () => {
+    if (!name) return message.error(`Nama tidak boleh kosong`, 5);
+    if (email.length < 6)
+      return message.error(`Username minimal 6 karakter `, 5);
+    if (password.length < 6)
+      return message.error(`Username minimal 6 karakter `, 5);
+    if (!roleIdCreate) return message.error(`Role tidak boleh kosong`, 5);
+    if (!machine1 && !machine2)
+      return message.error(`Pilih minimal 1 Line Type`, 5);
+
     const data = {
       name: name,
       email: email,
+      password: password,
       status: status,
       roleId: roleIdCreate,
       machine1: machine1,
@@ -92,11 +103,7 @@ export default function UserManagement() {
 
     if (result && result.code === "success" && result.payload) {
       if (result.payload.isSuccess) {
-        setName("");
-        setEmail("");
-        setRoleIdCreate(null);
-        setMachine1(true);
-        setMachine2(true);
+        resetDataCreate();
         setModalAddVisible(false);
         getDataUser();
       }
@@ -110,6 +117,13 @@ export default function UserManagement() {
   };
 
   const onEditUser = async id => {
+    if (userEdit.name) return message.error(`Nama tidak boleh kosong`, 5);
+    if (userEdit.email.length < 6)
+      return message.error(`Username minimal 6 karakter `, 5);
+
+    if (!userEdit.machine1 && !userEdit.machine2)
+      return message.error(`Pilih minimal 1 Line Type`, 5);
+
     const data = {
       name: userEdit.name,
       email: userEdit.email,
@@ -120,6 +134,8 @@ export default function UserManagement() {
     };
 
     if (userEdit.password) {
+      if (userEdit.password.length < 6)
+        return message.error(`Username minimal 6 karakter `, 5);
       data.password = userEdit.password;
     }
 
@@ -138,24 +154,37 @@ export default function UserManagement() {
 
     if (result && result.code === "success") {
       if (result.payload.isSuccess) {
-        setUserEdit({
-          id: "",
-          email: "",
-          name: "",
-          roleId: "",
-          status: "",
-          machine1: false,
-          machine2: false,
-          role: {
-            name: "",
-          },
-        });
+        resetDataEdit();
         setModalEditVisible(false);
         getDataUser();
       }
     } else {
       alert("Edit User Failed");
     }
+  };
+
+  const resetDataCreate = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setRoleIdCreate(null);
+    setMachine1(true);
+    setMachine2(true);
+  };
+
+  const resetDataEdit = () => {
+    setUserEdit({
+      id: "",
+      email: "",
+      name: "",
+      roleId: "",
+      status: "",
+      machine1: false,
+      machine2: false,
+      role: {
+        name: "",
+      },
+    });
   };
 
   const renderHeader = () => {
@@ -231,7 +260,10 @@ export default function UserManagement() {
     return (
       <CustomModal
         visible={modalAddVisible}
-        onClose={() => setModalAddVisible(false)}
+        onClose={() => {
+          resetDataCreate();
+          setModalAddVisible(false);
+        }}
         title={"Add User"}
       >
         <InputWithLabel
@@ -315,7 +347,10 @@ export default function UserManagement() {
         </LabelCustom>
         <div className={Styles.buttonContainer}>
           <button
-            onClick={() => setModalAddVisible(false)}
+            onClick={() => {
+              resetDataCreate();
+              setModalAddVisible(false);
+            }}
             className={Styles.cancel}
           >
             Cancel
@@ -332,7 +367,10 @@ export default function UserManagement() {
     return (
       <CustomModal
         visible={modalEditVisible}
-        onClose={() => setModalEditVisible(false)}
+        onClose={() => {
+          resetDataEdit();
+          setModalEditVisible(false);
+        }}
         title={"Edit User"}
       >
         <InputWithLabel
@@ -420,7 +458,10 @@ export default function UserManagement() {
         </LabelCustom>
         <div className={Styles.buttonContainer}>
           <button
-            onClick={() => setModalEditVisible(false)}
+            onClick={() => {
+              resetDataEdit();
+              setModalEditVisible(false);
+            }}
             className={Styles.cancel}
           >
             Cancel

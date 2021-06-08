@@ -17,9 +17,9 @@ export default function Description({ row }) {
   }
   return (
     <div className={table_cell + " " + column_duration}>
-      <p className={elipis}>
+      <span className={elipis}>
         {row.endTime ? timeDiffCalc(row.endTime, row.startTime) : "-"}
-      </p>
+      </span>
     </div>
   );
 }

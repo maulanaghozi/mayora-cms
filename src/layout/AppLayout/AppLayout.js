@@ -9,7 +9,7 @@ import Header from "../../components/Header/Header";
 import Content from "../../components/Content/Content";
 import { hasToken } from "../../utility/utility";
 import { http } from "../../utility/http";
-import { WarningIcon, SuccessIcon } from "../../assets/icons";
+import { WarningIcon } from "../../assets/icons";
 import { CustomModal } from "../../components/Modal/CustomModal/CustomModal";
 import { InputWithLabel } from "../../components/Form/InputWithLable/InputWithLabel";
 
