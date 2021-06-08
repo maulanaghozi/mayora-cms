@@ -117,7 +117,7 @@ export default function UserManagement() {
   };
 
   const onEditUser = async id => {
-    if (userEdit.name) return message.error(`Nama tidak boleh kosong`, 5);
+    if (!userEdit.name) return message.error(`Nama tidak boleh kosong`, 5);
     if (userEdit.email.length < 6)
       return message.error(`Username minimal 6 karakter `, 5);
 
