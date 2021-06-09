@@ -85,7 +85,6 @@ export default function OEE() {
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log(result.payload);
         setDate(moment(date).format("DD MMM YYYY"));
         setOee1(result.payload);
       } else {
@@ -119,7 +118,6 @@ export default function OEE() {
 
     if (result && result.code === "success") {
       if (result.payload) {
-        console.log(result.payload);
         setDate(moment(date).format("DD MMM YYYY"));
         setOee2(result.payload);
       } else {
