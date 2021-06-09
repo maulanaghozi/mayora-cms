@@ -7,11 +7,16 @@ import {
   categoryWrapper,
 } from "../TroubleTable.module.scss";
 
-export default function Category({ row }) {
+export default function CategoryLevel4({ row }) {
+  const handleValue = () => {
+    if (!row.category) return "not set";
+    if (!row.category.parent) return "not set";
+    return row.category.parent.name;
+  };
   return (
     <div className={classNames(table_cell, column_category)}>
       <div className={categoryWrapper}>
-        <span>{row.category ? row.category.name : "not set"}</span>
+        <span>{row.category ? handleValue() : "not set"}</span>
         {row.updatedBy === null && <div className={dotRed}></div>}
       </div>
     </div>

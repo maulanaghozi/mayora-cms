@@ -4,6 +4,8 @@ import { ReactComponent as SortIcon } from "../../../assets/chevron_down_blue.sv
 
 import Time from "./Column/Time";
 import Duration from "./Column/Duration";
+import CategoryLevel3 from "./Column/CategoryLevel3";
+import CategoryLevel4 from "./Column/CategoryLevel4";
 import Category from "./Column/Category";
 import Remark from "./Column/Remark";
 import Name from "./Column/Name";
@@ -30,7 +32,9 @@ import {
 const Header = [
   "Time",
   "Duration",
-  "Category",
+  "Category Lv 3",
+  "Category Lv 4",
+  "Category Lv 5",
   "Remark",
   "Name",
   "Updated at",
@@ -41,13 +45,15 @@ const headerClasses = [
   column_time,
   column_duration,
   column_category,
+  column_category,
+  column_category,
   column_remark,
   column_name,
   column_updated,
   column_action,
 ];
 
-export default function PromoTable(props) {
+export default function TroubleTable(props) {
   const [openMore, setOpenMore] = useState(false);
 
   return (
@@ -63,6 +69,8 @@ export default function PromoTable(props) {
             <div className={table_row} key={index}>
               <Time row={row} />
               <Duration row={row} />
+              <CategoryLevel3 row={row} />
+              <CategoryLevel4 row={row} />
               <Category row={row} />
               <Remark row={row} />
               <Name row={row} />
