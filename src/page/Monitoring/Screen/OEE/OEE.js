@@ -157,21 +157,21 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={target1}
+            target={90}
             value={oee1.AV > 100 ? 100 : oee1.AV < 0 ? 0 : oee1.AV}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
-            target={target1}
+            target={95}
             value={oee1.PE > 100 ? 100 : oee1.PE < 0 ? 0 : oee1.PE}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
-            target={target1}
+            target={99}
             value={oee1.QR > 100 ? 100 : oee1.QR < 0 ? 0 : oee1.QR}
           />
         </div>
@@ -195,21 +195,21 @@ export default function OEE() {
         <div className={Styles.chart}>
           <GaugeChart
             title={"AV"}
-            target={target2}
+            target={90}
             value={oee2.AV > 100 ? 100 : oee2.AV < 0 ? 0 : oee2.AV}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"PE"}
-            target={target2}
+            target={95}
             value={oee2.PE > 100 ? 100 : oee2.PE < 0 ? 0 : oee2.PE}
           />
         </div>
         <div className={Styles.chart}>
           <GaugeChart
             title={"QR"}
-            target={target2}
+            target={99}
             value={oee2.QR > 100 ? 100 : oee2.QR < 0 ? 0 : oee2.QR}
           />
         </div>
