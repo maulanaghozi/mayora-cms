@@ -60,7 +60,8 @@ export const ProductionPlanning = props => {
           <span>Actual</span>
           <div>
             <h1>{actual}</h1>
-            {target > actual ? <ChevronDownFill /> : <ChevronUpFill />}
+            {target > actual && <ChevronDownFill />}
+            {target < actual && <ChevronUpFill />}
           </div>
         </div>
         <div className={Styles.dataWrapper}>

@@ -19,7 +19,6 @@ export default function CategoryLevel3({ row }) {
     <div className={classNames(table_cell, column_category)}>
       <div className={categoryWrapper}>
         <span>{row.category ? handleValue() : "not set"}</span>
-        {row.updatedBy === null && <div className={dotRed}></div>}
       </div>
     </div>
   );
