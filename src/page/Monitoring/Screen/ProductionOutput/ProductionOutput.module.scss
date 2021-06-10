@@ -1,11 +1,13 @@
 .container {
   width: 100%;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   padding-bottom: 50px;
 
   .lineContainer {
     display: flex;
+    flex: 1;
     align-items: stretch;
     width: 100%;
     margin-bottom: 20px;
@@ -15,11 +17,13 @@
     }
 
     .chart {
+      display: flex;
       flex: 2;
+      flex-grow: 1;
+      align-items: stretch;
       background-color: #ffffff;
       margin-left: 10px;
       border-radius: 10px;
-      height: 100%;
     }
   }
 }

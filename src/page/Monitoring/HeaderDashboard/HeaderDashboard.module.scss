@@ -5,6 +5,7 @@
 .container {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .selected {
@@ -20,13 +21,13 @@
   color: #757575;
   background-color: #ffffff;
   @include primary-font(medium);
-  font-size: 12px;
+  font-size: 1rem;
   cursor: pointer;
   text-decoration: none;
-  margin-right: 10px;
+  margin-right: 1rem;
   user-select: none;
   display: inline-block;
   text-transform: capitalize;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }

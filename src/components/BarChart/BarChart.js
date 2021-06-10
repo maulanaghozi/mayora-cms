@@ -91,7 +91,7 @@ class BarChart extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", height: "80%" }}>
+      <div style={{ width: "100%", height: "100%" }}>
         <div className="row" style={{ width: "100%", height: "100%" }}>
           <div className="col mixed-chart" style={{ height: "100%" }}>
             <Chart
@@ -99,7 +99,7 @@ class BarChart extends Component {
               series={this.state.seriesMixedChart}
               type="line"
               width="100%"
-              height="385"
+              height="100%"
             />
           </div>
         </div>

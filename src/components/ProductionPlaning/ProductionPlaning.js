@@ -6,17 +6,6 @@ import { ChevronDownFill, ChevronUpFill } from "../../assets/icons";
 export const ProductionPlanning = props => {
   const { machineName, target, actual, status } = props;
 
-  const renderMain = () => {
-    return (
-      <div className={Styles.container}>
-        <div className={Styles.headerStatus}>
-          <span>Production Planning</span>
-        </div>
-        {renderDisplay()}
-      </div>
-    );
-  };
-
   const colorDifferential = status => {
     switch (status) {
       case true:
@@ -87,7 +76,14 @@ export const ProductionPlanning = props => {
     );
   };
 
-  return <div>{renderMain()}</div>;
+  return (
+    <div className={Styles.container}>
+      <div className={Styles.headerStatus}>
+        <span>Production Planning</span>
+      </div>
+      {renderDisplay()}
+    </div>
+  );
 };
 
 ProductionPlanning.defaultProps = {

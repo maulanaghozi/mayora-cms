@@ -125,7 +125,32 @@ export const ProductionStatusBar = props => {
       </>
     );
   };
-  return <div>{renderStatus()}</div>;
+  return (
+    <div className={Styles.statusContainer}>
+      <div className={Styles.headerStatus}>
+        <span>{`Production Status - ${machineName.toUpperCase()}`}</span>
+        <div className={Styles.indicatorColor}>
+          <div className={Styles.status}>
+            <div className={classNames(Styles.box, Styles.grey)} />
+            <span>Off</span>
+          </div>
+          <div className={Styles.status}>
+            <div className={classNames(Styles.box, Styles.green)} />
+            <span>Running</span>
+          </div>
+          <div className={Styles.status}>
+            <div className={classNames(Styles.box, Styles.yellow)} />
+            <span>Start Up</span>
+          </div>
+          <div className={Styles.status}>
+            <div className={classNames(Styles.box, Styles.red)} />
+            <span>Down Time</span>
+          </div>
+        </div>
+      </div>
+      {renderProgress()}
+    </div>
+  );
 };
 
 ProductionStatusBar.defaultProps = {

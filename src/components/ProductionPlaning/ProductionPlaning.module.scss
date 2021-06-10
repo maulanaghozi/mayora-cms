@@ -1,27 +1,32 @@
 .container {
   margin: 10px 0px;
   border: 1px solid rgba($color: #000000, $alpha: 0.1);
-  border-radius: 10px;
+  border-radius: 1rem;
   background-color: #ffffff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 
   .headerStatus {
+    flex-grow: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px;
+    padding: 20px 2rem;
     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
 
     > span {
       font-family: roboto;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 1.5rem;
     }
   }
 
   .mainContainer {
-    padding: 20px 30px;
+    padding: 20px 2rem;
     display: flex;
     align-items: center;
+    flex-grow: 2;
 
     .dataWrapper {
       flex: 1;
@@ -29,7 +34,7 @@
       > span {
         color: #757575;
         font-family: roboto;
-        font-size: 16px;
+        font-size: 1.5rem;
         line-height: 24px;
         margin-bottom: 5px;
       }
@@ -39,7 +44,7 @@
         align-items: center;
         > h1 {
           color: #212121;
-          font-size: 40px;
+          font-size: 1.5rem;
           font-family: roboto;
           font-weight: 500;
           margin-right: 5px;
@@ -49,7 +54,7 @@
 
       > h1 {
         color: #212121;
-        font-size: 40px;
+        font-size: 1.5rem;
         font-family: roboto;
         font-weight: 500;
         margin-bottom: 0;
@@ -61,8 +66,8 @@
         &.status {
           color: #ffffff;
           border-radius: 100px;
-          padding: 4px 14px;
-          font-size: 28px;
+          padding: 0px 1rem;
+          font-size: 1.5rem;
           width: fit-content;
         }
       }

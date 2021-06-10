@@ -339,7 +339,15 @@ export default function ProductionStatus() {
   };
 
   return (
-    <div style={{ paddingBottom: 50 }}>
+    <div
+      style={{
+        paddingBottom: 50,
+        display: "flex",
+        flexGrow: 1,
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
       {renderProductionPlaningLine1()}
       {renderProductionStatusLine1()}
       {renderProductionPlaningLine2()}

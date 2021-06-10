@@ -15,7 +15,6 @@ export default function HelpNotif(props) {
         ticking={true}
         timezone={"Asia/Jakarta"}
       />
-      {/* <span>{moment().format("dddd, DD/MM/YYYY")}</span> */}
     </div>
   );
 }
