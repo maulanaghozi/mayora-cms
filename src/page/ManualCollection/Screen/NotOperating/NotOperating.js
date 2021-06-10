@@ -52,7 +52,7 @@ export default function NotOperating() {
     return (
       <div>
         {data.map((item, idx) => (
-          <Directory name={item.name} key={idx.toString()}>
+          <Directory name={item.name} id={item.id} key={idx.toString()}>
             {Array.isArray(item.categories) && item.categories.length > 0 && (
               <TableCategory data={item.categories} />
             )}

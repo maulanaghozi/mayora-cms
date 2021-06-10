@@ -80,6 +80,7 @@ export default function DownTimeLosses() {
 
     if (result && result.code === "success" && result.payload) {
       if (result.payload.isSuccess) {
+        setName("");
         getData();
       }
     } else {
@@ -146,18 +147,22 @@ export default function DownTimeLosses() {
     return (
       <div>
         {data.map((item, idx) => (
-          <Directory name={item.name} key={idx.toString()}>
+          <Directory name={item.name} id={item.id} key={idx.toString()}>
             {Array.isArray(item.children) &&
               item.children.length > 0 &&
               item.children.map((params, idx) => (
-                <Directory name={params.name} key={idx.toString()}>
+                <Directory
+                  name={params.name}
+                  id={params.id}
+                  key={idx.toString()}
+                >
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
                       <>
                         <div
                           className={Styles.buttonAdd}
                           onClick={() => {
-                            setCategoryParentId(item.id);
+                            setCategoryParentId(params.id);
                             setModalIsOpened(true);
                           }}
                         >
@@ -176,14 +181,14 @@ export default function DownTimeLosses() {
                   {Array.isArray(params.children) &&
                     params.children.length > 0 &&
                     params.children.map((el, idx) => (
-                      <Directory name={el.name} key={idx.toString()}>
+                      <Directory name={el.name} id={el.id} key={idx.toString()}>
                         {Array.isArray(el.categories) &&
                           el.categories.length > 0 && (
                             <>
                               <div
                                 className={Styles.buttonAdd}
                                 onClick={() => {
-                                  setCategoryParentId(item.id);
+                                  setCategoryParentId(el.id);
                                   setModalIsOpened(true);
                                 }}
                               >

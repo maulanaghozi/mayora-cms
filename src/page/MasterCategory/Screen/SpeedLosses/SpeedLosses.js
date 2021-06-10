@@ -72,6 +72,7 @@ export default function SpeedLosses() {
 
     if (result && result.code === "success" && result.payload) {
       if (result.payload.isSuccess) {
+        setName("");
         getData();
       }
     } else {
@@ -138,11 +139,15 @@ export default function SpeedLosses() {
     return (
       <div>
         {data.map((item, idx) => (
-          <Directory name={item.name} key={idx.toString()}>
+          <Directory name={item.name} id={item.id} key={idx.toString()}>
             {Array.isArray(item.children) &&
               item.children.length > 0 &&
               item.children.map((params, idx) => (
-                <Directory name={params.name} key={idx.toString()}>
+                <Directory
+                  name={params.name}
+                  id={params.id}
+                  key={idx.toString()}
+                >
                   {Array.isArray(params.categories) &&
                     params.categories.length > 0 && (
                       <>

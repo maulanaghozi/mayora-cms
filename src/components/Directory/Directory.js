@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import Styles from "./Directory.module.scss";
 import {
@@ -7,14 +7,63 @@ import {
   MinusSquareIcon,
   PlusSquareIcon,
 } from "../../assets/icons";
+import { Context } from "../../hooks/context";
+import _ from "lodash";
 
 export const Directory = props => {
   const [isOpened, setIsOpened] = useState(false);
-  const { name } = props;
+  const { name, id } = props;
+
+  const globalState = useContext(Context);
+  const { manualOpens, setManualOpens } = globalState;
+
+  const handleAdd = () => {
+    const newManualOpens = [...manualOpens, id];
+    setManualOpens(newManualOpens);
+  };
+
+  const handleRemove = () => {
+    const newManualOpens = _.remove(manualOpens, function (n) {
+      return n == id;
+    });
+
+    setManualOpens(newManualOpens);
+  };
+
+  const handleOnCLick = () => {
+    if (isOpened) {
+      handleRemove();
+      setIsOpened(false);
+    } else {
+      handleAdd();
+      setIsOpened(true);
+    }
+  };
+
+  const initial = () => {
+    const checked = _.findIndex(manualOpens, function (el) {
+      return el === id;
+    });
+
+    if (checked === -1) {
+      setIsOpened(false);
+    } else {
+      setIsOpened(true);
+    }
+  };
+
+  useEffect(() => {
+    initial();
+  }, []);
 
   return (
     <div className={Styles.wrapper}>
-      <div className={Styles.container} onClick={() => setIsOpened(!isOpened)}>
+      <div
+        className={Styles.container}
+        onClick={() => {
+          handleOnCLick();
+        }}
+      >
         {isOpened ? <MinusSquareIcon /> : <PlusSquareIcon />}
         {isOpened ? <FolderOpenIcon /> : <FolderCloseIcon />}
         <span>{name}</span>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { InputWithLabel } from "../../components/Form";
@@ -13,6 +13,10 @@ export default function EditCollection() {
   const history = useHistory();
   const globalState = useContext(Context);
   const { manualCollection, dateSelected, machine, adminProfile } = globalState;
+
+  useEffect(() => {
+    setValue(manualCollection.value);
+  }, []);
 
   const handleSave = async () => {
     let date = moment(dateSelected * 1000).format("YYYY-MM-DD");

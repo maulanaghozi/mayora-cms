@@ -31,7 +31,7 @@ export default function IdlingMinorStoppages() {
     } else {
       setData(results);
       setIsLoading(false);
-      console.log("THIS IS ERROR TechnicalBreakDown"); 
+      console.log("THIS IS ERROR TechnicalBreakDown");
     }
   };
 
@@ -39,7 +39,7 @@ export default function IdlingMinorStoppages() {
     return (
       <div>
         {data.map((item, idx) => (
-          <Directory name={item.name} key={idx.toString()}>
+          <Directory name={item.name} id={item.id} key={idx.toString()}>
             {Array.isArray(item.children) &&
               item.children.length > 0 &&
               item.children.map((params, idx) => (

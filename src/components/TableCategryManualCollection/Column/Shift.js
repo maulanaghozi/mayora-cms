@@ -8,6 +8,14 @@ export default function Description({ manualCollection, row, shift }) {
   const globalState = useContext(Context);
   const { setManualCollection, adminProfile } = globalState;
   const history = useHistory();
+
+  const handleValue = () => {
+    if (manualCollection && manualCollection.value) {
+      return manualCollection.value;
+    } else {
+      return "";
+    }
+  };
   return (
     <div className={table_cell + " " + column_shift}>
       {manualCollection && manualCollection.value ? (
@@ -29,7 +37,7 @@ export default function Description({ manualCollection, row, shift }) {
             setManualCollection({
               categoryId: row.id,
               categoryName: row.name,
-              value: "",
+              value: handleValue(),
               shift: shift,
               remark: "",
               unit: row.unit,
