@@ -32,9 +32,15 @@ html {
   }
 }
 
-@media screen and (min-width: 1200.0001px) and (max-width: 3000px) {
+@media screen and (min-width: 1200.0001px) and (max-width: 1920px) {
   html {
     font-size: 16px !important;
+  }
+}
+
+@media screen and (min-width: 1920.0001px) and (max-width: 3000px) {
+  html {
+    font-size: 22px !important;
   }
 }
 
