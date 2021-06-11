@@ -1,5 +1,4 @@
 import React from "react";
-import GaugeChart from "react-gauge-chart";
 import ReactSpeedometer from "react-d3-speedometer";
 import classNames from "classnames";
 import Styles from "./GaugeChart.module.scss";
@@ -7,23 +6,6 @@ import "./styles.css";
 
 export default function GaugeChartOEE(props) {
   const { title, target, value, classContainer } = props;
-
-  const renderGaugeChart = () => {
-    return (
-      <GaugeChart
-        id="gauge-chart5"
-        nrOfLevels={100}
-        arcsLength={[target, 1 - target]}
-        colors={["#E92548", "#0AC46B"]}
-        percent={value}
-        arcPadding={0.01}
-        style={{ width: "100%" }}
-        cornerRadius={0}
-        hideText={true}
-        formatTextValue={val => val}
-      />
-    );
-  };
 
   const renderSpedometerChart = () => {
     return (
@@ -46,18 +28,7 @@ export default function GaugeChartOEE(props) {
   };
   return (
     <div className={classNames(Styles.container, classContainer)}>
-      {/* {renderGaugeChart()} */}
       {renderSpedometerChart()}
-      {/* <div className={Styles.titleContainer}>
-        <span className={Styles.title}>{title}</span>
-        <span
-          className={classNames(Styles.value, { [Styles.red]: value < target })}
-        >{`${value * 100}%`}</span>
-      </div>
-      <div className={Styles.titleContainer}>
-        <span className={Styles.title}>Target</span>
-        <span>{`${target * 100}%`}</span>
-      </div> */}
     </div>
   );
 }

@@ -76,7 +76,7 @@ export const ProductionStatusBar = props => {
             <div
               key={idx.toString()}
               style={{
-                height: "20px",
+                height: "1rem",
                 flex: timeDiffCalc(item.endTime, item.startTime),
                 backgroundColor: backgroundProgress(item.status),
               }}
@@ -84,7 +84,7 @@ export const ProductionStatusBar = props => {
           ))}
           <div
             style={{
-              height: "20px",
+              height: "1rem",
               flex: 1440 - minutesPass,
               backgroundColor: "#ffffff",
             }}

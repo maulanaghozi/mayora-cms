@@ -37,27 +37,29 @@ export default function Dashboard() {
 
   const renderMainContent = () => {
     return (
-      <Switch>
-        <Route
-          path={"/monitoring-dashboard/production-status"}
-          component={ProductionStatus}
-        />
-        <Route
-          path={"/monitoring-dashboard/production-output"}
-          component={ProductionOutput}
-        />
-        <Route
-          path={"/monitoring-dashboard/oee-vs-target"}
-          component={OEEvsTarget}
-        />
-        <Route path={"/monitoring-dashboard/oee"} component={OEE} />
-        <Route
-          path={"/monitoring-dashboard"}
-          render={() => (
-            <Redirect to={"/monitoring-dashboard/production-status"} />
-          )}
-        />
-      </Switch>
+      <div className={Styles.mainContent}>
+        <Switch>
+          <Route
+            path={"/monitoring-dashboard/production-status"}
+            component={ProductionStatus}
+          />
+          <Route
+            path={"/monitoring-dashboard/production-output"}
+            component={ProductionOutput}
+          />
+          <Route
+            path={"/monitoring-dashboard/oee-vs-target"}
+            component={OEEvsTarget}
+          />
+          <Route path={"/monitoring-dashboard/oee"} component={OEE} />
+          <Route
+            path={"/monitoring-dashboard"}
+            render={() => (
+              <Redirect to={"/monitoring-dashboard/production-status"} />
+            )}
+          />
+        </Switch>
+      </div>
     );
   };
   return (

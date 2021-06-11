@@ -2,18 +2,21 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
 
   .lineContainer {
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    flex-grow: 1;
 
     .header {
       width: 100%;
-      padding: 20px 20px;
+      padding: 1rem 2rem;
       display: flex;
 
       .dataWrapper {
@@ -21,14 +24,14 @@
         > span {
           color: #757575;
           font-family: roboto;
-          font-size: 16px;
+          font-size: 1rem;
           line-height: 24px;
           margin-bottom: 5px;
         }
 
         > h1 {
           color: #212121;
-          font-size: 40px;
+          font-size: 1.5rem;
           font-family: roboto;
           font-weight: 500;
 
@@ -53,6 +56,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 0;
+      flex-grow: 1;
 
       .chart {
         flex: 1;

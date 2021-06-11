@@ -4,7 +4,6 @@
 
 .dashboard_container {
   padding: 2rem 2rem 0 2rem;
-  height: 100%;
   min-height: 98vh;
   display: flex;
   flex-direction: column;
@@ -12,6 +11,7 @@
   background-color: #eeeeee;
 
   .headerContainer {
+    // position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,5 +20,10 @@
     > svg {
       cursor: pointer;
     }
+  }
+
+  .mainContent {
+    height: 80vh;
+    overflow: scroll;
   }
 }

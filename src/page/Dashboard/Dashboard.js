@@ -6,7 +6,6 @@ import ProductionOutput from "./Screen/ProductionOutput/ProductionOutput";
 import OEEvsTarget from "./Screen/OEEvsTarget/OEEvsTarget";
 import OEE from "./Screen/OEE/OEE";
 import Styles from "./Dashboard.module.scss";
-// import { FullscreenIcon } from "../../assets/icons";
 
 export default function Dashboard() {
   const renderHeader = () => {
@@ -26,32 +25,30 @@ export default function Dashboard() {
             "/dashboard/oee-vs-target",
           ]}
         />
-
-        {/* <Link to={"/monitoring-dashboard"}>
-          <FullscreenIcon />
-        </Link> */}
       </div>
     );
   };
 
   const renderMainContent = () => {
     return (
-      <Switch>
-        <Route
-          path={"/dashboard/production-status"}
-          component={ProductionStatus}
-        />
-        <Route
-          path={"/dashboard/production-output"}
-          component={ProductionOutput}
-        />
-        <Route path={"/dashboard/oee-vs-target"} component={OEEvsTarget} />
-        <Route path={"/dashboard/oee"} component={OEE} />
-        <Route
-          path={"/dashboard"}
-          render={() => <Redirect to={"/dashboard/production-status"} />}
-        />
-      </Switch>
+      <div className={Styles.mainContent}>
+        <Switch>
+          <Route
+            path={"/dashboard/production-status"}
+            component={ProductionStatus}
+          />
+          <Route
+            path={"/dashboard/production-output"}
+            component={ProductionOutput}
+          />
+          <Route path={"/dashboard/oee-vs-target"} component={OEEvsTarget} />
+          <Route path={"/dashboard/oee"} component={OEE} />
+          <Route
+            path={"/dashboard"}
+            render={() => <Redirect to={"/dashboard/production-status"} />}
+          />
+        </Switch>
+      </div>
     );
   };
   return (

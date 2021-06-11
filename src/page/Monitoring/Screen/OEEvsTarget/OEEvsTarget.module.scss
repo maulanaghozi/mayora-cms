@@ -3,32 +3,34 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 50px;
+  min-height: 85vh;
 
   .lineContainer {
     display: flex;
     align-items: stretch;
     width: 100%;
     margin-top: 20px;
+    flex-grow: 1;
 
     .tableContainer {
       flex: 1 !important;
       background-color: #ffffff;
-      border-radius: 5px;
+      border-radius: 0.8rem;
       min-height: 330px;
 
       .header {
-        padding: 12px 20px;
+        padding: 1rem 2rem;
         border-bottom: 1px solid #ececec;
         > span {
           color: #212121;
-          font-size: 16px;
+          font-size: 1rem;
           font-family: roboto;
           font-weight: 500;
         }
       }
 
       .table {
-        padding: 12px 20px;
+        padding: 12px 2rem;
       }
     }
 
@@ -36,7 +38,7 @@
       flex: 1 !important;
       background-color: #ffffff;
       margin-left: 10px;
-      border-radius: 5px;
+      border-radius: 0.8rem;
     }
   }
 }

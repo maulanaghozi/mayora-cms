@@ -9,6 +9,15 @@ class BarChart extends Component {
 
     this.state = {
       optionsMixedChart: {
+        dataLabels: {
+          style: {
+            fontSize: "14px",
+          },
+        },
+        legend: {
+          fontSize: "14px",
+        },
+
         colors: ["#E92548", "#0861CB"],
         chart: {
           id: "basic-bar",

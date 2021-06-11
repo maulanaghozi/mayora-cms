@@ -126,17 +126,13 @@ export default function OEE() {
     }
   };
 
-  const renderHeader = (machineName, target) => {
+  const renderHeader = machineName => {
     return (
       <div className={Styles.header}>
         <div className={Styles.dataWrapper}>
           <span>Type</span>
           <h1 className={Styles.type}>{machineName}</h1>
         </div>
-        {/* <div className={Styles.dataWrapper}>
-          <span>Target</span>
-          <h1>{`${target}%`}</h1>
-        </div> */}
         <div className={Styles.dataWrapper}>
           <span>Date</span>
           <h1>{date}</h1>
@@ -219,7 +215,7 @@ export default function OEE() {
   const renderLine1 = () => {
     return (
       <div className={Styles.lineContainer}>
-        {renderHeader("LINE 1", target1)}
+        {renderHeader("LINE 1")}
         {renderChart1()}
       </div>
     );
@@ -228,7 +224,7 @@ export default function OEE() {
   const renderLine2 = () => {
     return (
       <div className={Styles.lineContainer}>
-        {renderHeader("LINE 2", target2)}
+        {renderHeader("LINE 2")}
         {renderChart2()}
       </div>
     );
