@@ -2,35 +2,36 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
-  min-height: 85vh;
+  flex: 1;
 
   .lineContainer {
     display: flex;
     align-items: stretch;
     width: 100%;
-    margin-top: 20px;
     flex-grow: 1;
 
     .tableContainer {
+      display: flex;
+      flex-direction: column;
       flex: 1 !important;
       background-color: #ffffff;
       border-radius: 0.8rem;
-      min-height: 330px;
 
       .header {
-        padding: 1rem 2rem;
+        padding: 10px 2rem;
         border-bottom: 1px solid #ececec;
         > span {
           color: #212121;
-          font-size: 1rem;
+          font-size: 1.5rem;
           font-family: roboto;
           font-weight: 500;
         }
       }
 
       .table {
+        display: flex;
         padding: 12px 2rem;
+        flex-grow: 1;
       }
     }
 

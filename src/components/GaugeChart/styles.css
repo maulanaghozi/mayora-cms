@@ -1,5 +1,5 @@
-.segment-value:after {
-  content: "%";
+.segment-value {
+  font-size: 1rem !important;
 }
 
 .segment-value:first-child {

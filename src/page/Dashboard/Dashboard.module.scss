@@ -3,15 +3,14 @@
 @import "src/styles/function";
 
 .dashboard_container {
-  padding: 2rem 2rem 0 2rem;
-  min-height: 92vh;
+  padding: 1rem;
+  min-height: 93vh;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   background-color: #eeeeee;
 
   .headerContainer {
-    // position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,7 +22,8 @@
   }
 
   .mainContent {
-    height: 80vh;
+    display: flex;
+    flex-grow: 1;
     overflow: scroll;
   }
 }

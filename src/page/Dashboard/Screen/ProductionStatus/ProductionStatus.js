@@ -343,7 +343,13 @@ export default function ProductionStatus() {
   };
 
   return (
-    <div style={{ paddingBottom: 50 }}>
+    <div
+      style={{
+        display: "flex",
+        flexGrow: 1,
+        flexDirection: "column",
+      }}
+    >
       {adminProfile && adminProfile.machine1 && renderProductionPlaningLine1()}
       {adminProfile && adminProfile.machine1 && renderProductionStatusLine1()}
       {adminProfile && adminProfile.machine2 && renderProductionPlaningLine2()}

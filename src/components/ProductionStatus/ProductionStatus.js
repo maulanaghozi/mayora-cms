@@ -22,35 +22,6 @@ export const ProductionStatusBar = props => {
     return Math.round(Number(minutes));
   }
 
-  const renderStatus = () => {
-    return (
-      <div className={Styles.statusContainer}>
-        <div className={Styles.headerStatus}>
-          <span>{`Production Status - ${machineName.toUpperCase()}`}</span>
-          <div className={Styles.indicatorColor}>
-            <div className={Styles.status}>
-              <div className={classNames(Styles.box, Styles.grey)} />
-              <span>Off</span>
-            </div>
-            <div className={Styles.status}>
-              <div className={classNames(Styles.box, Styles.green)} />
-              <span>Running</span>
-            </div>
-            <div className={Styles.status}>
-              <div className={classNames(Styles.box, Styles.yellow)} />
-              <span>Start Up</span>
-            </div>
-            <div className={Styles.status}>
-              <div className={classNames(Styles.box, Styles.red)} />
-              <span>Down Time</span>
-            </div>
-          </div>
-        </div>
-        {renderProgress()}
-      </div>
-    );
-  };
-
   const backgroundProgress = status => {
     switch (status) {
       case "off":
@@ -76,7 +47,7 @@ export const ProductionStatusBar = props => {
             <div
               key={idx.toString()}
               style={{
-                height: "1rem",
+                height: "1.5rem",
                 flex: timeDiffCalc(item.endTime, item.startTime),
                 backgroundColor: backgroundProgress(item.status),
               }}

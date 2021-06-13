@@ -15,7 +15,8 @@ class BarChart extends Component {
           },
         },
         legend: {
-          fontSize: "14px",
+          show: true,
+          fontSize: "16px",
         },
 
         colors: ["#E92548", "#0861CB"],
@@ -38,14 +39,19 @@ class BarChart extends Component {
         },
         xaxis: {
           categories: data.categories,
+          labels: {
+            style: {
+              fontSize: "0.8rem",
+            },
+          },
         },
         markers: {
-          size: 6,
+          size: 0,
           strokeWidth: 3,
           fillOpacity: 0,
           strokeOpacity: 0,
           hover: {
-            size: 8,
+            size: 6,
           },
         },
         yaxis: [
@@ -53,6 +59,11 @@ class BarChart extends Component {
             tickAmount: 5,
             min: 0,
             max: Number(props.target),
+            labels: {
+              style: {
+                fontSize: "0.8rem",
+              },
+            },
           },
         ],
       },

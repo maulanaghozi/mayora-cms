@@ -49,12 +49,12 @@ export const ProductionPlanning = props => {
         <div className={Styles.dataWrapper} style={{ marginBottom: 16 }}>
           <span>Actual</span>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <h1>{actual}</h1>
+            <h1 style={{ marginRight: 10 }}>{actual}</h1>
             {target > actual && <ChevronDownFill />}
             {target < actual && <ChevronUpFill />}
           </div>
         </div>
-        <div className={Styles.dataWrapper}>
+        <div className={Styles.dataWrapper} style={{ margin: 0 }}>
           <span>Differential</span>
           <div style={{ display: "flex", alignItems: "center" }}>
             <h1
@@ -66,7 +66,7 @@ export const ProductionPlanning = props => {
             </h1>
           </div>
         </div>
-        <div className={Styles.dataWrapper}>
+        <div className={Styles.dataWrapper} style={{ margin: 0 }}>
           <span>Status</span>
           <h1
             className={Styles.status}

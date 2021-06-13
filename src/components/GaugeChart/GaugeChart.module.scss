@@ -3,28 +3,7 @@
   flex-direction: column;
   width: 90%;
 
-  .titleContainer {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-
-    > span {
-      color: #201d1d;
-      font-size: 18px;
-      font-family: roboto;
-      font-weight: 500;
-
-      &.title {
-        margin-right: 30px;
-      }
-
-      &.value {
-        color: #0ac46b;
-      }
-
-      &.red {
-        color: #e92548;
-      }
-    }
+  .speedometer {
+    height: 300px !important;
   }
 }

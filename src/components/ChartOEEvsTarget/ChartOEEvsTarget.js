@@ -9,6 +9,10 @@ class ChartOEEvsTarget extends Component {
 
     this.state = {
       optionsMixedChart: {
+        legend: {
+          show: true,
+          fontSize: "16px",
+        },
         colors: ["#E92548", "#0861CB"],
         chart: {
           id: "basic-bar",
@@ -29,20 +33,30 @@ class ChartOEEvsTarget extends Component {
         },
         xaxis: {
           categories: props.dates,
+          labels: {
+            style: {
+              fontSize: "0.8rem",
+            },
+          },
         },
         markers: {
-          size: 6,
+          size: 0,
           strokeWidth: 3,
           fillOpacity: 0,
           strokeOpacity: 0,
           hover: {
-            size: 8,
+            size: 6,
           },
         },
         yaxis: {
           tickAmount: 5,
           min: 0,
           max: props.maxValue || 100,
+          labels: {
+            style: {
+              fontSize: "0.8rem",
+            },
+          },
         },
       },
       seriesMixedChart: [

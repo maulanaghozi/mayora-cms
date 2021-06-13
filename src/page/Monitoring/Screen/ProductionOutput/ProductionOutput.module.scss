@@ -1,9 +1,8 @@
 .container {
   width: 100%;
-  height: 75vh;
   display: flex;
   flex-direction: column;
-  // padding-bottom: 50px;
+  flex-grow: 1;
 
   .lineContainer {
     display: flex;
@@ -11,6 +10,7 @@
     align-items: stretch;
     width: 100%;
     margin-bottom: 20px;
+    flex-grow: 1;
 
     .planning {
       flex: 1;

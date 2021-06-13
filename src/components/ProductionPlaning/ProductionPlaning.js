@@ -48,7 +48,7 @@ export const ProductionPlanning = props => {
         <div className={Styles.dataWrapper}>
           <span>Actual</span>
           <div>
-            <h1>{actual}</h1>
+            <h1 style={{ marginRight: 10 }}>{actual}</h1>
             {target > actual && <ChevronDownFill />}
             {target < actual && <ChevronUpFill />}
           </div>

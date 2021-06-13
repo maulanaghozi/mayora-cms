@@ -3,7 +3,7 @@
 @import "src/styles/function";
 
 .dashboard_container {
-  padding: 2rem 2rem 0 2rem;
+  padding: 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,8 @@
   }
 
   .mainContent {
-    height: 83vh;
+    display: flex;
+    flex-grow: 1;
     overflow: scroll;
   }
 }

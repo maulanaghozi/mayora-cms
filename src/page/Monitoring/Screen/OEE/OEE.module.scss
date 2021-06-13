@@ -1,10 +1,9 @@
 .container {
   display: flex;
   width: 100%;
-  flex-direction: column;
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  flex: 1;
 
   .lineContainer {
     background-color: #ffffff;
@@ -16,7 +15,7 @@
 
     .header {
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 1rem 2rem 0;
       display: flex;
 
       .dataWrapper {
@@ -24,16 +23,17 @@
         > span {
           color: #757575;
           font-family: roboto;
-          font-size: 1rem;
+          font-size: 1.5rem;
           line-height: 24px;
           margin-bottom: 5px;
         }
 
         > h1 {
           color: #212121;
-          font-size: 1.5rem;
+          font-size: 2rem;
           font-family: roboto;
           font-weight: 500;
+          margin: 0px;
 
           &.type {
             text-transform: uppercase;
@@ -53,13 +53,14 @@
     .chartContainer {
       display: flex;
       width: 100%;
-      align-items: center;
+      height: 100%;
+      align-items: stretch;
       justify-content: space-between;
-      padding: 20px 0;
       flex-grow: 1;
 
       .chart {
         flex: 1;
+        min-height: 80%;
       }
     }
   }

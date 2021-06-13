@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 2rem;
+    padding: 10px 2rem;
     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
 
     > span {
@@ -23,7 +23,7 @@
   }
 
   .mainContainer {
-    padding: 20px 2rem;
+    padding: 10px 2rem;
     display: flex;
     align-items: center;
     flex-grow: 2;
@@ -44,20 +44,20 @@
         align-items: center;
         > h1 {
           color: #212121;
-          font-size: 1.5rem;
+          font-size: 2rem;
           font-family: roboto;
           font-weight: 500;
           margin-right: 5px;
-          margin-bottom: 0;
+          margin: 0;
         }
       }
 
       > h1 {
         color: #212121;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-family: roboto;
         font-weight: 500;
-        margin-bottom: 0;
+        margin: 0;
 
         &.type {
           text-transform: uppercase;
@@ -69,6 +69,7 @@
           padding: 0px 1rem;
           font-size: 1.5rem;
           width: fit-content;
+          margin-top: 10px;
         }
       }
     }

@@ -243,7 +243,7 @@ export default function OEEvsTarget() {
 
   const renderLine2 = () => {
     return (
-      <div className={Styles.lineContainer}>
+      <div className={Styles.lineContainer} style={{ marginTop: 20 }}>
         {renderTable2()}
         <div className={Styles.chart}>
           {chartReady2 && (
