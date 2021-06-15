@@ -111,7 +111,7 @@ export default function Release(props) {
 
   const getShift2 = async () => {
     let date = moment(dateSelected * 1000).format("YYYY MM DD");
-    let startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
@@ -121,7 +121,7 @@ export default function Release(props) {
 
     if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
-      startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+      startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
       endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
     }
 
@@ -274,15 +274,15 @@ export default function Release(props) {
           </div>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 2</span>
-            <span className={Styles.amount}>{shift2}</span>
+            <span className={Styles.amount}>{shift2 - shift1}</span>
           </div>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 3</span>
-            <span className={Styles.amount}>{shift3}</span>
+            <span className={Styles.amount}>{total - shift2}</span>
           </div>
         </div>
         <div className={Styles.totalReleaseBySystem}>
-          <span className={Styles.shift}>Total Release by System</span>
+          <span className={Styles.shift}>Total Output by System</span>
           <span className={Styles.amount}>{total}</span>
         </div>
       </div>
