@@ -10,7 +10,6 @@ import { http } from "../../utility/http";
 export default function Release() {
   const [shift1, setShift1] = useState(0);
   const [shift2, setShift2] = useState(0);
-  const [shift3, setShift3] = useState(0);
   const [total, setTotal] = useState(0);
   const [totalAmount, setTotalAmount] = useState([]);
   const globalState = useContext(Context);
@@ -23,7 +22,6 @@ export default function Release() {
     getTotal();
     getShift1();
     getShift2();
-    getShift3();
   }, [dateSelected, machine.machineId]);
 
   const handleAmoutDaily = time => {
@@ -144,7 +142,7 @@ export default function Release() {
 
   const getShift2 = async () => {
     let date = moment(dateSelected * 1000).format("YYYY MM DD");
-    let startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+    let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
     let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
@@ -154,7 +152,7 @@ export default function Release() {
 
     if (ms < 86400 && msa > 0) {
       date = moment(date).subtract(1, "days").format("YYYY MM DD");
-      startTime = moment(`${date} 15:00`).format("YYYY MM DD HH:mm");
+      startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
       endTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
     }
 
@@ -181,51 +179,10 @@ export default function Release() {
     }
   };
 
-  const getShift3 = async () => {
-    let date = moment(dateSelected * 1000).format("YYYY MM DD");
-    let nextDate = moment(date).add(1, "days").format("YYYY MM DD");
-    let startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
-    let endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
-    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
-    let curentTime = moment().format("YYYY MM DD HH:mm");
-
-    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
-    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
-
-    if (ms < 86400 && msa > 0) {
-      date = moment(date).subtract(1, "days").format("YYYY MM DD");
-      nextDate = moment(date).add(1, "days").format("YYYY MM DD");
-      startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
-      endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
-    }
-
-    const params = {
-      method: "GET",
-      path: "release/last",
-      query: {
-        machineId: machine.machineId,
-        startTime: startTime,
-        endTime: endTime,
-      },
-    };
-
-    const result = await http(params);
-
-    if (result && result.code === "success") {
-      if (result.payload) {
-        setShift3(result.payload.amount);
-      } else {
-        setShift3(0);
-      }
-    } else {
-      console.log("error ", result);
-    }
-  };
-
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
-        <span>Release</span>
+        <span>Output</span>
         <div className={Styles.filter}>
           <InputSelect
             value={machine.machineId}
@@ -273,8 +230,8 @@ export default function Release() {
   const renderTotalRelease = () => {
     return (
       <div className={Styles.akumulasiRelease}>
-        <span>Data Release By System</span>
-        <span className={Styles.akumulasi}>{`Total Release: ${total}`}</span>
+        <span>Data Output By System</span>
+        <span className={Styles.akumulasi}>{`Total Output: ${total}`}</span>
       </div>
     );
   };
@@ -298,7 +255,7 @@ export default function Release() {
           ]}
         />
         <TableShiftRelease
-          total={shift2}
+          total={shift2 - shift1}
           title={"Shift 2"}
           styleContainer={Styles.table}
           data={[
@@ -313,7 +270,7 @@ export default function Release() {
           ]}
         />
         <TableShiftRelease
-          total={shift3}
+          total={total - shift2}
           title={"Shift 3"}
           styleContainer={Styles.table}
           data={[

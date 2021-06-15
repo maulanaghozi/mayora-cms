@@ -23,7 +23,7 @@ export default function Description({ manualCollection, row, shift }) {
           className={value}
         >{`${manualCollection.value} ${manualCollection.unit}`}</span>
       ) : (
-        <span className={notSet}>Not Set</span>
+        <span className={notSet}></span>
       )}
 
       {adminProfile &&

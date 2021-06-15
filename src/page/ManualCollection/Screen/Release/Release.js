@@ -13,7 +13,6 @@ export default function Release(props) {
   const [currentActual, setCurrentActual] = useState(0);
   const [shift1, setShift1] = useState(0);
   const [shift2, setShift2] = useState(0);
-  const [shift3, setShift3] = useState(0);
   const [total, setTotal] = useState(0);
   const globalState = useContext(Context);
 
@@ -24,7 +23,6 @@ export default function Release(props) {
     getTotal();
     getShift1();
     getShift2();
-    getShift3();
   }, [dateSelected, machine.machineId]);
 
   const handleChange = e => {
@@ -142,47 +140,6 @@ export default function Release(props) {
         setShift2(result.payload.amount);
       } else {
         setShift2(0);
-      }
-    } else {
-      console.log("error ", result);
-    }
-  };
-
-  const getShift3 = async () => {
-    let date = moment(dateSelected * 1000).format("YYYY MM DD");
-    let nextDate = moment(date).add(1, "days").format("YYYY MM DD");
-    let startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
-    let endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
-    let startDate = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
-    let curentTime = moment().format("YYYY MM DD HH:mm");
-
-    const ms = Math.abs(new Date(startDate) - new Date(curentTime)) / 1000;
-    const msa = (new Date(startDate) - new Date(curentTime)) / 1000;
-
-    if (ms < 86400 && msa > 0) {
-      date = moment(date).subtract(1, "days").format("YYYY MM DD");
-      nextDate = moment(date).add(1, "days").format("YYYY MM DD");
-      startTime = moment(`${date} 23:00`).format("YYYY MM DD HH:mm");
-      endTime = moment(`${nextDate} 07:00`).format("YYYY MM DD HH:mm");
-    }
-
-    const params = {
-      method: "GET",
-      path: "release/last",
-      query: {
-        machineId: machine.machineId,
-        startTime: startTime,
-        endTime: endTime,
-      },
-    };
-
-    const result = await http(params);
-
-    if (result && result.code === "success") {
-      if (result.payload) {
-        setShift3(result.payload.amount);
-      } else {
-        setShift3(0);
       }
     } else {
       console.log("error ", result);

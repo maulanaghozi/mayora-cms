@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Styles from "./TableShiftRelease.module.scss";
 
-const Header = ["Time", "Release Amount"];
+const Header = ["Time", "Output Amount"];
 const headerClasses = [Styles.columnTime, Styles.columnAmount];
 
 export default function TableShiftRelease(props) {

@@ -5,6 +5,7 @@ import ProductionStatus from "./Screen/ProductionStatus/ProductionStatus";
 import ProductionOutput from "./Screen/ProductionOutput/ProductionOutput";
 import OEEvsTarget from "./Screen/OEEvsTarget/OEEvsTarget";
 import OEE from "./Screen/OEE/OEE";
+import Output from "./Screen/Output/Output";
 import Styles from "./Dashboard.module.scss";
 
 export default function Dashboard() {
@@ -17,12 +18,14 @@ export default function Dashboard() {
             "Production Output",
             "OEE",
             "OEE VS Target",
+            "Output",
           ]}
           path={[
             "/dashboard/production-status",
             "/dashboard/production-output",
             "/dashboard/oee",
             "/dashboard/oee-vs-target",
+            "/dashboard/output",
           ]}
         />
       </div>
@@ -43,6 +46,7 @@ export default function Dashboard() {
           />
           <Route path={"/dashboard/oee-vs-target"} component={OEEvsTarget} />
           <Route path={"/dashboard/oee"} component={OEE} />
+          <Route path={"/dashboard/output"} component={Output} />
           <Route
             path={"/dashboard"}
             render={() => <Redirect to={"/dashboard/production-status"} />}

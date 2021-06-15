@@ -37,7 +37,7 @@ const middleNav = [
   navigation("Trouble List", "/trouble-list", TroubleIcon),
   navigation("Manual Collection", "/manual-collection", CollectionIcon),
   navigation("Target", "/target", TargetIcon),
-  navigation("Release", "/release", ReleaseIcon),
+  navigation("Output", "/output", ReleaseIcon),
 ];
 const bottomNavAdmin = [
   navigation("Report", "/report", ReportIcon),
