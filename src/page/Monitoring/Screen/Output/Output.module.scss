@@ -1,0 +1,103 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-bottom: 50px;
+
+  .lineContainer {
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    .header {
+      width: 100%;
+      padding: 20px 20px;
+      display: flex;
+
+      .dataWrapper {
+        margin-right: 50px;
+        > span {
+          color: #757575;
+          font-family: roboto;
+          font-size: 1.5rem;
+          line-height: 24px;
+          margin-bottom: 5px;
+        }
+
+        > h1 {
+          color: #212121;
+          font-size: 2.5rem;
+          font-family: roboto;
+          font-weight: 500;
+
+          &.type {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    .releaseBySystem {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 16px;
+
+      .shiftContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 50%;
+
+        .shiftWrapper {
+          width: 32%;
+          display: flex;
+          flex-direction: column;
+          .shift {
+            width: 100%;
+            color: #616161;
+            font-size: 1.5rem;
+            flex-wrap: nowrap;
+            font-family: roboto;
+            margin-bottom: 10px;
+          }
+
+          .amount {
+            width: 100%;
+            font-size: 2.5rem;
+            color: #201d1d;
+            font-family: roboto;
+          }
+        }
+      }
+
+      .totalReleaseBySystem {
+        border-left: 1px solid #bdbdbd;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-left: 40px;
+        .shift {
+          width: 100%;
+          color: #201d1d;
+          font-size: 1.5rem;
+          flex-wrap: nowrap;
+          font-family: roboto;
+          margin-bottom: 10px;
+        }
+
+        .amount {
+          width: 100%;
+          font-weight: 700;
+          font-size: 2.5rem;
+          color: #201d1d;
+          font-family: roboto;
+        }
+      }
+    }
+  }
+}

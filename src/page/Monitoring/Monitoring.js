@@ -5,6 +5,7 @@ import ProductionStatus from "./Screen/ProductionStatus/ProductionStatus";
 import ProductionOutput from "./Screen/ProductionOutput/ProductionOutput";
 import OEEvsTarget from "./Screen/OEEvsTarget/OEEvsTarget";
 import OEE from "./Screen/OEE/OEE";
+import Output from "./Screen/Output/Output";
 import Styles from "./Monitoring.module.scss";
 import Date from "../../components/Header/Date/Date";
 import Clock from "../../components/Header/Clock/Clock";
@@ -19,12 +20,14 @@ export default function Dashboard() {
             "Production Output",
             "OEE",
             "OEE VS Target",
+            "Output",
           ]}
           path={[
             "/monitoring-dashboard/production-status",
             "/monitoring-dashboard/production-output",
             "/monitoring-dashboard/oee",
             "/monitoring-dashboard/oee-vs-target",
+            "/monitoring-dashboard/output",
           ]}
         />
         <div className={Styles.time_container}>
@@ -52,6 +55,7 @@ export default function Dashboard() {
             component={OEEvsTarget}
           />
           <Route path={"/monitoring-dashboard/oee"} component={OEE} />
+          <Route path={"/monitoring-dashboard/output"} component={Output} />
           <Route
             path={"/monitoring-dashboard"}
             render={() => (

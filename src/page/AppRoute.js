@@ -38,7 +38,7 @@ export default function AppPage() {
         />
         <Route path="/manual-collection" component={ManualCollection} />
         <Route path="/target" component={Target} />
-        <Route path="/release" component={Release} />
+        <Route path="/output" component={Release} />
         <Route path="/master-category" component={MasterCategory} />
         <Route exact path="/user" component={User} />
         <Route exact path="/report" component={Report} />
