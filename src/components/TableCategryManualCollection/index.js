@@ -3,6 +3,7 @@ import classNames from "classnames";
 
 import Category from "./Column/Category";
 import Shift from "./Column/Shift";
+import Total from "./Column/Total";
 import Detail from "./Column/Detail";
 
 import {
@@ -21,11 +22,13 @@ const Header = [
   "Value (Shift 1)",
   "Value (Shift 2)",
   "Value (Shift 3)",
+  "Total",
   "Detail",
 ];
 
 const headerClasses = [
   column_category,
+  column_shift,
   column_shift,
   column_shift,
   column_shift,
@@ -69,6 +72,7 @@ export default function PromoTable(props) {
                 row={row}
                 shift={"shift3"}
               />
+              <Total row={row} />
               <Detail row={row} />
             </div>
           ))}
