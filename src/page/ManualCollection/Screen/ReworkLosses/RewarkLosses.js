@@ -5,9 +5,11 @@ import Styles from "./ReworkLosses.module.scss";
 import { Context } from "../../../../hooks/context";
 import moment from "moment";
 import { http } from "../../../../utility/http";
+import { LoadingModal } from "../../../../components/Modal";
 
 export default function RewarkLosses() {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const globalState = useContext(Context);
   const { machine, dateSelected } = globalState;
 
@@ -16,6 +18,7 @@ export default function RewarkLosses() {
   }, [machine.machineId, dateSelected]);
 
   const getData = async () => {
+    setIsLoading(true);
     let date = moment(dateSelected * 1000).format("YYYY-MM-DD");
     let startTime = moment(`${date} 07:00`).format("YYYY MM DD HH:mm");
     let curentTime = moment().format("YYYY MM DD HH:mm");
@@ -46,6 +49,7 @@ export default function RewarkLosses() {
       setData(results);
       console.log("THIS IS ERROR TechnicalBreakDown");
     }
+    setIsLoading(false);
   };
 
   const renderDirectoryParent = () => {
@@ -73,7 +77,12 @@ export default function RewarkLosses() {
     );
   };
 
-  return <div className={Styles.container}>{renderDirectoryParent()}</div>;
+  return (
+    <div className={Styles.container}>
+      {renderDirectoryParent()}
+      {isLoading && <LoadingModal />}
+    </div>
+  );
 }
 
 const results = [
