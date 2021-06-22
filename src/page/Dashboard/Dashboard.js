@@ -9,6 +9,16 @@ import Output from "./Screen/Output/Output";
 import Styles from "./Dashboard.module.scss";
 
 export default function Dashboard() {
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 1800000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>

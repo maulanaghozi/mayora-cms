@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import HeaderDashboard from "./HeaderDashboard/HeaderDashboard";
 import ProductionStatus from "./Screen/ProductionStatus/ProductionStatus";
@@ -10,7 +10,17 @@ import Styles from "./Monitoring.module.scss";
 import Date from "../../components/Header/Date/Date";
 import Clock from "../../components/Header/Clock/Clock";
 
-export default function Dashboard() {
+export default function Monitoring() {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 1800000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   const renderHeader = () => {
     return (
       <div className={Styles.headerContainer}>
