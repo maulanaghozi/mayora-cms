@@ -181,7 +181,7 @@ export default function TroubleList(props) {
       "download",
       `Trouble ${handleMachineId(params.query.machineId)} - ${
         params.query.date
-      }`
+      }.xlsx`
     );
     // 3. Append to html page
     document.body.appendChild(link);

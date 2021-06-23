@@ -58,7 +58,9 @@ export default function Report() {
       link.href = url;
       link.setAttribute(
         "download",
-        `Report ${report} ${moment(date * 1000).format("YYYY-MM-DD hh-mm-ss")}`
+        `Report ${report} ${moment(date * 1000).format(
+          "YYYY-MM-DD hh-mm-ss"
+        )}.xlsx`
       );
       document.body.appendChild(link);
       link.click();
@@ -464,7 +466,10 @@ export default function Report() {
     const url = window.URL.createObjectURL(result);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", fileName ?? `Template report ${periode}`);
+    link.setAttribute(
+      "download",
+      fileName ?? `Template report ${periode}.xlsx`
+    );
     // 3. Append to html page
     document.body.appendChild(link);
     // 4. Force download
