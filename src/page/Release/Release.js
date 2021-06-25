@@ -6,6 +6,7 @@ import TableShiftRelease from "../../components/TableShiftRelease/TableShiftRele
 import { Context } from "../../hooks/context";
 import Styles from "./Release.module.scss";
 import { http } from "../../utility/http";
+import { currencyFormater } from "../../utility/utility";
 
 export default function Release() {
   const [shift1, setShift1] = useState(0);
@@ -231,7 +232,9 @@ export default function Release() {
     return (
       <div className={Styles.akumulasiRelease}>
         <span>Data Output By System</span>
-        <span className={Styles.akumulasi}>{`Total Output: ${total}`}</span>
+        <span className={Styles.akumulasi}>{`Total Output: ${currencyFormater(
+          total
+        )}`}</span>
       </div>
     );
   };

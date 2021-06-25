@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Styles from "./TableShiftRelease.module.scss";
+import { currencyFormater } from "../../utility/utility";
 
 const Header = ["Time", "Output Amount"];
 const headerClasses = [Styles.columnTime, Styles.columnAmount];
@@ -29,7 +30,11 @@ export default function TableShiftRelease(props) {
               </div>
               <div className={Styles.columnAmount}>
                 <span>
-                  {row.amount ? row.amount : row.amount == 0 ? 0 : "-"}
+                  {row.amount
+                    ? currencyFormater(row.amount)
+                    : row.amount == 0
+                    ? 0
+                    : "-"}
                 </span>
               </div>
             </div>
@@ -39,7 +44,7 @@ export default function TableShiftRelease(props) {
               <span>Total</span>
             </div>
             <div className={Styles.columnAmount}>
-              <span className={Styles.total}>{total}</span>
+              <span className={Styles.total}>{currencyFormater(total)}</span>
             </div>
           </div>
         </div>

@@ -43,7 +43,8 @@ export const removeToken = () => {
 };
 
 export const validateEmail = email => {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
@@ -76,4 +77,15 @@ export const arrayToOptions = array => {
       label: prettifyMaster(entry),
     };
   });
+};
+
+export const currencyFormater = value => {
+  const tempArray = value.toString().split(".");
+
+  if (tempArray[1]) {
+    const decimal = tempArray[1].length;
+    return value.toFixed(decimal).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  } else {
+    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  }
 };

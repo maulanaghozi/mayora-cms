@@ -6,6 +6,7 @@ import { InputWithLabel } from "../../../../components/Form/InputWithLable/Input
 import { http } from "../../../../utility/http";
 import Styles from "./ProductionTarget.module.scss";
 import { Context } from "../../../../hooks/context";
+import { currencyFormater } from "../../../../utility/utility";
 
 export default function ProductionTarget() {
   const [modalDefaultVisible, setModalDefaultVisible] = useState(false);
@@ -137,7 +138,9 @@ export default function ProductionTarget() {
           <span className={Styles.title}>Default Target</span>
         </div>
         <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>{defaultTarget}</span>
+          <span className={Styles.targetValue}>
+            {currencyFormater(defaultTarget)}
+          </span>
           {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
             <span
               onClick={() => setModalDefaultVisible(true)}
@@ -165,7 +168,9 @@ export default function ProductionTarget() {
           </span>
         </div>
         <div className={Styles.targetValueContainer}>
-          <span className={Styles.targetValue}>{currentTarget}</span>
+          <span className={Styles.targetValue}>
+            {currencyFormater(currentTarget)}
+          </span>
           {adminProfile && adminProfile.roleId !== "ROLE-USER-MYR003" && (
             <span
               onClick={() => setModalCurrentVisible(true)}

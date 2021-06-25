@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Styles from "./Output.module.scss";
 import { http } from "../../../../utility/http";
+import { currencyFormater } from "../../../../utility/utility";
 
 export default function Output() {
   //Line 1
@@ -295,20 +296,26 @@ export default function Output() {
         <div className={Styles.shiftContainer}>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 1</span>
-            <span className={Styles.amount}>{line1Shift1}</span>
+            <span className={Styles.amount}>
+              {currencyFormater(line1Shift1)}
+            </span>
           </div>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 2</span>
-            <span className={Styles.amount}>{line1Shift2 - line1Shift1}</span>
+            <span className={Styles.amount}>
+              {currencyFormater(line1Shift2 - line1Shift1)}
+            </span>
           </div>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 3</span>
-            <span className={Styles.amount}>{line1Total - line1Shift2}</span>
+            <span className={Styles.amount}>
+              {currencyFormater(line1Total - line1Shift2)}
+            </span>
           </div>
         </div>
         <div className={Styles.totalReleaseBySystem}>
           <span className={Styles.shift}>Total Output by System</span>
-          <span className={Styles.amount}>{line1Total}</span>
+          <span className={Styles.amount}>{currencyFormater(line1Total)}</span>
         </div>
       </div>
     );
@@ -320,20 +327,26 @@ export default function Output() {
         <div className={Styles.shiftContainer}>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 1</span>
-            <span className={Styles.amount}>{line2Shift1}</span>
+            <span className={Styles.amount}>
+              {currencyFormater(line2Shift1)}
+            </span>
           </div>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 2</span>
-            <span className={Styles.amount}>{line2Shift2 - line2Shift1}</span>
+            <span className={Styles.amount}>
+              {currencyFormater(line2Shift2 - line2Shift1)}
+            </span>
           </div>
           <div className={Styles.shiftWrapper}>
             <span className={Styles.shift}>Shift 3</span>
-            <span className={Styles.amount}>{line2Total - line2Shift2}</span>
+            <span className={Styles.amount}>
+              {currencyFormater(line2Total - line2Shift2)}
+            </span>
           </div>
         </div>
         <div className={Styles.totalReleaseBySystem}>
           <span className={Styles.shift}>Total Output by System</span>
-          <span className={Styles.amount}>{line2Total}</span>
+          <span className={Styles.amount}>{currencyFormater(line2Total)}</span>
         </div>
       </div>
     );

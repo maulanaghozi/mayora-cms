@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Styles from "./ProductionPlaning.module.scss";
 import { ChevronDownFill, ChevronUpFill } from "../../assets/icons";
+import { currencyFormater } from "../../utility/utility";
 
 export const ProductionPlanning = props => {
   const { machineName, target, actual, status } = props;
@@ -43,12 +44,12 @@ export const ProductionPlanning = props => {
         </div>
         <div className={Styles.dataWrapper}>
           <span>Target</span>
-          <h1>{target}</h1>
+          <h1>{currencyFormater(target)}</h1>
         </div>
         <div className={Styles.dataWrapper}>
           <span>Actual</span>
           <div>
-            <h1 style={{ marginRight: 10 }}>{actual}</h1>
+            <h1 style={{ marginRight: 10 }}>{currencyFormater(actual)}</h1>
             {target > actual && <ChevronDownFill />}
             {target < actual && <ChevronUpFill />}
           </div>
@@ -60,7 +61,7 @@ export const ProductionPlanning = props => {
               color: colorDifferential(Number(target) <= Number(actual)),
             }}
           >
-            {Math.abs(target - actual)}
+            {currencyFormater(Math.abs(target - actual))}
           </h1>
         </div>
         <div className={Styles.dataWrapper}>
