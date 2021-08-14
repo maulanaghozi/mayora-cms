@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import { notification } from "antd";
 import { http } from "../../../../utility/http";
 import { ProductionStatusBar } from "../../../../components/ProductionStatus/ProductionStatus";
 import { ProductionPlanning } from "../../../../components/ProductionPlaning/ProductionPlaning";
+import { WarningIcon } from "../../../../assets/icons";
 
 const GetTime = () => {
   let totalMinutes = 1440;
@@ -92,7 +94,12 @@ export default function ProductionStatus() {
         setStatus1("disconnected");
       }
     } else {
-      alert("please contact administrator");
+      notification.open({
+        message: `Status Machine Line 1 disconnected`,
+        description: `please contact administrator`,
+        duration: 5,
+        icon: <WarningIcon />,
+      });
       setStatus1("disconnected");
     }
   };
@@ -115,7 +122,12 @@ export default function ProductionStatus() {
         setStatus2("disconnected");
       }
     } else {
-      alert("please contact administrator");
+      notification.open({
+        message: `Status Machine Line 2 disconnected`,
+        description: `please contact administrator`,
+        duration: 5,
+        icon: <WarningIcon />,
+      });
       setStatus2("disconnected");
     }
   };
@@ -137,7 +149,6 @@ export default function ProductionStatus() {
       setDataStatus1(result.payload.results);
     } else {
       console.log(result);
-      alert("please contact administrator");
       setDataStatus1([]);
     }
   };
@@ -159,7 +170,6 @@ export default function ProductionStatus() {
       setDataStatus2(result.payload.results);
     } else {
       console.log(result);
-      alert("please contact administrator");
       setDataStatus2([]);
     }
   };

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import { notification } from "antd";
 import { http } from "../../../../utility/http";
 import { ProductionPlanning } from "../../../../components/ProductionOutputPlanning/ProductionOutputPlanning";
 import BarChart from "../../../../components/BarChart/BarChart";
 import Styles from "./ProductionOutput.module.scss";
+import { WarningIcon } from "../../../../assets/icons";
 
 export default function ProductionOutput() {
   const [target1, setTarget1] = useState(0);
@@ -183,7 +185,12 @@ export default function ProductionOutput() {
         setStatus1("disconnected");
       }
     } else {
-      alert("please contact administrator");
+      notification.open({
+        message: `Status Machine Line 1 disconnected`,
+        description: `please contact administrator`,
+        duration: 5,
+        icon: <WarningIcon />,
+      });
       setStatus1("disconnected");
     }
   };
@@ -206,7 +213,12 @@ export default function ProductionOutput() {
         setStatus2("disconnected");
       }
     } else {
-      alert("please contact administrator");
+      notification.open({
+        message: `Status Machine Line 2 disconnected`,
+        description: `please contact administrator`,
+        duration: 5,
+        icon: <WarningIcon />,
+      });
       setStatus2("disconnected");
     }
   };
