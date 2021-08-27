@@ -96,7 +96,6 @@ export default function ProductionStatus() {
         setStatus1("disconnected");
       }
     } else {
-      alert("please contact administrator");
       setStatus1("disconnected");
     }
   };
@@ -119,7 +118,6 @@ export default function ProductionStatus() {
         setStatus2("disconnected");
       }
     } else {
-      alert("please contact administrator");
       setStatus2("disconnected");
     }
   };
@@ -141,7 +139,6 @@ export default function ProductionStatus() {
       setDataStatus1(result.payload.results);
     } else {
       console.log(result);
-      alert("please contact administrator");
       setDataStatus1([]);
     }
   };
@@ -163,7 +160,6 @@ export default function ProductionStatus() {
       setDataStatus2(result.payload.results);
     } else {
       console.log(result);
-      alert("please contact administrator");
       setDataStatus2([]);
     }
   };

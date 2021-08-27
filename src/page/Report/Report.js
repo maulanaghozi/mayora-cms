@@ -56,12 +56,22 @@ export default function Report() {
       const url = window.URL.createObjectURL(result);
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute(
-        "download",
-        `Report ${report} ${moment(date * 1000).format(
-          "YYYY-MM-DD hh-mm-ss"
-        )}.xlsx`
-      );
+
+      if (report === "monthly") {
+        link.setAttribute(
+          "download",
+          `${moment(date * 1000).format("YYYY")} Report Bulan ${moment(
+            date * 1000
+          ).format("MM")}.xlsx`
+        );
+      } else {
+        link.setAttribute(
+          "download",
+          `Report ${report} ${moment(date * 1000).format(
+            "YYYY-MM-DD hh-mm-ss"
+          )}.xlsx`
+        );
+      }
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);

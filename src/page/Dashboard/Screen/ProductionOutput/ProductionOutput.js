@@ -186,7 +186,6 @@ export default function ProductionOutput() {
         setStatus1("disconnected");
       }
     } else {
-      alert("please contact administrator");
       setStatus1("disconnected");
     }
   };
@@ -209,7 +208,6 @@ export default function ProductionOutput() {
         setStatus2("disconnected");
       }
     } else {
-      alert("please contact administrator");
       setStatus2("disconnected");
     }
   };
