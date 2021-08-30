@@ -19,6 +19,7 @@ export default function Report() {
   const [report, setReport] = useState("weekly");
   const [duration, setDuration] = useState("7 Day");
   const [week, setWeek] = useState("4 Week");
+  const [semester, setSemester] = useState(1);
   const [date, setDate] = useState("");
   const [file1, setFile1] = useState("not set");
   const [file2, setFile2] = useState("not set");
@@ -36,14 +37,22 @@ export default function Report() {
       alert("please select date");
       return false;
     }
+
+    const query = {
+      date: moment(date * 1000).format("YYYY-MM-DD"),
+      machineId: machine.machineId,
+      duration: week | 4,
+    };
+
+    if (report === "semester") {
+      query.semester = semester;
+      query.year = moment(date * 1000).format("YYYY-MM-DD");
+    }
+
     const params = {
       method: "GET",
       path: `report-${report}`,
-      query: {
-        date: moment(date * 1000).format("YYYY-MM-DD"),
-        machineId: machine.machineId,
-        duration: week | 4,
-      },
+      query: query,
       content_type: "application/octet-stream",
       responseType: "blob",
     };
@@ -64,6 +73,13 @@ export default function Report() {
             date * 1000
           ).format("MM")}.xlsx`
         );
+      } else if (report === "semester") {
+        link.setAttribute(
+          "download",
+          `${moment(date * 1000).format(
+            "YYYY"
+          )} Report Semester ${semester}.xlsx`
+        );
       } else {
         link.setAttribute(
           "download",
@@ -82,11 +98,11 @@ export default function Report() {
 
   function mapTemplate(data) {
     if (data) {
-      if (data.type == "weekly") {
+      if (data.type === "weekly") {
         setFile1(data.fileTemplate);
-      } else if (data.type == "monthly") {
+      } else if (data.type === "monthly") {
         setFile2(data.fileTemplate);
-      } else if (data.type == "semester") {
+      } else if (data.type === "semester") {
         setFile3(data.fileTemplate);
       }
 
@@ -135,13 +151,13 @@ export default function Report() {
   const onReportChange = e => {
     setReport(e);
 
-    if (e == "weekly") {
+    if (e === "weekly") {
       setDuration("7 Day");
       setIsMonthly(false);
-    } else if (e == "monthly") {
+    } else if (e === "monthly") {
       setDuration("");
       setIsMonthly(true);
-    } else if (e == "semester") {
+    } else if (e === "semester") {
       setDuration("6 Month");
       setIsMonthly(false);
     }
@@ -221,52 +237,90 @@ export default function Report() {
               onChange={selected => onReportChange(selected.value)}
             />
           </div>
-          <div className={Styles.filter}>
-            <span>Start</span>
-            <InputDate
-              value={date}
-              onChange={e => setDate(e)}
-              className={Styles.inputDate}
-              filterDate={date => date.getDay() === 1}
-            />
-          </div>
+          {report === "semester" ? (
+            <div className={Styles.filter}>
+              <span>Year</span>
+              <InputDate
+                value={date}
+                onChange={e => setDate(e)}
+                className={Styles.inputDate}
+                filterDate={date => date.getDay() === 1}
+                isYearPicker={true}
+              />
+            </div>
+          ) : (
+            <div className={Styles.filter}>
+              <span>Start</span>
+              <InputDate
+                value={date}
+                onChange={e => setDate(e)}
+                className={Styles.inputDate}
+                filterDate={date => date.getDay() === 1}
+              />
+            </div>
+          )}
 
-          <div
-            className={Styles.filter}
-            style={{ display: isMonthly ? "block" : "none" }}
-          >
-            <span>Duration</span>
-            <InputSelect
-              value={week}
-              className={Styles.inputSelect}
-              placeholder={"4 Week"}
-              defaultValue={"4"}
-              options={[
-                {
-                  value: "4",
-                  label: "4 Week",
-                },
-                {
-                  value: "5",
-                  label: "5 Week",
-                },
-              ]}
-              onChange={selected => onWeekChange(selected.value)}
-            />
-          </div>
-          <div
-            className={Styles.filter}
-            style={{ display: !isMonthly ? "block" : "none" }}
-          >
-            <span>Duration</span>
-            <InputText
-              value={duration}
-              className={Styles.inputText}
-              placeholder={"7 Day"}
-              defaultValue={"7"}
-              disabled={true}
-            />
-          </div>
+          {report === "semester" ? (
+            <div className={Styles.filter}>
+              <span>Semester</span>
+              <InputSelect
+                value={semester}
+                className={Styles.inputSelect}
+                placeholder={"1st Semester"}
+                defaultValue={1}
+                options={[
+                  {
+                    value: 1,
+                    label: "1st Semester",
+                  },
+                  {
+                    value: 2,
+                    label: "2nd Semester",
+                  },
+                ]}
+                onChange={selected => setSemester(selected.value)}
+              />
+            </div>
+          ) : (
+            <>
+              <div
+                className={Styles.filter}
+                style={{ display: isMonthly ? "block" : "none" }}
+              >
+                <span>Duration</span>
+                <InputSelect
+                  value={week}
+                  className={Styles.inputSelect}
+                  placeholder={"4 Week"}
+                  defaultValue={"4"}
+                  options={[
+                    {
+                      value: "4",
+                      label: "4 Week",
+                    },
+                    {
+                      value: "5",
+                      label: "5 Week",
+                    },
+                  ]}
+                  onChange={selected => onWeekChange(selected.value)}
+                />
+              </div>
+              <div
+                className={Styles.filter}
+                style={{ display: !isMonthly ? "block" : "none" }}
+              >
+                <span>Duration</span>
+                <InputText
+                  value={duration}
+                  className={Styles.inputText}
+                  placeholder={"7 Day"}
+                  defaultValue={"7"}
+                  disabled={true}
+                />
+              </div>
+            </>
+          )}
 
           <div className={Styles.download} onClick={() => onExport()}>
             <DownloadIcon />
@@ -300,19 +354,6 @@ export default function Report() {
           },
         ]}
         onChange={selected => onWeekChange(selected.value)}
-      />
-    </div>
-  );
-
-  const RenderDuration = () => (
-    <div className={Styles.filter}>
-      <span>Duration</span>
-      <InputText
-        value={duration}
-        className={Styles.inputText}
-        placeholder={"7 Day"}
-        defaultValue={"7"}
-        disabled={true}
       />
     </div>
   );
@@ -411,11 +452,11 @@ export default function Report() {
   };
 
   const fileChange = (e, periode) => {
-    if (periode == "weekly") {
+    if (periode === "weekly") {
       setFile1("Uploading...");
-    } else if (periode == "monthly") {
+    } else if (periode === "monthly") {
       setFile2("Uploading...");
-    } else if (periode == "semester") {
+    } else if (periode === "semester") {
       setFile3("Uploading...");
     }
 
@@ -442,11 +483,11 @@ export default function Report() {
     const result = await http(params);
     if (result && result.code === "success") {
       if (result.payload) {
-        if (periode == "weekly") {
+        if (periode === "weekly") {
           setFile1(result.payload);
-        } else if (periode == "monthly") {
+        } else if (periode === "monthly") {
           setFile2(result.payload);
-        } else if (periode == "semester") {
+        } else if (periode === "semester") {
           setFile3(result.payload);
         }
       }
