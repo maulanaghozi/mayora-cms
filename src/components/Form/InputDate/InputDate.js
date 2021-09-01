@@ -64,10 +64,12 @@ export default function InputDate(props) {
           setSelectedDate(date);
         }}
         maxDate={new Date()}
+        minDate={new Date("2021")}
         placeholderText={"Select Year"}
         shouldCloseOnSelect={true}
         dateFormat="yyyy"
         showYearPicker
+        yearItemNumber={10}
         customInput={
           <div
             className={classNames(
