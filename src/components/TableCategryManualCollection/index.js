@@ -45,37 +45,47 @@ export default function PromoTable(props) {
       </div>
       <div className={table_body}>
         {props.data &&
-          props.data.map((row, index, arr) => (
-            <div className={table_row} key={index}>
-              <Category row={row} />
-              <Shift
-                manualCollection={
-                  Array.isArray(row.manualCollections) &&
-                  row.manualCollections.find(item => item.shift === "shift1")
-                }
-                row={row}
-                shift={"shift1"}
-              />
-              <Shift
-                manualCollection={
-                  Array.isArray(row.manualCollections) &&
-                  row.manualCollections.find(item => item.shift === "shift2")
-                }
-                row={row}
-                shift={"shift2"}
-              />
-              <Shift
-                manualCollection={
-                  Array.isArray(row.manualCollections) &&
-                  row.manualCollections.find(item => item.shift === "shift3")
-                }
-                row={row}
-                shift={"shift3"}
-              />
-              <Total row={row} />
-              <Detail row={row} />
-            </div>
-          ))}
+          props.data.map((row, index, arr) => {
+            if (row.status === "active") {
+              return (
+                <div className={table_row} key={index}>
+                  <Category row={row} />
+                  <Shift
+                    manualCollection={
+                      Array.isArray(row.manualCollections) &&
+                      row.manualCollections.find(
+                        item => item.shift === "shift1"
+                      )
+                    }
+                    row={row}
+                    shift={"shift1"}
+                  />
+                  <Shift
+                    manualCollection={
+                      Array.isArray(row.manualCollections) &&
+                      row.manualCollections.find(
+                        item => item.shift === "shift2"
+                      )
+                    }
+                    row={row}
+                    shift={"shift2"}
+                  />
+                  <Shift
+                    manualCollection={
+                      Array.isArray(row.manualCollections) &&
+                      row.manualCollections.find(
+                        item => item.shift === "shift3"
+                      )
+                    }
+                    row={row}
+                    shift={"shift3"}
+                  />
+                  <Total row={row} />
+                  <Detail row={row} />
+                </div>
+              );
+            }
+          })}
       </div>
     </div>
   );
